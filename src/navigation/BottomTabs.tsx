@@ -3,12 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
-import TricountScreen from '../screens/Tricount/TricountScreen';
+import GroupScreen from '../screens/Group/GroupScreen';
 import PersonalScreen from '../screens/Personal/PersonalScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 export type BottomTabParamList = {
-  Tricount: undefined;
+  Group: undefined;
   Personal: undefined;
   Profile: undefined;
 };
@@ -24,7 +24,7 @@ const BottomTabs: React.FC = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap;
 
-          if (route.name === 'Tricount') {
+          if (route.name === 'Group') {
             iconName = focused ? 'calculator' : 'calculator-outline';
           } else if (route.name === 'Personal') {
             iconName = focused ? 'wallet' : 'wallet-outline';
@@ -47,8 +47,8 @@ const BottomTabs: React.FC = () => {
       })}
     >
       <Tab.Screen 
-        name="Tricount" 
-        component={TricountScreen}
+        name="Group" 
+        component={GroupScreen}
       />
       <Tab.Screen 
         name="Personal" 

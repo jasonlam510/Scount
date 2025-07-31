@@ -13,6 +13,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../../context/ThemeContext';
+import FloatingActionButton from '../../components/FloatingActionButton';
 
 const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -181,16 +182,16 @@ const ProfileScreen: React.FC = () => {
           <Text style={[styles.deleteProfileText, { color: colors.danger }]}>Delete Profile</Text>
         </TouchableOpacity>
 
-        {/* Support Center */}
-        <TouchableOpacity style={styles.supportCenter} onPress={handleSupportCenter}>
-          <View style={[styles.supportIconContainer, { backgroundColor: colors.success }]}>
-            <Ionicons name="chatbubble" size={30} color="white" />
-          </View>
-          <Text style={[styles.supportText, { color: colors.text }]}>Support Center</Text>
-        </TouchableOpacity>
-
-        <View style={{ height: 50 }} />
+        <View style={{ height: 100 }} />
       </ScrollView>
+
+      {/* Floating Action Button for Support Center */}
+      <FloatingActionButton
+        icon="chatbubble"
+        label="Support Center"
+        backgroundColor={colors.success}
+        onPress={handleSupportCenter}
+      />
 
       {/* Theme Selector Modal for Web */}
       {showThemeSelector && Platform.OS === 'web' && (
@@ -312,22 +313,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 30,
-  },
-  supportCenter: {
-    alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 20,
-  },
-  supportIconContainer: {
-    borderRadius: 30,
-    width: 60,
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  supportText: {
-    fontSize: 15,
   },
   // Modal styles for web
   modalOverlay: {

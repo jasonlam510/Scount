@@ -13,6 +13,7 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useExpenses } from '../../context/ExpensesContext';
 import { useTheme } from '../../context/ThemeContext';
+import FloatingActionButton from '../../components/FloatingActionButton';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -20,17 +21,23 @@ const PersonalScreen: React.FC = () => {
   const { colors } = useTheme();
   const [activeTab, setActiveTab] = useState(0); // 0 for expenses, 1 for balances
 
-  // Mock data for the design with dates
+  // Mock data for the design with dates - includes both expenses and income
   const mockExpenses = [
-    { id: '1', description: 'Three fish', payer: 'Paid by Shirley', amount: 'HK$57.60', icon: '💶', date: '27 Jul 2025' },
-    { id: '2', description: 'Fish skin', payer: 'Paid by Shirley', amount: 'HK$7.20', icon: '💶', date: '27 Jul 2025' },
-    { id: '3', description: 'Fishotto', payer: 'Paid by Shirley', amount: 'HK$187.20', icon: '💶', date: '27 Jul 2025' },
-    { id: '4', description: 'Three dish', payer: 'Paid by Shirley', amount: 'HK$63.20', icon: '💶', date: '27 Jul 2025' },
-    { id: '5', description: 'Carbonara', payer: 'Paid by Shirley', amount: 'HK$166.40', icon: '🚗', date: '27 Jul 2025' },
-    { id: '6', description: 'Poke bowl', payer: 'Paid by Shirley', amount: 'HK$50.00', icon: '💶', date: '27 Jul 2025' },
-    { id: '7', description: 'Lunch', payer: 'Paid by Shirley', amount: 'HK$186.40', icon: '💶', date: '27 Jul 2025' },
-    { id: '8', description: 'Coffee', payer: 'Paid by Shirley', amount: 'HK$25.00', icon: '☕', date: '26 Jul 2025' },
-    { id: '9', description: 'Dinner', payer: 'Paid by Shirley', amount: 'HK$120.00', icon: '🍽️', date: '26 Jul 2025' },
+    // Expenses
+    { id: '1', description: 'Three fish', payer: 'Paid by Shirley', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '2', description: 'Fish skin', payer: 'Paid by Shirley', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '3', description: 'Fishotto', payer: 'Paid by Shirley', amount: 187.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '4', description: 'Three dish', payer: 'Paid by Shirley', amount: 63.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '5', description: 'Carbonara', payer: 'Paid by Shirley', amount: 166.40, currency: 'HK$', type: 'expense', icon: '🚗', date: '27 Jul 2025' },
+    { id: '6', description: 'Poke bowl', payer: 'Paid by Shirley', amount: 50.00, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '7', description: 'Lunch', payer: 'Paid by Shirley', amount: 186.40, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '8', description: 'Coffee', payer: 'Paid by Shirley', amount: 25.00, currency: 'HK$', type: 'expense', icon: '☕', date: '26 Jul 2025' },
+    { id: '9', description: 'Dinner', payer: 'Paid by Shirley', amount: 120.00, currency: 'HK$', type: 'expense', icon: '🍽️', date: '26 Jul 2025' },
+    
+    // Income
+    { id: '10', description: 'Salary', payer: 'Received by Shirley', amount: 5000.00, currency: 'HK$', type: 'income', icon: '💰', date: '25 Jul 2025' },
+    { id: '11', description: 'Freelance Project', payer: 'Received by Shirley', amount: 2500.00, currency: 'HK$', type: 'income', icon: '💼', date: '24 Jul 2025' },
+    { id: '12', description: 'Investment Return', payer: 'Received by Shirley', amount: 2025.90, currency: 'HK$', type: 'income', icon: '📈', date: '23 Jul 2025' },
   ];
 
   // Group expenses by date
@@ -43,8 +50,14 @@ const PersonalScreen: React.FC = () => {
     return groups;
   }, {} as Record<string, typeof mockExpenses>);
 
-  const myExpenses = 1182.30;
-  const totalIncome = 9525.90;
+  // Calculate totals from mockExpenses data
+  const myExpenses = mockExpenses
+    .filter(item => item.type === 'expense')
+    .reduce((sum, item) => sum + item.amount, 0);
+  
+  const totalIncome = mockExpenses
+    .filter(item => item.type === 'income')
+    .reduce((sum, item) => sum + item.amount, 0);
 
   const renderExpenseItem = ({ item }: { item: any }) => (
     <View style={[styles.expenseItem, { backgroundColor: colors.surface }]}>
@@ -55,7 +68,14 @@ const PersonalScreen: React.FC = () => {
         <Text style={[styles.expenseDescription, { color: colors.text }]}>{item.description}</Text>
         <Text style={[styles.expensePayer, { color: colors.textSecondary }]}>{item.payer}</Text>
       </View>
-      <Text style={[styles.expenseAmount, { color: colors.text }]}>{item.amount}</Text>
+      <Text style={[
+        styles.expenseAmount, 
+        { 
+          color: item.type === 'income' ? colors.success : colors.text 
+        }
+      ]}>
+        {item.type === 'income' ? '+' : '-'}{item.currency}{item.amount.toFixed(2)}
+      </Text>
     </View>
   );
 
@@ -140,12 +160,14 @@ const PersonalScreen: React.FC = () => {
       </ScrollView>
 
       {/* Floating Action Button */}
-      <View style={styles.fabContainer}>
-        <TouchableOpacity style={[styles.fab, { backgroundColor: colors.primary }]}>
-          <Ionicons name="add" size={24} color="white" />
-        </TouchableOpacity>
-        <Text style={[styles.fabLabel, { color: colors.textSecondary }]}>Add Expense</Text>
-      </View>
+      <FloatingActionButton
+        icon="add"
+        label="Add Expense"
+        onPress={() => {
+          // TODO: Navigate to add expense screen
+          console.log('Add expense pressed');
+        }}
+      />
     </View>
   );
 };
@@ -273,30 +295,6 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    textAlign: 'center',
-  },
-  fabContainer: {
-    position: 'absolute',
-    bottom: 80,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-  },
-  fab: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    marginBottom: 8,
-  },
-  fabLabel: {
-    fontSize: 12,
     textAlign: 'center',
   },
 });

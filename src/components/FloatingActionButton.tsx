@@ -48,7 +48,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 const styles = StyleSheet.create({
   fabContainer: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 0,
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   fabLabel: {
     fontSize: 12,
     textAlign: 'center',
-    paddingBottom: 8,
+    paddingBottom: 10,
   },
 });
 

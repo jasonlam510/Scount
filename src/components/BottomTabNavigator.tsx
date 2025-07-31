@@ -15,7 +15,7 @@ export type BottomTabParamList = {
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-const BottomTabs: React.FC = () => {
+const BottomTabNavigator: React.FC = () => {
   const { colors } = useTheme();
 
   return (
@@ -62,4 +62,4 @@ const BottomTabs: React.FC = () => {
   );
 };
 
-export default BottomTabs; 
+export default BottomTabNavigator; 

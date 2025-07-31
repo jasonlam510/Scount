@@ -15,6 +15,7 @@ import { useTheme } from '../../context/ThemeContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SegmentedControl from '../../components/SegmentedControl';
 import HeaderActions from '../../components/HeaderActions';
+import SummarySection from '../../components/SummarySection';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -132,18 +133,20 @@ const PersonalScreen: React.FC = () => {
 
       {/* Summary Section - Only show for Expenses tab */}
       {activeTab === 0 && (
-        <>
-          <View style={styles.summaryContainer}>
-            <View style={styles.summaryItem}>
-              <Text style={[styles.summaryLabel, { color: colors.textSecondary }]}>Expense</Text>
-              <Text style={[styles.summaryAmount, { color: colors.text }]}>HK${myExpenses.toLocaleString()}</Text>
-            </View>
-            <View style={styles.summaryItem}>
-              <Text style={[styles.summaryLabel, { color: colors.textSecondary }]}>Income</Text>
-              <Text style={[styles.summaryAmount, { color: colors.text }]}>HK${totalIncome.toLocaleString()}</Text>
-            </View>
-          </View>
-        </>
+        <SummarySection
+          items={[
+            {
+              label: 'Expense',
+              amount: myExpenses,
+              currency: 'HK$'
+            },
+            {
+              label: 'Income',
+              amount: totalIncome,
+              currency: 'HK$'
+            }
+          ]}
+        />
       )}
 
       {/* Scrollable Content */}
@@ -193,24 +196,6 @@ const styles = StyleSheet.create({
   tabContainer: {
     marginHorizontal: 20,
     marginBottom: 20,
-  },
-  summaryContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    marginBottom: 10,
-    justifyContent: 'center',
-  },
-  summaryItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  summaryLabel: {
-    fontSize: 14,
-    marginBottom: 4,
-  },
-  summaryAmount: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
   dateText: {
     fontSize: 14,

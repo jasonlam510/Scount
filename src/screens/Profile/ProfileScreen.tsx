@@ -189,7 +189,7 @@ const ProfileScreen: React.FC = () => {
           <Text style={[styles.supportText, { color: colors.text }]}>Support Center</Text>
         </TouchableOpacity>
 
-        <View style={{ height: 50 }} /> {/* Spacer for bottom nav */}
+        <View style={{ height: 50 }} />
       </ScrollView>
 
       {/* Theme Selector Modal for Web */}

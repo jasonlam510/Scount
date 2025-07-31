@@ -4,12 +4,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
 import TricountScreen from '../screens/Tricount/TricountScreen';
-import SmoneyScreen from '../screens/Smoney/SmoneyScreen';
+import PersonalScreen from '../screens/Personal/PersonalScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 export type BottomTabParamList = {
   Tricount: undefined;
-  Smoney: undefined;
+  Personal: undefined;
   Profile: undefined;
 };
 
@@ -26,7 +26,7 @@ const BottomTabs: React.FC = () => {
 
           if (route.name === 'Tricount') {
             iconName = focused ? 'calculator' : 'calculator-outline';
-          } else if (route.name === 'Smoney') {
+          } else if (route.name === 'Personal') {
             iconName = focused ? 'wallet' : 'wallet-outline';
           } else if (route.name === 'Profile') {
             iconName = focused ? 'person' : 'person-outline';
@@ -51,8 +51,8 @@ const BottomTabs: React.FC = () => {
         component={TricountScreen}
       />
       <Tab.Screen 
-        name="Smoney" 
-        component={SmoneyScreen}
+        name="Personal" 
+        component={PersonalScreen}
       />
       <Tab.Screen 
         name="Profile" 

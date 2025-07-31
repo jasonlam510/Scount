@@ -14,6 +14,7 @@ import { useExpenses } from '../../context/ExpensesContext';
 import { useTheme } from '../../context/ThemeContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SegmentedControl from '../../components/SegmentedControl';
+import HeaderActions from '../../components/HeaderActions';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -59,6 +60,17 @@ const PersonalScreen: React.FC = () => {
     .filter(item => item.type === 'income')
     .reduce((sum, item) => sum + item.amount, 0);
 
+  // Header action handlers
+  const handleSearchPress = () => {
+    // TODO: Show search bar at top, focus on search input, show keyboard
+    console.log('Search button pressed');
+  };
+
+  const handleMenuPress = () => {
+    // TODO: Show dropdown menu under button
+    console.log('Menu button pressed');
+  };
+
   const renderExpenseItem = ({ item }: { item: any }) => (
     <View style={[styles.expenseItem, { backgroundColor: colors.surface }]}>
       <View style={styles.expenseIcon}>
@@ -93,18 +105,21 @@ const PersonalScreen: React.FC = () => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <StatusBar barStyle={colors.text === '#ffffff' ? 'light-content' : 'dark-content'} />
       
-      {/* Navigation Header */}
-      <View style={[styles.header, { paddingTop: insets.top, backgroundColor: colors.background }]}>
-        <View style={styles.headerLeft} />
-        <View style={styles.headerRight}>
-          <TouchableOpacity style={styles.headerButton}>
-            <Ionicons name="search" size={24} color={colors.text} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerButton}>
-            <Ionicons name="ellipsis-vertical" size={24} color={colors.text} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      {/* Header Actions */}
+      <HeaderActions
+        actions={[
+          {
+            icon: 'search',
+            onPress: handleSearchPress,
+            visible: activeTab === 0 // Only show for Expenses tab
+          },
+          {
+            icon: 'ellipsis-vertical',
+            onPress: handleMenuPress,
+            visible: true // Always show menu
+          }
+        ]}
+      />
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
@@ -174,24 +189,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingBottom: 15,
-  },
-  headerLeft: {
-    flex: 1,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerButton: {
-    padding: 8,
-    marginLeft: 8,
-  },
+
   tabContainer: {
     marginHorizontal: 20,
     marginBottom: 20,

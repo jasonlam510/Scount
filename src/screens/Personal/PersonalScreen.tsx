@@ -9,11 +9,11 @@ import {
   StatusBar,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useExpenses } from '../../context/ExpensesContext';
 import { useTheme } from '../../context/ThemeContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
+import SegmentedControl from '../../components/SegmentedControl';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -109,11 +109,9 @@ const PersonalScreen: React.FC = () => {
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
         <SegmentedControl
-          values={['Expenses', 'Balances']}
-          selectedIndex={activeTab}
-          onChange={(event) => setActiveTab(event.nativeEvent.selectedSegmentIndex)}
-          style={styles.segmentedControl}
-          appearance={colors.text === '#ffffff' ? 'dark' : 'light'}
+          tabs={['Expenses', 'Balances']}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
         />
       </View>
 
@@ -197,10 +195,6 @@ const styles = StyleSheet.create({
   tabContainer: {
     marginHorizontal: 20,
     marginBottom: 20,
-  },
-  segmentedControl: {
-    height: 32,
-    marginHorizontal: 0,
   },
   summaryContainer: {
     flexDirection: 'row',

@@ -30,6 +30,8 @@ const defaultStyles = StyleSheet.create({
   dailyTotal: {
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'right', // Ensure right alignment
+    minWidth: 80, // Match the expense amount width
   },
 });
 

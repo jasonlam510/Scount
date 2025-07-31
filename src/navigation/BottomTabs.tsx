@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../context/ThemeContext';
 
 import TricountScreen from '../screens/Tricount/TricountScreen';
 import SmoneyScreen from '../screens/Smoney/SmoneyScreen';
@@ -15,6 +16,8 @@ export type BottomTabParamList = {
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabs: React.FC = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -33,25 +36,27 @@ const BottomTabs: React.FC = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: 'gray',
-        headerShown: true,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
+          borderTopWidth: 1,
+        },
+        headerShown: false,
       })}
     >
       <Tab.Screen 
         name="Tricount" 
         component={TricountScreen}
-        options={{ title: 'Tricount' }}
       />
       <Tab.Screen 
         name="Smoney" 
         component={SmoneyScreen}
-        options={{ title: 'Smoney' }}
       />
       <Tab.Screen 
         name="Profile" 
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
       />
     </Tab.Navigator>
   );

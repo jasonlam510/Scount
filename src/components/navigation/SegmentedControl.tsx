@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 
 interface SegmentedControlProps {
   tabs: string[];

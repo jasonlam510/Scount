@@ -13,10 +13,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useExpenses } from '../../context/ExpensesContext';
 import { useTheme } from '../../context/ThemeContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
-import SegmentedControl from '../../components/SegmentedControl';
-import HeaderActions from '../../components/HeaderActions';
 import SummarySection from '../../components/SummarySection';
 import { SmartList } from '../../components/lists';
+import { SegmentedControl, HeaderActions } from '../../components/navigation';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();

@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 
-import GroupScreen from '../screens/Group/GroupScreen';
-import PersonalScreen from '../screens/Personal/PersonalScreen';
-import ProfileScreen from '../screens/Profile/ProfileScreen';
+import GroupScreen from '../../screens/Group/GroupScreen';
+import PersonalScreen from '../../screens/Personal/PersonalScreen';
+import ProfileScreen from '../../screens/Profile/ProfileScreen';
 
 export type BottomTabParamList = {
   Group: undefined;

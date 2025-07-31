@@ -107,6 +107,7 @@ const defaultStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 5,
+    paddingRight: 12, // Match the expense item padding
   },
   dateText: {
     fontSize: 14,

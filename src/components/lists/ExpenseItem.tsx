@@ -85,6 +85,8 @@ const defaultStyles = StyleSheet.create({
   expenseAmount: {
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'right', // Ensure right alignment
+    minWidth: 80, // Give consistent width for alignment
   },
 });
 

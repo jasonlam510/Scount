@@ -16,6 +16,7 @@ import FloatingActionButton from '../../components/FloatingActionButton';
 import SegmentedControl from '../../components/SegmentedControl';
 import HeaderActions from '../../components/HeaderActions';
 import SummarySection from '../../components/SummarySection';
+import { SmartList } from '../../components/lists';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -24,7 +25,16 @@ const PersonalScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0); // 0 for expenses, 1 for balances
 
   // Mock data for the design with dates - includes both expenses and income
-  const mockExpenses = [
+  const mockExpenses: Array<{
+    id: string;
+    description: string;
+    payer: string;
+    amount: number;
+    currency: string;
+    type: 'expense' | 'income';
+    icon: string;
+    date: string;
+  }> = [
     // Expenses
     { id: '1', description: 'Three fish', payer: 'Paid by Shirley', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
     { id: '2', description: 'Fish skin', payer: 'Paid by Shirley', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
@@ -41,16 +51,6 @@ const PersonalScreen: React.FC = () => {
     { id: '11', description: 'Freelance Project', payer: 'Received by Shirley', amount: 2500.00, currency: 'HK$', type: 'income', icon: '💼', date: '24 Jul 2025' },
     { id: '12', description: 'Investment Return', payer: 'Received by Shirley', amount: 2025.90, currency: 'HK$', type: 'income', icon: '📈', date: '23 Jul 2025' },
   ];
-
-  // Group expenses by date
-  const groupedExpenses = mockExpenses.reduce((groups, expense) => {
-    const date = expense.date;
-    if (!groups[date]) {
-      groups[date] = [];
-    }
-    groups[date].push(expense);
-    return groups;
-  }, {} as Record<string, typeof mockExpenses>);
 
   // Calculate totals from mockExpenses data
   const myExpenses = mockExpenses
@@ -72,25 +72,7 @@ const PersonalScreen: React.FC = () => {
     console.log('Menu button pressed');
   };
 
-  const renderExpenseItem = ({ item }: { item: any }) => (
-    <View style={[styles.expenseItem, { backgroundColor: colors.surface }]}>
-      <View style={styles.expenseIcon}>
-        <Text style={styles.expenseIconText}>{item.icon}</Text>
-      </View>
-      <View style={styles.expenseContent}>
-        <Text style={[styles.expenseDescription, { color: colors.text }]}>{item.description}</Text>
-        <Text style={[styles.expensePayer, { color: colors.textSecondary }]}>{item.payer}</Text>
-      </View>
-      <Text style={[
-        styles.expenseAmount, 
-        { 
-          color: item.type === 'income' ? colors.success : colors.text 
-        }
-      ]}>
-        {item.type === 'income' ? '+' : '-'}{item.currency}{item.amount.toFixed(2)}
-      </Text>
-    </View>
-  );
+
 
   const renderBalancesItem = ({ item }: { item: any }) => (
     <View style={[styles.balanceItem, { backgroundColor: colors.surface }]}>
@@ -149,31 +131,15 @@ const PersonalScreen: React.FC = () => {
         />
       )}
 
-      {/* Scrollable Content */}
-      <ScrollView 
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
-        {/* Content List */}
-        {activeTab === 0 ? (
-          Object.entries(groupedExpenses).map(([date, expenses]) => (
-            <View key={date}>
-              <Text style={[styles.dateText, { color: colors.textSecondary }]}>{date}</Text>
-              {expenses.map((item) => (
-                <View key={item.id}>
-                  {renderExpenseItem({ item })}
-                </View>
-              ))}
-            </View>
-          ))
-        ) : (
-          // Balances content would go here
-          <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>No balances to show</Text>
-          </View>
-        )}
-      </ScrollView>
+      {/* Smart List */}
+      {activeTab === 0 ? (
+        <SmartList data={mockExpenses} groupBy="date" />
+      ) : (
+        // Balances content would go here
+        <View style={styles.emptyContainer}>
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>No balances to show</Text>
+        </View>
+      )}
 
       {/* Floating Action Button */}
       <FloatingActionButton
@@ -197,44 +163,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 20,
   },
-  dateText: {
-    fontSize: 14,
-    marginBottom: 20,
-  },
-  expenseItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 10,
-  },
-  expenseIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  expenseIconText: {
-    fontSize: 20,
-  },
-  expenseContent: {
-    flex: 1,
-  },
-  expenseDescription: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 2,
-  },
-  expensePayer: {
-    fontSize: 14,
-  },
-  expenseAmount: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
   balanceItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -256,13 +184,6 @@ const styles = StyleSheet.create({
   balanceAmount: {
     fontSize: 16,
     fontWeight: '600',
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingBottom: 100,
   },
   emptyContainer: {
     flex: 1,

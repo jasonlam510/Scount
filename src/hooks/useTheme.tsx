@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
+import { usePreferences } from '../contexts/PreferencesContext';
 
 export type ThemeMode = 'light' | 'dark' | 'automatic';
 
@@ -8,6 +9,7 @@ interface ThemeContextType {
   isDark: boolean;
   setThemeMode: (mode: ThemeMode) => void;
   colors: ThemeColors;
+  isLoading: boolean;
 }
 
 interface ThemeColors {
@@ -83,7 +85,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>('automatic');
+  const { themeMode, setThemeMode, isLoading } = usePreferences();
   const systemColorScheme = useColorScheme();
 
   // Determine if dark mode should be active
@@ -113,6 +115,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     isDark,
     setThemeMode,
     colors,
+    isLoading,
   };
 
   return (

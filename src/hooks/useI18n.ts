@@ -1,10 +1,27 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { usePreferences } from '../contexts/PreferencesContext';
 
 export const useI18n = () => {
   const { t, i18n } = useTranslation();
-  
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+  const { language, setLanguage, isLoading } = usePreferences();
+
+  // Update i18n language when preferences change
+  useEffect(() => {
+    if (language && isLanguageSupported(language)) {
+      i18n.changeLanguage(language);
+    }
+  }, [language, i18n]);
+
+  const changeLanguage = async (newLanguage: string) => {
+    try {
+      await setLanguage(newLanguage);
+      // i18n will be updated via useEffect
+    } catch (error) {
+      console.error('Failed to change language:', error);
+      // Still change the i18n language even if storage fails
+      i18n.changeLanguage(newLanguage);
+    }
   };
   
   const getCurrentLanguage = () => i18n.language;
@@ -24,6 +41,7 @@ export const useI18n = () => {
     isLanguageSupported,  // Check if language is supported
     getSupportedLanguages, // Get list of supported languages
     isReady: i18n.isInitialized,
-    currentLanguage: i18n.language
+    currentLanguage: i18n.language,
+    isLoading            // Loading state for language initialization
   };
 }; 

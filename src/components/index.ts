@@ -10,5 +10,4 @@ export { SmartList, ExpenseItem } from './lists';
 // Export navigation components
 export { HeaderActions, SegmentedControl, BottomTabNavigator } from './navigation';
 
-// Export hooks
-export { useI18n, useTheme, useExpenses } from '../hooks'; 
+// Note: Hooks are exported from src/hooks/index.ts 

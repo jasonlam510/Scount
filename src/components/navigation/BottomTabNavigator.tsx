@@ -1,8 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../hooks';
-import { useI18n } from '../../hooks/useI18n';
+import { useTheme, useI18n } from '../../hooks';
 
 import GroupScreen from '../../screens/Group/GroupScreen';
 import PersonalScreen from '../../screens/Personal/PersonalScreen';

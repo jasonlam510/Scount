@@ -12,10 +12,9 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '../../hooks';
+import { useTheme, useI18n } from '../../hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
-import { useI18n } from '../../hooks/useI18n';
 
 const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();

@@ -15,7 +15,8 @@ import { useExpenses, useTheme, useI18n } from '../../hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SummarySection from '../../components/SummarySection';
 import { SmartList } from '../../components/lists';
-import { SegmentedControl, HeaderActions } from '../../components/navigation';
+import SegmentedControl from '../../components/navigation/SegmentedControl';
+import HeaderActions from '../../components/navigation/HeaderActions';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../hooks';
 
 interface DailyTotalProps {
   total: number;

@@ -2,8 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider } from './src/context/ThemeContext';
-import { ExpensesProvider } from './src/context/ExpensesContext';
+import { ThemeProvider, ExpensesProvider } from './src/hooks';
 import { BottomTabNavigator } from './src/components/navigation';
 import './src/i18n'; // Import i18n configuration
 

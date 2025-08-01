@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useExpenses } from '../../context/ExpensesContext';
-import { useTheme } from '../../context/ThemeContext';
-import { useI18n } from '../../hooks/useI18n';
+import { useExpenses, useTheme, useI18n } from '../../hooks';
+
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SummarySection from '../../components/SummarySection';
 import { SmartList } from '../../components/lists';

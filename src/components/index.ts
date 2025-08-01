@@ -11,4 +11,4 @@ export { SmartList, ExpenseItem } from './lists';
 export { HeaderActions, SegmentedControl, BottomTabNavigator } from './navigation';
 
 // Export hooks
-export { useI18n } from '../hooks/useI18n'; 
+export { useI18n, useTheme, useExpenses } from '../hooks'; 

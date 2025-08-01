@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../hooks';
 import { useI18n } from '../../hooks/useI18n';
 import FloatingActionButton from '../../components/FloatingActionButton';
 

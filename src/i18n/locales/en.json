@@ -1,0 +1,77 @@
+{
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "search": "Search",
+    "menu": "Menu",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "light": "Light",
+    "dark": "Dark",
+    "automatic": "Automatic"
+  },
+  "navigation": {
+    "personal": "Personal",
+    "group": "Group",
+    "profile": "Profile"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "addExpense": "Add Expense",
+    "addIncome": "Add Income",
+    "totalExpenses": "Total Expenses",
+    "totalIncome": "Total Income",
+    "balance": "Balance",
+    "noExpenses": "No expenses to show",
+    "noBalances": "No balances to show",
+    "expense": "Expense",
+    "income": "Income",
+    "amount": "Amount",
+    "currency": "Currency",
+    "description": "Description",
+    "payer": "Payer",
+    "date": "Date",
+    "category": "Category"
+  },
+  "personal": {
+    "title": "Personal",
+    "expensesTab": "Expenses",
+    "balancesTab": "Balances",
+    "searchPlaceholder": "Search expenses...",
+    "dailyTotal": "Daily Total"
+  },
+  "group": {
+    "title": "Group",
+    "myExpenses": "My Expenses",
+    "totalIncome": "Total Income",
+    "addGroupExpense": "Add Group Expense"
+  },
+  "profile": {
+    "title": "Profile",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "supportCenter": "Support Center",
+    "about": "About",
+    "version": "Version",
+    "notifications": "Notifications",
+    "name": "Name",
+    "publicNickname": "Public Nickname",
+    "logout": "Log out",
+    "deleteProfile": "Delete Profile"
+  },
+  "categories": {
+    "food": "Food",
+    "transport": "Transport",
+    "entertainment": "Entertainment",
+    "shopping": "Shopping",
+    "health": "Health",
+    "education": "Education",
+    "other": "Other"
+  }
+} 

@@ -35,15 +35,15 @@ const PersonalScreen: React.FC = () => {
     date: string;
   }> = [
     // Expenses
-    { id: '1', description: 'Three fish', payer: 'Paid by Shirley', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '2', description: 'Fish skin', payer: 'Paid by Shirley', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '3', description: 'Fishotto', payer: 'Paid by Shirley', amount: 187.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '4', description: 'Three dish', payer: 'Paid by Shirley', amount: 63.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '5', description: 'Carbonara', payer: 'Paid by Shirley', amount: 166.40, currency: 'HK$', type: 'expense', icon: '🚗', date: '27 Jul 2025' },
-    { id: '6', description: 'Poke bowl', payer: 'Paid by Shirley', amount: 50.00, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '7', description: 'Lunch', payer: 'Paid by Shirley', amount: 186.40, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '8', description: 'Coffee', payer: 'Paid by Shirley', amount: 25.00, currency: 'HK$', type: 'expense', icon: '☕', date: '26 Jul 2025' },
-    { id: '9', description: 'Dinner', payer: 'Paid by Shirley', amount: 120.00, currency: 'HK$', type: 'expense', icon: '🍽️', date: '26 Jul 2025' },
+    { id: '1', description: 'Three fish', payer: '', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '2', description: 'Fish skin', payer: '🌻 煮飯仔', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '3', description: 'Fishotto', payer: '🇬🇧 London', amount: 187.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '4', description: 'Three dish', payer: '', amount: 63.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '5', description: 'Carbonara', payer: '', amount: 166.40, currency: 'HK$', type: 'expense', icon: '🚗', date: '27 Jul 2025' },
+    { id: '6', description: 'Poke bowl', payer: '🇮🇸Iceland', amount: 50.00, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '7', description: 'Lunch', payer: '', amount: 186.40, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
+    { id: '8', description: 'Coffee', payer: '👧🏻gf', amount: 25.00, currency: 'HK$', type: 'expense', icon: '☕', date: '26 Jul 2025' },
+    { id: '9', description: 'Dinner', payer: '', amount: 120.00, currency: 'HK$', type: 'expense', icon: '🍽️', date: '26 Jul 2025' },
     
     // Income
     { id: '10', description: 'Salary', payer: 'Received by Shirley', amount: 5000.00, currency: 'HK$', type: 'income', icon: '💰', date: '25 Jul 2025' },
@@ -106,7 +106,7 @@ const PersonalScreen: React.FC = () => {
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
         <SegmentedControl
-          tabs={['Expenses', 'Balances']}
+          tabs={['Expenses', 'Balances', 'Budgets']}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />

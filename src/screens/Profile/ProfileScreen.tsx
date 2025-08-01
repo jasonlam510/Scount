@@ -92,10 +92,10 @@ const ProfileScreen: React.FC = () => {
 
   const getThemeModeDisplayText = () => {
     switch (themeMode) {
-      case 'light': return 'Light';
-      case 'dark': return 'Dark';
-      case 'automatic': return 'Automatic';
-      default: return 'Automatic';
+      case 'light': return t('common.light');
+      case 'dark': return t('common.dark');
+      case 'automatic': return t('common.automatic');
+      default: return t('common.automatic');
     }
   };
 

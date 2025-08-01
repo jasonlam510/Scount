@@ -10,14 +10,19 @@ A cross-platform expense tracking app built with Expo, React Native, and TypeScr
 1. Install [Node.js](https://nodejs.org)
 2. Install Expo
 
+```bash
+npm install expo
+```
+
 ### Setup
 
 ```bash
 https://github.com/jasonlam510/Scount.git
 cd scount
 ```
+
 #### Run the App
 
 ```bash
-npm start
+npx expo start
 ```

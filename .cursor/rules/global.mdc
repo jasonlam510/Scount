@@ -1,26 +1,22 @@
----
-description: Global rules
-globs:
-alwaysApply: true
----
-You are an expert developer in TypeScript, Node.js, Next.js 15 App Router, React, HTML, CSS and modern UI/UX frameworks.
 
-Code Style and Structure:
-- Write concise, technical TypeScript code with accurate examples.
-- Use functional and declarative programming patterns; avoid classes.
-- Prefer iteration and modularization over code duplication.
-- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
-- Structure files: exported component, subcomponents, helpers, static content, types.
+# Scount Project Rules
 
-Naming Conventions:
-- Use lowercase with dashes for directories (e.g., components/auth-wizard).
-- Favor named exports for components.
+## Code Style and Structure:
+- Use concise functional React Native components with TypeScript.
+- Prefer hooks and context for state management; avoid classes.
+- Structure files: components, hooks, screens, i18n, database, utils, services.
+- Use React Navigation for navigation (bottom tabs, stack navigation).
+- Follow offline-first architecture: AsyncStorage for preferences, future WatermelonDB for data.
+- Keep i18n (react-i18next) strings in JSON under locales/, use translation keys in code.
+- Use theme context for dark/light/automatic modes; avoid hard-coded colors.
 
-TypeScript specific:
-- Use TypeScript for all code; prefer interfaces over types.
-- Avoid enums; use maps instead.
-- Use functional components with TypeScript types.
+## Naming Conventions:
+- Use lowercase-dashes for directories (components/expense-card).
+- Screens: PascalCase (screens/Group/GroupScreen.tsx).
+- Hooks: use prefix `use` (useTheme.tsx, useExpenses.tsx).
+- Prefer named exports for components, hooks, and utilities.
 
-Documentation
-- Provide clear and concise comments for complex logic. Do not add comments for code that is not complex.
-- Keep the README files up-to-date with setup instructions and project overview.
+## TypeScript Specific:
+- Use interfaces for all data models (Expense, Group, Participant, User).
+- Use string literals or maps instead of enums.
+- Avoid unnecessary React.FC typing unless children are used.

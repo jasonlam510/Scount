@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useExpenses } from '../../context/ExpensesContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useI18n } from '../../hooks/useI18n';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SummarySection from '../../components/SummarySection';
 import { SmartList } from '../../components/lists';
@@ -21,6 +22,7 @@ const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState(0); // 0 for expenses, 1 for balances
 
   // Mock data for the design with dates - includes both expenses and income
@@ -106,7 +108,7 @@ const PersonalScreen: React.FC = () => {
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
         <SegmentedControl
-          tabs={['Expenses', 'Balances', 'Budgets']}
+          tabs={[t('personal.expensesTab'), t('personal.balancesTab')]}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
@@ -117,12 +119,12 @@ const PersonalScreen: React.FC = () => {
         <SummarySection
           items={[
             {
-              label: 'Expense',
+              label: t('expenses.expense'),
               amount: myExpenses,
               currency: 'HK$'
             },
             {
-              label: 'Income',
+              label: t('expenses.income'),
               amount: totalIncome,
               currency: 'HK$'
             }
@@ -136,14 +138,14 @@ const PersonalScreen: React.FC = () => {
       ) : (
         // Balances content would go here
         <View style={styles.emptyContainer}>
-          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>No balances to show</Text>
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>{t('expenses.noBalances')}</Text>
         </View>
       )}
 
       {/* Floating Action Button */}
       <FloatingActionButton
         icon="add"
-        label="Add Expense"
+        label={t('expenses.addExpense')}
         onPress={() => {
           // TODO: Navigate to add expense screen
           console.log('Add expense pressed');

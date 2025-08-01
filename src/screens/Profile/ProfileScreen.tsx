@@ -14,18 +14,21 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../../context/ThemeContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
+import Selector from '../../components/Selector';
+import { useI18n } from '../../hooks/useI18n';
 
 const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
+  const { t, changeLanguage, currentLanguage } = useI18n();
   const [showThemeSelector, setShowThemeSelector] = useState(false);
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   
   // Local state for user data and preferences
   const [userName, setUserName] = useState('Jason Lam');
   const [publicNickname, setPublicNickname] = useState('Jason Lam');
   const [userEmail, setUserEmail] = useState('jasonlamufo@gmail.com');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [language, setLanguage] = useState('English');
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -38,30 +41,29 @@ const ProfileScreen: React.FC = () => {
     // In a real app: navigation.navigate('EditNicknameScreen');
   };
 
-  const handleLanguagePress = () => {
-    Alert.alert('Language Settings', 'Navigate to language selection screen.');
-    // In a real app: navigation.navigate('LanguageSettingsScreen');
-  };
-
-  const handleThemePress = () => {
-    if (Platform.OS === 'web') {
-      setShowThemeSelector(true);
-    } else {
-      Alert.alert(
-        'Theme',
-        'Choose your theme preference',
-        [
-          { text: 'Light', onPress: () => setThemeMode('light') },
-          { text: 'Dark', onPress: () => setThemeMode('dark') },
-          { text: 'Automatic', onPress: () => setThemeMode('automatic') },
-          { text: 'Cancel', style: 'cancel' },
-        ]
-      );
+  const getCurrentLanguageDisplay = () => {
+    switch (currentLanguage) {
+      case 'en': return 'English';
+      case 'zh': return '繁體中文';
+      default: return 'English';
     }
   };
 
-  const handleThemeSelect = (mode: 'light' | 'dark' | 'automatic') => {
-    setThemeMode(mode);
+  const handleLanguagePress = () => {
+    setShowLanguageSelector(true);
+  };
+
+  const handleLanguageSelect = (language: string) => {
+    changeLanguage(language);
+    setShowLanguageSelector(false);
+  };
+
+  const handleThemePress = () => {
+    setShowThemeSelector(true);
+  };
+
+  const handleThemeSelect = (mode: string) => {
+    setThemeMode(mode as 'light' | 'dark' | 'automatic');
     setShowThemeSelector(false);
   };
 
@@ -101,7 +103,7 @@ const ProfileScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}>
         {/* Header */}
-        <Text style={[styles.headerTitle, { color: colors.text }]}>Profile</Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>{t('profile.title')}</Text>
 
         {/* User Information Section */}
         <View style={[styles.section, { backgroundColor: colors.surface }]}>
@@ -123,7 +125,7 @@ const ProfileScreen: React.FC = () => {
           
           {/* Editable Name */}
           <TouchableOpacity style={styles.row} onPress={handleEditName}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>Name</Text>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{userName}</Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
@@ -134,7 +136,7 @@ const ProfileScreen: React.FC = () => {
           
           {/* Editable Public Nickname */}
           <TouchableOpacity style={styles.row} onPress={handleEditNickname}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>Public Nickname</Text>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{publicNickname}</Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
@@ -143,10 +145,10 @@ const ProfileScreen: React.FC = () => {
         </View>
 
         {/* Preferences Section */}
-        <Text style={[styles.sectionHeader, { color: colors.textSecondary }]}>Preferences</Text>
+        <Text style={[styles.sectionHeader, { color: colors.textSecondary }]}>{t('profile.settings')}</Text>
         <View style={[styles.section, { backgroundColor: colors.surface }]}>
           <View style={styles.row}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>Notifications</Text>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.notifications')}</Text>
             <Switch
               trackColor={{ false: '#767577', true: colors.success }}
               thumbColor={notificationsEnabled ? '#ffffff' : '#f4f3f4'}
@@ -157,15 +159,15 @@ const ProfileScreen: React.FC = () => {
           </View>
           <View style={[styles.separator, { backgroundColor: colors.border }]} />
           <TouchableOpacity style={styles.row} onPress={handleLanguagePress}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>Language</Text>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.language')}</Text>
             <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{language}</Text>
+              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{getCurrentLanguageDisplay()}</Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
           <View style={[styles.separator, { backgroundColor: colors.border }]} />
           <TouchableOpacity style={styles.row} onPress={handleThemePress}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>Theme</Text>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.theme')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{getThemeModeDisplayText()}</Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
@@ -175,11 +177,11 @@ const ProfileScreen: React.FC = () => {
 
         {/* Account Actions */}
         <TouchableOpacity style={[styles.logoutButton, { backgroundColor: colors.surface }]} onPress={handleLogout}>
-          <Text style={[styles.logoutButtonText, { color: colors.danger }]}>Log out</Text>
+          <Text style={[styles.logoutButtonText, { color: colors.danger }]}>{t('profile.logout')}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handleDeleteProfile}>
-          <Text style={[styles.deleteProfileText, { color: colors.danger }]}>Delete Profile</Text>
+          <Text style={[styles.deleteProfileText, { color: colors.danger }]}>{t('profile.deleteProfile')}</Text>
         </TouchableOpacity>
 
         <View style={{ height: 100 }} />
@@ -188,43 +190,35 @@ const ProfileScreen: React.FC = () => {
       {/* Floating Action Button for Support Center */}
       <FloatingActionButton
         icon="chatbubble"
-        label="Support Center"
+        label={t('profile.supportCenter')}
         backgroundColor={colors.success}
         onPress={handleSupportCenter}
       />
 
-      {/* Theme Selector Modal for Web */}
-      {showThemeSelector && Platform.OS === 'web' && (
-        <View style={[styles.modalOverlay, { backgroundColor: 'rgba(0, 0, 0, 0.5)' }]}>
-          <View style={[styles.modalContent, { backgroundColor: colors.surface }]}>
-            <Text style={[styles.modalTitle, { color: colors.text }]}>Choose Theme</Text>
-            <TouchableOpacity 
-              style={[styles.themeOption, { borderBottomColor: colors.border }]} 
-              onPress={() => handleThemeSelect('light')}
-            >
-              <Text style={[styles.themeOptionText, { color: colors.text }]}>Light</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.themeOption, { borderBottomColor: colors.border }]} 
-              onPress={() => handleThemeSelect('dark')}
-            >
-              <Text style={[styles.themeOptionText, { color: colors.text }]}>Dark</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.themeOption} 
-              onPress={() => handleThemeSelect('automatic')}
-            >
-              <Text style={[styles.themeOptionText, { color: colors.text }]}>Automatic</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.cancelButton, { backgroundColor: colors.border }]} 
-              onPress={() => setShowThemeSelector(false)}
-            >
-              <Text style={[styles.cancelButtonText, { color: colors.text }]}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
+      {/* Theme Selector */}
+      <Selector
+        visible={showThemeSelector}
+        title={t('profile.theme')}
+        options={[
+          { key: 'light', label: t('common.light'), value: 'light' },
+          { key: 'dark', label: t('common.dark'), value: 'dark' },
+          { key: 'automatic', label: t('common.automatic'), value: 'automatic' },
+        ]}
+        onSelect={handleThemeSelect}
+        onCancel={() => setShowThemeSelector(false)}
+      />
+
+      {/* Language Selector */}
+      <Selector
+        visible={showLanguageSelector}
+        title={t('profile.language')}
+        options={[
+          { key: 'en', label: 'English', value: 'en' },
+          { key: 'zh', label: '繁體中文', value: 'zh' },
+        ]}
+        onSelect={handleLanguageSelect}
+        onCancel={() => setShowLanguageSelector(false)}
+      />
     </View>
   );
 };
@@ -313,47 +307,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 30,
-  },
-  // Modal styles for web
-  modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000,
-  },
-  modalContent: {
-    borderRadius: 10,
-    padding: 20,
-    minWidth: 250,
-    maxWidth: 300,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 15,
-  },
-  themeOption: {
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-  },
-  themeOptionText: {
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  cancelButton: {
-    marginTop: 15,
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  cancelButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
   },
 });
 

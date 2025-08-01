@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../context/ThemeContext';
+import { useI18n } from '../../hooks/useI18n';
 
 import GroupScreen from '../../screens/Group/GroupScreen';
 import PersonalScreen from '../../screens/Personal/PersonalScreen';
@@ -17,6 +18,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigator: React.FC = () => {
   const { colors } = useTheme();
+  const { t } = useI18n();
 
   return (
     <Tab.Navigator
@@ -49,14 +51,17 @@ const BottomTabNavigator: React.FC = () => {
       <Tab.Screen 
         name="Group" 
         component={GroupScreen}
+        options={{ tabBarLabel: t('navigation.group') }}
       />
       <Tab.Screen 
         name="Personal" 
         component={PersonalScreen}
+        options={{ tabBarLabel: t('navigation.personal') }}
       />
       <Tab.Screen 
         name="Profile" 
         component={ProfileScreen}
+        options={{ tabBarLabel: t('navigation.profile') }}
       />
     </Tab.Navigator>
   );

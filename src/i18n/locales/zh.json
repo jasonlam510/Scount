@@ -1,0 +1,77 @@
+{
+  "common": {
+    "add": "新增",
+    "edit": "編輯",
+    "delete": "刪除",
+    "save": "儲存",
+    "cancel": "取消",
+    "back": "返回",
+    "search": "搜尋",
+    "menu": "選單",
+    "loading": "載入中...",
+    "error": "錯誤",
+    "success": "成功",
+    "light": "淺色",
+    "dark": "深色",
+    "automatic": "自動"
+  },
+  "navigation": {
+    "personal": "個人",
+    "group": "群組",
+    "profile": "個人資料"
+  },
+  "expenses": {
+    "title": "支出",
+    "addExpense": "新增支出",
+    "addIncome": "新增收入",
+    "totalExpenses": "總支出",
+    "totalIncome": "總收入",
+    "balance": "餘額",
+    "noExpenses": "暫無支出記錄",
+    "noBalances": "暫無餘額記錄",
+    "expense": "支出",
+    "income": "收入",
+    "amount": "金額",
+    "currency": "貨幣",
+    "description": "描述",
+    "payer": "付款人",
+    "date": "日期",
+    "category": "類別"
+  },
+  "personal": {
+    "title": "個人",
+    "expensesTab": "支出",
+    "balancesTab": "餘額",
+    "searchPlaceholder": "搜尋支出...",
+    "dailyTotal": "日總計"
+  },
+  "group": {
+    "title": "群組",
+    "myExpenses": "我的支出",
+    "totalIncome": "總收入",
+    "addGroupExpense": "新增群組支出"
+  },
+  "profile": {
+    "title": "個人資料",
+    "settings": "設定",
+    "language": "語言",
+    "theme": "主題",
+    "supportCenter": "支援中心",
+    "about": "關於",
+    "version": "版本",
+    "notifications": "通知",
+    "name": "姓名",
+    "publicNickname": "公開暱稱",
+    "logout": "登出",
+    "deleteProfile": "刪除個人資料"
+  },
+  "categories": {
+    "food": "餐飲",
+    "transport": "交通",
+    "entertainment": "娛樂",
+    "shopping": "購物",
+    "health": "健康",
+    "education": "教育",
+    "other": "其他"
+  }
+} 

@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from './src/context/ThemeContext';
 import { ExpensesProvider } from './src/context/ExpensesContext';
 import { BottomTabNavigator } from './src/components/navigation';
+import './src/i18n'; // Import i18n configuration
 
 const Stack = createStackNavigator();
 

@@ -34,18 +34,12 @@ npx expo start --web
 **Note**: WatermelonDB requires native SQLite libraries that are NOT available in Expo Go or web browsers.
 
 ```bash
-# Generate native projects (required for WatermelonDB)
+# First time only
 npx expo prebuild
 
-# Run on iOS
+# Every time you want to test on device/simulator
 npx expo run:ios
 
-# Run on Android  
+# or
 npx expo run:android
 ```
-
-#### Development Options
-
-- ✅ **Web**: Use `npx expo start --web` (limited WatermelonDB support)
-- ✅ **iOS/Android**: Use `npx expo prebuild` + `npx expo run:ios/android` (full WatermelonDB support)
-- ❌ **Expo Go**: Not supported due to native SQLite requirements

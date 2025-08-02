@@ -5,18 +5,76 @@ import { ThemeMode } from '../hooks/useTheme';
 const STORAGE_KEYS = {
   THEME_MODE: '@scount:theme_mode',
   LANGUAGE: '@scount:language',
+  IS_SEEDED: '@scount:is_seeded',
 } as const;
 
 // Default values
 const DEFAULT_VALUES = {
   THEME_MODE: 'automatic' as ThemeMode,
   LANGUAGE: 'en',
+  IS_SEEDED: false,
 } as const;
 
 export interface Preferences {
   themeMode: ThemeMode;
   language: string;
+  isSeeded: boolean;
 }
+
+// Database seeding methods
+export const isDatabaseSeeded = async (): Promise<boolean> => {
+  try {
+    const seeded = await AsyncStorage.getItem(STORAGE_KEYS.IS_SEEDED);
+    return seeded === 'true';
+  } catch (error) {
+    console.warn('Failed to load database seeded status from storage:', error);
+    return DEFAULT_VALUES.IS_SEEDED;
+  }
+};
+
+export const setDatabaseSeeded = async (seeded: boolean = true): Promise<void> => {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEYS.IS_SEEDED, seeded.toString());
+  } catch (error) {
+    console.error('Failed to save database seeded status to storage:', error);
+    throw new Error('Failed to save database seeded status');
+  }
+};
+
+// Reset all data (useful for development/testing)
+export const resetAllData = async (): Promise<void> => {
+  try {
+    console.log('🔄 Resetting all app data...')
+    
+    // Clear AsyncStorage
+    await clearAllPreferences()
+    
+    // Clear IndexedDB (for web)
+    if (typeof window !== 'undefined' && window.indexedDB) {
+      try {
+        await new Promise<void>((resolve, reject) => {
+          const request = indexedDB.deleteDatabase('scountDB')
+          request.onsuccess = () => {
+            console.log('✅ IndexedDB cleared')
+            resolve()
+          }
+          request.onerror = () => {
+            console.log('⚠️ IndexedDB clear failed (might not exist)')
+            resolve() // Don't reject, just continue
+          }
+        })
+      } catch (error) {
+        console.log('⚠️ IndexedDB clear error:', error)
+      }
+    }
+    
+    console.log('✅ All data reset successfully')
+    console.log('🔄 Please refresh the page to re-seed the database')
+  } catch (error) {
+    console.error('❌ Failed to reset data:', error)
+    throw new Error('Failed to reset data')
+  }
+};
 
 // Theme methods
 export const getThemeMode = async (): Promise<ThemeMode> => {
@@ -67,20 +125,23 @@ export const setLanguage = async (language: string): Promise<void> => {
 // Get all preferences
 export const getAllPreferences = async (): Promise<Preferences> => {
   try {
-    const [themeMode, language] = await Promise.all([
+    const [themeMode, language, isSeeded] = await Promise.all([
       getThemeMode(),
       getLanguage(),
+      isDatabaseSeeded(),
     ]);
 
     return {
       themeMode,
       language,
+      isSeeded,
     };
   } catch (error) {
     console.warn('Failed to load preferences:', error);
     return {
       themeMode: DEFAULT_VALUES.THEME_MODE,
       language: DEFAULT_VALUES.LANGUAGE,
+      isSeeded: DEFAULT_VALUES.IS_SEEDED,
     };
   }
 };
@@ -91,6 +152,7 @@ export const clearAllPreferences = async (): Promise<void> => {
     await Promise.all([
       AsyncStorage.removeItem(STORAGE_KEYS.THEME_MODE),
       AsyncStorage.removeItem(STORAGE_KEYS.LANGUAGE),
+      AsyncStorage.removeItem(STORAGE_KEYS.IS_SEEDED),
     ]);
   } catch (error) {
     console.error('Failed to clear preferences:', error);

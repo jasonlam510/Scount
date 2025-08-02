@@ -1,6 +1,7 @@
 import { Database } from '@nozbe/watermelondb'
 import { createAdapter } from './adapters' // Metro will automatically resolve to index.web.ts or index.native.ts
-import { getPlatform } from '../utils/platform'
+import { isWeb, isIOS, isAndroid, getPlatform } from '../utils/platform'
+import { seedDatabase } from './seeds'
 import {
   User,
   Group,
@@ -23,7 +24,12 @@ let database: Database | null = null
 const checkDatabaseHealthOnStartup = async (db: Database) => {
   try {
     console.log('🚀 Database initialized - running health check...')
+    
+    // Show specific platform
     console.log(`📱 Platform: ${getPlatform()}`)
+    
+    // Add a small delay to ensure database is fully initialized
+    await new Promise(resolve => setTimeout(resolve, 100))
     
     const health = await isDatabaseWorking()
     
@@ -32,6 +38,9 @@ const checkDatabaseHealthOnStartup = async (db: Database) => {
       console.log(`📊 Tables: ${health.tables}`)
       console.log(`👥 Users: ${health.usersCount}`)
       console.log(`⏰ Checked at: ${health.timestamp}`)
+      
+      // Run seeding after health check passes
+      await seedDatabase(db)
     } else {
       console.error('❌ Database health check failed')
       console.error(`🚨 Error: ${health.error}`)

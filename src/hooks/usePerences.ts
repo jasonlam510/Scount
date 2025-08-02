@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeMode } from '../hooks/useTheme';
+import { ThemeMode } from './useTheme';
 
 // Storage keys
 const STORAGE_KEYS = {

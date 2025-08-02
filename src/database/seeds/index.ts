@@ -1,5 +1,5 @@
 import { Database } from '@nozbe/watermelondb'
-import { isDatabaseSeeded, setDatabaseSeeded } from '../../services/PreferencesService'
+import { isDatabaseSeeded, setDatabaseSeeded } from '../../hooks/usePerences'
 import { seedUsers } from './users'
 import { seedCategories } from './categories'
 import { seedSubcategories } from './subcategories'

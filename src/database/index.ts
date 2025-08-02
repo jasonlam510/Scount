@@ -1,5 +1,5 @@
 import { Database } from '@nozbe/watermelondb'
-import { createAdapter } from './adapters'
+import { createAdapter } from './adapters' // Metro will automatically resolve to index.web.ts or index.native.ts
 import {
   User,
   Group,

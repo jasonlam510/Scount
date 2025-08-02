@@ -1,16 +1,10 @@
-import { isWeb } from '../../utils/platform'
-import { createSQLiteAdapter } from './sqlite'
-import { createLokiJSAdapter } from './lokijs'
+// Platform-specific adapter exports
+// Metro will automatically resolve to the correct platform file:
+// - index.web.ts for web platform
+// - index.native.ts for iOS/Android platforms
 
-/**
- * Create the appropriate database adapter based on platform
- */
-export const createAdapter = async () => {
-  if (isWeb) {
-    console.log('🌐 Using LokiJS adapter for web platform')
-    return await createLokiJSAdapter()
-  } else {
-    console.log('📱 Using SQLite adapter for mobile platform')
-    return await createSQLiteAdapter()
-  }
+// This is a fallback that should never be used in practice
+// Metro's platform resolution should always pick the correct file
+export const createAdapter = () => {
+  throw new Error('Platform-specific adapter not found. Metro should have resolved to index.web.ts or index.native.ts')
 } 

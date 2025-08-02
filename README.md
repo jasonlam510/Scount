@@ -43,3 +43,26 @@ npx expo run:ios
 # or
 npx expo run:android
 ```
+### Useful Commands
+
+#### Reset Database (Web)
+
+To reset the database and seed data on web platform:
+
+```javascript
+// Open browser console (F12) and run:
+localStorage.clear()
+indexedDB.deleteDatabase('scountDB')
+// Then refresh the page
+```
+
+#### Reset Database (Mobile)
+
+To reset the database on mobile platforms:
+
+```bash
+# Delete the app from device/simulator
+# Then reinstall and run:
+npx expo run:ios
+# or
+npx expo run:android

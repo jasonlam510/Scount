@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useExpenses, useTheme, useI18n } from '../../hooks';
+import { useTheme, useI18n } from '../../hooks';
 
 import FloatingActionButton from '../../components/FloatingActionButton';
 import SummarySection from '../../components/SummarySection';
@@ -19,7 +19,6 @@ import SegmentedControl from '../../components/navigation/SegmentedControl';
 import HeaderActions from '../../components/navigation/HeaderActions';
 
 const PersonalScreen: React.FC = () => {
-  const { expenses, addExpense } = useExpenses();
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();

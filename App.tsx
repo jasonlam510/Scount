@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider, ExpensesProvider, useDatabase } from './src/hooks';
+import { ThemeProvider, useDatabase } from './src/hooks';
 import { PreferencesProvider } from './src/contexts/PreferencesContext';
 import { BottomTabNavigator } from './src/components/navigation';
 import './src/i18n'; // Import i18n configuration
@@ -22,7 +22,6 @@ export default function App() {
     <SafeAreaProvider>
       <PreferencesProvider>
         <ThemeProvider>
-          <ExpensesProvider>
             <NavigationContainer>
               {/* Initialize database on app startup */}
               <DatabaseInitializer />
@@ -35,7 +34,6 @@ export default function App() {
                 />
               </Stack.Navigator>
             </NavigationContainer>
-          </ExpensesProvider>
         </ThemeProvider>
       </PreferencesProvider>
     </SafeAreaProvider>

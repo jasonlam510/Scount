@@ -17,7 +17,6 @@ import SummarySection from '../../components/SummarySection';
 import { SmartList } from '../../components/lists';
 import SegmentedControl from '../../components/navigation/SegmentedControl';
 import HeaderActions from '../../components/navigation/HeaderActions';
-import DatabaseTest from '../../components/DatabaseTest';
 
 const PersonalScreen: React.FC = () => {
   const { expenses, addExpense } = useExpenses();
@@ -103,9 +102,6 @@ const PersonalScreen: React.FC = () => {
           }
         ]}
       />
-
-      {/* Database Test Component - Temporary for testing */}
-      <DatabaseTest />
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>

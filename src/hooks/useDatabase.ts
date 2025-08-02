@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getDatabase, testDatabaseConnection } from '../database'
+import { getDatabase, isDatabaseWorking } from '../database'
 import { isWeb } from '../utils/platform'
 
 /**
@@ -10,21 +10,23 @@ export const useDatabase = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [database, setDatabase] = useState<any>(null)
+  const [healthStatus, setHealthStatus] = useState<any>(null)
 
-  // Test database connection
-  const testConnection = useCallback(async () => {
+  // Check database health
+  const checkHealth = useCallback(async () => {
     try {
       setIsLoading(true)
       setError(null)
       
-      const success = await testDatabaseConnection()
-      setIsConnected(success)
+      const health = await isDatabaseWorking()
+      setHealthStatus(health)
+      setIsConnected(health.working)
       
-      if (success) {
-        const db = await getDatabase()
+      if (health.working) {
+        const db = getDatabase()
         setDatabase(db)
       } else {
-        setError('Database connection failed')
+        setError(health.error || 'Database health check failed')
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown database error')
@@ -34,15 +36,22 @@ export const useDatabase = () => {
     }
   }, [])
 
-  // Initialize database connection on mount
+  // Initialize database connection on mount - this will trigger the health check
   useEffect(() => {
-    testConnection()
-  }, [testConnection])
+    console.log('🔍 useDatabase hook initialized - triggering database access')
+    
+    // This will trigger database initialization and health check
+    const db = getDatabase()
+    setDatabase(db)
+    
+    // Also run health check for detailed status
+    checkHealth()
+  }, [checkHealth])
 
   // Get database instance
-  const getDatabaseInstance = useCallback(async () => {
+  const getDatabaseInstance = useCallback(() => {
     if (!database) {
-      const db = await getDatabase()
+      const db = getDatabase()
       setDatabase(db)
       return db
     }
@@ -63,9 +72,10 @@ export const useDatabase = () => {
     isLoading,
     error,
     database,
+    healthStatus,
     
     // Actions
-    testConnection,
+    checkHealth,
     getDatabase: getDatabaseInstance,
     getPlatformInfo,
   }

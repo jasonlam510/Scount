@@ -1,5 +1,6 @@
 import { Database } from '@nozbe/watermelondb'
 import { createAdapter } from './adapters' // Metro will automatically resolve to index.web.ts or index.native.ts
+import { getPlatform } from '../utils/platform'
 import {
   User,
   Group,
@@ -15,6 +16,31 @@ import {
 
 // Database instance (will be initialized asynchronously)
 let database: Database | null = null
+
+/**
+ * Check database health and log results
+ */
+const checkDatabaseHealthOnStartup = async (db: Database) => {
+  try {
+    console.log('🚀 Database initialized - running health check...')
+    console.log(`📱 Platform: ${getPlatform()}`)
+    
+    const health = await isDatabaseWorking()
+    
+    if (health.working) {
+      console.log('✅ Database health check passed')
+      console.log(`📊 Tables: ${health.tables}`)
+      console.log(`👥 Users: ${health.usersCount}`)
+      console.log(`⏰ Checked at: ${health.timestamp}`)
+    } else {
+      console.error('❌ Database health check failed')
+      console.error(`🚨 Error: ${health.error}`)
+      console.error(`⏰ Failed at: ${health.timestamp}`)
+    }
+  } catch (error) {
+    console.error('💥 Database health check error:', error)
+  }
+}
 
 /**
  * Initialize the database with platform-specific adapter
@@ -44,6 +70,9 @@ export const initializeDatabase = (): Database => {
     ],
   })
 
+  // Run health check after database is created
+  checkDatabaseHealthOnStartup(database)
+
   return database
 }
 
@@ -54,39 +83,32 @@ export const getDatabase = (): Database => {
   return initializeDatabase()
 }
 
-// Test database initialization
-export const testDatabaseConnection = async () => {
+/**
+ * Simple health check - checks if database is accessible without creating test data
+ */
+export const isDatabaseWorking = async () => {
   try {
-    console.log('🔍 Testing database connection...')
-    
     const db = getDatabase()
     
-    // Test if we can access the database
+    // Check if we can access collections
     const collections = db.collections
-    console.log('✅ Database collections available:', Object.keys(collections))
+    const tableCount = Object.keys(collections).length
     
-    // Test if we can query a table (even if empty)
+    // Check if we can perform a simple query (without creating data)
     const usersCount = await db.collections.get('users').query().fetchCount()
-    console.log('✅ Users table accessible, count:', usersCount)
     
-    // Test if we can create a test record
-    await db.write(async () => {
-      const testUser = await db.collections.get('users').create((user: any) => {
-        user.name = 'Test User'
-        user.email = 'test@example.com'
-      })
-      console.log('✅ Test user created with ID:', testUser.id)
-      
-      // Clean up - delete the test user
-      await testUser.destroyPermanently()
-      console.log('✅ Test user cleaned up')
-    })
-    
-    console.log('🎉 Database connection test successful!')
-    return true
+    return {
+      working: true,
+      tables: tableCount,
+      usersCount,
+      timestamp: new Date().toISOString()
+    }
   } catch (error) {
-    console.error('❌ Database connection test failed:', error)
-    return false
+    return {
+      working: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    }
   }
 }
 

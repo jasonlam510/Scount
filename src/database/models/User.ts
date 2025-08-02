@@ -5,8 +5,8 @@ export default class User extends Model {
   static table = 'users'
   
   static associations = {
-    participants: { type: 'has_many', foreignKey: 'user_id' },
-    transaction_payers: { type: 'has_many', foreignKey: 'user_id' },
+    participants: { type: 'has_many' as const, foreignKey: 'user_id' },
+    transaction_payers: { type: 'has_many' as const, foreignKey: 'user_id' },
   }
 
   @text('name') name!: string

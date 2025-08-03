@@ -7,6 +7,7 @@ export const schema = appSchema({
     tableSchema({
       name: 'users',
       columns: [
+        { name: 'uuid', type: 'string', isIndexed: true },
         { name: 'name', type: 'string' },
         { name: 'nickname', type: 'string', isOptional: true },
         { name: 'email', type: 'string', isOptional: true },
@@ -23,6 +24,7 @@ export const schema = appSchema({
         { name: 'title', type: 'string' },
         { name: 'icon', type: 'string', isOptional: true },
         { name: 'currency', type: 'string' },
+        { name: 'is_archived', type: 'boolean' },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ]
@@ -84,6 +86,7 @@ export const schema = appSchema({
         { name: 'title', type: 'string' },
         { name: 'amount', type: 'number' },
         { name: 'currency', type: 'string' },
+        { name: 'type', type: 'string', isIndexed: true },
         { name: 'date', type: 'number', isIndexed: true },
         { name: 'subcategory_id', type: 'string', isIndexed: true, isOptional: true },
         { name: 'created_at', type: 'number' },

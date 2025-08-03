@@ -6,6 +6,8 @@ const STORAGE_KEYS = {
   THEME_MODE: '@scount:theme_mode',
   LANGUAGE: '@scount:language',
   IS_SEEDED: '@scount:is_seeded',
+  CURRENT_USER_UUID: '@scount:current_user_uuid',
+  NOTIFICATIONS_ENABLED: '@scount:notifications_enabled',
 } as const;
 
 // Default values
@@ -13,12 +15,16 @@ const DEFAULT_VALUES = {
   THEME_MODE: 'automatic' as ThemeMode,
   LANGUAGE: 'en',
   IS_SEEDED: false,
+  CURRENT_USER_UUID: '550e8400-e29b-41d4-a716-446655440000' as string | null, // Jason's UUID
+  NOTIFICATIONS_ENABLED: false,
 } as const;
 
 export interface Preferences {
   themeMode: ThemeMode;
   language: string;
   isSeeded: boolean;
+  currentUserUuid: string | null;
+  notificationsEnabled: boolean;
 }
 
 // Database seeding methods
@@ -38,6 +44,59 @@ export const setDatabaseSeeded = async (seeded: boolean = true): Promise<void> =
   } catch (error) {
     console.error('Failed to save database seeded status to storage:', error);
     throw new Error('Failed to save database seeded status');
+  }
+};
+
+// Current user UUID methods
+export const getCurrentUserUuid = async (): Promise<string | null> => {
+  try {
+    const userUuid = await AsyncStorage.getItem(STORAGE_KEYS.CURRENT_USER_UUID);
+    return userUuid;
+  } catch (error) {
+    console.warn('Failed to load current user UUID from storage:', error);
+    return DEFAULT_VALUES.CURRENT_USER_UUID;
+  }
+};
+
+export const setCurrentUserUuid = async (userUuid: string | null): Promise<void> => {
+  try {
+    if (userUuid) {
+      await AsyncStorage.setItem(STORAGE_KEYS.CURRENT_USER_UUID, userUuid);
+    } else {
+      await AsyncStorage.removeItem(STORAGE_KEYS.CURRENT_USER_UUID);
+    }
+  } catch (error) {
+    console.error('Failed to save current user UUID to storage:', error);
+    throw new Error('Failed to save current user UUID');
+  }
+};
+
+export const clearCurrentUserUuid = async (): Promise<void> => {
+  try {
+    await AsyncStorage.removeItem(STORAGE_KEYS.CURRENT_USER_UUID);
+  } catch (error) {
+    console.error('Failed to clear current user UUID from storage:', error);
+    throw new Error('Failed to clear current user UUID');
+  }
+};
+
+// Notification methods
+export const getNotificationsEnabled = async (): Promise<boolean> => {
+  try {
+    const enabled = await AsyncStorage.getItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED);
+    return enabled === null ? DEFAULT_VALUES.NOTIFICATIONS_ENABLED : enabled === 'true';
+  } catch (error) {
+    console.warn('Failed to load notifications setting from storage:', error);
+    return DEFAULT_VALUES.NOTIFICATIONS_ENABLED;
+  }
+};
+
+export const setNotificationsEnabled = async (enabled: boolean): Promise<void> => {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED, enabled.toString());
+  } catch (error) {
+    console.error('Failed to save notifications setting to storage:', error);
+    throw new Error('Failed to save notifications setting');
   }
 };
 
@@ -125,16 +184,20 @@ export const setLanguage = async (language: string): Promise<void> => {
 // Get all preferences
 export const getAllPreferences = async (): Promise<Preferences> => {
   try {
-    const [themeMode, language, isSeeded] = await Promise.all([
+    const [themeMode, language, isSeeded, currentUserUuid, notificationsEnabled] = await Promise.all([
       getThemeMode(),
       getLanguage(),
       isDatabaseSeeded(),
+      getCurrentUserUuid(),
+      getNotificationsEnabled(),
     ]);
 
     return {
       themeMode,
       language,
       isSeeded,
+      currentUserUuid,
+      notificationsEnabled,
     };
   } catch (error) {
     console.warn('Failed to load preferences:', error);
@@ -142,6 +205,8 @@ export const getAllPreferences = async (): Promise<Preferences> => {
       themeMode: DEFAULT_VALUES.THEME_MODE,
       language: DEFAULT_VALUES.LANGUAGE,
       isSeeded: DEFAULT_VALUES.IS_SEEDED,
+      currentUserUuid: DEFAULT_VALUES.CURRENT_USER_UUID,
+      notificationsEnabled: DEFAULT_VALUES.NOTIFICATIONS_ENABLED,
     };
   }
 };
@@ -153,6 +218,8 @@ export const clearAllPreferences = async (): Promise<void> => {
       AsyncStorage.removeItem(STORAGE_KEYS.THEME_MODE),
       AsyncStorage.removeItem(STORAGE_KEYS.LANGUAGE),
       AsyncStorage.removeItem(STORAGE_KEYS.IS_SEEDED),
+      AsyncStorage.removeItem(STORAGE_KEYS.CURRENT_USER_UUID),
+      AsyncStorage.removeItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED),
     ]);
   } catch (error) {
     console.error('Failed to clear preferences:', error);
@@ -165,7 +232,8 @@ export const isInitialized = async (): Promise<boolean> => {
   try {
     const themeMode = await AsyncStorage.getItem(STORAGE_KEYS.THEME_MODE);
     const language = await AsyncStorage.getItem(STORAGE_KEYS.LANGUAGE);
-    return !!(themeMode && language);
+    const notificationsEnabled = await AsyncStorage.getItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED);
+    return !!(themeMode && language && notificationsEnabled !== null);
   } catch (error) {
     console.warn('Failed to check initialization status:', error);
     return false;
@@ -177,10 +245,17 @@ export const initializeDefaults = async (): Promise<void> => {
   try {
     const initialized = await isInitialized();
     if (!initialized) {
+      console.log('🔧 Initializing default preferences...');
       await Promise.all([
         setThemeMode(DEFAULT_VALUES.THEME_MODE),
         setLanguage(DEFAULT_VALUES.LANGUAGE),
+        setNotificationsEnabled(DEFAULT_VALUES.NOTIFICATIONS_ENABLED),
+        setCurrentUserUuid(DEFAULT_VALUES.CURRENT_USER_UUID),
+        setDatabaseSeeded(DEFAULT_VALUES.IS_SEEDED),
       ]);
+      console.log('✅ Default preferences initialized');
+    } else {
+      console.log('✅ Preferences already initialized');
     }
   } catch (error) {
     console.error('Failed to initialize default preferences:', error);

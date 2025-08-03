@@ -59,8 +59,11 @@ export const initializeDatabase = (): Database => {
     return database
   }
 
+  console.log('🔧 Initializing database...')
+  
   // Create the appropriate adapter based on platform
   const adapter = createAdapter()
+  console.log('🔧 Adapter created:', adapter)
 
   // Create the Watermelon database
   database = new Database({

@@ -1,5 +1,5 @@
 import { Database } from '@nozbe/watermelondb'
-import { isDatabaseSeeded, setDatabaseSeeded } from '../../hooks/usePerences'
+import { isDatabaseSeeded, setDatabaseSeeded } from '../../hooks/usePreference'
 import { seedUsers } from './users'
 import { seedCategories } from './categories'
 import { seedSubcategories } from './subcategories'
@@ -29,6 +29,7 @@ export const seedDatabase = async (db: Database): Promise<void> => {
       const createdUsers = await Promise.all(
         seedUsers.map(userData =>
           db.collections.get('users').create((user: any) => {
+            user.uuid = userData.uuid
             user.name = userData.name
             user.nickname = userData.nickname
             user.email = userData.email

@@ -16,6 +16,7 @@ export default class Transaction extends Model {
   @text('title') title!: string
   @field('amount') amount!: number
   @text('currency') currency!: string
+  @text('type') type!: string
   @date('date') date!: number
   @readonly @date('created_at') createdAt!: number
   @readonly @date('updated_at') updatedAt!: number

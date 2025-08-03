@@ -8,7 +8,7 @@ import {
   getAllPreferences,
   initializeDefaults,
   Preferences,
-} from '../hooks/usePerences';
+} from '../hooks/usePreference';
 
 interface PreferencesState {
   themeMode: ThemeMode;

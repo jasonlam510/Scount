@@ -12,6 +12,7 @@ export default class Group extends Model {
   @text('title') title!: string
   @text('icon') icon?: string
   @text('currency') currency!: string
+  @field('is_archived') isArchived!: boolean
   @readonly @date('created_at') createdAt!: number
   @readonly @date('updated_at') updatedAt!: number
 

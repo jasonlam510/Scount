@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n } from '../../hooks';
+import { useTheme, useI18n, useUser } from '../../hooks';
+import { getNotificationsEnabled, setNotificationsEnabled, clearCurrentUserUuid } from '../../hooks/usePreference';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -23,11 +24,26 @@ const ProfileScreen: React.FC = () => {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   
-  // Local state for user data and preferences
-  const [userName, setUserName] = useState('Jason Lam');
-  const [publicNickname, setPublicNickname] = useState('Jason Lam');
-  const [userEmail, setUserEmail] = useState('jasonlamufo@gmail.com');
+  // Use real user data and preferences
+  const { userData, isLoading: userLoading, error: userError } = useUser();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [isLoadingNotifications, setIsLoadingNotifications] = useState(true);
+
+  // Load notifications setting
+  useEffect(() => {
+    const loadNotificationsSetting = async () => {
+      try {
+        const enabled = await getNotificationsEnabled();
+        setNotificationsEnabled(enabled);
+      } catch (error) {
+        console.error('Failed to load notifications setting:', error);
+      } finally {
+        setIsLoadingNotifications(false);
+      }
+    };
+
+    loadNotificationsSetting();
+  }, []);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -66,10 +82,21 @@ const ProfileScreen: React.FC = () => {
     setShowThemeSelector(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     Alert.alert('Log Out', 'Are you sure you want to log out?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Log Out', onPress: () => console.log('User logged out') },
+      { 
+        text: 'Log Out', 
+        onPress: async () => {
+          try {
+            await clearCurrentUserUuid();
+            console.log('User logged out');
+            // In a real app, you might navigate to login screen
+          } catch (error) {
+            console.error('Failed to logout:', error);
+          }
+        } 
+      },
     ]);
   };
 
@@ -110,13 +137,19 @@ const ProfileScreen: React.FC = () => {
           <View style={styles.profileHeader}>
             <View style={styles.profilePhotoContainer}>
               <Image
-                source={{ uri: 'https://avatars.githubusercontent.com/jasonlam510' }}
+                source={{ 
+                  uri: userData?.avatar || 'https://via.placeholder.com/80x80?text=User'
+                }}
                 style={styles.profilePhoto}
               />
             </View>
             <View style={styles.userInfo}>
-              <Text style={[styles.userName, { color: colors.text }]}>{userName}</Text>
-              <Text style={[styles.userEmail, { color: colors.textSecondary }]}>{userEmail}</Text>
+              <Text style={[styles.userName, { color: colors.text }]}>
+                {userData?.name || 'Loading...'}
+              </Text>
+              <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
+                {userData?.email || 'Loading...'}
+              </Text>
             </View>
           </View>
           
@@ -126,7 +159,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditName}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{userName}</Text>
+              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+                {userData?.name || 'Loading...'}
+              </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
@@ -137,7 +172,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditNickname}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{publicNickname}</Text>
+              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+                {userData?.nickname || 'Loading...'}
+              </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
@@ -152,8 +189,16 @@ const ProfileScreen: React.FC = () => {
               trackColor={{ false: '#767577', true: colors.success }}
               thumbColor={notificationsEnabled ? '#ffffff' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={setNotificationsEnabled}
+              onValueChange={async (value) => {
+                setNotificationsEnabled(value);
+                try {
+                  await setNotificationsEnabled(value);
+                } catch (error) {
+                  console.error('Failed to save notifications setting:', error);
+                }
+              }}
               value={notificationsEnabled}
+              disabled={isLoadingNotifications}
             />
           </View>
           <View style={[styles.separator, { backgroundColor: colors.border }]} />

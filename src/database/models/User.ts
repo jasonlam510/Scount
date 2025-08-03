@@ -9,6 +9,7 @@ export default class User extends Model {
     transaction_payers: { type: 'has_many' as const, foreignKey: 'user_id' },
   }
 
+  @text('uuid') uuid!: string
   @text('name') name!: string
   @text('nickname') nickname?: string
   @text('email') email?: string

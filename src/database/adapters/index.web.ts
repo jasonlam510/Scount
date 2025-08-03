@@ -6,6 +6,9 @@ import schema from '../schema'
  */
 export const createAdapter = () => {
   console.log('🌐 Using LokiJS adapter for web platform')
+  console.log('📋 Schema being used:', schema)
+  console.log('📊 Schema version:', schema.version)
+  console.log('📚 Schema tables:', schema.tables.length)
   
   return new LokiJSAdapter({
     schema,

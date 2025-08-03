@@ -13,6 +13,7 @@ erDiagram
     %% Users Entity
     USERS {
         int user_id PK "auto-increment"
+        string uuid "unique identifier"
         string name
         string nickname
         string email
@@ -27,6 +28,7 @@ erDiagram
         string title
         string icon
         string currency
+        boolean is_archived
         timestamp created_at
         timestamp updated_at
     }
@@ -78,6 +80,7 @@ erDiagram
         string title
         double amount
         string currency
+        enum type "expense|income|transfer"
         timestamp date
         int subcategory_id FK "nullable"
         timestamp created_at
@@ -130,16 +133,20 @@ erDiagram
 
 ### 1. Users
 - **Purpose**: Stores user account information
-- **Key Fields**: `user_id` (Primary Key), `name`, `nickname`, `email`, `avatar`
+- **Key Fields**: `user_id` (Primary Key), `uuid` (Unique Identifier), `name`, `nickname`, `email`, `avatar`
 - **Relationships**: Can participate in multiple groups via Participants table
+- **Rules**: `uuid` must be unique across all users
 
 ### 2. Groups
 - **Purpose**: Represents expense groups for shared expenses
-- **Key Fields**: `group_id` (Primary Key), `title`, `icon`, `currency`, `created_at`
+- **Key Fields**: `group_id` (Primary Key), `title`, `icon`, `currency`, `is_archived`, `created_at`
 - **Relationships**: 
   - Has many participants (via Participants table)
   - Has many transactions
   - Personal expenses have `group_id = NULL`
+- **Rules**: 
+  - `is_archived` defaults to `false` for new groups
+  - Archived groups can be hidden from active group lists
 
 ### 3. Participants (Group Membership)
 - **Purpose**: Junction table linking users to groups with role information
@@ -165,10 +172,11 @@ erDiagram
 
 ### 7. Transactions
 - **Purpose**: Core expense/income records
-- **Key Fields**: `transaction_id` (Primary Key), `group_id` (nullable), `title`, `amount`, `currency`, `date`, `subcategory_id`, `created_at`
+- **Key Fields**: `transaction_id` (Primary Key), `group_id` (nullable), `title`, `amount`, `currency`, `type`, `date`, `subcategory_id`, `created_at`
 - **Rules**: 
   - Can belong to a group or be personal (group_id = NULL)
   - Can have multiple payers and tags
+  - `type` must be one of: 'expense', 'income', or 'transfer'
 
 ### 8. Transaction Payers
 - **Purpose**: Supports multiple payers for a single transaction

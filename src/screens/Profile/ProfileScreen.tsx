@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -12,8 +12,9 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n, useUser } from '../../hooks';
-import { getNotificationsEnabled, setNotificationsEnabled, clearCurrentUserUuid } from '../../hooks/usePreference';
+import { useTheme, useI18n } from '../../hooks';
+import { useUser } from '../../hooks/database';
+import { getNotificationsEnabled, setNotificationsEnabled, clearCurrentUserUuid, getCurrentUserUuid } from '../../hooks/usePreference';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -24,8 +25,47 @@ const ProfileScreen: React.FC = () => {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   
-  // Use real user data and preferences
-  const { userData, isLoading: userLoading, error: userError } = useUser();
+  // Get current user UUID and fetch user data
+  const [currentUserUuid, setCurrentUserUuid] = useState<string | null>(null);
+  const [isLoadingUuid, setIsLoadingUuid] = useState(true);
+  
+  // Fetch current user UUID from preferences
+  useEffect(() => {
+    const fetchCurrentUserUuid = async () => {
+      try {
+        setIsLoadingUuid(true);
+        const uuid = await getCurrentUserUuid();
+        setCurrentUserUuid(uuid);
+      } catch (error) {
+        console.error('Error fetching current user UUID:', error);
+      } finally {
+        setIsLoadingUuid(false);
+      }
+    };
+
+    fetchCurrentUserUuid();
+  }, []);
+
+  // Create stable filters object
+  const userFilters = useMemo(() => {
+    return currentUserUuid ? { uuid: currentUserUuid } : {}
+  }, [currentUserUuid])
+
+  // Use generic user hook with UUID
+  const { users, isLoading: userLoading, error: userError } = useUser(
+    userFilters,
+    {
+      enabled: !!currentUserUuid,
+      onSuccess: useCallback((data: any[]) => {
+        if (data.length > 0) {
+          console.log('Current user loaded:', data[0].name);
+        }
+      }, []),
+      onError: useCallback((error: string) => console.error('Error loading user:', error), [])
+    }
+  );
+
+  const userData = users[0] || null;
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [isLoadingNotifications, setIsLoadingNotifications] = useState(true);
 
@@ -143,14 +183,14 @@ const ProfileScreen: React.FC = () => {
                 style={styles.profilePhoto}
               />
             </View>
-            <View style={styles.userInfo}>
-              <Text style={[styles.userName, { color: colors.text }]}>
-                {userData?.name || 'Loading...'}
-              </Text>
-              <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-                {userData?.email || 'Loading...'}
-              </Text>
-            </View>
+                      <View style={styles.userInfo}>
+            <Text style={[styles.userName, { color: colors.text }]}>
+              {userData?.name || (isLoadingUuid || userLoading ? 'Loading...' : 'No user found')}
+            </Text>
+            <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
+              {userData?.email || (isLoadingUuid || userLoading ? 'Loading...' : 'No email')}
+            </Text>
+          </View>
           </View>
           
           <View style={[styles.separator, { backgroundColor: colors.border }]} />
@@ -159,9 +199,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditName}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {userData?.name || 'Loading...'}
-              </Text>
+                          <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+              {userData?.name || (isLoadingUuid || userLoading ? 'Loading...' : 'No name')}
+            </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
@@ -172,9 +212,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditNickname}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {userData?.nickname || 'Loading...'}
-              </Text>
+                          <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+              {userData?.nickname || (isLoadingUuid || userLoading ? 'Loading...' : 'No nickname')}
+            </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>

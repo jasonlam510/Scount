@@ -3,29 +3,25 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider, useDatabase } from './src/hooks';
+import { DatabaseProvider } from '@nozbe/watermelondb/DatabaseProvider';
+import { ThemeProvider } from './src/hooks';
 import { PreferencesProvider } from './src/contexts/PreferencesContext';
 import { BottomTabNavigator } from './src/components/navigation';
+import { getDatabase } from './src/database';
 import './src/i18n'; // Import i18n configuration
 
 const Stack = createStackNavigator();
 
-// Database initializer component
-const DatabaseInitializer: React.FC = () => {
-  // This will trigger database initialization and health check
-  useDatabase();
-  return null;
-};
-
 export default function App() {
+  // Initialize database
+  const database = getDatabase();
+
   return (
     <SafeAreaProvider>
-      <PreferencesProvider>
-        <ThemeProvider>
+      <DatabaseProvider database={database}>
+        <PreferencesProvider>
+          <ThemeProvider>
             <NavigationContainer>
-              {/* Initialize database on app startup */}
-              <DatabaseInitializer />
-              
               <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {/* Main screens with bottom tabs */}
                 <Stack.Screen 
@@ -34,8 +30,9 @@ export default function App() {
                 />
               </Stack.Navigator>
             </NavigationContainer>
-        </ThemeProvider>
-      </PreferencesProvider>
+          </ThemeProvider>
+        </PreferencesProvider>
+      </DatabaseProvider>
     </SafeAreaProvider>
   );
 }

@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import { usePreferences } from '../contexts/PreferencesContext';
+import { useSettings } from '../contexts/SettingsContext';
 
 export const useI18n = () => {
   const { t, i18n } = useTranslation();
-  const { language, setLanguage, isLoading } = usePreferences();
+  const { language, setLanguage, isLoading } = useSettings();
 
   // Update i18n language when preferences change
   useEffect(() => {

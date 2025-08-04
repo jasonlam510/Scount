@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n } from '../../hooks';
 import { useUser } from '../../hooks/database';
-import { getNotificationsEnabled, setNotificationsEnabled, clearCurrentUserUuid, getCurrentUserUuid } from '../../hooks/usePreference';
+import { useSettings } from '../../contexts/SettingsContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -22,29 +22,17 @@ const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
+  const { 
+    currentUserUuid, 
+    setCurrentUserUuid, 
+    clearCurrentUserUuid,
+    notificationsEnabled, 
+    setNotificationsEnabled,
+    isLoading: settingsLoading 
+  } = useSettings();
+  
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
-  
-  // Get current user UUID and fetch user data
-  const [currentUserUuid, setCurrentUserUuid] = useState<string | null>(null);
-  const [isLoadingUuid, setIsLoadingUuid] = useState(true);
-  
-  // Fetch current user UUID from preferences
-  useEffect(() => {
-    const fetchCurrentUserUuid = async () => {
-      try {
-        setIsLoadingUuid(true);
-        const uuid = await getCurrentUserUuid();
-        setCurrentUserUuid(uuid);
-      } catch (error) {
-        console.error('Error fetching current user UUID:', error);
-      } finally {
-        setIsLoadingUuid(false);
-      }
-    };
-
-    fetchCurrentUserUuid();
-  }, []);
 
   // Create stable filters object
   const userFilters = useMemo(() => {
@@ -66,24 +54,6 @@ const ProfileScreen: React.FC = () => {
   );
 
   const userData = users[0] || null;
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [isLoadingNotifications, setIsLoadingNotifications] = useState(true);
-
-  // Load notifications setting
-  useEffect(() => {
-    const loadNotificationsSetting = async () => {
-      try {
-        const enabled = await getNotificationsEnabled();
-        setNotificationsEnabled(enabled);
-      } catch (error) {
-        console.error('Failed to load notifications setting:', error);
-      } finally {
-        setIsLoadingNotifications(false);
-      }
-    };
-
-    loadNotificationsSetting();
-  }, []);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -165,6 +135,15 @@ const ProfileScreen: React.FC = () => {
     }
   };
 
+  // Show loading state if settings are still loading
+  if (settingsLoading) {
+    return (
+      <View style={[styles.loadingContainer, { backgroundColor: colors.background }]}>
+        <Text style={[styles.loadingText, { color: colors.text }]}>Loading settings...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}>
@@ -183,14 +162,14 @@ const ProfileScreen: React.FC = () => {
                 style={styles.profilePhoto}
               />
             </View>
-                      <View style={styles.userInfo}>
-            <Text style={[styles.userName, { color: colors.text }]}>
-              {userData?.name || (isLoadingUuid || userLoading ? 'Loading...' : 'No user found')}
-            </Text>
-            <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-              {userData?.email || (isLoadingUuid || userLoading ? 'Loading...' : 'No email')}
-            </Text>
-          </View>
+            <View style={styles.userInfo}>
+              <Text style={[styles.userName, { color: colors.text }]}>
+                {userData?.name || (userLoading ? 'Loading...' : 'No user found')}
+              </Text>
+              <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
+                {userData?.email || (userLoading ? 'Loading...' : 'No email')}
+              </Text>
+            </View>
           </View>
           
           <View style={[styles.separator, { backgroundColor: colors.border }]} />
@@ -199,9 +178,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditName}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
-                          <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-              {userData?.name || (isLoadingUuid || userLoading ? 'Loading...' : 'No name')}
-            </Text>
+              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+                {userData?.name || (userLoading ? 'Loading...' : 'No name')}
+              </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
@@ -212,9 +191,9 @@ const ProfileScreen: React.FC = () => {
           <TouchableOpacity style={styles.row} onPress={handleEditNickname}>
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
-                          <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-              {userData?.nickname || (isLoadingUuid || userLoading ? 'Loading...' : 'No nickname')}
-            </Text>
+              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+                {userData?.nickname || (userLoading ? 'Loading...' : 'No nickname')}
+              </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
@@ -230,7 +209,6 @@ const ProfileScreen: React.FC = () => {
               thumbColor={notificationsEnabled ? '#ffffff' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
               onValueChange={async (value) => {
-                setNotificationsEnabled(value);
                 try {
                   await setNotificationsEnabled(value);
                 } catch (error) {
@@ -238,7 +216,6 @@ const ProfileScreen: React.FC = () => {
                 }
               }}
               value={notificationsEnabled}
-              disabled={isLoadingNotifications}
             />
           </View>
           <View style={[styles.separator, { backgroundColor: colors.border }]} />
@@ -311,6 +288,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 16,
   },
   headerTitle: {
     fontSize: 20,

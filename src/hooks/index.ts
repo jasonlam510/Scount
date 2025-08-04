@@ -1,6 +1,8 @@
 // Export hooks
 export { useI18n } from './useI18n';
-export { useTheme, ThemeProvider } from './useTheme';
+export { useTheme } from './useTheme';
+export { useSettings } from '../contexts/SettingsContext';
+export { useAsyncStorage } from './useAsyncStorage';
 
 // Export database hooks
 export { useDatabase } from './useDatabase';

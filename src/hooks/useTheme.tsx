@@ -1,18 +1,9 @@
-import React, { createContext, useContext, ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
-import { usePreferences } from '../contexts/PreferencesContext';
+import { useSettings } from '../contexts/SettingsContext';
 
 export type ThemeMode = 'light' | 'dark' | 'automatic';
 
-interface ThemeContextType {
-  themeMode: ThemeMode;
-  isDark: boolean;
-  setThemeMode: (mode: ThemeMode) => void;
-  colors: ThemeColors;
-  isLoading: boolean;
-}
-
-interface ThemeColors {
+export interface ThemeColors {
   background: string;
   surface: string;
   primary: string;
@@ -78,14 +69,8 @@ const greenColors: ThemeColors = {
   danger: '#dc3545',
 };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const { themeMode, setThemeMode, isLoading } = usePreferences();
+export const useTheme = () => {
+  const { themeMode, setThemeMode, isLoading } = useSettings();
   const systemColorScheme = useColorScheme();
 
   // Determine if dark mode should be active
@@ -94,7 +79,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     : themeMode === 'dark';
 
   // Get the appropriate colors based on the current theme
-  // You can extend this to support more themes
   const getColors = (): ThemeColors => {
     if (isDark) {
       return darkColors;
@@ -110,25 +94,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const colors = getColors();
 
-  const value: ThemeContextType = {
+  return {
     themeMode,
     isDark,
     setThemeMode,
     colors,
     isLoading,
   };
-
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 }; 

@@ -1,5 +1,5 @@
 import { Database } from '@nozbe/watermelondb'
-import { isDatabaseSeeded, setDatabaseSeeded } from '../../hooks/usePreference'
+import { useAsyncStorage } from '../../hooks/useAsyncStorage'
 import { seedUsers } from './users'
 import { seedCategories } from './categories'
 import { seedSubcategories } from './subcategories'
@@ -14,8 +14,12 @@ export const seedDatabase = async (db: Database): Promise<void> => {
   try {
     console.log('🌱 Checking if database needs seeding...')
     
+    // Use generic storage functions
+    const { get, set } = useAsyncStorage();
+    
     // Check if database is already seeded using AsyncStorage flag
-    const isSeeded = await isDatabaseSeeded()
+    const isSeededValue = await get('@scount:is_seeded');
+    const isSeeded = isSeededValue === 'true';
     if (isSeeded) {
       console.log('✅ Database already seeded, skipping seed')
       return
@@ -207,7 +211,7 @@ export const seedDatabase = async (db: Database): Promise<void> => {
     })
     
     // Mark database as seeded in AsyncStorage
-    await setDatabaseSeeded(true)
+    await set('@scount:is_seeded', 'true')
     console.log('🎉 Database seeding completed successfully!')
     
   } catch (error) {

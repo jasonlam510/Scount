@@ -1,5 +1,5 @@
 import { useColorScheme } from 'react-native';
-import { useSettings } from '../contexts/SettingsContext';
+import { useSettings } from '../contexts/AppContext';
 
 export type ThemeMode = 'light' | 'dark' | 'automatic';
 

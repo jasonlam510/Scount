@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n } from '../../hooks';
 import { useUser } from '../../hooks/database';
-import { useSettings } from '../../contexts/SettingsContext';
+import { useSettings } from '../../contexts/AppContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 

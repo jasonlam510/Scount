@@ -30,7 +30,18 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-localization"
-    ]
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "zh"],
+            "android": ["en", "zh"]
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "supportsRTL": true
+    }
   }
 }

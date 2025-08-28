@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSettings } from '../contexts/AppContext';
+import { localeInfo } from '../i18n';
+import * as Localization from 'expo-localization';
 
 export const useI18n = () => {
   const { t, i18n } = useTranslation();
@@ -33,8 +35,30 @@ export const useI18n = () => {
   const getSupportedLanguages = () => {
     return Object.keys(i18n.options.resources || {});
   };
+
+  // Simple locale information (no formatting functions)
+  const localeData = useMemo(() => {
+    try {
+      const locales = Localization.getLocales();
+      const primaryLocale = locales[0];
+      
+      return {
+        languageCode: primaryLocale?.languageCode || 'en',
+        languageTag: primaryLocale?.languageTag || 'en-US',
+        regionCode: primaryLocale?.regionCode || 'US'
+      };
+    } catch (error) {
+      console.warn('Failed to get locale data:', error);
+      return {
+        languageCode: 'en',
+        languageTag: 'en-US', 
+        regionCode: 'US'
+      };
+    }
+  }, []);
   
   return {
+    // Basic i18n functions
     t,                    // Translation function
     changeLanguage,       // Language switcher
     getCurrentLanguage,   // Current language getter
@@ -42,6 +66,9 @@ export const useI18n = () => {
     getSupportedLanguages, // Get list of supported languages
     isReady: i18n.isInitialized,
     currentLanguage: i18n.language,
-    isLoading            // Loading state for language initialization
+    isLoading,            // Loading state for language initialization
+    
+    // Simple locale information (no formatting)
+    locale: localeData
   };
 }; 

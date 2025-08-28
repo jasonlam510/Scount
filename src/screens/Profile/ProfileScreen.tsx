@@ -13,7 +13,6 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n } from '../../hooks';
-import { useUser } from '../../hooks/database';
 import { useSettings } from '../../contexts/AppContext';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
@@ -34,26 +33,13 @@ const ProfileScreen: React.FC = () => {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
 
-  // Create stable filters object
-  const userFilters = useMemo(() => {
-    return currentUserUuid ? { uuid: currentUserUuid } : {}
-  }, [currentUserUuid])
-
-  // Use generic user hook with UUID
-  const { users, isLoading: userLoading, error: userError } = useUser(
-    userFilters,
-    {
-      enabled: !!currentUserUuid,
-      onSuccess: useCallback((data: any[]) => {
-        if (data.length > 0) {
-          console.log('Current user loaded:', data[0].name);
-        }
-      }, []),
-      onError: useCallback((error: string) => console.error('Error loading user:', error), [])
-    }
-  );
-
-  const userData = users[0] || null;
+  // Mock user data - will be replaced with proper mock data service later
+  const mockUserData = {
+    name: 'Jason Lam',
+    email: 'jason@example.com',
+    nickname: 'J',
+    avatar: 'https://via.placeholder.com/80x80?text=J'
+  };
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -157,17 +143,17 @@ const ProfileScreen: React.FC = () => {
             <View style={styles.profilePhotoContainer}>
               <Image
                 source={{ 
-                  uri: userData?.avatar || 'https://via.placeholder.com/80x80?text=User'
+                  uri: mockUserData?.avatar || 'https://via.placeholder.com/80x80?text=User'
                 }}
                 style={styles.profilePhoto}
               />
             </View>
             <View style={styles.userInfo}>
               <Text style={[styles.userName, { color: colors.text }]}>
-                {userData?.name || (userLoading ? 'Loading...' : 'No user found')}
+                {mockUserData?.name || 'Loading...'}
               </Text>
               <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-                {userData?.email || (userLoading ? 'Loading...' : 'No email')}
+                {mockUserData?.email || 'Loading...'}
               </Text>
             </View>
           </View>
@@ -179,7 +165,7 @@ const ProfileScreen: React.FC = () => {
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {userData?.name || (userLoading ? 'Loading...' : 'No name')}
+                {mockUserData?.name || 'Loading...'}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
@@ -192,7 +178,7 @@ const ProfileScreen: React.FC = () => {
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {userData?.nickname || (userLoading ? 'Loading...' : 'No nickname')}
+                {mockUserData?.nickname || 'Loading...'}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>

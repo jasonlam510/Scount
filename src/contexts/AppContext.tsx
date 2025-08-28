@@ -11,9 +11,6 @@ export const STORAGE_KEYS = {
   
   // User Session
   CURRENT_USER_UUID: '@scount:current_user_uuid',
-  
-  // Database State
-  IS_SEEDED: '@scount:is_seeded',
 } as const;
 
 // Centralized app defaults - easy to modify
@@ -22,7 +19,6 @@ const APP_DEFAULTS = {
   language: 'en',
   notificationsEnabled: true,
   currentUserUuid: '550e8400-e29b-41d4-a716-446655440000' as string | null, // Jason's UUID
-  isSeeded: false,
 } as const;
 
 // All settings interface
@@ -34,9 +30,6 @@ export interface AllSettings {
   
   // User Session
   currentUserUuid: string | null;
-  
-  // Database State
-  isSeeded: boolean;
 }
 
 interface SettingsState {
@@ -47,9 +40,6 @@ interface SettingsState {
   
   // User Session
   currentUserUuid: string | null;
-  
-  // Database State
-  isSeeded: boolean;
   
   // UI State
   isLoading: boolean;
@@ -66,9 +56,6 @@ interface SettingsContextType extends SettingsState {
   setCurrentUserUuid: (userUuid: string | null) => Promise<void>;
   clearCurrentUserUuid: () => Promise<void>;
   
-  // Database State Actions
-  setDatabaseSeeded: (seeded: boolean) => Promise<void>;
-  
   // Utility Actions
   refreshAllSettings: () => Promise<void>;
   clearAllSettings: () => Promise<void>;
@@ -83,9 +70,6 @@ const defaultState: SettingsState = {
   
   // User Session
   currentUserUuid: APP_DEFAULTS.currentUserUuid,
-  
-  // Database State
-  isSeeded: APP_DEFAULTS.isSeeded,
   
   // UI State
   isLoading: true,
@@ -130,7 +114,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         [STORAGE_KEYS.LANGUAGE]: APP_DEFAULTS.language,
         [STORAGE_KEYS.NOTIFICATIONS_ENABLED]: APP_DEFAULTS.notificationsEnabled.toString(),
         [STORAGE_KEYS.CURRENT_USER_UUID]: APP_DEFAULTS.currentUserUuid || '',
-        [STORAGE_KEYS.IS_SEEDED]: APP_DEFAULTS.isSeeded.toString(),
       };
 
       for (const [key, value] of Object.entries(defaultSettings)) {
@@ -160,13 +143,11 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         languageRaw,
         notificationsEnabledRaw,
         currentUserUuid,
-        isSeededRaw,
       ] = await Promise.all([
         get(STORAGE_KEYS.THEME_MODE),
         get(STORAGE_KEYS.LANGUAGE),
         get(STORAGE_KEYS.NOTIFICATIONS_ENABLED),
         get(STORAGE_KEYS.CURRENT_USER_UUID),
-        get(STORAGE_KEYS.IS_SEEDED),
       ]);
       
       // Parse and validate values
@@ -182,17 +163,12 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         ? notificationsEnabledRaw === 'true'
         : APP_DEFAULTS.notificationsEnabled;
       
-      const isSeeded = isSeededRaw && isValidBoolean(isSeededRaw)
-        ? isSeededRaw === 'true'
-        : APP_DEFAULTS.isSeeded;
-      
       setState(prev => ({
         ...prev,
         themeMode,
         language,
         notificationsEnabled,
         currentUserUuid,
-        isSeeded,
         isLoading: false,
         error: null,
       }));
@@ -272,19 +248,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     }
   };
 
-  // Database State Actions
-  const setDatabaseSeeded = async (seeded: boolean) => {
-    try {
-      setState(prev => ({ ...prev, error: null }));
-      await set(STORAGE_KEYS.IS_SEEDED, seeded.toString());
-      setState(prev => ({ ...prev, isSeeded: seeded }));
-    } catch (error) {
-      console.error('Failed to save database seeded status:', error);
-      setState(prev => ({ ...prev, error: 'Failed to save database seeded status' }));
-      throw error;
-    }
-  };
-
   // Utility Actions
   const refreshAllSettings = async () => {
     await loadAllSettings();
@@ -313,7 +276,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     setNotificationsEnabled,
     setCurrentUserUuid,
     clearCurrentUserUuid,
-    setDatabaseSeeded,
     refreshAllSettings,
     clearAllSettings,
     clearError,

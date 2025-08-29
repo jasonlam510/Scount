@@ -1,11 +1,11 @@
 import { IUserService } from '../../interfaces/IUserService';
 import { 
-  User, 
+  Profile, 
   CreateUserRequest, 
   UpdateUserRequest, 
   UpdatePreferencesRequest,
   UserPreferences
-} from '../../types/users';
+} from '../../types/profiles';
 import { 
   Group,
   CreateGroupRequest,
@@ -20,9 +20,9 @@ import { mockUsers } from '../data/users';
 import { mockUserPreferencesByUser } from '../data/user-preferences';
 
 export class MockUserService implements IUserService {
-  private users: User[] = [...mockUsers];
-  private currentUser: User | null = mockUsers[0]; // Jason Lam
-  private userListeners: { [userId: string]: ((user: User) => void)[] } = {};
+  private users: Profile[] = [...mockUsers];
+  private currentUser: Profile | null = mockUsers[0]; // Jason Lam
+  private userListeners: { [userId: string]: ((user: Profile) => void)[] } = {};
   private preferencesListeners: { [userId: string]: ((preferences: UserPreferences) => void)[] } = {};
   private groupListeners: { [groupId: string]: ((group: Group) => void)[] } = {};
 
@@ -31,7 +31,7 @@ export class MockUserService implements IUserService {
   }
 
   // Real-time subscriptions (for future sync)
-  subscribeToUserChanges(userId: string, callback: (user: User) => void) {
+  subscribeToUserChanges(userId: string, callback: (user: Profile) => void) {
     if (!this.userListeners[userId]) {
       this.userListeners[userId] = [];
     }
@@ -81,7 +81,7 @@ export class MockUserService implements IUserService {
     };
   }
 
-  private notifyUserListeners(userId: string, user: User) {
+  private notifyUserListeners(userId: string, user: Profile) {
     if (this.userListeners[userId]) {
       this.userListeners[userId].forEach(callback => callback(user));
     }
@@ -93,24 +93,24 @@ export class MockUserService implements IUserService {
     }
   }
 
-  async getCurrentUser(): Promise<User | null> {
+  async getCurrentUser(): Promise<Profile | null> {
     await this.simulateDelay();
     return this.currentUser;
   }
 
-  async getUserById(id: string): Promise<User | null> {
+  async getUserById(id: string): Promise<Profile | null> {
     await this.simulateDelay();
     return this.users.find(u => u.id === id) || null;
   }
 
-  async getUserByUuid(uuid: string): Promise<User | null> {
+  async getUserByUuid(uuid: string): Promise<Profile | null> {
     await this.simulateDelay();
     return this.users.find(u => u.uuid === uuid) || null;
   }
 
-  async createUser(user: CreateUserRequest): Promise<User> {
+  async createUser(user: CreateUserRequest): Promise<Profile> {
     await this.simulateDelay();
-    const newUser: User = {
+    const newUser: Profile = {
       ...user,
       id: this.generateId(),
       avatar: user.avatar || `https://via.placeholder.com/80x80?text=${user.nickname}`,
@@ -123,7 +123,7 @@ export class MockUserService implements IUserService {
     return newUser;
   }
 
-  async updateUser(id: string, updates: UpdateUserRequest): Promise<User> {
+  async updateUser(id: string, updates: UpdateUserRequest): Promise<Profile> {
     await this.simulateDelay();
     const index = this.users.findIndex(u => u.id === id);
     if (index === -1) throw new Error('User not found');
@@ -186,7 +186,7 @@ export class MockUserService implements IUserService {
     return updatedPreferences;
   }
 
-  async login(email: string, password: string): Promise<{ user: User; token: string }> {
+  async login(email: string, password: string): Promise<{ user: Profile; token: string }> {
     await this.simulateDelay();
     const user = this.users.find(u => u.email === email);
     if (!user) throw new Error('Invalid credentials');
@@ -205,7 +205,7 @@ export class MockUserService implements IUserService {
     this.currentUser = null;
   }
 
-  async refreshToken(): Promise<{ user: User; token: string }> {
+  async refreshToken(): Promise<{ user: Profile; token: string }> {
     await this.simulateDelay();
     if (!this.currentUser) throw new Error('No user logged in');
     
@@ -215,12 +215,12 @@ export class MockUserService implements IUserService {
     };
   }
 
-  async updateAvatar(userId: string, avatarUrl: string): Promise<User> {
+  async updateAvatar(userId: string, avatarUrl: string): Promise<Profile> {
     await this.simulateDelay();
     return this.updateUser(userId, { id: userId, avatar: avatarUrl });
   }
 
-  async updateNickname(userId: string, nickname: string): Promise<User> {
+  async updateNickname(userId: string, nickname: string): Promise<Profile> {
     await this.simulateDelay();
     return this.updateUser(userId, { id: userId, nickname });
   }
@@ -306,7 +306,7 @@ export class MockUserService implements IUserService {
   }
 
   // User search and filtering
-  async searchUsers(query: string): Promise<User[]> {
+  async searchUsers(query: string): Promise<Profile[]> {
     await this.simulateDelay();
     const lowercaseQuery = query.toLowerCase();
     return this.users.filter(user => 
@@ -316,14 +316,14 @@ export class MockUserService implements IUserService {
     );
   }
 
-  async getUsersByGroup(groupId: string): Promise<User[]> {
+  async getUsersByGroup(groupId: string): Promise<Profile[]> {
     await this.simulateDelay();
     // Mock implementation - in real app this would query participants table
     // For now, return all users as a mock
     return this.users;
   }
 
-  async getActiveUsers(): Promise<User[]> {
+  async getActiveUsers(): Promise<Profile[]> {
     await this.simulateDelay();
     // Mock implementation - in real app this would filter by active status
     // For now, return all users as a mock

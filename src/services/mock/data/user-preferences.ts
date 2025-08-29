@@ -1,4 +1,4 @@
-import { UserPreferences } from '../../types/users';
+import { UserPreferences } from '../../types/profiles';
 
 // Mock user preferences data
 export const mockUserPreferences: UserPreferences = {
@@ -33,4 +33,5 @@ export const mockUserPreferencesByUser: { [userId: string]: UserPreferences } = 
     timezone: 'America/New_York'
   }
 };
+
 

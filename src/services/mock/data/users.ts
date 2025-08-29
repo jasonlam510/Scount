@@ -1,7 +1,7 @@
-import { User } from '../../types/users';
+import { Profile } from '../../types/profiles';
 
 // Mock users based on seed data
-export const mockUsers: User[] = [
+export const mockUsers: Profile[] = [
   {
     id: '1',
     uuid: '550e8400-e29b-41d4-a716-446655440000',

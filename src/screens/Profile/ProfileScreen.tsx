@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n } from '../../hooks';
-import { useSettings } from '../../contexts/AppContext';
+import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -24,11 +23,12 @@ const ProfileScreen: React.FC = () => {
   const { 
     currentUserUuid, 
     setCurrentUserUuid, 
-    clearCurrentUserUuid,
+    clearUserData,
+  } = useUser();
+  const { 
     notificationsEnabled, 
     setNotificationsEnabled,
-    isLoading: settingsLoading 
-  } = useSettings();
+  } = useAppSettings();
   
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
@@ -85,7 +85,7 @@ const ProfileScreen: React.FC = () => {
         text: 'Log Out', 
         onPress: async () => {
           try {
-            await clearCurrentUserUuid();
+            await clearUserData();
             console.log('User logged out');
             // In a real app, you might navigate to login screen
           } catch (error) {
@@ -121,14 +121,7 @@ const ProfileScreen: React.FC = () => {
     }
   };
 
-  // Show loading state if settings are still loading
-  if (settingsLoading) {
-    return (
-      <View style={[styles.loadingContainer, { backgroundColor: colors.background }]}>
-        <Text style={[styles.loadingText, { color: colors.text }]}>Loading settings...</Text>
-      </View>
-    );
-  }
+  // Loading state removed since we're using Zustand stores now
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>

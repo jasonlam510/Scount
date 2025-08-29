@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useMemo } from 'react';
-import { useSettings } from '../contexts/AppContext';
+import { useAppSettings } from './useAppSettings';
 import { localeInfo } from '../i18n';
 import * as Localization from 'expo-localization';
 
 export const useI18n = () => {
   const { t, i18n } = useTranslation();
-  const { language, setLanguage, isLoading } = useSettings();
+  const { language, setLanguage } = useAppSettings();
 
   // Update i18n language when preferences change
   useEffect(() => {
@@ -17,7 +17,7 @@ export const useI18n = () => {
 
   const changeLanguage = async (newLanguage: string) => {
     try {
-      await setLanguage(newLanguage);
+      setLanguage(newLanguage);
       // i18n will be updated via useEffect
     } catch (error) {
       console.error('Failed to change language:', error);
@@ -66,7 +66,6 @@ export const useI18n = () => {
     getSupportedLanguages, // Get list of supported languages
     isReady: i18n.isInitialized,
     currentLanguage: i18n.language,
-    isLoading,            // Loading state for language initialization
     
     // Simple locale information (no formatting)
     locale: localeData

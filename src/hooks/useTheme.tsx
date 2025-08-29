@@ -1,5 +1,5 @@
 import { useColorScheme } from 'react-native';
-import { useSettings } from '../contexts/AppContext';
+import { useAppSettingsStore } from '../zustand';
 
 export type ThemeMode = 'light' | 'dark' | 'automatic';
 
@@ -70,7 +70,7 @@ const greenColors: ThemeColors = {
 };
 
 export const useTheme = () => {
-  const { themeMode, setThemeMode, isLoading } = useSettings();
+  const { themeMode, setThemeMode } = useAppSettingsStore();
   const systemColorScheme = useColorScheme();
 
   // Determine if dark mode should be active
@@ -99,6 +99,5 @@ export const useTheme = () => {
     isDark,
     setThemeMode,
     colors,
-    isLoading,
   };
 }; 

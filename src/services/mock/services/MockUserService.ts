@@ -5,17 +5,17 @@ import {
   UpdateUserRequest, 
   UpdatePreferencesRequest,
   UserPreferences
-} from '../../types/profiles';
+} from '../../../types/profiles';
 import { 
   Group,
   CreateGroupRequest,
   UpdateGroupRequest
-} from '../../types/groups';
+} from '../../../types/groups';
 import { 
   Participant,
   CreateParticipantRequest,
   UpdateParticipantRequest
-} from '../../types/participants';
+} from '../../../types/participants';
 import { mockUsers } from '../data/users';
 import { mockUserPreferencesByUser } from '../data/user-preferences';
 

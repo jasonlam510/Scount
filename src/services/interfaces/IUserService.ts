@@ -4,7 +4,7 @@ import {
   UpdateUserRequest, 
   UpdatePreferencesRequest,
   UserPreferences
-} from '../types/profiles';
+} from '../../types/profiles';
 
 export interface IUserService {
   // User management

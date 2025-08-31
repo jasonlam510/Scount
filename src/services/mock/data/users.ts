@@ -1,4 +1,4 @@
-import { Profile } from '../../types/profiles';
+import { Profile } from '../../../types/profiles';
 
 // Mock users based on seed data
 export const mockUsers: Profile[] = [

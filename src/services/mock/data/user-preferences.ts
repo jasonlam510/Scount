@@ -1,4 +1,4 @@
-import { UserPreferences } from '../../types/profiles';
+import { UserPreferences } from '../../../types/profiles';
 
 // Mock user preferences data
 export const mockUserPreferences: UserPreferences = {

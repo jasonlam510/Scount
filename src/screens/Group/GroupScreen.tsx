@@ -1,47 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../../hooks';
 import { useI18n } from '../../hooks/useI18n';
 import GroupCard from '../../components/features/groups/GroupCard';
 import { FloatingActionButton } from '../../components';
-import { Group } from '../../types/goups';
+import { Group } from '../../types/groups';
+import { useUserGroups } from '../../electricsql/useUserGroups';
 
 const GroupScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();
-  
-  // Sample groups data - in a real app, this would come from your store/service
-  const [groups, setGroups] = useState<Group[]>([
-    {
-      id: '1',
-      title: 'Roommates',
-      icon: '🏠',
-      currency: 'USD',
-      is_archived: false,
-      created_at: Date.now() - 86400000 * 30,
-      updated_at: Date.now(),
-    },
-    {
-      id: '2',
-      title: 'Vacation Trip',
-      icon: '✈️',
-      currency: 'EUR',
-      is_archived: false,
-      created_at: Date.now() - 86400000 * 7,
-      updated_at: Date.now(),
-    },
-    {
-      id: '3',
-      title: 'Old Project',
-      icon: '💼',
-      currency: 'USD',
-      is_archived: true,
-      created_at: Date.now() - 86400000 * 90,
-      updated_at: Date.now(),
-    },
-  ]);
+  const { groups, isLoading, error } = useUserGroups();
+  if (isLoading) {
+    console.log('Loading groups...');
+  }
+  if (error) {
+    console.log('Failed to load groups:', error.message);
+  }
 
   const handleGroupPress = (group: Group) => {
     // Navigate to group detail page

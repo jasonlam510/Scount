@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../../hooks';
-import { Group } from '../../../types/goups';
+import { Group } from '../../../types/groups';
 import * as ContextMenu from 'zeego/context-menu';
 
 interface GroupCardProps {
@@ -22,11 +22,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
     // navigation.navigate('AddExpense', { groupId: group.id });
   };
 
-  const handleArchive = () => {
-    const action = group.is_archived ? 'unarchive' : 'archive';
-    // TODO: Call API to update group archive status
-    console.log(`${action} group: ${group.title}`);
-  };
+
 
   const handleDelete = () => {
     // TODO: Call API to delete group
@@ -83,13 +79,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
               </View>
             </View>
             
-            {group.is_archived && (
-              <View style={[styles.archivedBadge, { backgroundColor: colors.border }]}>
-                <Text style={[styles.archivedText, { color: colors.textSecondary }]}>
-                  Archived
-                </Text>
-              </View>
-            )}
+            
           </TouchableOpacity>
         </ContextMenu.Trigger>
 
@@ -151,50 +141,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
             </ContextMenu.ItemIcon>
           </ContextMenu.Item>
           
-          <ContextMenu.Item 
-            key="archive" 
-            onSelect={handleArchive}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '12px 16px',
-              borderRadius: 8,
-              cursor: 'pointer',
-              backgroundColor: 'transparent',
-              border: 'none',
-              width: '100%',
-              minWidth: 220,
-              boxSizing: 'border-box',
-              textAlign: 'left',
-            }}
-          >
-            <ContextMenu.ItemTitle
-              style={{
-                color: colors.text,
-                fontSize: 16,
-                fontWeight: '500',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              }}
-            >
-              {group.is_archived ? 'Unarchive' : 'Archive'}
-            </ContextMenu.ItemTitle>
-            <ContextMenu.ItemIcon 
-              ios={{
-                name: group.is_archived ? 'archivebox.fill' : 'archivebox',
-                pointSize: 16,
-                weight: 'medium',
-                scale: 'medium',
-              }}
-            >
-              <Ionicons 
-                name={group.is_archived ? "archive" : "archive-outline"} 
-                size={20} 
-                color={colors.text} 
-              />
-            </ContextMenu.ItemIcon>
-          </ContextMenu.Item>
+
           
           <ContextMenu.Item 
             key="delete" 
@@ -289,17 +236,7 @@ const styles = StyleSheet.create({
   cardActions: {
     marginLeft: 'auto',
   },
-  archivedBadge: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginTop: 12,
-  },
-  archivedText: {
-    fontSize: 12,
-    fontWeight: '500',
-  },
+
   // Web-specific context menu styles
   webMenuItem: {
     flexDirection: 'row',

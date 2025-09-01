@@ -46,7 +46,7 @@ export type UserStore = UserState & UserActions;
 
 // Default values
 const DEFAULT_USER_STATE: UserState = {
-  currentUserUuid: null,
+  currentUserUuid: '23cc2389-5fc1-4846-b65c-1dd6399d69c2',
   accessToken: null,
   refreshToken: null,
   userProfile: null,

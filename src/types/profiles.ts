@@ -4,5 +4,5 @@ export interface Profile {
   nickname: string;
   email: string;
   avatar?: string;
-  created_at: number;
+  created_at: string; // timestamptz in DB
 }

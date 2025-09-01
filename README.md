@@ -11,13 +11,6 @@ DB sync: PowerSync
 
 DB & Auth: Supabase
 
-## Tech Stack
-
-Language: TypeScript
-Framework: React Native + Expo
-DB sync: PowerSync
-DB & Auth: Supabase
-
 ## Quick Start
 
 ### Prerequisites

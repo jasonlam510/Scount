@@ -42,6 +42,9 @@
     ],
     "extra": {
       "supportsRTL": true
+    },
+    "developmentClient": {
+      "silentLaunch": false
     }
   }
 }

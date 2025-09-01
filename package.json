@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --go",
+    "dev": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "npm run powersync:copy-assets && expo start --web",
+    "powersync:copy-assets": "npx powersync-web copy-assets"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",
+    "@journeyapps/react-native-quick-sqlite": "^2.4.8",
+    "@powersync/adapter-sql-js": "^0.0.4",
+    "@powersync/react-native": "^1.24.1",
+    "@powersync/web": "^1.26.0",
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-native-menu/menu": "^1.2.2",
     "@react-native-segmented-control/segmented-control": "2.5.7",

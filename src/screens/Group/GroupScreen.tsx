@@ -6,15 +6,15 @@ import { useI18n } from '../../hooks/useI18n';
 import GroupCard from '../../components/features/groups/GroupCard';
 import { FloatingActionButton } from '../../components';
 import { Group } from '../../types/groups';
-import { useUserGroups } from '../../electricsql/useUserGroups';
+import { useUserGroupsRealtime } from '../../powersync/hooks/useUserGroups';
 
 const GroupScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();
-  const { groups, isLoading, error } = useUserGroups();
+  const { groups, isLoading, error } = useUserGroupsRealtime();
   if (isLoading) {
-    console.log('Loading groups...');
+    console.log('Loading groups... [GroupScreen]');
   }
   if (error) {
     console.log('Failed to load groups:', error.message);

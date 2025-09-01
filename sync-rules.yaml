@@ -1,0 +1,18 @@
+bucket_definitions:
+  user:
+    # User's personal data bucket
+    parameters: SELECT request.user_id() as user_id
+    data:
+      # User's own profile
+      - SELECT * FROM public.profiles WHERE id = bucket.user_id
+      # User's participation records (where they are members)
+      - SELECT * FROM public.participants WHERE user_id = bucket.user_id
+  
+  groups:
+    # Groups the user has access to (as participant)
+    parameters: SELECT group_id FROM public.participants WHERE user_id = request.user_id()
+    data:
+      # Group details for groups user participates in
+      - SELECT * FROM public.groups WHERE id = bucket.group_id
+      # All participants in user's groups (to see other members)
+      - SELECT * FROM public.participants WHERE group_id = bucket.group_id

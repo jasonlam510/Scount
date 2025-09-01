@@ -1,330 +1,210 @@
 # Entity Relationship Diagram (ERD)
 
-This document provides a visual representation of the database schema for the Scount expense tracking application using Mermaid diagrams.
+This document provides a visual representation of the database schema for the Scount expense tracking application using Supabase and Mermaid diagrams.
 
 ## Database Schema Overview
 
-The Scount app manages personal and group expenses with support for multiple payers, categories, tags, and media attachments.
+The Scount app currently implements a simplified database structure with three core tables: profiles, groups, and participants. This structure supports user management and group membership functionality.
 
 ## Entity Relationship Diagram
 
 ```mermaid
 erDiagram
-    %% Users Entity
-    USERS {
-        int user_id PK "auto-increment"
-        string uuid "unique identifier"
-        string name
-        string nickname
-        string email
-        string avatar
-        timestamp created_at
-        timestamp updated_at
+    %% Profiles Entity (Users)
+    PROFILES {
+        uuid id PK "UUID primary key"
+        text name "User's full name"
+        text nickname "User's display nickname"
+        varchar email "User's email address"
+        text avatar "Avatar URL (optional)"
+        timestamptz created_at "Account creation timestamp"
     }
 
     %% Groups Entity
     GROUPS {
-        int group_id PK "auto-increment"
-        string title
-        string icon
-        string currency
-        boolean is_archived
-        timestamp created_at
-        timestamp updated_at
+        uuid id PK "UUID primary key"
+        timestamptz created_at "Group creation timestamp"
+        text title "Group name/title"
+        text icon "Group icon identifier"
+        text currency "Group currency code"
     }
 
     %% Participants Entity (Group Membership)
     PARTICIPANTS {
-        int participant_id PK "auto-increment"
-        int group_id FK
-        int user_id FK
-        boolean is_active
-        string display_name
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Categories Entity
-    CATEGORIES {
-        int category_id PK "auto-increment"
-        string name
-        enum type "expense|income|transfer"
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Subcategories Entity
-    SUBCATEGORIES {
-        int subcategory_id PK "auto-increment"
-        int category_id FK
-        string name
-        enum type "expense|income|transfer"
-        string icon
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Tags Entity
-    TAGS {
-        int tag_id PK "auto-increment"
-        string name
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Transactions Entity
-    TRANSACTIONS {
-        int transaction_id PK "auto-increment"
-        int group_id FK "nullable"
-        boolean is_personal "true=personal, false=group"
-        string title
-        double amount
-        string currency
-        enum type "expense|income|transfer"
-        timestamp date
-        int subcategory_id FK "nullable"
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Transaction Payers Entity
-    TRANSACTION_PAYERS {
-        int id PK "auto-increment"
-        int transaction_id FK
-        int user_id FK
-        double amount
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Transaction Tags Entity (Junction Table)
-    TRANSACTION_TAGS {
-        int id PK "auto-increment"
-        int transaction_id FK
-        int tag_id FK
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    %% Transaction Media Entity
-    TRANSACTION_MEDIA {
-        int media_id PK "auto-increment"
-        int transaction_id FK
-        string uri
-        enum type "image|receipt"
-        timestamp created_at
-        timestamp updated_at
+        uuid id PK "UUID primary key"
+        timestamptz created_at "Participation creation timestamp"
+        uuid group_id FK "Reference to groups.id"
+        uuid user_id FK "Reference to auth.users.id"
+        text display_name "Display name in group"
     }
 
     %% Relationships
-    USERS ||--o{ PARTICIPANTS : "belongs_to"
-    GROUPS ||--o{ PARTICIPANTS : "has_many"
-    GROUPS ||--o{ TRANSACTIONS : "contains"
-    USERS ||--o{ TRANSACTION_PAYERS : "pays_for"
-    TRANSACTIONS ||--o{ TRANSACTION_PAYERS : "has_payers"
-    CATEGORIES ||--o{ SUBCATEGORIES : "contains"
-    SUBCATEGORIES ||--o{ TRANSACTIONS : "categorizes"
-    TRANSACTIONS ||--o{ TRANSACTION_TAGS : "has_tags"
-    TAGS ||--o{ TRANSACTION_TAGS : "used_in"
-    TRANSACTIONS ||--o{ TRANSACTION_MEDIA : "has_media"
+    PROFILES ||--o{ PARTICIPANTS : "user_id"
+    GROUPS ||--o{ PARTICIPANTS : "group_id"
 ```
 
 ## Entity Descriptions
 
-### 1. Users
-- **Purpose**: Stores user account information
-- **Key Fields**: `user_id` (Primary Key), `uuid` (Unique Identifier), `name`, `nickname`, `email`, `avatar`
+### 1. Profiles (Users)
+- **Purpose**: Stores user account information and profile data
+- **Key Fields**: `id` (UUID Primary Key), `name`, `nickname`, `email`, `avatar` (optional), `created_at`
 - **Relationships**: Can participate in multiple groups via Participants table
-- **Rules**: `uuid` must be unique across all users
+- **Rules**: 
+  - `id` is a UUID and serves as the primary key
+  - Links to Supabase Auth system through `auth.users.id`
+  - `avatar` field is optional for profile pictures
 
 ### 2. Groups
-- **Purpose**: Represents expense groups for shared expenses
-- **Key Fields**: `group_id` (Primary Key), `title`, `icon`, `currency`, `is_archived`, `created_at`
+- **Purpose**: Represents expense groups for shared expenses and collaboration
+- **Key Fields**: `id` (UUID Primary Key), `title`, `icon`, `currency`, `created_at`
 - **Relationships**: 
   - Has many participants (via Participants table)
-  - Has many transactions
-  - Personal expenses have `group_id = NULL`
+  - Group membership is managed through the participants junction table
 - **Rules**: 
-  - `is_archived` defaults to `false` for new groups
-  - Archived groups can be hidden from active group lists
+  - `id` is a UUID primary key
+  - Each group has a designated currency for expense tracking
+  - Group members are tracked via the participants table
 
 ### 3. Participants (Group Membership)
-- **Purpose**: Junction table linking users to groups with role information
-- **Key Fields**: `participant_id` (Primary Key), `group_id`, `user_id`, `is_active`, `display_name`
+- **Purpose**: Junction table linking users to groups with membership details
+- **Key Fields**: `id` (UUID Primary Key), `group_id` (FK), `user_id` (FK), `display_name`, `created_at`
+- **Relationships**: 
+  - Each participant belongs to exactly one group
+  - Each participant links to a valid user profile
+  - Bridges the many-to-many relationship between profiles and groups
 - **Rules**: 
-  - Each participant must belong to exactly one group
-  - Each participant must link to a valid user
-
-### 4. Categories
-- **Purpose**: Main expense/income/transfer categories
-- **Key Fields**: `category_id` (Primary Key), `name`, `type` (expense, income, or transfer)
-- **Relationships**: Has many subcategories
-
-### 5. Subcategories
-- **Purpose**: Detailed categorization under main categories
-- **Key Fields**: `subcategory_id` (Primary Key), `category_id`, `name`, `type`, `icon`
-- **Rules**: Type must match parent category type (expense, income, or transfer)
-
-### 6. Tags
-- **Purpose**: Global tags that can be applied to any transaction
-- **Key Fields**: `tag_id` (Primary Key), `name`
-- **Rules**: Tags are global and reusable across all groups/transactions
-
-### 7. Transactions
-- **Purpose**: Core expense/income records
-- **Key Fields**: `transaction_id` (Primary Key), `group_id` (nullable), `title`, `amount`, `currency`, `type`, `date`, `subcategory_id`, `created_at`
-- **Rules**: 
-  - Can belong to a group or be personal (group_id = NULL)
-  - Can have multiple payers and tags
-  - `type` must be one of: 'expense', 'income', or 'transfer'
-
-### 8. Transaction Payers
-- **Purpose**: Supports multiple payers for a single transaction
-- **Key Fields**: `id` (Primary Key), `transaction_id`, `user_id`, `amount`
-- **Rules**: 
-  - Each payer must be a valid user
-  - If transaction has a group, payer must be in that group
-
-### 9. Transaction Tags
-- **Purpose**: Junction table for many-to-many relationship between transactions and tags
-- **Key Fields**: `id` (Primary Key), `transaction_id`, `tag_id`
-
-### 10. Transaction Media
-- **Purpose**: Stores media attachments for transactions (receipts, images)
-- **Key Fields**: `media_id` (Primary Key), `transaction_id`, `uri`, `type`
-- **Rules**: Each media item is linked to exactly one transaction
+  - `group_id` references `groups.id`
+  - `user_id` references `auth.users.id` (Supabase Auth)
+  - `display_name` allows custom names within groups
 
 ## Key Relationship Rules
 
-1. **Subcategory → Category**: One-to-Many
-   - Each subcategory must belong to exactly one category
+1. **Profile → Participants**: One-to-Many
+   - Each profile (user) can participate in multiple groups through the participants table
 
-2. **Transaction → Tags**: Many-to-Many (via `transaction_tags`)
-   - A transaction can have many tags, and a tag can be used in many transactions
+2. **Group → Participants**: One-to-Many
+   - Each group can have multiple participants
 
-3. **Transaction → Payers**: One-to-Many
-   - A transaction can have multiple payers, each with their amount
-
-4. **Group → Transactions**: One-to-Many
-   - A group can have multiple transactions; personal transactions have no group
-
-5. **Group → Participants**: One-to-Many
-   - A group can have multiple participants
-
-6. **User → Groups**: Many-to-Many (via Participants)
+3. **User → Groups**: Many-to-Many (via Participants)
    - Users can participate in multiple groups
+   - Groups can have multiple users
+   - The participants table serves as the junction table
 
 ## Database Design Notes
 
-- **Auto-increment IDs**: All primary keys use auto-increment integers for better WatermelonDB performance
-- **External Sync**: Use UUIDs for external sync/API communication while maintaining auto-increment for local primary keys
-- **Personal vs Group**: `is_personal` boolean field in transactions (true=personal, false=group)
-- **Nullable Foreign Keys**: `group_id` in transactions allows for personal expenses
-- **Currency Support**: Both groups and transactions have currency fields
-- **Audit Trail**: `created_at` and `updated_at` timestamps for tracking and sync conflict resolution
-- **Soft Deletes**: Consider adding `deleted_at` fields for soft deletion
-- **Indexing**: Consider indexes on frequently queried fields like `user_id`, `group_id`, `date`
+- **UUID Primary Keys**: All tables use UUID primary keys for better Supabase integration and distributed systems support
+- **Supabase Integration**: 
+  - Profiles table links to Supabase Auth via `auth.users.id`
+  - Uses Supabase's built-in authentication system
+  - Leverages Supabase's real-time capabilities for live updates
+- **Timestamptz Fields**: Uses PostgreSQL's `timestamptz` for proper timezone handling
+- **Normalized Structure**: Group membership is properly normalized through the participants table
+- **Flexible Display Names**: Participants can have custom display names within groups
+- **Simple Structure**: Current implementation focuses on core user and group management
+- **Future Extensibility**: Structure allows for easy addition of expense tracking tables later
 
-## WatermelonDB-Specific Considerations
+## Supabase-Specific Considerations
 
-### **1. Sync Strategy**
-- **Multi-payer Transactions**: These will be complex to sync - consider how you'll handle conflicts when multiple users modify the same transaction
-- **Group Membership**: Participants table will need careful sync handling for group invitations/removals
-- **Conflict Resolution**: Use `updated_at` timestamps for conflict resolution during sync
+### **1. Authentication Integration**
+- **Auth Users**: The `profiles` table connects to Supabase's `auth.users` table
+- **Row Level Security (RLS)**: Implement RLS policies to ensure users can only access their own data and groups they belong to
+- **User Registration**: New user profiles are created when users sign up through Supabase Auth
 
-### **2. Performance Optimizations**
-- **Indexing**: Add indexes on frequently queried fields:
-  - `user_id` in participants
-  - `group_id` in transactions  
-  - `date` in transactions
-  - `subcategory_id` in transactions
-  - `is_personal` in transactions
+### **2. Real-time Features**
+- **Live Updates**: Leverage Supabase's real-time subscriptions for live group updates
+- **Group Collaboration**: Real-time notifications when users join/leave groups
+- **Instant Sync**: Changes are immediately reflected across all connected clients
+
+### **3. Performance Optimizations**
+- **Indexing**: Add database indexes on frequently queried fields:
+  - `participants.user_id` for user's group lookups
+  - `participants.group_id` for group member lookups
 - **Query Patterns**: Optimize for common queries:
-  - User's expenses (personal + group)
-  - Group expenses with payer breakdowns
-  - Category/subcategory summaries
-  - Date range queries
+  - User's groups list
+  - Group membership verification
+  - User profile lookups
 
-### **3. Data Integrity**
-- **Cascade Deletes**: Plan how you'll handle deletions:
-  - What happens to transactions when a group is deleted?
-  - What happens to transaction_payers when a user is removed from a group?
-- **Foreign Key Constraints**: Ensure referential integrity during sync operations
+### **4. Data Integrity**
+- **Foreign Key Constraints**: 
+  - `participants.group_id` → `groups.id`
+  - `participants.user_id` → `auth.users.id`
+- **Cascade Deletes**: Configure appropriate cascade behavior:
+  - When a group is deleted, all participants are removed
+  - When a user is deleted from auth, their profile and participation records are handled appropriately
 
-### **4. External Sync Implementation**
-- **UUID Mapping**: Maintain a separate mapping table for local IDs to external UUIDs
-- **Sync Fields**: Add `external_id` (UUID) and `synced_at` fields to track sync status
-- **Conflict Resolution**: Use `updated_at` timestamps to determine which record is newer
+### **5. Security Policies (RLS)**
+- **Profiles**: Users can only read/update their own profile
+- **Groups**: Users can only access groups they participate in
+- **Participants**: Users can only see participants of groups they belong to
 
-### **5. Migration Considerations**
-- **Version Management**: Plan for schema migrations as your app evolves
-- **Data Seeding**: Consider how you'll seed default categories/subcategories
-- **User Onboarding**: Plan for initial data setup for new users
-
-### **6. Complex Query Handling**
-- **Multi-payer Aggregations**: Consider how to efficiently calculate totals when multiple users pay for one transaction
-- **Group Expense Splitting**: Plan for complex expense splitting calculations
-- **Reporting Queries**: Design efficient queries for expense summaries and reports
+### **6. Migration Considerations**
+- **Schema Evolution**: Use Supabase migrations for schema changes
+- **Data Seeding**: Consider default data setup for new users
+- **Backup Strategy**: Leverage Supabase's backup capabilities
 
 ## Key App Queries
 
-The app will need to support the following query patterns:
+The app currently supports the following core query patterns:
 
-### **1. User Expense Queries**
+### **1. User Profile Queries**
 
-#### **Personal Expenses**
-- **User's personal expenses for specific month/year**: Filter personal transactions by date range
-- **User's all personal expenses**: Retrieve all personal transactions without date filtering
+#### **User Profile Lookup**
+- **Get user profile by ID**: Retrieve user's profile information
+- **Update user profile**: Modify user's name, nickname, email, or avatar
 
-#### **Group Expenses**
-- **User's group expenses for specific month/year**: Filter group transactions by date range, including group name
-- **User's all group expenses**: Retrieve all group transactions the user participates in
+### **2. Group Management Queries**
 
-#### **All Expenses (Personal + Group)**
-- **User's all expenses for specific month/year**: Combined view of personal and group expenses with source identification
-- **User's all expenses (no date filter)**: Complete expense history from both personal and group sources
+#### **User's Groups**
+- **Get all groups for a user**: Retrieve all groups where the user is a participant
+- **Get group details**: Fetch specific group information including title, icon, currency
 
-### **2. Group Balance Queries**
+#### **Group Membership**
+- **Get group participants**: Retrieve all participants in a specific group
+- **Check group membership**: Verify if a user is a member of a specific group
+- **Add/remove participants**: Manage group membership
 
-#### **Current Balance for Each Participant in a Group**
-- **Participant balance calculation**: Calculate net balance (total paid - total owed) for each active participant in a specific group
-- **Balance display**: Show participant names, amounts paid, amounts owed, and final balance
+### **3. Common Query Patterns**
 
-#### **Group Summary with Total Expenses**
-- **Group overview**: Display total expenses, participant count, and transaction count for a specific group
-- **Group statistics**: Show group currency and overall financial summary
+#### **Group-User Relationships**
+```sql
+-- Get all groups for a user
+SELECT g.* FROM groups g
+JOIN participants p ON g.id = p.group_id
+WHERE p.user_id = $1;
 
-### **3. Date Range Queries**
+-- Get all participants in a group
+SELECT pr.*, p.display_name FROM profiles pr
+JOIN participants p ON pr.id = p.user_id
+WHERE p.group_id = $1;
 
-#### **Monthly Expenses**
-- **Monthly summary**: Group expenses by month for trend analysis and monthly budgeting
-- **Monthly statistics**: Show total amount and transaction count per month
+-- Check if user is in group
+SELECT EXISTS(
+  SELECT 1 FROM participants 
+  WHERE user_id = $1 AND group_id = $2
+);
+```
 
-#### **Yearly Expenses**
-- **Yearly summary**: Group expenses by year for annual financial review
-- **Yearly statistics**: Show total amount and transaction count per year
+### **4. Future Query Considerations**
 
-### **4. Category Analysis Queries**
+When expense tracking features are added, the following query patterns will be needed:
 
-#### **Expense by Category**
-- **Category breakdown**: Group expenses by category and subcategory
-- **Category statistics**: Show total amount and transaction count per category
-- **Date-filtered categories**: Support date range filtering for category analysis
+- **Expense tracking**: User's personal and group expenses
+- **Balance calculations**: Group expense splitting and balances
+- **Reporting**: Monthly/yearly expense summaries
+- **Category analysis**: Expense breakdown by categories
 
 ### **Query Performance Considerations**
 
-- **Indexes Needed**:
-  - `transactions(user_id, is_personal, date)`
-  - `transactions(group_id, date)`
-  - `participants(user_id, group_id, is_active)`
-  - `transaction_payers(user_id, transaction_id)`
-  - `subcategories(category_id)`
+- **Current Indexes Needed**:
+  - `participants(user_id)` - for user's group lookups
+  - `participants(group_id)` - for group member lookups
+
+- **Query Optimization**:
+  - Use Supabase's query builder for type safety
+  - Leverage real-time subscriptions for live updates
+  - Implement proper error handling for network issues
 
 - **Caching Strategy**:
-  - Cache monthly/yearly summaries
-  - Cache group balances
-  - Cache category breakdowns
-
-- **Pagination**:
-  - Implement pagination for large transaction lists
-  - Use LIMIT/OFFSET or cursor-based pagination 
+  - Cache user profiles locally
+  - Cache group memberships
+  - Use Supabase's built-in caching when appropriate 

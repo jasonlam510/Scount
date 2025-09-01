@@ -9,6 +9,7 @@ import {
   Alert,
   Image,
   Platform,
+  ActionSheetIOS,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -56,8 +57,29 @@ const ProfileScreen: React.FC = () => {
     }
   };
 
+  // Platform-specific menu handlers
   const handleLanguagePress = () => {
-    setShowLanguageSelector(true);
+    if (Platform.OS === 'ios') {
+      // Native iOS ActionSheet (true bottom-up menu)
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: ['English', '繁體中文', 'Cancel'],
+          cancelButtonIndex: 2,
+          title: t('profile.language'),
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 0) {
+            changeLanguage('en');
+          } else if (buttonIndex === 1) {
+            changeLanguage('zh');
+          }
+          // buttonIndex === 2 is Cancel, do nothing
+        }
+      );
+    } else {
+      // Web/Android: use custom selector
+      setShowLanguageSelector(true);
+    }
   };
 
   const handleLanguageSelect = (language: string) => {
@@ -66,7 +88,29 @@ const ProfileScreen: React.FC = () => {
   };
 
   const handleThemePress = () => {
-    setShowThemeSelector(true);
+    if (Platform.OS === 'ios') {
+      // Native iOS ActionSheet (true bottom-up menu)
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: [t('common.light'), t('common.dark'), t('common.automatic'), 'Cancel'],
+          cancelButtonIndex: 3,
+          title: t('profile.theme'),
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 0) {
+            setThemeMode('light');
+          } else if (buttonIndex === 1) {
+            setThemeMode('dark');
+          } else if (buttonIndex === 2) {
+            setThemeMode('automatic');
+          }
+          // buttonIndex === 3 is Cancel, do nothing
+        }
+      );
+    } else {
+      // Web/Android: use custom selector
+      setShowThemeSelector(true);
+    }
   };
 
   const handleThemeSelect = (mode: string) => {

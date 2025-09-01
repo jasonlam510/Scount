@@ -1,7 +1,15 @@
 # Scount
-Scount is an all-in-one app for managing personal, family, and group expenses, combining the features of Smoney and Tricount in one place.
+Scount combines the best features from Tricount and Smoney, integrating both personal and group expense tracking. It is deployed as a multiplatform app (iOS and Web PWA).
 
-A cross-platform expense tracking app built with Expo, React Native, and TypeScript.
+## Tech Stack
+
+Language: TypeScript
+
+Framework: React Native + Expo
+
+DB sync: PowerSync
+
+DB & Auth: Supabase
 
 ## Quick Start
 

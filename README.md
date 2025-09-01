@@ -7,11 +7,16 @@ A cross-platform expense tracking app built with Expo, React Native, and TypeScr
 
 ### Prerequisites
 
-1. Install [Node.js](https://nodejs.org)
-2. Install Expo SDK 53
+1. Install [Node.js](https://nodejs.org) on your machine
 
+2. Install Expo SDK 53 into the repo
 ```bash
 npm install expo
+```
+
+3. Install powersync-web into the repo
+```bash
+npx powersync-web copy-assets
 ```
 
 ### Setup
@@ -23,26 +28,10 @@ cd scount
 
 ### Run the App
 
-#### Web Development
-
 ```bash
-npx expo start --web
+npx expo start
 ```
 
-#### iOS & Android Development
-
-**Note**: WatermelonDB requires native SQLite libraries that are NOT available in Expo Go or web browsers.
-
-```bash
-# First time only
-npx expo prebuild
-
-# Every time you want to test on device/simulator
-npx expo run:ios
-
-# or
-npx expo run:android
-```
 ### Useful Commands
 
 #### Reset Database (Web)

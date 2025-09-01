@@ -13,6 +13,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
+import { useProfileRealtime } from '../../powersync/hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -30,16 +31,11 @@ const ProfileScreen: React.FC = () => {
     setNotificationsEnabled,
   } = useAppSettings();
   
+  // PowerSync profile data
+  const { profile, isLoading: profileLoading, error: profileError } = useProfileRealtime();
+  
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
-
-  // Mock user data - will be replaced with proper mock data service later
-  const mockUserData = {
-    name: 'Jason Lam',
-    email: 'jason@example.com',
-    nickname: 'J',
-    avatar: 'https://via.placeholder.com/80x80?text=J'
-  };
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -131,22 +127,31 @@ const ProfileScreen: React.FC = () => {
 
         {/* User Information Section */}
         <View style={[styles.section, { backgroundColor: colors.surface }]}>
+          {/* Profile Error Message */}
+          {profileError && (
+            <View style={styles.errorContainer}>
+              <Text style={[styles.errorText, { color: '#FF6B6B' }]}>
+                Failed to load profile data
+              </Text>
+            </View>
+          )}
+          
           {/* Profile Photo and User Info */}
           <View style={styles.profileHeader}>
             <View style={styles.profilePhotoContainer}>
               <Image
                 source={{ 
-                  uri: mockUserData?.avatar || 'https://via.placeholder.com/80x80?text=User'
+                  uri: profile?.avatar || 'https://via.placeholder.com/80x80?text=User'
                 }}
                 style={styles.profilePhoto}
               />
             </View>
             <View style={styles.userInfo}>
               <Text style={[styles.userName, { color: colors.text }]}>
-                {mockUserData?.name || 'Loading...'}
+                {profileLoading ? 'Loading...' : (profile?.name || 'No name set')}
               </Text>
               <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-                {mockUserData?.email || 'Loading...'}
+                {profileLoading ? 'Loading...' : (profile?.email || 'No email set')}
               </Text>
             </View>
           </View>
@@ -158,7 +163,7 @@ const ProfileScreen: React.FC = () => {
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.name')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {mockUserData?.name || 'Loading...'}
+                {profileLoading ? 'Loading...' : (profile?.name || 'No name set')}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
@@ -171,7 +176,7 @@ const ProfileScreen: React.FC = () => {
             <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {mockUserData?.nickname || 'Loading...'}
+                {profileLoading ? 'Loading...' : (profile?.nickname || 'No nickname set')}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
@@ -355,6 +360,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 30,
+  },
+  errorContainer: {
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+  },
+  errorText: {
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: '500',
   },
 });
 

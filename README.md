@@ -3,6 +3,13 @@ Scount is an all-in-one app for managing personal, family, and group expenses, c
 
 A cross-platform expense tracking app built with Expo, React Native, and TypeScript.
 
+## Tech Stack
+
+Language: TypeScript
+Framework: React Native + Expo
+DB sync: PowerSync
+DB & Auth: Supabase
+
 ## Quick Start
 
 ### Prerequisites

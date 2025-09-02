@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { powerSync } from '../SystemProvider.tsx';
+import { db } from '../SystemProvider.tsx';
 import { useUser } from '../../hooks/useUser';
 import { Group } from '../../types/groups';
 
@@ -34,20 +34,21 @@ export const useUserGroups = (): UseUserGroupsResult => {
         setIsLoading(true);
         setError(null);
 
-        // Use PowerSync to get user's groups
+        // Use Kysely to get user's groups (type-safe)
         // PowerSync handles the joining via sync rules, so we can query groups directly
-        const result = await powerSync.getAll(`
-          SELECT * FROM groups
-          ORDER BY created_at DESC
-        `);
+        const result = await db.selectFrom('groups')
+          .selectAll()
+          .orderBy('created_at', 'desc')
+          .execute();
 
         if (!isCancelled) {
-          const userGroups = result.map((row: any) => ({
-            id: row.id as string,
-            title: row.title as string,
-            icon: row.icon as string,
-            currency: row.currency as string,
-            created_at: row.created_at as string,
+          // No manual type casting needed - Kysely provides type safety
+          const userGroups: Group[] = result.map((row) => ({
+            id: row.id,
+            title: row.title,
+            icon: row.icon,
+            currency: row.currency,
+            created_at: row.created_at,
           }));
 
           setGroups(userGroups);
@@ -103,30 +104,31 @@ export const useUserGroupsRealtime = (): UseUserGroupsResult => {
       try {
         setError(null);
 
-        // Use PowerSync watch for real-time updates
+        // Use Kysely watch for real-time updates (type-safe)
         // PowerSync handles filtering via sync rules, so we can watch groups directly
-        const watchQuery = powerSync.watch(`
-          SELECT * FROM groups
-          ORDER BY created_at DESC
-        `);
+        const query = db.selectFrom('groups')
+          .selectAll()
+          .orderBy('created_at', 'desc');
 
-        // Process real-time updates
-        for await (const result of watchQuery) {
-          if (isCancelled) break;
+        db.watch(query, {
+          onResult: (results) => {
+            if (isCancelled) return;
 
-          const userGroups = (result.rows?._array || []).map((row: any) => ({
-            id: row.id as string,
-            title: row.title as string,
-            icon: row.icon as string,
-            currency: row.currency as string,
-            created_at: row.created_at as string,
-          }));
+            // No manual type casting needed - Kysely provides type safety
+            const userGroups: Group[] = results.map((row) => ({
+              id: row.id,
+              title: row.title,
+              icon: row.icon,
+              currency: row.currency,
+              created_at: row.created_at,
+            }));
 
-          setGroups(userGroups);
-          setIsLoading(false);
-          
-          console.log(`🔄 Real-time update [${Platform.OS}]: ${userGroups.length} groups for user ${currentUserUuid}`);
-        }
+            setGroups(userGroups);
+            setIsLoading(false);
+            
+            console.log(`🔄 Real-time update [${Platform.OS}]: ${userGroups.length} groups for user ${currentUserUuid}`);
+          }
+        });
       } catch (err) {
         console.error('❌ Error watching user groups:', err);
         if (!isCancelled) {

@@ -6,7 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { BottomTabNavigator } from './src/components/navigation';
 import { useInitializeStores } from './src/hooks/useInitializeStores';
-import { powerSync, Connector } from './src/powersync';
+import { connectDatabase } from './src/powersync';
 import './src/i18n'; // Import i18n configuration
 
 const Stack = createStackNavigator();
@@ -24,9 +24,8 @@ export default function App() {
       try {
         console.log('🚀 Initializing PowerSync...');
         
-        // Create connector and connect PowerSync
-        const connector = new Connector();
-        await powerSync.connect(connector);
+        // Connect PowerSync using the new connectDatabase function
+        await connectDatabase();
         
         setPowerSyncReady(true);
         console.log('✅ PowerSync initialized successfully');

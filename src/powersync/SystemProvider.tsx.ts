@@ -1,7 +1,9 @@
 import { Platform } from 'react-native';
 import { SQLJSOpenFactory } from "@powersync/adapter-sql-js";
 import Constants from "expo-constants";
-import { AppSchema } from "./AppSchema";
+import { wrapPowerSyncWithKysely } from '@powersync/kysely-driver';
+import { AppSchema, KyselyDatabase } from "./AppSchema";
+import { Connector } from './Connector';
 
 // Platform-specific PowerSync database imports following official docs
 let PowerSyncDatabase: any, WASQLiteOpenFactory: any;
@@ -53,4 +55,13 @@ if (isWeb) {
   });
 }
 
-export { powerSync };
+// Create Kysely wrapper for type-safe database operations
+export const db = wrapPowerSyncWithKysely<KyselyDatabase>(powerSync);
+
+// Connection function for App.tsx initialization
+export const connectDatabase = async () => {
+  return await powerSync.connect(new Connector());
+};
+
+// Keep powerSync internal - only export db interface
+// export { powerSync }; // ❌ No longer exported - use db instead

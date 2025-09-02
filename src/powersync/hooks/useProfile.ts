@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { powerSync } from '../SystemProvider.tsx';
+import { db } from '../SystemProvider.tsx';
 import { useUser } from '../../hooks/useUser';
 import { Profile } from '../../types/profiles';
 
@@ -35,23 +35,24 @@ export const useProfile = (): UseProfileResult => {
         setIsLoading(true);
         setError(null);
 
-        // Query the user's profile from PowerSync
-        const result = await powerSync.getAll(`
-          SELECT * FROM profiles
-          WHERE id = ?
-          LIMIT 1
-        `, [currentUserUuid]);
+        // Query the user's profile using Kysely (type-safe)
+        const result = await db.selectFrom('profiles')
+          .selectAll()
+          .where('id', '=', currentUserUuid)
+          .limit(1)
+          .execute();
 
         if (!isCancelled) {
           if (result.length > 0) {
             const profileData = result[0];
+            // No manual type casting needed - Kysely provides type safety
             const userProfile: Profile = {
-              id: profileData.id as string,
-              name: profileData.name as string,
-              nickname: profileData.nickname as string,
-              email: profileData.email as string,
-              avatar: profileData.avatar as string,
-              created_at: profileData.created_at as string,
+              id: profileData.id,
+              name: profileData.name,
+              nickname: profileData.nickname,
+              email: profileData.email,
+              avatar: profileData.avatar || '',
+              created_at: profileData.created_at,
             };
 
             setProfile(userProfile);
@@ -89,21 +90,21 @@ export const useProfile = (): UseProfileResult => {
       setIsLoading(true);
       setError(null);
       
-      const result = await powerSync.getAll(`
-        SELECT * FROM profiles
-        WHERE id = ?
-        LIMIT 1
-      `, [currentUserUuid]);
+      const result = await db.selectFrom('profiles')
+        .selectAll()
+        .where('id', '=', currentUserUuid)
+        .limit(1)
+        .execute();
       
       if (result.length > 0) {
         const profileData = result[0];
         const userProfile: Profile = {
-          id: profileData.id as string,
-          name: profileData.name as string,
-          nickname: profileData.nickname as string,
-          email: profileData.email as string,
-          avatar: profileData.avatar as string,
-          created_at: profileData.created_at as string,
+          id: profileData.id,
+          name: profileData.name,
+          nickname: profileData.nickname,
+          email: profileData.email,
+          avatar: profileData.avatar || '',
+          created_at: profileData.created_at,
         };
         
         setProfile(userProfile);
@@ -150,39 +151,37 @@ export const useProfileRealtime = (): UseProfileResult => {
       try {
         setError(null);
 
-        // Use PowerSync watch for real-time updates
-        const watchQuery = powerSync.watch(`
-          SELECT * FROM profiles
-          WHERE id = ?
-          LIMIT 1
-        `, [currentUserUuid]);
+        // Use Kysely watch for real-time updates (type-safe)
+        const query = db.selectFrom('profiles')
+          .selectAll()
+          .where('id', '=', currentUserUuid)
+          .limit(1);
 
-        // Process real-time updates
-        for await (const result of watchQuery) {
-          if (isCancelled) break;
+        db.watch(query, {
+          onResult: (results) => {
+            if (isCancelled) return;
 
-          const profiles = result.rows?._array || [];
-          
-          if (profiles.length > 0) {
-            const profileData = profiles[0];
-            const userProfile: Profile = {
-              id: profileData.id as string,
-              name: profileData.name as string,
-              nickname: profileData.nickname as string,
-              email: profileData.email as string,
-              avatar: profileData.avatar as string,
-              created_at: profileData.created_at as string,
-            };
+            if (results.length > 0) {
+              const profileData = results[0];
+              const userProfile: Profile = {
+                id: profileData.id,
+                name: profileData.name,
+                nickname: profileData.nickname,
+                email: profileData.email,
+                avatar: profileData.avatar || '',
+                created_at: profileData.created_at,
+              };
 
-            setProfile(userProfile);
-            console.log(`🔄 Real-time profile update [${Platform.OS}] for user ${currentUserUuid}`);
-          } else {
-            setProfile(null);
-            console.log(`⚠️ Profile not found for user ${currentUserUuid}`);
+              setProfile(userProfile);
+              console.log(`🔄 Real-time profile update [${Platform.OS}] for user ${currentUserUuid}`);
+            } else {
+              setProfile(null);
+              console.log(`⚠️ Profile not found for user ${currentUserUuid}`);
+            }
+            
+            setIsLoading(false);
           }
-          
-          setIsLoading(false);
-        }
+        });
       } catch (err) {
         console.error('❌ Error watching user profile:', err);
         if (!isCancelled) {
@@ -208,21 +207,21 @@ export const useProfileRealtime = (): UseProfileResult => {
       setIsLoading(true);
       setError(null);
       
-      const result = await powerSync.getAll(`
-        SELECT * FROM profiles
-        WHERE id = ?
-        LIMIT 1
-      `, [currentUserUuid]);
+      const result = await db.selectFrom('profiles')
+        .selectAll()
+        .where('id', '=', currentUserUuid)
+        .limit(1)
+        .execute();
       
       if (result.length > 0) {
         const profileData = result[0];
         const userProfile: Profile = {
-          id: profileData.id as string,
-          name: profileData.name as string,
-          nickname: profileData.nickname as string,
-          email: profileData.email as string,
-          avatar: profileData.avatar as string,
-          created_at: profileData.created_at as string,
+          id: profileData.id,
+          name: profileData.name,
+          nickname: profileData.nickname,
+          email: profileData.email,
+          avatar: profileData.avatar || '',
+          created_at: profileData.created_at,
         };
         
         setProfile(userProfile);

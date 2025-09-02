@@ -1,22 +1,52 @@
 
-# Scount Project Rules
+# Scount - Personal & Group Expense Tracker
+
+## Project Overview:
+- **Purpose**: Personal and group expense tracking application
+- **Tech Stack**: React Native + Expo, TypeScript, Supabase (DB/Auth), PowerSync (sync engine)
+- **Target Platforms**: Web and iOS (primary), Android (future)
+- **Architecture**: Offline-first with real-time sync
+
+## UI/UX Guidelines:
+- **Theme System**: ALWAYS use theme colors from `useTheme()` hook - never hard-code colors
+- **Responsive Design**: Design for both mobile (iOS) and web - use platform-specific components when needed
+- **Language Support**: Use i18n keys from `useI18n()` hook - support English and Chinese (繁體中文)
+- **Native iOS Components**: Use ActionSheetIOS, native menus for iOS when possible
+- **Accessibility**: Follow iOS Human Interface Guidelines and web accessibility standards
 
 ## Code Style and Structure:
-- Use concise functional React Native components with TypeScript.
-- Prefer hooks and context for state management; avoid classes.
-- Structure files: components, hooks, screens, i18n, database, utils, services.
-- Use React Navigation for navigation (bottom tabs, stack navigation).
-- Follow offline-first architecture: AsyncStorage for preferences, future WatermelonDB for data.
-- Keep i18n (react-i18next) strings in JSON under locales/, use translation keys in code.
-- Use theme context for dark/light/automatic modes; avoid hard-coded colors.
+- Use concise functional React Native components with TypeScript
+- Prefer hooks and Zustand stores for state management; avoid classes
+- File structure: `src/{components, hooks, screens, powersync, zustand, i18n, types, utils}`
+- Use React Navigation: BottomTabNavigator for main screens, Stack for modals/details
+- Follow offline-first architecture: PowerSync for data sync, AsyncStorage for app settings
+
+## Data Layer (PowerSync + Supabase):
+- **Database Schema**: Follow `docs/erd.md` for complete schema definition and relationships
+- **Core Tables**: `profiles`, `groups`, `participants` (see ERD for full field specifications)
+- **UUID Primary Keys**: All tables use UUID PKs as defined in ERD
+- **Cloud Data Hooks**: ALL cloud data layer hooks are centralized in `src/powersync/hooks/` directory
+- **Hook Organization**: Group related hooks by feature (`useUserGroups`, `useProfile`, `useExpenses`, etc.)
+- **Sync Rules**: Define user-specific buckets in `sync-rules.yaml` following ERD relationships
+- **Schema Mapping**: Mirror ERD structure in `src/powersync/AppSchema.ts` for local SQLite
+- **Platform Support**: SQL.js adapter for Expo Go, WASQLite for web, native SQLite for production builds
+- **Query Patterns**: Reference ERD documentation for optimized query patterns and relationships
 
 ## Naming Conventions:
-- Use lowercase-dashes for directories (components/expense-card).
-- Screens: PascalCase (screens/Group/GroupScreen.tsx).
-- Hooks: use prefix `use` (useTheme.tsx, useExpenses.tsx).
-- Prefer named exports for components, hooks, and utilities.
+- **Directories**: kebab-case (`components/expense-item`, `powersync/hooks`)
+- **Files**: PascalCase for components (`ProfileScreen.tsx`), camelCase for hooks (`useProfile.ts`)
+- **Database**: snake_case tables (`personal_expenses`, `user_id` columns)
+- **Hooks**: Prefix with `use` (`useTheme`, `useUserGroups`, `useProfile`)
+- **PowerSync**: Use `Realtime` suffix for reactive hooks (`useUserGroupsRealtime`)
 
-## TypeScript Specific:
-- Use interfaces for all data models (Expense, Group, Participant, User).
-- Use string literals or maps instead of enums.
-- Avoid unnecessary React.FC typing unless children are used.
+## TypeScript Guidelines:
+- Use interfaces for data models (Profile, Group, Participant, PersonalExpense)
+- Define database types from PowerSync schema: `Database = (typeof AppSchema)['types']`
+- Use string literals instead of enums for better JSON serialization
+- Platform-specific typing: `Platform.OS === 'ios'` for conditional logic
+
+## Platform-Specific Considerations:
+- **iOS**: Use ActionSheetIOS, native styling, respect safe areas
+- **Web**: Ensure responsive design, web-compatible components
+- **Expo Go**: Use SQL.js adapter, avoid native modules
+- **Development**: Support hot reload, clear console logging with platform tags

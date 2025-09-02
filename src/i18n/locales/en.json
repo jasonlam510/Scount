@@ -13,7 +13,8 @@
     "success": "Success",
     "light": "Light",
     "dark": "Dark",
-    "automatic": "Automatic"
+    "automatic": "Automatic",
+    "ok": "OK"
   },
   "navigation": {
     "personal": "Personal",
@@ -63,7 +64,24 @@
     "name": "Name",
     "publicNickname": "Public Nickname",
     "logout": "Log out",
-    "deleteProfile": "Delete Profile"
+    "deleteProfile": "Delete Profile",
+    "editName": "Edit Name",
+    "editNickname": "Edit Nickname",
+    "namePlaceholder": "Enter your name",
+    "nicknamePlaceholder": "Enter your nickname",
+    "nicknameHelp": "This is the default nickname for you when you create a group. You can pick different nickname when creating the group or edit page of the group.",
+    "validation": {
+      "nameRequired": "Name is required",
+      "nicknameRequired": "Nickname is required",
+      "nameTooShort": "Name must be at least 2 characters",
+      "nicknameTooShort": "Nickname must be at least 2 characters",
+      "nameTooLong": "Name must be less than 50 characters",
+      "nicknameTooLong": "Nickname must be less than 50 characters"
+    },
+    "error": {
+      "title": "Update Failed",
+      "updateFailed": "Failed to update profile. Please try again."
+    }
   },
   "categories": {
     "food": "Food",

@@ -14,9 +14,10 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
-import { useProfileRealtime } from '../../powersync/hooks';
+import { useProfileRealtime, useProfileFieldUpdate } from '../../powersync/hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
+import EditProfileModal from '../../components/profile/EditProfileModal';
 
 const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -35,18 +36,47 @@ const ProfileScreen: React.FC = () => {
   // PowerSync profile data
   const { profile, isLoading: profileLoading, error: profileError } = useProfileRealtime();
   
+  // Profile update functionality
+  const { updateName, updateNickname, isUpdating, error: updateError, clearError } = useProfileFieldUpdate();
+  
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  
+  // Edit profile modal state
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editField, setEditField] = useState<'name' | 'nickname'>('name');
 
   // Handlers for navigation/actions
   const handleEditName = () => {
-    Alert.alert('Edit Name', 'Navigate to screen to edit user name.');
-    // In a real app: navigation.navigate('EditNameScreen');
+    setEditField('name');
+    setEditModalVisible(true);
+    clearError(); // Clear any previous errors
   };
 
   const handleEditNickname = () => {
-    Alert.alert('Edit Nickname', 'Navigate to screen to edit public nickname.');
-    // In a real app: navigation.navigate('EditNicknameScreen');
+    setEditField('nickname');
+    setEditModalVisible(true);
+    clearError(); // Clear any previous errors
+  };
+
+  // Profile update handlers
+  const handleProfileSave = async (value: string) => {
+    try {
+      if (editField === 'name') {
+        await updateName(value);
+      } else {
+        await updateNickname(value);
+      }
+      setEditModalVisible(false);
+    } catch (error) {
+      // Error is handled by the hook and modal
+      throw error;
+    }
+  };
+
+  const handleProfileCancel = () => {
+    setEditModalVisible(false);
+    clearError();
   };
 
   const getCurrentLanguageDisplay = () => {
@@ -307,6 +337,20 @@ const ProfileScreen: React.FC = () => {
         ]}
         onSelect={handleLanguageSelect}
         onCancel={() => setShowLanguageSelector(false)}
+      />
+
+      {/* Edit Profile Modal */}
+      <EditProfileModal
+        visible={editModalVisible}
+        field={editField}
+        currentValue={
+          editField === 'name' 
+            ? (profile?.name || '') 
+            : (profile?.nickname || '')
+        }
+        onSave={handleProfileSave}
+        onCancel={handleProfileCancel}
+        isLoading={isUpdating}
       />
     </View>
   );

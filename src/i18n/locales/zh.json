@@ -13,7 +13,8 @@
     "success": "成功",
     "light": "淺色",
     "dark": "深色",
-    "automatic": "自動"
+    "automatic": "自動",
+    "ok": "確定"
   },
   "navigation": {
     "personal": "個人",
@@ -63,7 +64,24 @@
     "name": "姓名",
     "publicNickname": "公開暱稱",
     "logout": "登出",
-    "deleteProfile": "刪除個人資料"
+    "deleteProfile": "刪除個人資料",
+    "editName": "編輯姓名",
+    "editNickname": "編輯暱稱",
+    "namePlaceholder": "請輸入您的姓名",
+    "nicknamePlaceholder": "請輸入您的暱稱",
+    "nicknameHelp": "這是您創建群組時的預設暱稱。您可以在創建群組或群組編輯頁面時選擇不同的暱稱。",
+    "validation": {
+      "nameRequired": "姓名為必填項",
+      "nicknameRequired": "暱稱為必填項",
+      "nameTooShort": "姓名至少需要2個字符",
+      "nicknameTooShort": "暱稱至少需要2個字符",
+      "nameTooLong": "姓名不能超過50個字符",
+      "nicknameTooLong": "暱稱不能超過50個字符"
+    },
+    "error": {
+      "title": "更新失敗",
+      "updateFailed": "更新個人資料失敗，請重試。"
+    }
   },
   "categories": {
     "food": "餐飲",

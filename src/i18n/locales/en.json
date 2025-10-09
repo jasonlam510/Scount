@@ -62,9 +62,13 @@
     "version": "Version",
     "notifications": "Notifications",
     "name": "Name",
+    "email": "Email",
     "publicNickname": "Public Nickname",
     "logout": "Log out",
-    "deleteProfile": "Delete Profile"
+    "deleteProfile": "Delete Profile",
+    "editPhoto": "Edit Profile Picture",
+    "camera": "Camera",
+    "photoLibrary": "Photo Library"
   },
   "categories": {
     "food": "Food",

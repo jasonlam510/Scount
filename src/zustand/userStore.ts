@@ -10,12 +10,8 @@ interface UserState {
   accessToken: string | null;
   refreshToken: string | null;
   
-  // User profile
-  userProfile: {
-    email?: string;
-    name?: string;
-    avatar?: string;
-  } | null;
+  // User email (from Supabase verification)
+  userEmail: string | null;
 }
 
 // User actions interface
@@ -25,12 +21,11 @@ interface UserActions {
   setRefreshToken: (token: string | null) => void;
   setCurrentUserUuid: (uuid: string | null) => void;
   
-  // User profile actions
-  setUserProfile: (profile: UserState['userProfile']) => void;
-  updateUserProfile: (updates: Partial<UserState['userProfile']>) => void;
+  // User email actions
+  setUserEmail: (email: string | null) => void;
   
   // Session management
-  login: (userData: { uuid: string; accessToken: string; refreshToken?: string; profile?: UserState['userProfile'] }) => void;
+  login: (userData: { uuid: string; accessToken: string; refreshToken?: string; email?: string }) => void;
   logout: () => void;
   
   // Utility actions
@@ -49,7 +44,7 @@ const DEFAULT_USER_STATE: UserState = {
   currentUserUuid: null,
   accessToken: null,
   refreshToken: null,
-  userProfile: null,
+  userEmail: null,
 };
 
 // Storage keys
@@ -57,7 +52,7 @@ const STORAGE_KEYS = {
   CURRENT_USER_UUID: '@scount:current_user_uuid',
   ACCESS_TOKEN: '@scount:access_token',
   REFRESH_TOKEN: '@scount:refresh_token',
-  USER_PROFILE: '@scount:user_profile',
+  USER_EMAIL: '@scount:user_email',
 };
 
 // Create the store without persist middleware
@@ -81,25 +76,17 @@ export const useUserStore = create<UserStore>((set, get) => ({
     get().saveToStorage();
   },
   
-  setUserProfile: (profile: UserState['userProfile']) => {
-    set({ userProfile: profile });
+  setUserEmail: (email: string | null) => {
+    set({ userEmail: email });
     get().saveToStorage();
   },
   
-  updateUserProfile: (updates: Partial<UserState['userProfile']>) => {
-    const currentProfile = get().userProfile;
-    set({ 
-      userProfile: currentProfile ? { ...currentProfile, ...updates } : updates,
-    });
-    get().saveToStorage();
-  },
-  
-  login: (userData: { uuid: string; accessToken: string; refreshToken?: string; profile?: UserState['userProfile'] }) => {
+  login: (userData: { uuid: string; accessToken: string; refreshToken?: string; email?: string }) => {
     set({
       currentUserUuid: userData.uuid,
       accessToken: userData.accessToken,
       refreshToken: userData.refreshToken || null,
-      userProfile: userData.profile || null,
+      userEmail: userData.email || null,
     });
     get().saveToStorage();
   },
@@ -117,11 +104,11 @@ export const useUserStore = create<UserStore>((set, get) => ({
   // Persistence actions
   loadFromStorage: async () => {
     try {
-      const [uuid, accessToken, refreshToken, profileRaw] = await Promise.all([
+      const [uuid, accessToken, refreshToken, email] = await Promise.all([
         AsyncStorage.getItem(STORAGE_KEYS.CURRENT_USER_UUID),
         AsyncStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
         AsyncStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
-        AsyncStorage.getItem(STORAGE_KEYS.USER_PROFILE),
+        AsyncStorage.getItem(STORAGE_KEYS.USER_EMAIL),
       ]);
       
       const updates: Partial<UserState> = {};
@@ -129,13 +116,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
       if (uuid) updates.currentUserUuid = uuid;
       if (accessToken) updates.accessToken = accessToken;
       if (refreshToken) updates.refreshToken = refreshToken;
-      if (profileRaw) {
-        try {
-          updates.userProfile = JSON.parse(profileRaw);
-        } catch (e) {
-          console.error('Failed to parse user profile:', e);
-        }
-      }
+      if (email) updates.userEmail = email;
       
       if (Object.keys(updates).length > 0) {
         set(updates);
@@ -152,7 +133,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
         state.currentUserUuid ? AsyncStorage.setItem(STORAGE_KEYS.CURRENT_USER_UUID, state.currentUserUuid) : AsyncStorage.removeItem(STORAGE_KEYS.CURRENT_USER_UUID),
         state.accessToken ? AsyncStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, state.accessToken) : AsyncStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN),
         state.refreshToken ? AsyncStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, state.refreshToken) : AsyncStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN),
-        state.userProfile ? AsyncStorage.setItem(STORAGE_KEYS.USER_PROFILE, JSON.stringify(state.userProfile)) : AsyncStorage.removeItem(STORAGE_KEYS.USER_PROFILE),
+        state.userEmail ? AsyncStorage.setItem(STORAGE_KEYS.USER_EMAIL, state.userEmail) : AsyncStorage.removeItem(STORAGE_KEYS.USER_EMAIL),
       ]);
     } catch (error) {
       console.error('Failed to save user data to storage:', error);

@@ -15,7 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
 import { supabase } from '../../lib/supbabase';
-import { useProfileRealtime } from '../../powersync/hooks';
+import { useProfile } from '../../powersync/hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
 
@@ -25,6 +25,7 @@ const ProfileScreen: React.FC = () => {
   const { t, changeLanguage, currentLanguage } = useI18n();
   const { 
     currentUserUuid, 
+    userEmail,
     setCurrentUserUuid, 
     clearUserData,
   } = useUser();
@@ -34,11 +35,12 @@ const ProfileScreen: React.FC = () => {
   } = useAppSettings();
   
   // PowerSync profile data
-  const { profile, isLoading: profileLoading, error: profileError } = useProfileRealtime();
+  const { profile, isLoading: profileLoading, error: profileError } = useProfile();
   
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showLogoutSelector, setShowLogoutSelector] = useState(false);
+  const [showPhotoSelector, setShowPhotoSelector] = useState(false);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -46,9 +48,25 @@ const ProfileScreen: React.FC = () => {
     // In a real app: navigation.navigate('EditNameScreen');
   };
 
-  const handleEditNickname = () => {
-    Alert.alert('Edit Nickname', 'Navigate to screen to edit public nickname.');
-    // In a real app: navigation.navigate('EditNicknameScreen');
+  const handleEditProfilePicture = () => {
+    if (Platform.OS === 'ios') {
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: [t('common.cancel'), t('profile.camera'), t('profile.photoLibrary')],
+          cancelButtonIndex: 0,
+          title: t('profile.editPhoto'),
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 1) {
+            console.log('Open camera');
+          } else if (buttonIndex === 2) {
+            console.log('Open photo library');
+          }
+        }
+      );
+    } else {
+      setShowPhotoSelector(true);
+    }
   };
 
   const getCurrentLanguageDisplay = () => {
@@ -151,6 +169,15 @@ const ProfileScreen: React.FC = () => {
     setShowLogoutSelector(false);
   };
 
+  const handlePhotoSelect = (value: string) => {
+    if (value === 'camera') {
+      console.log('Open camera');
+    } else if (value === 'photoLibrary') {
+      console.log('Open photo library');
+    }
+    setShowPhotoSelector(false);
+  };
+
   const handleLogout = async () => {
     try {
       // Sign out from Supabase
@@ -203,31 +230,32 @@ const ProfileScreen: React.FC = () => {
 
         {/* User Information Section */}
         <View style={[styles.section, { backgroundColor: colors.surface }]}>
-          {/* Profile Error Message */}
-          {profileError && (
-            <View style={styles.errorContainer}>
-              <Text style={[styles.errorText, { color: '#FF6B6B' }]}>
-                Failed to load profile data
-              </Text>
-            </View>
-          )}
-          
           {/* Profile Photo and User Info */}
           <View style={styles.profileHeader}>
-            <View style={styles.profilePhotoContainer}>
+            <TouchableOpacity 
+              style={styles.profilePhotoContainer}
+              onPress={handleEditProfilePicture}
+              activeOpacity={0.7}
+            >
               <Image
                 source={{ 
-                  uri: profile?.avatar || 'https://via.placeholder.com/80x80?text=User'
+                  uri: profile?.avatar && profile.avatar.trim() !== '' 
+                    ? profile.avatar 
+                    : 'https://via.placeholder.com/80x80?text=User'
                 }}
                 style={styles.profilePhoto}
+                onError={() => {
+                  // Fallback to placeholder if image fails to load
+                  console.log('Profile image failed to load, using placeholder');
+                }}
               />
-            </View>
+            </TouchableOpacity>
             <View style={styles.userInfo}>
               <Text style={[styles.userName, { color: colors.text }]}>
                 {profileLoading ? 'Loading...' : (profile?.name || 'No name set')}
               </Text>
               <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-                {profileLoading ? 'Loading...' : (profile?.email || 'No email set')}
+                {userEmail || 'No email set'}
               </Text>
             </View>
           </View>
@@ -240,19 +268,6 @@ const ProfileScreen: React.FC = () => {
             <View style={styles.rowValueContainer}>
               <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
                 {profileLoading ? 'Loading...' : (profile?.name || 'No name set')}
-              </Text>
-              <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
-            </View>
-          </TouchableOpacity>
-          
-          <View style={[styles.separator, { backgroundColor: colors.border }]} />
-          
-          {/* Editable Public Nickname */}
-          <TouchableOpacity style={styles.row} onPress={handleEditNickname}>
-            <Text style={[styles.rowLabel, { color: colors.text }]}>{t('profile.publicNickname')}</Text>
-            <View style={styles.rowValueContainer}>
-              <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
-                {profileLoading ? 'Loading...' : (profile?.nickname || 'No nickname set')}
               </Text>
               <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
             </View>
@@ -350,6 +365,18 @@ const ProfileScreen: React.FC = () => {
         ]}
         onSelect={handleLogoutSelect}
         onCancel={() => setShowLogoutSelector(false)}
+      />
+
+      {/* Photo Selector */}
+      <Selector
+        visible={showPhotoSelector}
+        title={t('profile.editPhoto')}
+        options={[
+          { key: 'camera', label: t('profile.camera'), value: 'camera' },
+          { key: 'photoLibrary', label: t('profile.photoLibrary'), value: 'photoLibrary' },
+        ]}
+        onSelect={handlePhotoSelect}
+        onCancel={() => setShowPhotoSelector(false)}
       />
     </View>
   );

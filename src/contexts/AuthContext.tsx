@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setCurrentUserUuid, 
     setAccessToken, 
     setRefreshToken, 
-    setUserProfile,
+    setUserEmail,
     logout: logoutFromStore 
   } = useUserStore();
 
@@ -63,11 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setCurrentUserUuid(session.user.id);
           setAccessToken(session.access_token);
           setRefreshToken(session.refresh_token);
-          setUserProfile({
-            email: session.user.email,
-            name: session.user.user_metadata?.full_name || session.user.user_metadata?.name,
-            avatar: session.user.user_metadata?.avatar_url,
-          });
+          setUserEmail(session.user.email || null);
         }
       } catch (error) {
         console.error('Error initializing auth:', error);
@@ -112,11 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setCurrentUserUuid(session.user.id);
           setAccessToken(session.access_token);
           setRefreshToken(session.refresh_token);
-          setUserProfile({
-            email: session.user.email,
-            name: session.user.user_metadata?.full_name || session.user.user_metadata?.name,
-            avatar: session.user.user_metadata?.avatar_url,
-          });
+          setUserEmail(session.user.email || null);
         } else {
           // User signed out - clear Zustand store
           logoutFromStore();
@@ -129,7 +121,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [setCurrentUserUuid, setAccessToken, setRefreshToken, setUserProfile, logoutFromStore]);
+  }, [setCurrentUserUuid, setAccessToken, setRefreshToken, setUserEmail, logoutFromStore]);
 
   const value: AuthData = {
     session,

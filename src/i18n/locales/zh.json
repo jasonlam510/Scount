@@ -62,9 +62,13 @@
     "version": "版本",
     "notifications": "通知",
     "name": "姓名",
+    "email": "電子郵件",
     "publicNickname": "公開暱稱",
     "logout": "登出",
-    "deleteProfile": "刪除個人資料"
+    "deleteProfile": "刪除個人資料",
+    "editPhoto": "編輯個人照片",
+    "camera": "相機",
+    "photoLibrary": "相片庫"
   },
   "categories": {
     "food": "餐飲",

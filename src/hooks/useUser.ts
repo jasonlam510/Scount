@@ -7,14 +7,13 @@ export const useUser = () => {
     currentUserUuid,
     accessToken,
     refreshToken,
-    userProfile,
+    userEmail,
     
     // Actions
     setCurrentUserUuid,
     setAccessToken,
     setRefreshToken,
-    setUserProfile,
-    updateUserProfile,
+    setUserEmail,
     login,
     logout,
     clearUserData,
@@ -28,15 +27,14 @@ export const useUser = () => {
     currentUserUuid,
     accessToken,
     refreshToken,
-    userProfile,
+    userEmail,
     isAuthenticated,
     
     // User management
     setCurrentUserUuid,
     setAccessToken,
     setRefreshToken,
-    setUserProfile,
-    updateUserProfile,
+    setUserEmail,
     
     // Authentication
     login,

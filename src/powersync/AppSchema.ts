@@ -21,9 +21,7 @@ const profiles = new Table(
   {
     // id column (text) is automatically included
     created_at: column.text,
-    email: column.text,
     name: column.text,
-    nickname: column.text,
     avatar: column.text
   },
   { indexes: {} }

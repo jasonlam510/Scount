@@ -14,8 +14,6 @@ erDiagram
     PROFILES {
         uuid id PK "UUID primary key"
         text name "User's full name"
-        text nickname "User's display nickname"
-        varchar email "User's email address"
         text avatar "Avatar URL (optional)"
         timestamptz created_at "Account creation timestamp"
     }
@@ -47,7 +45,7 @@ erDiagram
 
 ### 1. Profiles (Users)
 - **Purpose**: Stores user account information and profile data
-- **Key Fields**: `id` (UUID Primary Key), `name`, `nickname`, `email`, `avatar` (optional), `created_at`
+- **Key Fields**: `id` (UUID Primary Key), `name`, `avatar` (optional), `created_at`
 - **Relationships**: Can participate in multiple groups via Participants table
 - **Rules**: 
   - `id` is a UUID and serves as the primary key
@@ -150,7 +148,7 @@ The app currently supports the following core query patterns:
 
 #### **User Profile Lookup**
 - **Get user profile by ID**: Retrieve user's profile information
-- **Update user profile**: Modify user's name, nickname, email, or avatar
+- **Update user profile**: Modify user's name or avatar
 
 ### **2. Group Management Queries**
 

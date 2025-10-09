@@ -49,8 +49,6 @@ export const useProfile = (): UseProfileResult => {
             const userProfile: Profile = {
               id: profileData.id,
               name: profileData.name,
-              nickname: profileData.nickname,
-              email: profileData.email,
               avatar: profileData.avatar || '',
               created_at: profileData.created_at,
             };
@@ -101,8 +99,6 @@ export const useProfile = (): UseProfileResult => {
         const userProfile: Profile = {
           id: profileData.id,
           name: profileData.name,
-          nickname: profileData.nickname,
-          email: profileData.email,
           avatar: profileData.avatar || '',
           created_at: profileData.created_at,
         };
@@ -166,8 +162,6 @@ export const useProfileRealtime = (): UseProfileResult => {
               const userProfile: Profile = {
                 id: profileData.id,
                 name: profileData.name,
-                nickname: profileData.nickname,
-                email: profileData.email,
                 avatar: profileData.avatar || '',
                 created_at: profileData.created_at,
               };
@@ -218,8 +212,6 @@ export const useProfileRealtime = (): UseProfileResult => {
         const userProfile: Profile = {
           id: profileData.id,
           name: profileData.name,
-          nickname: profileData.nickname,
-          email: profileData.email,
           avatar: profileData.avatar || '',
           created_at: profileData.created_at,
         };

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, Text, ActivityIndicator } from 'react-native';
 import { BottomTabNavigator, AppNavigator } from './src/components/navigation';
+import { LoadingScreen } from './src/components';
 import { useInitializeStores } from './src/hooks/useInitializeStores';
 import { connectDatabase } from './src/powersync';
 import { AuthProvider } from './src/contexts';
@@ -54,32 +54,11 @@ export default function App() {
   if (!powerSyncReady) {
     return (
       <SafeAreaProvider>
-        <View style={{ 
-          flex: 1, 
-          justifyContent: 'center', 
-          alignItems: 'center', 
-          backgroundColor: colors.background 
-        }}>
-          <ActivityIndicator size="large" color={colors.primary} />
-          <Text style={{ 
-            marginTop: 16, 
-            fontSize: 16, 
-            color: colors.textSecondary 
-          }}>
-            Initializing PowerSync...
-          </Text>
-          {initError && (
-            <Text style={{ 
-              marginTop: 8, 
-              fontSize: 14, 
-              color: colors.danger, 
-              textAlign: 'center', 
-              paddingHorizontal: 20 
-            }}>
-              Error: {initError}
-            </Text>
-          )}
-        </View>
+        <LoadingScreen 
+          messageKey="common.initializing"
+          error={initError || undefined}
+          showError={!!initError}
+        />
       </SafeAreaProvider>
     );
   }

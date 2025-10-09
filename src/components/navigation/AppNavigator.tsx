@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, ActivityIndicator } from 'react-native';
 import BottomTabNavigator from './BottomTabNavigator';
 import { useAuthContext } from '../../contexts';
 import { useTheme } from '../../hooks/useTheme';
+import LoadingScreen from '../LoadingScreen';
 import LoginScreen from '../../screens/Auth/LoginScreen';
 
 const Stack = createStackNavigator();
@@ -15,23 +15,7 @@ export default function AppNavigator() {
 
   // Show loading screen while auth is initializing
   if (isLoading) {
-    return (
-      <View style={{ 
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        backgroundColor: colors.background 
-      }}>
-        <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={{ 
-          marginTop: 16, 
-          fontSize: 16, 
-          color: colors.textSecondary 
-        }}>
-          Loading...
-        </Text>
-      </View>
-    );
+    return <LoadingScreen messageKey="common.loading" />;
   }
 
   return (

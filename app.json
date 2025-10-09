@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "userInterfaceStyle": "automatic",
-      "bundleIdentifier": "com.anonymous.scount"
+      "bundleIdentifier": "com.scount"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,19 +24,33 @@
       },
       "edgeToEdgeEnabled": true,
       "userInterfaceStyle": "automatic",
-      "package": "com.anonymous.scount"
+      "package": "com.scount"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "scheme": "com.scount",
     "plugins": [
       [
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": ["en", "zh"],
-            "android": ["en", "zh"]
+            "ios": [
+              "en",
+              "zh"
+            ],
+            "android": [
+              "en",
+              "zh"
+            ]
           }
+        }
+      ],
+      "expo-secure-store",
+      [
+        "expo-web-browser",
+        {
+          "experimentalLauncherActivity": false
         }
       ]
     ],

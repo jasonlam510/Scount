@@ -73,5 +73,29 @@
     "health": "健康",
     "education": "教育",
     "other": "其他"
+  },
+  "auth": {
+    "welcome": "歡迎使用 Scount",
+    "enterEmail": "輸入您的電子郵件以開始使用",
+    "emailPlaceholder": "輸入您的電子郵件",
+    "sendOTP": "發送驗證碼",
+    "sending": "發送中...",
+    "otpSent": "驗證碼已發送！",
+    "otpSentTo": "我們已將6位數驗證碼發送至：",
+    "enterOTP": "輸入驗證碼",
+    "verifyOTP": "驗證代碼",
+    "verifying": "驗證中...",
+    "resendOTP": "重新發送驗證碼",
+    "resendIn": "重新發送倒數",
+    "backToLogin": "返回登入",
+    "didntReceive": "沒有收到嗎？",
+    "checkSpam": "• 檢查您的垃圾郵件/垃圾資料夾\n• 確認電子郵件地址正確\n• 嘗試重新發送驗證碼",
+    "emailRequired": "請輸入您的電子郵件地址",
+    "invalidEmail": "請輸入有效的電子郵件地址",
+    "invalidOTP": "請輸入有效的6位數驗證碼",
+    "otpExpired": "驗證碼已過期，請重新申請。",
+    "otpSentAgain": "驗證碼已重新發送！",
+    "somethingWrong": "出現錯誤，請重試。",
+    "secureLinkDescription": "我們將發送安全驗證碼給您，無需密碼即可登入"
   }
 } 

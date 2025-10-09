@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../../hooks';
 import { useI18n } from '../../hooks/useI18n';
 import GroupCard from '../../components/features/groups/GroupCard';
-import { FloatingActionButton } from '../../components';
+import FloatingActionButton from '../../components/FloatingActionButton';
 import { Group } from '../../types/groups';
 import { useUserGroupsRealtime } from '../../powersync/hooks/useUserGroups';
 

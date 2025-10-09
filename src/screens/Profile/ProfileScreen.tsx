@@ -14,6 +14,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
+import { supabase } from '../../lib/supbabase';
 import { useProfileRealtime } from '../../powersync/hooks';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import Selector from '../../components/Selector';
@@ -125,9 +126,16 @@ const ProfileScreen: React.FC = () => {
         text: 'Log Out', 
         onPress: async () => {
           try {
+            // Sign out from Supabase
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+              console.error('Supabase logout error:', error);
+            }
+            
+            // Clear local user data
             await clearUserData();
             console.log('User logged out');
-            // In a real app, you might navigate to login screen
+            // The AuthContext will automatically handle the navigation back to login
           } catch (error) {
             console.error('Failed to logout:', error);
           }

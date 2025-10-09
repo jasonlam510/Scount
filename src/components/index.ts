@@ -4,10 +4,8 @@ export { default as FloatingActionButton } from './FloatingActionButton';
 export { default as Selector } from './Selector';
 export { default as SummarySection } from './SummarySection';
 
-// Navigation components
-export * from './navigation';
-
 // List components
 export * from './lists';
 
-// Note: Hooks are exported from src/hooks/index.ts 
+// Note: Hooks are exported from src/hooks/index.ts
+// Note: Navigation components are exported from src/components/navigation/index.ts 

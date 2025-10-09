@@ -73,5 +73,29 @@
     "health": "Health",
     "education": "Education",
     "other": "Other"
+  },
+  "auth": {
+    "welcome": "Welcome to Scount",
+    "enterEmail": "Enter your email to get started",
+    "emailPlaceholder": "Enter your email",
+    "sendOTP": "Send OTP",
+    "sending": "Sending...",
+    "otpSent": "OTP sent!",
+    "otpSentTo": "We've sent a 6-digit code to:",
+    "enterOTP": "Enter verification code",
+    "verifyOTP": "Verify Code",
+    "verifying": "Verifying...",
+    "resendOTP": "Resend OTP",
+    "resendIn": "Resend in",
+    "backToLogin": "Back to login",
+    "didntReceive": "Didn't receive it?",
+    "checkSpam": "• Check your spam/junk folder\n• Make sure the email address is correct\n• Try resending the code",
+    "emailRequired": "Please enter your email address",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidOTP": "Please enter a valid 6-digit code",
+    "otpExpired": "The verification code has expired. Please request a new one.",
+    "otpSentAgain": "OTP sent again!",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "secureLinkDescription": "We'll send you a secure code to sign in without a password"
   }
 } 

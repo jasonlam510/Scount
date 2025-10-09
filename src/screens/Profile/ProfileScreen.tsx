@@ -38,6 +38,7 @@ const ProfileScreen: React.FC = () => {
   
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [showLogoutSelector, setShowLogoutSelector] = useState(false);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -119,29 +120,52 @@ const ProfileScreen: React.FC = () => {
     setShowThemeSelector(false);
   };
 
-  const handleLogout = async () => {
-    Alert.alert('Log Out', 'Are you sure you want to log out?', [
-      { text: 'Cancel', style: 'cancel' },
-      { 
-        text: 'Log Out', 
-        onPress: async () => {
-          try {
-            // Sign out from Supabase
-            const { error } = await supabase.auth.signOut();
-            if (error) {
-              console.error('Supabase logout error:', error);
-            }
-            
-            // Clear local user data
-            await clearUserData();
-            console.log('User logged out');
-            // The AuthContext will automatically handle the navigation back to login
-          } catch (error) {
-            console.error('Failed to logout:', error);
+  // Platform-specific logout handlers
+  const handleLogoutPress = () => {
+    if (Platform.OS === 'ios') {
+      // Native iOS ActionSheet (true bottom-up menu)
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: [t('profile.logout'), 'Cancel'],
+          cancelButtonIndex: 1,
+          destructiveButtonIndex: 0, // Makes logout button red
+          title: 'Logout?',
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 0) {
+            handleLogout(); // Execute actual logout
           }
-        } 
-      },
-    ]);
+          // buttonIndex === 1 is Cancel, do nothing
+        }
+      );
+    } else {
+      // Web/Android: use custom selector
+      setShowLogoutSelector(true);
+    }
+  };
+
+  const handleLogoutSelect = (value: string) => {
+    if (value === 'logout') {
+      handleLogout();
+    }
+    setShowLogoutSelector(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Sign out from Supabase
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('Supabase logout error:', error);
+      }
+      
+      // Clear local user data
+      await clearUserData();
+      console.log('User logged out');
+      // The AuthContext will automatically handle the navigation back to login
+    } catch (error) {
+      console.error('Failed to logout:', error);
+    }
   };
 
   const handleDeleteProfile = () => {
@@ -273,7 +297,7 @@ const ProfileScreen: React.FC = () => {
         </View>
 
         {/* Account Actions */}
-        <TouchableOpacity style={[styles.logoutButton, { backgroundColor: colors.surface }]} onPress={handleLogout}>
+        <TouchableOpacity style={[styles.logoutButton, { backgroundColor: colors.surface }]} onPress={handleLogoutPress}>
           <Text style={[styles.logoutButtonText, { color: colors.danger }]}>{t('profile.logout')}</Text>
         </TouchableOpacity>
 
@@ -315,6 +339,17 @@ const ProfileScreen: React.FC = () => {
         ]}
         onSelect={handleLanguageSelect}
         onCancel={() => setShowLanguageSelector(false)}
+      />
+
+      {/* Logout Selector */}
+      <Selector
+        visible={showLogoutSelector}
+        title="Logout?"
+        options={[
+          { key: 'logout', label: t('profile.logout'), value: 'logout' },
+        ]}
+        onSelect={handleLogoutSelect}
+        onCancel={() => setShowLogoutSelector(false)}
       />
     </View>
   );

@@ -75,10 +75,10 @@
     "other": "其他"
   },
   "auth": {
-    "welcome": "歡迎使用 Scount",
+    "welcome": "Scount",
     "enterEmail": "輸入您的電子郵件以開始使用",
     "emailPlaceholder": "輸入您的電子郵件",
-    "sendOTP": "發送驗證碼",
+    "sendOTP": "使用電子郵件登入",
     "sending": "發送中...",
     "otpSent": "驗證碼已發送！",
     "otpSentTo": "我們已將6位數驗證碼發送至：",

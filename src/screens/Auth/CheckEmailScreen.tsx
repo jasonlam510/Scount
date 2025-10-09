@@ -125,7 +125,6 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
         </View>
 
         {/* Main Message */}
-        <Text style={[styles.title, { color: colors.text }]}>{t('auth.otpSent')}</Text>
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           {t('auth.otpSentTo')}
         </Text>

@@ -75,10 +75,10 @@
     "other": "Other"
   },
   "auth": {
-    "welcome": "Welcome to Scount",
+    "welcome": "Scount",
     "enterEmail": "Enter your email to get started",
     "emailPlaceholder": "Enter your email",
-    "sendOTP": "Send OTP",
+    "sendOTP": "Sign in with Email",
     "sending": "Sending...",
     "otpSent": "OTP sent!",
     "otpSentTo": "We've sent a 6-digit code to:",

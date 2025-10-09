@@ -62,8 +62,7 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
-        <Text style={[styles.title, { color: colors.text }]}>{t('auth.welcome')}</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{t('auth.enterEmail')}</Text>
+        <Text style={[styles.title, { color: colors.text }]}>Scount</Text>
         
         <View style={styles.formContainer}>
           <TextInput
@@ -96,10 +95,6 @@ export default function LoginScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-        
-        <Text style={[styles.helpText, { color: colors.textSecondary }]}>
-          {t('auth.secureLinkDescription')}
-        </Text>
       </View>
     </SafeAreaView>
   );
@@ -118,7 +113,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 40,
     textAlign: 'center',
   },
   subtitle: {

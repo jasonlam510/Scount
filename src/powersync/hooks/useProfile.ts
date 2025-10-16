@@ -56,8 +56,29 @@ export const useProfile = (): UseProfileResult => {
             setProfile(userProfile);
             console.log(`✅ Loaded profile for user ${currentUserUuid}`);
           } else {
-            setProfile(null);
-            console.log(`⚠️ No profile found for user ${currentUserUuid}`);
+            // No profile found - create one automatically
+            console.log(`⚠️ No profile found for user ${currentUserUuid}, creating new profile...`);
+            
+            try {
+              const newProfile = {
+                id: currentUserUuid,
+                name: 'New User',
+                avatar: '',
+                created_at: new Date().toISOString(),
+              };
+
+              // Insert new profile using PowerSync
+              await db.insertInto('profiles')
+                .values(newProfile)
+                .execute();
+
+              setProfile(newProfile);
+              console.log(`✅ Created new profile for user ${currentUserUuid}`);
+            } catch (createError) {
+              console.error('❌ Error creating profile:::"::', createError);
+              setError(createError as Error);
+              setProfile(null);
+            }
           }
         }
       } catch (err) {
@@ -106,7 +127,29 @@ export const useProfile = (): UseProfileResult => {
         setProfile(userProfile);
         console.log(`🔄 Refreshed profile for user ${currentUserUuid}`);
       } else {
-        setProfile(null);
+        // No profile found - create one automatically
+        console.log(`⚠️ No profile found during refresh for user ${currentUserUuid}, creating new profile...`);
+        
+        try {
+          const newProfile = {
+            id: currentUserUuid,
+            name: 'New User',
+            avatar: '',
+            created_at: new Date().toISOString(),
+          };
+
+          // Insert new profile using PowerSync
+          await db.insertInto('profiles')
+            .values(newProfile)
+            .execute();
+
+          setProfile(newProfile);
+          console.log(`✅ Created new profile during refresh for user ${currentUserUuid}`);
+        } catch (createError) {
+          console.error('❌ Error creating profile during refresh:', createError);
+          setError(createError as Error);
+          setProfile(null);
+        }
       }
     } catch (err) {
       console.error('❌ Error refreshing profile:', err);
@@ -154,7 +197,7 @@ export const useProfileRealtime = (): UseProfileResult => {
           .limit(1);
 
         db.watch(query, {
-          onResult: (results) => {
+          onResult: async (results) => {
             if (isCancelled) return;
 
             if (results.length > 0) {
@@ -169,8 +212,29 @@ export const useProfileRealtime = (): UseProfileResult => {
               setProfile(userProfile);
               console.log(`🔄 Real-time profile update [${Platform.OS}] for user ${currentUserUuid}`);
             } else {
-              setProfile(null);
-              console.log(`⚠️ Profile not found for user ${currentUserUuid}`);
+              // No profile found - create one automatically
+              console.log(`⚠️ No profile found in realtime for user ${currentUserUuid}, creating new profile...`);
+              
+              try {
+                const newProfile = {
+                  id: currentUserUuid,
+                  name: 'New User',
+                  avatar: '',
+                  created_at: new Date().toISOString(),
+                };
+
+                // Insert new profile using PowerSync
+                await db.insertInto('profiles')
+                  .values(newProfile)
+                  .execute();
+
+                setProfile(newProfile);
+                console.log(`✅ Created new profile in realtime for user ${currentUserUuid}`);
+              } catch (createError) {
+                console.error('❌ Error creating profile in realtime:', createError);
+                setError(createError as Error);
+                setProfile(null);
+              }
             }
             
             setIsLoading(false);
@@ -217,8 +281,31 @@ export const useProfileRealtime = (): UseProfileResult => {
         };
         
         setProfile(userProfile);
+        console.log(`🔄 Refreshed profile (realtime) for user ${currentUserUuid}`);
       } else {
-        setProfile(null);
+        // No profile found - create one automatically
+        console.log(`⚠️ No profile found during realtime refresh for user ${currentUserUuid}, creating new profile...`);
+        
+        try {
+          const newProfile = {
+            id: currentUserUuid,
+            name: 'New User',
+            avatar: '',
+            created_at: new Date().toISOString(),
+          };
+
+          // Insert new profile using PowerSync
+          await db.insertInto('profiles')
+            .values(newProfile)
+            .execute();
+
+          setProfile(newProfile);
+          console.log(`✅ Created new profile during realtime refresh for user ${currentUserUuid}`);
+        } catch (createError) {
+          console.error('❌ Error creating profile during realtime refresh:', createError);
+          setError(createError as Error);
+          setProfile(null);
+        }
       }
     } catch (err) {
       console.error('❌ Error refreshing profile:', err);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { db } from '../SystemProvider.tsx';
-import { useUser } from '../../hooks/useUser';
-import { Profile } from '../../types/profiles';
+import { db } from '@/powersync/SystemProvider.tsx';
+import { useUser } from '@/hooks/useUser';
+import { Profile } from '@/types/profiles';
 
 interface UseProfileResult {
   profile: Profile | null;

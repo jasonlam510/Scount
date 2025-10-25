@@ -13,11 +13,11 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n, useUser, useAppSettings } from '../../hooks';
-import { supabase } from '../../lib/supbabase';
-import { useProfile } from '../../powersync/hooks';
-import FloatingActionButton from '../../components/FloatingActionButton';
-import Selector from '../../components/Selector';
+import { useTheme, useI18n, useUser, useAppSettings } from '@/hooks';
+import { supabase } from '@/lib/supbabase';
+import { useProfile } from '@/powersync/hooks';
+import FloatingActionButton from '@/components/FloatingActionButton';
+import Selector from '@/components/Selector';
 
 const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();

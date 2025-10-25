@@ -2,10 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
-import { useAuthContext } from '../../contexts';
-import { useTheme } from '../../hooks/useTheme';
-import LoadingScreen from '../LoadingScreen';
-import LoginScreen from '../../screens/Auth/LoginScreen';
+import { useAuthContext } from '@/contexts';
+import { useTheme } from '@/hooks/useTheme';
+import LoadingScreen from '@/components/LoadingScreen';
+import LoginScreen from '@/screens/Auth/LoginScreen';
 
 const Stack = createStackNavigator();
 

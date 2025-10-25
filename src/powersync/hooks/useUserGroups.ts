@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { db } from '../SystemProvider.tsx';
-import { useUser } from '../../hooks/useUser';
-import { Group } from '../../types/groups';
+import { db } from '@/powersync/SystemProvider.tsx';
+import { useUser } from '@/hooks/useUser';
+import { Group } from '@/types/groups';
 
 interface UseUserGroupsResult {
   groups: Group[];

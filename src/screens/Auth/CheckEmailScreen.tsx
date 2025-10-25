@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { supabase } from '../../lib/supbabase';
-import { useI18n, useTheme } from '../../hooks';
+import { supabase } from '@/lib/supbabase';
+import { useI18n, useTheme } from '@/hooks';
 
 interface CheckEmailScreenProps {
   email: string;

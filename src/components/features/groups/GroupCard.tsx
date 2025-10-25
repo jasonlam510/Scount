@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../../hooks';
-import { Group } from '../../../types/groups';
+import { useTheme } from '@/hooks';
+import { Group } from '@/types/groups';
 import * as ContextMenu from 'zeego/context-menu';
 
 interface GroupCardProps {

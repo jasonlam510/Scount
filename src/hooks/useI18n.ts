@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useMemo } from 'react';
-import { useAppSettings } from './useAppSettings';
-import { localeInfo } from '../i18n';
+import { useAppSettings } from '@/hooks/useAppSettings';
+import { localeInfo } from '@/i18n';
 import * as Localization from 'expo-localization';
 
 export const useI18n = () => {

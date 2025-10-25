@@ -1,4 +1,4 @@
-import { useAppSettingsStore } from '../zustand';
+import { useAppSettingsStore } from '@/zustand';
 
 export const useAppSettings = () => {
   const {

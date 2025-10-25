@@ -17,7 +17,7 @@ DB & Auth: Supabase
 
 1. Install [Node.js](https://nodejs.org) on your machine
 
-2. Install Expo SDK 53 into the repo
+2. Install Expo SDK into the repo
 ```bash
 npm install expo
 ```

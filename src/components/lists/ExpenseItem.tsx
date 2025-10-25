@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '../../hooks';
+import { useTheme } from '@/hooks';
 
 interface ExpenseItemData {
   id: string;

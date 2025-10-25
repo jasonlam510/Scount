@@ -1,8 +1,14 @@
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
+
+// Add alias configuration
+config.resolver.alias = {
+  '@': path.resolve(__dirname, 'src'),
+};
 
 // PowerSync React Native Web support configuration
 // Based on: https://docs.powersync.com/client-sdk-references/react-native-and-expo/react-native-web-support#4-enable-multiple-platforms

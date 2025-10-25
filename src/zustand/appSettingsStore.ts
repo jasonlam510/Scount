@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeMode } from '../hooks/useTheme';
+import { ThemeMode } from '@/hooks/useTheme';
 import { useEffect } from 'react';
 
 // App settings interface

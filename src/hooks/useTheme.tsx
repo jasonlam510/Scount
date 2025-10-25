@@ -1,6 +1,6 @@
 import { useColorScheme } from 'react-native';
-import { useAppSettingsStore } from '../zustand';
-import { ThemeColors, colorThemes } from '../constants';
+import { useAppSettingsStore } from '@/zustand';
+import { ThemeColors, colorThemes } from '@/constants';
 
 export type ThemeMode = 'light' | 'dark' | 'automatic';
 

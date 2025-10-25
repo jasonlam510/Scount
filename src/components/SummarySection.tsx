@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
-import { useTheme } from '../hooks';
+import { useTheme } from '@/hooks';
 
 interface SummaryItem {
   label: string;

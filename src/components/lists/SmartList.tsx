@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '../../hooks';
+import { useTheme } from '@/hooks';
 import ExpenseItem from './ExpenseItem';
-import DailyTotal from '../DailyTotal';
+import DailyTotal from '@/components/DailyTotal';
 
 interface ExpenseData {
   id: string;

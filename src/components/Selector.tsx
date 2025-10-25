@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { useTheme } from '../hooks';
+import { useTheme } from '@/hooks';
 
 export interface SelectorOption {
   key: string;

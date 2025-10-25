@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { BottomTabNavigator, AppNavigator } from './src/components/navigation';
-import { LoadingScreen } from './src/components';
-import { useInitializeStores } from './src/hooks/useInitializeStores';
-import { connectDatabase } from './src/powersync';
-import { AuthProvider } from './src/contexts';
-import { useTheme } from './src/hooks/useTheme';
-import './src/i18n'; // Import i18n configuration
+import { BottomTabNavigator, AppNavigator } from '@/components/navigation';
+import { LoadingScreen } from '@/components';
+import { useInitializeStores } from '@/hooks/useInitializeStores';
+import { connectDatabase } from '@/powersync';
+import { AuthProvider } from '@/contexts';
+import { useTheme } from '@/hooks/useTheme';
+import '@/i18n'; // Import i18n configuration
 
 export default function App() {
   const [powerSyncReady, setPowerSyncReady] = useState(false);

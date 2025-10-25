@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
-import { Profile } from '../types/profiles';
-import { Group } from '../types/groups';
-import { GroupParticipant } from '../types/participants';
+import { Profile } from '@/types/profiles';
+import { Group } from '@/types/groups';
+import { GroupParticipant } from '@/types/participants';
 
 // Platform-specific PowerSync imports
 let column: any, Schema: any, Table: any;

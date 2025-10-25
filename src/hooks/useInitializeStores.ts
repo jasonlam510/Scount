@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppSettingsStore } from '../zustand/appSettingsStore';
-import { useUserStore } from '../zustand/userStore';
+import { useAppSettingsStore } from '@/zustand/appSettingsStore';
+import { useUserStore } from '@/zustand/userStore';
 
 export const useInitializeStores = () => {
   const loadAppSettings = useAppSettingsStore(state => state.loadFromStorage);

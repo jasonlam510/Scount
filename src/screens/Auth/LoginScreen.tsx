@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { supabase } from '../../lib/supbabase';
-import { useI18n, useTheme } from '../../hooks';
+import { supabase } from '@/lib/supbabase';
+import { useI18n, useTheme } from '@/hooks';
 import CheckEmailScreen from './CheckEmailScreen';
 
 export default function LoginScreen() {

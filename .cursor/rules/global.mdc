@@ -4,15 +4,15 @@
 ## Project Overview:
 - **Purpose**: Personal and group expense tracking application
 - **Tech Stack**: React Native + Expo, TypeScript, Supabase (DB/Auth), PowerSync (sync engine)
-- **Target Platforms**: Web and iOS (primary), Android (future)
+- **Target Platforms**: iOS and Android (mobile-only)
 - **Architecture**: Offline-first with real-time sync
 
 ## UI/UX Guidelines:
 - **Theme System**: ALWAYS use theme colors from `useTheme()` hook - never hard-code colors
-- **Responsive Design**: Design for both mobile (iOS) and web - use platform-specific components when needed
+- **Mobile-First Design**: Design specifically for iOS and Android mobile platforms
 - **Language Support**: Use i18n keys from `useI18n()` hook - support English and Chinese (繁體中文)
-- **Native iOS Components**: Use ActionSheetIOS, native menus for iOS when possible
-- **Accessibility**: Follow iOS Human Interface Guidelines and web accessibility standards
+- **Native Components**: Use ActionSheetIOS for iOS, platform-specific components for Android
+- **Accessibility**: Follow iOS Human Interface Guidelines and Android Material Design accessibility standards
 
 ## Code Style and Structure:
 - Use concise functional React Native components with TypeScript
@@ -20,6 +20,12 @@
 - File structure: `src/{components, hooks, screens, powersync, zustand, i18n, types, utils}`
 - Use React Navigation: BottomTabNavigator for main screens, Stack for modals/details
 - Follow offline-first architecture: PowerSync for data sync, AsyncStorage for app settings
+
+## EAS Build Compatibility:
+- **Dependency Constraint**: ONLY use dependencies that are compatible with Expo EAS builds
+- **Native Modules**: Avoid native modules that require custom native code or configuration
+- **Expo SDK**: Prefer Expo SDK modules over third-party alternatives when available
+- **No Custom Native Code**: Avoid libraries requiring custom iOS/Android native code modifications
 
 ## Data Layer (PowerSync + Supabase):
 - **Database Schema**: Follow `docs/erd.md` for complete schema definition and relationships
@@ -29,7 +35,7 @@
 - **Hook Organization**: Group related hooks by feature (`useUserGroups`, `useProfile`, `useExpenses`, etc.)
 - **Sync Rules**: Define user-specific buckets in `sync-rules.yaml` following ERD relationships
 - **Schema Mapping**: Mirror ERD structure in `src/powersync/AppSchema.ts` for local SQLite
-- **Platform Support**: SQL.js adapter for Expo Go, WASQLite for web, native SQLite for production builds
+- **Platform Support**: SQL.js adapter for Expo Go, native SQLite for production builds
 - **Query Patterns**: Reference ERD documentation for optimized query patterns and relationships
 
 ## Naming Conventions:
@@ -46,7 +52,7 @@
 - Platform-specific typing: `Platform.OS === 'ios'` for conditional logic
 
 ## Platform-Specific Considerations:
-- **iOS**: Use ActionSheetIOS, native styling, respect safe areas
-- **Web**: Ensure responsive design, web-compatible components
+- **iOS**: Use ActionSheetIOS, native styling, respect safe areas, follow Human Interface Guidelines
+- **Android**: Use Material Design components, respect Android navigation patterns
 - **Expo Go**: Use SQL.js adapter, avoid native modules
 - **Development**: Support hot reload, clear console logging with platform tags

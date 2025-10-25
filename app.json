@@ -15,7 +15,17 @@
     "ios": {
       "supportsTablet": true,
       "userInterfaceStyle": "automatic",
-      "bundleIdentifier": "com.scount"
+      "bundleIdentifier": "com.scount",
+      "infoPlist": {
+        "ExpoLocalization_supportsRTL": true,
+        "CFBundleLocalizations": [
+          "en",
+          "zh",
+          "en",
+          "zh"
+        ],
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -26,10 +36,8 @@
       "userInterfaceStyle": "automatic",
       "package": "com.scount"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "scheme": "com.scount",
+    "main": "expo-router/entry",
     "plugins": [
       [
         "expo-localization",
@@ -52,10 +60,22 @@
         {
           "experimentalLauncherActivity": false
         }
+      ],
+      [
+        "expo-router",
+        {
+          "root": "./src/app"
+        }
       ]
     ],
     "extra": {
-      "supportsRTL": true
+      "supportsRTL": true,
+      "router": {
+        "root": "./src/app"
+      },
+      "eas": {
+        "projectId": "d660cda9-e5e9-4923-a65d-910a44a51840"
+      }
     },
     "developmentClient": {
       "silentLaunch": false

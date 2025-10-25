@@ -1,6 +1,6 @@
 import { AbstractPowerSyncDatabase, CrudEntry, PowerSyncBackendConnector, UpdateType, type PowerSyncCredentials } from '@powersync/react-native';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supbabase';
+import { supabase } from '@/lib/supabase';
 
 /// Postgres Response codes that we cannot recover from by retrying.
 const FATAL_RESPONSE_CODES = [
@@ -14,7 +14,7 @@ const FATAL_RESPONSE_CODES = [
   new RegExp('^42501$')
 ];
 
-const POWERSYNC_URL = process.env.EXPO_PUBLIC_POWERSYNC_URL || 'https://your-powersync-instance.powersync.com';
+const POWERSYNC_URL = process.env.EXPO_PUBLIC_POWERSYNC_URL;
 
 export class Connector implements PowerSyncBackendConnector {
   supabaseClient: SupabaseClient;

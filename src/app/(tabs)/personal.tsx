@@ -18,7 +18,7 @@ import { SmartList } from '@/components/lists';
 import SegmentedControl from '@/components/navigation/SegmentedControl';
 import HeaderActions from '@/components/navigation/HeaderActions';
 
-const PersonalScreen: React.FC = () => {
+export default function PersonalScreen() {
   const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();
@@ -144,13 +144,14 @@ const PersonalScreen: React.FC = () => {
         icon="add"
         label={t('expenses.addExpense')}
         onPress={() => {
-          // TODO: Navigate to add expense screen
+          // TODO: Navigate to add expense screen using Expo Router
+          // router.push('/(stack)/personal/transaction-form');
           console.log('Add expense pressed');
         }}
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -194,5 +195,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default PersonalScreen; 

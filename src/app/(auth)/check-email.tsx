@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { supabase } from '@/lib/supbabase';
+import { router, useLocalSearchParams } from 'expo-router';
+import { supabase } from '@/lib/supabase';
 import { useI18n, useTheme } from '@/hooks';
 
-interface CheckEmailScreenProps {
-  email: string;
-  onBackToLogin: () => void;
-}
-
-export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScreenProps) {
+export default function CheckEmailScreen() {
+  const { email } = useLocalSearchParams<{ email: string }>();
   const [otpCode, setOtpCode] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -68,7 +65,7 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
     
     try {
       const { data, error } = await supabase.auth.verifyOtp({
-        email: email,
+        email: email!,
         token: otpCode,
         type: 'email',
       });
@@ -79,6 +76,7 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
       } else {
         console.log('OTP verification successful');
         // AuthContext will handle the session and navigation
+        // Router will automatically redirect to tabs due to auth state change
       }
     } catch (error: any) {
       console.error('UNEXPECTED ERROR: OTP verification threw exception:', error);
@@ -95,7 +93,7 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
     
     try {
       const { error } = await supabase.auth.signInWithOtp({
-        email: email.trim(),
+        email: email!.trim(),
         options: {
           shouldCreateUser: true,
         },
@@ -114,6 +112,10 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
     } finally {
       setIsResending(false);
     }
+  };
+
+  const handleBackToLogin = () => {
+    router.back();
   };
 
   return (
@@ -210,7 +212,7 @@ export default function CheckEmailScreen({ email, onBackToLogin }: CheckEmailScr
                 borderColor: colors.border 
               }
             ]} 
-            onPress={onBackToLogin}
+            onPress={handleBackToLogin}
           >
             <Ionicons name="arrow-back" size={20} color={colors.textSecondary} />
             <Text style={[styles.backButtonText, { color: colors.textSecondary }]}>

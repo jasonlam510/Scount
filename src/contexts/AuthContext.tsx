@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supbabase';
+import { supabase } from '@/lib/supabase';
 import { useUserStore } from '@/zustand/userStore';
-import { connectDatabase } from '@/powersync';
 
 // Auth data interface following Supabase docs pattern
 export type AuthData = {

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { supabase } from '@/lib/supbabase';
+import { router } from 'expo-router';
+import { supabase } from '@/lib/supabase';
 import { useI18n, useTheme } from '@/hooks';
-import CheckEmailScreen from './CheckEmailScreen';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showCheckEmail, setShowCheckEmail] = useState(false);
   const { t } = useI18n();
   const { colors } = useTheme();
   
@@ -38,8 +37,11 @@ export default function LoginScreen() {
         console.error('OTP error:', error);
         Alert.alert(t('common.error'), error.message);
       } else {
-        // Navigate to OTP input screen
-        setShowCheckEmail(true);
+        // Navigate to OTP input screen with email parameter
+        router.push({
+          pathname: '/(auth)/check-email',
+          params: { email: email.trim() }
+        });
       }
     } catch (error) {
       console.error('OTP error:', error);
@@ -48,16 +50,6 @@ export default function LoginScreen() {
       setIsLoading(false);
     }
   };
-
-  const handleBackToLogin = () => {
-    setShowCheckEmail(false);
-    setEmail(''); // Clear email for fresh start
-  };
-
-  // Show CheckEmailScreen if magic link was sent
-  if (showCheckEmail) {
-    return <CheckEmailScreen email={email} onBackToLogin={handleBackToLogin} />;
-  }
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>

@@ -14,12 +14,12 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '@/hooks';
-import { supabase } from '@/lib/supbabase';
+import { supabase } from '@/lib/supabase';
 import { useProfile } from '@/powersync/hooks';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import Selector from '@/components/Selector';
 
-const ProfileScreen: React.FC = () => {
+export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
@@ -45,7 +45,8 @@ const ProfileScreen: React.FC = () => {
   // Handlers for navigation/actions
   const handleEditName = () => {
     Alert.alert('Edit Name', 'Navigate to screen to edit user name.');
-    // In a real app: navigation.navigate('EditNameScreen');
+    // TODO: Navigate to edit name screen using Expo Router
+    // router.push('/(stack)/edit-name');
   };
 
   const handleEditProfilePicture = () => {
@@ -97,7 +98,7 @@ const ProfileScreen: React.FC = () => {
         }
       );
     } else {
-      // Web/Android: use custom selector
+      // Android: use custom selector
       setShowLanguageSelector(true);
     }
   };
@@ -128,7 +129,7 @@ const ProfileScreen: React.FC = () => {
         }
       );
     } else {
-      // Web/Android: use custom selector
+      // Android: use custom selector
       setShowThemeSelector(true);
     }
   };
@@ -157,7 +158,7 @@ const ProfileScreen: React.FC = () => {
         }
       );
     } else {
-      // Web/Android: use custom selector
+      // Android: use custom selector
       setShowLogoutSelector(true);
     }
   };
@@ -208,7 +209,8 @@ const ProfileScreen: React.FC = () => {
 
   const handleSupportCenter = () => {
     Alert.alert('Support Center', 'Open support chat or contact page.');
-    // In a real app: navigation.navigate('SupportScreen'); or open external link
+    // TODO: Navigate to support screen using Expo Router
+    // router.push('/(stack)/support');
   };
 
   const getThemeModeDisplayText = () => {
@@ -219,8 +221,6 @@ const ProfileScreen: React.FC = () => {
       default: return t('common.automatic');
     }
   };
-
-  // Loading state removed since we're using Zustand stores now
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -380,7 +380,7 @@ const ProfileScreen: React.FC = () => {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -487,5 +487,3 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 });
-
-export default ProfileScreen; 

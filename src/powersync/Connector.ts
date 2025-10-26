@@ -54,6 +54,8 @@ export class Connector implements PowerSyncBackendConnector {
       // or edge functions to process the entire transaction in a single call.
       for (const op of transaction.crud) {
         lastOp = op;
+        console.log('Processing operation:', op.op, 'type:', typeof op.op, 'for table:', op.table);
+        console.log('Operation data:', op.opData);
         const table = this.supabaseClient.from(op.table);
         let result: any;
         switch (op.op) {

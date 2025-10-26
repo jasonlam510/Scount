@@ -16,6 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme, useI18n, useUser, useAppSettings } from '@/hooks';
 import { supabase } from '@/lib/supabase';
 import { useProfile } from '@/powersync/hooks';
+import { disconnectDatabase } from '@/powersync';
 import FloatingActionButton from '@/components/FloatingActionButton';
 import Selector from '@/components/Selector';
 
@@ -181,6 +182,9 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     try {
+      // Disconnect PowerSync and clear local database
+      await disconnectDatabase();
+      
       // Sign out from Supabase
       const { error } = await supabase.auth.signOut();
       if (error) {

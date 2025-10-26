@@ -63,5 +63,18 @@ export const connectDatabase = async () => {
   return await powerSync.connect(new Connector());
 };
 
+// Disconnect function for logout - clears local database
+export const disconnectDatabase = async () => {
+  try {
+    if (powerSync) {
+      await powerSync.disconnectAndClear();
+      console.log('✅ PowerSync disconnected and cleared successfully');
+    }
+  } catch (error) {
+    console.error('❌ Failed to disconnect PowerSync:', error);
+    throw error;
+  }
+};
+
 // Keep powerSync internal - only export db interface
 // export { powerSync }; // ❌ No longer exported - use db instead

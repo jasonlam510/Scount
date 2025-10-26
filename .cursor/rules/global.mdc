@@ -17,8 +17,12 @@
 ## Code Style and Structure:
 - Use concise functional React Native components with TypeScript
 - Prefer hooks and Zustand stores for state management; avoid classes
-- File structure: `src/{components, hooks, screens, powersync, zustand, i18n, types, utils}`
-- Use React Navigation: BottomTabNavigator for main screens, Stack for modals/details
+- File structure: `src/{app, components, hooks, powersync, zustand, i18n, types, utils, contexts}`
+- Navigation: Expo Router with file-based routing (`app/(tabs)`, `app/(auth)`)
+- Component organization: Feature-based with atomic design:
+  - `src/components/features/{feature}/sections/` - Screen-level composites
+  - `src/components/features/{feature}/components/` - Reusable building blocks
+  - `src/components/ui/` - Generic UI components
 - Follow offline-first architecture: PowerSync for data sync, AsyncStorage for app settings
 
 ## EAS Build Compatibility:
@@ -31,12 +35,24 @@
 - **Database Schema**: Follow `docs/erd.md` for complete schema definition and relationships
 - **Core Tables**: `profiles`, `groups`, `participants` (see ERD for full field specifications)
 - **UUID Primary Keys**: All tables use UUID PKs as defined in ERD
-- **Cloud Data Hooks**: ALL cloud data layer hooks are centralized in `src/powersync/hooks/` directory
-- **Hook Organization**: Group related hooks by feature (`useUserGroups`, `useProfile`, `useExpenses`, etc.)
+- **PowerSync Hooks**: Use hooks from `src/powersync/hooks/` directory (`useUserGroups`, `useUserGroupsRealtime`)
+- **Direct Database Access**: Use `db` from `@/powersync` directly in screens for simple queries
+- **Query Patterns**: Use Kysely for type-safe queries, PowerSync handles sync automatically
+- **Realtime Hooks**: Prefer `useUserGroupsRealtime` for reactive data updates
 - **Sync Rules**: Define user-specific buckets in `sync-rules.yaml` following ERD relationships
 - **Schema Mapping**: Mirror ERD structure in `src/powersync/AppSchema.ts` for local SQLite
 - **Platform Support**: SQL.js adapter for Expo Go, native SQLite for production builds
-- **Query Patterns**: Reference ERD documentation for optimized query patterns and relationships
+- **No Auto-Create**: Never auto-create records in hooks; return null when not found
+
+## Screen Architecture:
+- **Location**: Screens are in `src/app/(tabs)/` or `src/app/(auth)/`
+- **Structure**: Each screen file should contain:
+  - State management for screen-specific data
+  - Data fetching logic (useEffect hooks, db queries)
+  - Business logic handlers (api calls, navigation)
+  - Platform-specific handlers passed to components
+- **Data Fetching**: Use `db` from `@/powersync` directly in screen useEffect hooks
+- **Component Usage**: Import and use section components from `@/components/features/{feature}`
 
 ## Naming Conventions:
 - **Directories**: kebab-case (`components/expense-item`, `powersync/hooks`)
@@ -44,12 +60,23 @@
 - **Database**: snake_case tables (`personal_expenses`, `user_id` columns)
 - **Hooks**: Prefix with `use` (`useTheme`, `useUserGroups`, `useProfile`)
 - **PowerSync**: Use `Realtime` suffix for reactive hooks (`useUserGroupsRealtime`)
+- **Feature Components**: PascalCase (`ProfileSection.tsx`, `SwitchRow.tsx`)
 
 ## TypeScript Guidelines:
 - Use interfaces for data models (Profile, Group, Participant, PersonalExpense)
 - Define database types from PowerSync schema: `Database = (typeof AppSchema)['types']`
 - Use string literals instead of enums for better JSON serialization
 - Platform-specific typing: `Platform.OS === 'ios'` for conditional logic
+
+## Component Design Principles:
+- **Separation of Concerns**: 
+  - Screen files: Business logic, state management, data fetching
+  - Sections: Screen-level composition, platform-specific UI
+  - Components: Reusable building blocks, pure presentation logic
+- **Platform UI Handling**: Platform-specific UI (ActionSheetIOS vs Selector) goes in components
+- **Business Logic**: Business logic, API calls, data updates stay in screen files
+- **Component Props**: Components should receive business callbacks (`onPhotoSelected`, `onLogout`)
+- **State Management**: Use local state for UI state, Zustand for app-wide state
 
 ## Platform-Specific Considerations:
 - **iOS**: Use ActionSheetIOS, native styling, respect safe areas, follow Human Interface Guidelines

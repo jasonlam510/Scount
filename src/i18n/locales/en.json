@@ -48,9 +48,11 @@
   },
   "group": {
     "title": "Group",
+    "subtitle": "Split expenses with friends",
     "myExpenses": "My Expenses",
     "totalIncome": "Total Income",
-    "addGroupExpense": "Add Group Expense"
+    "addGroupExpense": "Add Group Expense",
+    "noGroups": "No groups yet. Create your first group to start splitting expenses!"
   },
   "profile": {
     "title": "Profile",

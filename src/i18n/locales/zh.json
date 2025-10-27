@@ -48,9 +48,11 @@
   },
   "group": {
     "title": "群組",
+    "subtitle": "與朋友分攤費用",
     "myExpenses": "我的支出",
     "totalIncome": "總收入",
-    "addGroupExpense": "新增群組支出"
+    "addGroupExpense": "新增群組支出",
+    "noGroups": "暫無群組。建立第一個群組來開始分攤費用！"
   },
   "profile": {
     "title": "個人資料",

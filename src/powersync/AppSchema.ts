@@ -1,21 +1,11 @@
-import { Platform } from 'react-native';
-import { Profile } from '@/types/profiles';
-import { Group } from '@/types/groups';
-import { GroupParticipant } from '@/types/participants';
-
 // Platform-specific PowerSync imports
+import { Platform } from 'react-native';
 let column: any, Schema: any, Table: any;
 if (Platform.OS === 'web') {
   ({ column, Schema, Table } = require('@powersync/web'));
 } else {
   ({ column, Schema, Table } = require('@powersync/react-native'));
 }
-
-// // Platform-specific getDevServer import
-// let getDevServer = () => { /* no-op */ };
-// if (Platform.OS !== 'web') {
-//   getDevServer = require("react-native/Libraries/Core/Devtools/getDevServer");
-// }
 
 const profiles = new Table(
   {
@@ -27,13 +17,24 @@ const profiles = new Table(
   { indexes: {} }
 );
 
-const participants = new Table(
+const group_members = new Table(
   {
     // id column (text) is automatically included
-    created_at: column.text,
+    member_id: column.text,
     group_id: column.text,
     user_id: column.text,
-    display_name: column.text
+    display_name: column.text,
+    status: column.text,
+    join_method: column.text,
+    invite_token: column.text,
+    invite_expires_at: column.text,
+    invited_at: column.text,
+    joined_at: column.text,
+    claimed_at: column.text,
+    left_at: column.text,
+    avatar_url: column.text,
+    note: column.text,
+    updated_at: column.text
   },
   { indexes: {} }
 );
@@ -41,26 +42,21 @@ const participants = new Table(
 const groups = new Table(
   {
     // id column (text) is automatically included
+    group_id: column.text,
     created_at: column.text,
     title: column.text,
     icon: column.text,
-    currency: column.text
+    currency: column.text,
+    is_deleted: column.integer,
+    updated_at: column.text
   },
   { indexes: {} }
 );
 
 export const AppSchema = new Schema({
   profiles,
-  participants,
+  group_members,
   groups
 });
 
 export type Database = (typeof AppSchema)['types'];
-
-// TypeScript interfaces for Kysely type-safe queries
-// Reusing existing types from types/ folder for consistency
-export interface KyselyDatabase {
-  profiles: Profile;
-  groups: Group;
-  participants: GroupParticipant;
-}

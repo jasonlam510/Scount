@@ -1,7 +1,10 @@
 export interface Group {
   id: string;
-  title: string;
-  icon: string;
-  currency: string;
-  created_at: string; // timestamptz in DB
+  group_id: string | null;
+  created_at: string | null; // timestamptz in DB
+  title: string | null;
+  icon: string | null;
+  currency: string | null;
+  is_deleted: number | null;
+  updated_at: string | null;
 }

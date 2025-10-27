@@ -34,21 +34,36 @@ export const useUserGroups = (): UseUserGroupsResult => {
         setIsLoading(true);
         setError(null);
 
-        // Use Kysely to get user's groups (type-safe)
-        // PowerSync handles the joining via sync rules, so we can query groups directly
+        // First, check if the database connection is working
+        const testQuery = db.selectFrom('groups').selectAll();
+        const sqlString = testQuery.compile().sql;
+        console.log(`🔍 SQL Query:`, sqlString);
+        
+        // List all groups in local database (no filtering for debugging)
         const result = await db.selectFrom('groups')
           .selectAll()
           .orderBy('created_at', 'desc')
           .execute();
 
+        console.log(`🔍 Query result: ${result.length} groups found in local database`);
+        console.log(`📊 Raw query data:`, JSON.stringify(result, null, 2));
+        
+        // Also check what columns are in the result
+        if (result.length > 0) {
+          console.log(`📋 First group columns:`, Object.keys(result[0]));
+        }
+
         if (!isCancelled) {
           // No manual type casting needed - Kysely provides type safety
           const userGroups: Group[] = result.map((row) => ({
             id: row.id,
+            group_id: row.group_id,
+            created_at: row.created_at,
             title: row.title,
             icon: row.icon,
             currency: row.currency,
-            created_at: row.created_at,
+            is_deleted: row.is_deleted,
+            updated_at: row.updated_at,
           }));
 
           setGroups(userGroups);
@@ -104,23 +119,33 @@ export const useUserGroupsRealtime = (): UseUserGroupsResult => {
       try {
         setError(null);
 
-        // Use Kysely watch for real-time updates (type-safe)
-        // PowerSync handles filtering via sync rules, so we can watch groups directly
+        // List all groups in local database (no filtering for debugging)
         const query = db.selectFrom('groups')
           .selectAll()
           .orderBy('created_at', 'desc');
+
+        console.log(`🔍 Starting watch query for user ${currentUserUuid}`);
+
+        // Print the raw sql query
+        console.log(`🔍 Raw SQL query:`, query.compile().sql);
 
         db.watch(query, {
           onResult: (results) => {
             if (isCancelled) return;
 
+            console.log(`📊 Watch query returned ${results.length} groups`);
+            console.log(`📋 Group data:`, results);
+
             // No manual type casting needed - Kysely provides type safety
             const userGroups: Group[] = results.map((row) => ({
               id: row.id,
+              group_id: row.group_id,
+              created_at: row.created_at,
               title: row.title,
               icon: row.icon,
               currency: row.currency,
-              created_at: row.created_at,
+              is_deleted: row.is_deleted,
+              updated_at: row.updated_at,
             }));
 
             setGroups(userGroups);

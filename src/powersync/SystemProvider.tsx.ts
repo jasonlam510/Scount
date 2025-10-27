@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import { SQLJSOpenFactory } from "@powersync/adapter-sql-js";
 import Constants from "expo-constants";
 import { wrapPowerSyncWithKysely } from '@powersync/kysely-driver';
-import { AppSchema, KyselyDatabase } from "./AppSchema";
+import { AppSchema, Database } from "./AppSchema";
 import { Connector } from './Connector';
 
 // Platform-specific PowerSync database imports following official docs
@@ -55,8 +55,8 @@ if (isWeb) {
   });
 }
 
-// Create Kysely wrapper for type-safe database operations
-export const db = wrapPowerSyncWithKysely<KyselyDatabase>(powerSync);
+// Create Kysely wrapper for type-safe database operations using PowerSync-generated types
+export const db = wrapPowerSyncWithKysely<Database>(powerSync);
 
 // Connection function for App.tsx initialization
 export const connectDatabase = async () => {

@@ -22,27 +22,41 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ item, onPress, style }) => {
   const { colors } = useTheme();
 
   const Container = onPress ? TouchableOpacity : View;
+  const hasPayer = Boolean(item.payer?.trim());
 
   return (
-    <Container 
+    <Container
       style={[defaultStyles.expenseItem, { backgroundColor: colors.surface }, style]}
       onPress={onPress}
     >
       <View style={defaultStyles.expenseIcon}>
         <Text style={defaultStyles.expenseIconText}>{item.icon}</Text>
       </View>
-      <View style={defaultStyles.expenseContent}>
-        <Text style={[defaultStyles.expenseDescription, { color: colors.text }]}>
+      <View
+        style={[
+          defaultStyles.expenseContent,
+          !hasPayer && defaultStyles.expenseContentCentered,
+        ]}
+      >
+        <Text
+          style={[
+            defaultStyles.expenseDescription,
+            { color: colors.text },
+            !hasPayer && defaultStyles.expenseDescriptionSolo,
+          ]}
+        >
           {item.description}
         </Text>
-        <Text style={[defaultStyles.expensePayer, { color: colors.textSecondary }]}>
-          {item.payer}
-        </Text>
+        {hasPayer && (
+          <Text style={[defaultStyles.expensePayer, { color: colors.textSecondary }]}>
+            {item.payer}
+          </Text>
+        )}
       </View>
       <Text style={[
-        defaultStyles.expenseAmount, 
-        { 
-          color: item.type === 'income' ? colors.success : colors.text 
+        defaultStyles.expenseAmount,
+        {
+          color: item.type === 'income' ? colors.success : colors.text
         }
       ]}>
         {item.type === 'income' ? '+' : '-'}{item.currency}{item.amount.toFixed(2)}
@@ -55,29 +69,35 @@ const defaultStyles = StyleSheet.create({
   expenseItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     borderRadius: 12,
     marginBottom: 10,
+    minHeight: 64,
   },
   expenseIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
+    width: 48,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   expenseIconText: {
-    fontSize: 20,
+    fontSize: 28,
   },
   expenseContent: {
     flex: 1,
+  },
+  expenseContentCentered: {
+    justifyContent: 'center',
   },
   expenseDescription: {
     fontSize: 16,
     fontWeight: '500',
     marginBottom: 2,
+  },
+  expenseDescriptionSolo: {
+    marginBottom: 0,
   },
   expensePayer: {
     fontSize: 14,

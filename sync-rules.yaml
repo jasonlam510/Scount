@@ -11,6 +11,6 @@ bucket_definitions:
     parameters: SELECT group_id FROM public.group_members WHERE user_id = request.user_id()
     data:
       # Group details for groups user participates in
-      - SELECT * FROM public.groups WHERE id = bucket.group_id
+      - SELECT * FROM public.groups WHERE id = bucket.group_id AND is_deleted = false
       # All participants in user's groups
       - SELECT * FROM public.group_members WHERE group_id = bucket.group_id

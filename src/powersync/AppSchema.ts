@@ -17,24 +17,13 @@ const profiles = new Table(
   { indexes: {} }
 );
 
-const group_members = new Table(
+const participants = new Table(
   {
     // id column (text) is automatically included
-    member_id: column.text,
-    group_id: column.text,
-    user_id: column.text,
+    created_at: column.text,
     display_name: column.text,
-    status: column.text,
-    join_method: column.text,
-    invite_token: column.text,
-    invite_expires_at: column.text,
-    invited_at: column.text,
-    joined_at: column.text,
-    claimed_at: column.text,
-    left_at: column.text,
-    avatar_url: column.text,
-    note: column.text,
-    updated_at: column.text
+    group_id: column.text,
+    user_id: column.text
   },
   { indexes: {} }
 );
@@ -55,7 +44,7 @@ const groups = new Table(
 
 export const AppSchema = new Schema({
   profiles,
-  group_members,
+  participants,
   groups
 });
 

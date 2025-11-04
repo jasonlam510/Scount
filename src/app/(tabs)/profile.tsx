@@ -142,7 +142,7 @@ export default function ProfileScreen() {
 
         const result = await db.selectFrom('profiles')
           .selectAll()
-          .where('id', '=', currentUserUuid)
+          .where('user_id', '=', currentUserUuid)
           .limit(1)
           .execute();
 
@@ -150,7 +150,7 @@ export default function ProfileScreen() {
           if (result.length > 0) {
             const profileData = result[0];
             setProfile({
-              id: profileData.id,
+              user_id: profileData.user_id,
               name: profileData.name,
               avatar: profileData.avatar || '',
               created_at: profileData.created_at,

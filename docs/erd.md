@@ -12,7 +12,7 @@ The Scount app currently implements a simplified database structure with three c
 erDiagram
     %% Profiles Entity (Users)
     PROFILES {
-        uuid id PK "UUID primary key"
+        uuid user_id PK "UUID primary key"
         text name "User's full name"
         text avatar "Avatar URL (optional)"
         timestamptz created_at "Account creation timestamp"
@@ -45,10 +45,10 @@ erDiagram
 
 ### 1. Profiles (Users)
 - **Purpose**: Stores user account information and profile data
-- **Key Fields**: `id` (UUID Primary Key), `name`, `avatar` (optional), `created_at`
+- **Key Fields**: `user_id` (UUID Primary Key), `name`, `avatar` (optional), `created_at`
 - **Relationships**: Can participate in multiple groups via Participants table
 - **Rules**: 
-  - `id` is a UUID and serves as the primary key
+  - `user_id` is a UUID and serves as the primary key
   - Links to Supabase Auth system through `auth.users.id`
   - `avatar` field is optional for profile pictures
 
@@ -172,7 +172,7 @@ WHERE p.user_id = $1;
 
 -- Get all participants in a group
 SELECT pr.*, p.display_name FROM profiles pr
-JOIN participants p ON pr.id = p.user_id
+JOIN participants p ON pr.user_id = p.user_id
 WHERE p.group_id = $1;
 
 -- Check if user is in group

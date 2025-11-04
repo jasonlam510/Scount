@@ -4,7 +4,16 @@ bucket_definitions:
     parameters: SELECT request.user_id() as user_id
     data:
       # User's own profile
-      - SELECT * FROM public.profiles WHERE id = bucket.user_id
+      - SELECT * FROM public.profiles WHERE user_id = bucket.user_id
+
+      # Personal categories (incl. soft-deleted for cross-device consistency)
+      - SELECT * FROM public.user_categories WHERE user_id = bucket.user_id
+      - SELECT * FROM public.user_subcategories WHERE user_id = bucket.user_id
+
+      # Personal expenses & tags
+      - SELECT * FROM public.user_expenses WHERE user_id = bucket.user_id
+      - SELECT * FROM public.user_tags WHERE user_id = bucket.user_id
+      - SELECT * FROM public.user_expense_tags WHERE user_id = bucket.user_id
   
   groups:
     # Groups the user has access to (as members)
@@ -14,3 +23,11 @@ bucket_definitions:
       - SELECT * FROM public.groups WHERE id = bucket.group_id AND is_deleted = false
       # All participants in user's groups
       - SELECT * FROM public.group_members WHERE group_id = bucket.group_id
+      
+  templates:
+    # Global bucket: no parameters; synced to all users
+    data:
+      - SELECT * FROM public.category_templates
+        WHERE is_active = true
+      - SELECT * FROM public.subcategory_templates
+        WHERE is_active = true

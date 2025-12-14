@@ -36,6 +36,9 @@
       "userInterfaceStyle": "automatic",
       "package": "com.scount"
     },
+    "web": {
+      "bundler": "metro"
+    },
     "scheme": "com.scount",
     "main": "expo-router/entry",
     "plugins": [

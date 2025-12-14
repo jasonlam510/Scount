@@ -8,6 +8,12 @@ init-dev:
 	@npm install expo
 	@echo "Copying PowerSync web assets..."
 	@npx powersync-web copy-assets
+	@if [ -f ".env" ]; then \
+		echo ".env already exists, skipping..."; \
+	else \
+		cp .env.example .env && \
+		echo "Created .env from .env.example"; \
+	fi
 
 .PHONY: clean-dev
 clean-dev:

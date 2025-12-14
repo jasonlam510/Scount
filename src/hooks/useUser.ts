@@ -1,5 +1,4 @@
-import { useAppSettingsStore } from '@/zustand';
-import { useUserStore } from '@/zustand';
+import { useAppSettingsStore , useUserStore } from '@/zustand';
 
 export const useUser = () => {
   const {

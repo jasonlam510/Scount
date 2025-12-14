@@ -25,7 +25,7 @@ export default function PersonalScreen() {
   const [activeTab, setActiveTab] = useState(0); // 0 for expenses, 1 for balances
 
   // Mock data for the design with dates - includes both expenses and income
-  const mockExpenses: Array<{
+  const mockExpenses: {
     id: string;
     description: string;
     payer: string;
@@ -34,7 +34,7 @@ export default function PersonalScreen() {
     type: 'expense' | 'income';
     icon: string;
     date: string;
-  }> = [
+  }[] = [
     // Expenses
     { id: '1', description: 'Three fish', payer: '', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
     { id: '2', description: 'Fish skin', payer: '🌻 煮飯仔', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },

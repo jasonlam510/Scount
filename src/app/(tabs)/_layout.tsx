@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { Tabs } from 'expo-router';
+import { Tabs , Redirect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme, useI18n } from '@/hooks';
 import { useAuthContext } from '@/contexts';
 import { useInitializeStores } from '@/hooks/useInitializeStores';
-import { Redirect } from 'expo-router';
 
 export default function TabsLayout() {
   const { isLoggedIn } = useAuthContext();

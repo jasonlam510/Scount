@@ -22,23 +22,20 @@ DB & Auth: Supabase
 
 ### Prerequisites
 
-1. Install [Node.js](https://nodejs.org) on your machine
-
-2. Install Expo SDK into the repo
-```bash
-npm install expo
-```
-
-3. Install powersync-web into the repo
-```bash
-npx powersync-web copy-assets
-```
+Install [Node.js](https://nodejs.org) on your machine
 
 ### Setup
+
+1. Clone this repo:
 
 ```bash
 git clone https://github.com/jasonlam510/Scount.git
 cd scount
+```
+
+2. Initialize the development environment
+```bash
+make init-dev
 ```
 
 ### Run the App

@@ -1,4 +1,5 @@
 # Scount
+
 Scount combines the best features from Tricount and Smoney, integrating both personal and group expense tracking. It is deployed as a multiplatform app (iOS and Web PWA).
 
 ## Tech Stack
@@ -34,6 +35,7 @@ cd scount
 ```
 
 2. Initialize the development environment
+
 ```bash
 make init-dev
 ```
@@ -52,8 +54,8 @@ To reset the database and seed data on web platform:
 
 ```javascript
 // Open browser console (F12) and run:
-localStorage.clear()
-indexedDB.deleteDatabase('scountDB')
+localStorage.clear();
+indexedDB.deleteDatabase("scountDB");
 // Then refresh the page
 ```
 
@@ -67,3 +69,4 @@ To reset the database on mobile platforms:
 npx expo run:ios
 # or
 npx expo run:android
+```

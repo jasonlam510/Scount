@@ -18,12 +18,7 @@
       "bundleIdentifier": "com.scount",
       "infoPlist": {
         "ExpoLocalization_supportsRTL": true,
-        "CFBundleLocalizations": [
-          "en",
-          "zh",
-          "en",
-          "zh"
-        ],
+        "CFBundleLocalizations": ["en", "zh", "en", "zh"],
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -46,14 +41,8 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": [
-              "en",
-              "zh"
-            ],
-            "android": [
-              "en",
-              "zh"
-            ]
+            "ios": ["en", "zh"],
+            "android": ["en", "zh"]
           }
         }
       ],

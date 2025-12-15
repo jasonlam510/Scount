@@ -34,6 +34,11 @@ lint:
 	@echo "Running ESLint ..."
 	@npx expo lint
 
+.PHONY: format
+format:
+	@echo "Checking code formatting with Prettier..."
+	@npx prettier --check .
+
 .PHONY: depcheck
 depcheck:
 	@echo "Checking for unused dependencies..."
@@ -47,7 +52,7 @@ audit:
 	@echo "Security audit completed."
 
 .PHONY: ci-static
-ci-static: lint depcheck audit
+ci-static: lint format depcheck audit
 	@echo "==========================================="
 	@echo "CI Static Quality Gate Passed. Ready for Build."
 	@echo "==========================================="
@@ -60,3 +65,8 @@ ci-static: lint depcheck audit
 fix-lint:
 	@echo "Running ESLint autofix..."
 	@npx expo lint --fix
+
+.PHONY: fix-format
+fix-format:
+	@echo "Running Prettier autofix..."
+	@npx prettier --write .

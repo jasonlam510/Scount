@@ -1,10 +1,10 @@
-import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
-import { Stack } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AuthProvider } from '@/contexts';
-import { LoadingScreen } from '@/components';
-import '@/i18n'; // Import i18n configuration
+import "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import { Stack } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AuthProvider } from "@/contexts";
+import { LoadingScreen } from "@/components";
+import "@/i18n"; // Import i18n configuration
 
 // Separate component for PowerSync initialization
 function PowerSyncInitializer({ children }: { children: React.ReactNode }) {
@@ -14,26 +14,33 @@ function PowerSyncInitializer({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const initializePowerSync = async () => {
       try {
-        console.log('🚀 Initializing PowerSync...');
-        
+        console.log("🚀 Initializing PowerSync...");
+
         // Import dynamically to avoid circular dependencies
-        const { connectDatabase } = await import('@/powersync');
+        const { connectDatabase } = await import("@/powersync");
         await connectDatabase();
-        
+
         setPowerSyncReady(true);
-        console.log('✅ PowerSync initialized successfully');
+        console.log("✅ PowerSync initialized successfully");
       } catch (error) {
-        console.error('❌ Failed to initialize PowerSync:', error);
-        console.error('Error details:', error);
-        
+        console.error("❌ Failed to initialize PowerSync:", error);
+        console.error("Error details:", error);
+
         // Check if it's an authentication error (no user logged in)
-        if (error instanceof Error && error.message.includes('Could not fetch Supabase credentials')) {
-          console.log('⚠️ PowerSync requires authentication - will initialize after login');
+        if (
+          error instanceof Error &&
+          error.message.includes("Could not fetch Supabase credentials")
+        ) {
+          console.log(
+            "⚠️ PowerSync requires authentication - will initialize after login",
+          );
           setPowerSyncReady(true); // Continue without PowerSync for now
         } else {
-          setInitError(error instanceof Error ? error.message : 'Unknown error');
+          setInitError(
+            error instanceof Error ? error.message : "Unknown error",
+          );
           // For other errors, continue without PowerSync
-          console.log('⚠️ Continuing without PowerSync due to error...');
+          console.log("⚠️ Continuing without PowerSync due to error...");
           setPowerSyncReady(true);
         }
       }
@@ -45,7 +52,7 @@ function PowerSyncInitializer({ children }: { children: React.ReactNode }) {
   // Show loading screen while PowerSync initializes
   if (!powerSyncReady) {
     return (
-      <LoadingScreen 
+      <LoadingScreen
         messageKey="common.initializing"
         error={initError || undefined}
         showError={!!initError}
@@ -61,11 +68,12 @@ function StoreInitializer({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const initializeStores = async () => {
       try {
-        const { useInitializeStores } = await import('@/hooks/useInitializeStores');
+        const { useInitializeStores } =
+          await import("@/hooks/useInitializeStores");
         // Note: This hook should be called in a component that's inside the provider tree
-        console.log('📦 Stores will be initialized by individual components');
+        console.log("📦 Stores will be initialized by individual components");
       } catch (error) {
-        console.error('❌ Failed to initialize stores:', error);
+        console.error("❌ Failed to initialize stores:", error);
       }
     };
 

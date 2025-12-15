@@ -1,10 +1,10 @@
 // Platform-specific PowerSync imports
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 let column: any, Schema: any, Table: any;
-if (Platform.OS === 'web') {
-  ({ column, Schema, Table } = require('@powersync/web'));
+if (Platform.OS === "web") {
+  ({ column, Schema, Table } = require("@powersync/web"));
 } else {
-  ({ column, Schema, Table } = require('@powersync/react-native'));
+  ({ column, Schema, Table } = require("@powersync/react-native"));
 }
 
 const profiles = new Table(
@@ -13,9 +13,9 @@ const profiles = new Table(
     user_id: column.text,
     created_at: column.text,
     name: column.text,
-    avatar: column.text
+    avatar: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const user_categories = new Table(
@@ -29,9 +29,9 @@ const user_categories = new Table(
     template_id: column.text,
     has_overrides: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const user_subcategories = new Table(
@@ -46,9 +46,9 @@ const user_subcategories = new Table(
     template_id: column.text,
     has_overrides: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const user_expenses = new Table(
@@ -63,9 +63,9 @@ const user_expenses = new Table(
     receipt_url: column.text,
     is_deleted: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const user_tags = new Table(
@@ -75,9 +75,9 @@ const user_tags = new Table(
     name: column.text,
     is_deleted: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const user_expense_tags = new Table(
@@ -88,9 +88,9 @@ const user_expense_tags = new Table(
     tag_id: column.text,
     is_deleted: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const groups = new Table(
@@ -101,9 +101,9 @@ const groups = new Table(
     icon: column.text,
     currency: column.text,
     is_deleted: column.integer,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const group_members = new Table(
@@ -113,9 +113,9 @@ const group_members = new Table(
     user_id: column.text,
     display_name: column.text,
     updated_at: column.text,
-    is_archived: column.integer
+    is_archived: column.integer,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const category_templates = new Table(
@@ -130,9 +130,9 @@ const category_templates = new Table(
     version: column.integer,
     is_active: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 const subcategory_templates = new Table(
@@ -148,9 +148,9 @@ const subcategory_templates = new Table(
     version: column.integer,
     is_active: column.integer,
     created_at: column.text,
-    updated_at: column.text
+    updated_at: column.text,
   },
-  { indexes: {} }
+  { indexes: {} },
 );
 
 export const AppSchema = new Schema({
@@ -163,8 +163,7 @@ export const AppSchema = new Schema({
   groups,
   group_members,
   category_templates,
-  subcategory_templates
+  subcategory_templates,
 });
 
-export type Database = (typeof AppSchema)['types'];
-
+export type Database = (typeof AppSchema)["types"];

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Tabs , Redirect } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme, useI18n } from '@/hooks';
-import { useAuthContext } from '@/contexts';
-import { useInitializeStores } from '@/hooks/useInitializeStores';
+import React, { useEffect } from "react";
+import { Tabs, Redirect } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { useTheme, useI18n } from "@/hooks";
+import { useAuthContext } from "@/contexts";
+import { useInitializeStores } from "@/hooks/useInitializeStores";
 
 export default function TabsLayout() {
   const { isLoggedIn } = useAuthContext();
@@ -24,14 +24,14 @@ export default function TabsLayout() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap;
 
-          if (route.name === 'group') {
-            iconName = focused ? 'calculator' : 'calculator-outline';
-          } else if (route.name === 'personal') {
-            iconName = focused ? 'wallet' : 'wallet-outline';
-          } else if (route.name === 'profile') {
-            iconName = focused ? 'person' : 'person-outline';
+          if (route.name === "group") {
+            iconName = focused ? "calculator" : "calculator-outline";
+          } else if (route.name === "personal") {
+            iconName = focused ? "wallet" : "wallet-outline";
+          } else if (route.name === "profile") {
+            iconName = focused ? "person" : "person-outline";
           } else {
-            iconName = 'help-outline';
+            iconName = "help-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -46,17 +46,17 @@ export default function TabsLayout() {
         headerShown: false,
       })}
     >
-      <Tabs.Screen 
-        name="group" 
-        options={{ tabBarLabel: t('navigation.group') }}
+      <Tabs.Screen
+        name="group"
+        options={{ tabBarLabel: t("navigation.group") }}
       />
-      <Tabs.Screen 
-        name="personal" 
-        options={{ tabBarLabel: t('navigation.personal') }}
+      <Tabs.Screen
+        name="personal"
+        options={{ tabBarLabel: t("navigation.personal") }}
       />
-      <Tabs.Screen 
-        name="profile" 
-        options={{ tabBarLabel: t('navigation.profile') }}
+      <Tabs.Screen
+        name="profile"
+        options={{ tabBarLabel: t("navigation.profile") }}
       />
     </Tabs>
   );

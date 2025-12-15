@@ -1,13 +1,16 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { useTheme, useI18n } from '@/hooks';
+import React from "react";
+import { Text, StyleSheet } from "react-native";
+import { useTheme, useI18n } from "@/hooks";
 
 interface GroupListHeaderProps {
   title: string;
   subtitle?: string;
 }
 
-export default function GroupListHeader({ title, subtitle }: GroupListHeaderProps) {
+export default function GroupListHeader({
+  title,
+  subtitle,
+}: GroupListHeaderProps) {
   const { colors } = useTheme();
   const { t } = useI18n();
 
@@ -15,7 +18,9 @@ export default function GroupListHeader({ title, subtitle }: GroupListHeaderProp
     <>
       <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
       {subtitle && (
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{subtitle}</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+          {subtitle}
+        </Text>
       )}
     </>
   );
@@ -24,7 +29,7 @@ export default function GroupListHeader({ title, subtitle }: GroupListHeaderProp
 const styles = StyleSheet.create({
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
   },
   subtitle: {

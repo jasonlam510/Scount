@@ -1,8 +1,15 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@/hooks';
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from "@/hooks";
 
 interface HeaderAction {
   icon: keyof typeof Ionicons.glyphMap;
@@ -16,10 +23,10 @@ interface HeaderActionsProps {
   showBackButton?: boolean;
   backButtonText?: string;
   onBackPress?: () => void;
-  
+
   // Right side - Actions
   actions?: HeaderAction[];
-  
+
   // Styling
   style?: StyleProp<ViewStyle>;
   backgroundColor?: string;
@@ -38,12 +45,9 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
 
   const renderBackButton = () => {
     if (!showBackButton) return null;
-    
+
     return (
-      <TouchableOpacity 
-        style={styles.backButton} 
-        onPress={onBackPress}
-      >
+      <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
         <Ionicons name="chevron-back" size={24} color={colors.text} />
         {backButtonText && (
           <Text style={[styles.backButtonText, { color: colors.text }]}>
@@ -55,10 +59,10 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
   };
 
   const renderActions = () => {
-    const visibleActions = actions.filter(action => action.visible !== false);
-    
+    const visibleActions = actions.filter((action) => action.visible !== false);
+
     if (visibleActions.length === 0) return null;
-    
+
     return (
       <View style={styles.actionsContainer}>
         {visibleActions.map((action, index) => (
@@ -67,10 +71,10 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
             style={styles.actionButton}
             onPress={action.onPress}
           >
-            <Ionicons 
-              name={action.icon} 
-              size={action.size || 24} 
-              color={colors.text} 
+            <Ionicons
+              name={action.icon}
+              size={action.size || 24}
+              color={colors.text}
             />
           </TouchableOpacity>
         ))}
@@ -79,23 +83,19 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
   };
 
   return (
-    <View 
+    <View
       style={[
-        styles.container, 
-        { 
-          paddingTop: insets.top, 
-          backgroundColor: backgroundColor || colors.background 
+        styles.container,
+        {
+          paddingTop: insets.top,
+          backgroundColor: backgroundColor || colors.background,
         },
-        style
+        style,
       ]}
     >
       <View style={styles.header}>
-        <View style={styles.leftSection}>
-          {renderBackButton()}
-        </View>
-        <View style={styles.rightSection}>
-          {renderActions()}
-        </View>
+        <View style={styles.leftSection}>{renderBackButton()}</View>
+        <View style={styles.rightSection}>{renderActions()}</View>
       </View>
     </View>
   );
@@ -106,33 +106,33 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   leftSection: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   rightSection: {
     flex: 1,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 8,
     paddingHorizontal: 4,
   },
   backButtonText: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     marginLeft: 4,
   },
   actionsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   actionButton: {
     padding: 8,
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderActions; 
+export default HeaderActions;

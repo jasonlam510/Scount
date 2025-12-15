@@ -1,3 +1,3 @@
 // Export list-related components
-export { default as SmartList } from './SmartList';
-export { default as ExpenseItem } from './ExpenseItem'; 
+export { default as SmartList } from "./SmartList";
+export { default as ExpenseItem } from "./ExpenseItem";

@@ -1,4 +1,4 @@
-import { useAppSettingsStore } from '@/zustand';
+import { useAppSettingsStore } from "@/zustand";
 
 export const useAppSettings = () => {
   const {
@@ -13,11 +13,11 @@ export const useAppSettings = () => {
     // Language settings
     language,
     setLanguage,
-    
+
     // Notification settings
     notificationsEnabled,
     setNotificationsEnabled,
-    
+
     // Actions
     resetToDefaults,
   };

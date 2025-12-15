@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
-import { db } from '@/powersync/SystemProvider.tsx';
-import { useUser } from '@/hooks/useUser';
-import { Group } from '@/types/groups';
+import { useEffect, useState } from "react";
+import { Platform } from "react-native";
+import { db } from "@/powersync/SystemProvider.tsx";
+import { useUser } from "@/hooks/useUser";
+import { Group } from "@/types/groups";
 
 interface UseUserGroupsResult {
   groups: Group[];
@@ -35,19 +35,22 @@ export const useUserGroups = (): UseUserGroupsResult => {
         setError(null);
 
         // First, check if the database connection is working
-        const testQuery = db.selectFrom('groups').selectAll();
+        const testQuery = db.selectFrom("groups").selectAll();
         const sqlString = testQuery.compile().sql;
         console.log(`🔍 SQL Query:`, sqlString);
-        
+
         // List all groups in local database (no filtering for debugging)
-        const result = await db.selectFrom('groups')
+        const result = await db
+          .selectFrom("groups")
           .selectAll()
-          .orderBy('created_at', 'desc')
+          .orderBy("created_at", "desc")
           .execute();
 
-        console.log(`🔍 Query result: ${result.length} groups found in local database`);
+        console.log(
+          `🔍 Query result: ${result.length} groups found in local database`,
+        );
         console.log(`📊 Raw query data:`, JSON.stringify(result, null, 2));
-        
+
         // Also check what columns are in the result
         if (result.length > 0) {
           console.log(`📋 First group columns:`, Object.keys(result[0]));
@@ -67,10 +70,12 @@ export const useUserGroups = (): UseUserGroupsResult => {
           }));
 
           setGroups(userGroups);
-          console.log(`✅ Loaded ${userGroups.length} groups for user ${currentUserUuid}`);
+          console.log(
+            `✅ Loaded ${userGroups.length} groups for user ${currentUserUuid}`,
+          );
         }
       } catch (err) {
-        console.error('❌ Error fetching user groups:', err);
+        console.error("❌ Error fetching user groups:", err);
         if (!isCancelled) {
           setError(err as Error);
         }
@@ -120,9 +125,10 @@ export const useUserGroupsRealtime = (): UseUserGroupsResult => {
         setError(null);
 
         // List all groups in local database (no filtering for debugging)
-        const query = db.selectFrom('groups')
+        const query = db
+          .selectFrom("groups")
           .selectAll()
-          .orderBy('created_at', 'desc');
+          .orderBy("created_at", "desc");
 
         console.log(`🔍 Starting watch query for user ${currentUserUuid}`);
 
@@ -150,12 +156,14 @@ export const useUserGroupsRealtime = (): UseUserGroupsResult => {
 
             setGroups(userGroups);
             setIsLoading(false);
-            
-            console.log(`🔄 Real-time update [${Platform.OS}]: ${userGroups.length} groups for user ${currentUserUuid}`);
-          }
+
+            console.log(
+              `🔄 Real-time update [${Platform.OS}]: ${userGroups.length} groups for user ${currentUserUuid}`,
+            );
+          },
         });
       } catch (err) {
-        console.error('❌ Error watching user groups:', err);
+        console.error("❌ Error watching user groups:", err);
         if (!isCancelled) {
           setError(err as Error);
           setIsLoading(false);

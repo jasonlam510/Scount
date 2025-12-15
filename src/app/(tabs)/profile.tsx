@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,72 +7,69 @@ import {
   Alert,
   Platform,
   ActionSheetIOS,
-} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n, useUser, useAppSettings } from '@/hooks';
-import { supabase } from '@/lib/supabase';
-import { disconnectDatabase, db } from '@/powersync';
-import { Profile } from '@/types/profiles';
-import FloatingActionButton from '@/components/FloatingActionButton';
-import Selector from '@/components/Selector';
-import { ProfileSection, AppSettingsSection, AccountSection } from '@/components/features/profile';
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme, useI18n, useUser, useAppSettings } from "@/hooks";
+import { supabase } from "@/lib/supabase";
+import { disconnectDatabase, db } from "@/powersync";
+import { Profile } from "@/types/profiles";
+import FloatingActionButton from "@/components/FloatingActionButton";
+import Selector from "@/components/Selector";
+import {
+  ProfileSection,
+  AppSettingsSection,
+  AccountSection,
+} from "@/components/features/profile";
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
-  const { 
-    currentUserUuid, 
-    userEmail,
-    setCurrentUserUuid, 
-    clearUserData,
-  } = useUser();
-  const { 
-    notificationsEnabled, 
-    setNotificationsEnabled,
-  } = useAppSettings();
-  
+  const { currentUserUuid, userEmail, setCurrentUserUuid, clearUserData } =
+    useUser();
+  const { notificationsEnabled, setNotificationsEnabled } = useAppSettings();
+
   // Profile state
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
   const [profileError, setProfileError] = useState<Error | null>(null);
-  
+
   const [showLogoutSelector, setShowLogoutSelector] = useState(false);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
-    Alert.alert('Edit Name', 'Navigate to screen to edit user name.');
+    Alert.alert("Edit Name", "Navigate to screen to edit user name.");
     // TODO: Navigate to edit name screen using Expo Router
     // router.push('/(stack)/edit-name');
   };
 
-  const handlePhotoSelected = (source: 'camera' | 'library') => {
-    if (source === 'camera') {
-      console.log('Open camera');
+  const handlePhotoSelected = (source: "camera" | "library") => {
+    if (source === "camera") {
+      console.log("Open camera");
       // TODO: Open camera and update profile avatar
-    } else if (source === 'library') {
-      console.log('Open photo library');
+    } else if (source === "library") {
+      console.log("Open photo library");
       // TODO: Open photo library and update profile avatar
     }
   };
 
   // Platform-specific logout handlers
   const handleLogoutPress = () => {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       // Native iOS ActionSheet (true bottom-up menu)
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: [t('profile.logout'), 'Cancel'],
+          options: [t("profile.logout"), "Cancel"],
           cancelButtonIndex: 1,
           destructiveButtonIndex: 0, // Makes logout button red
-          title: 'Logout?',
+          title: "Logout?",
         },
         (buttonIndex) => {
           if (buttonIndex === 0) {
             handleLogout(); // Execute actual logout
           }
           // buttonIndex === 1 is Cancel, do nothing
-        }
+        },
       );
     } else {
       // Android: use custom selector
@@ -81,46 +78,45 @@ export default function ProfileScreen() {
   };
 
   const handleLogoutSelect = (value: string) => {
-    if (value === 'logout') {
+    if (value === "logout") {
       handleLogout();
     }
     setShowLogoutSelector(false);
   };
 
-
   const handleLogout = async () => {
     try {
       // Disconnect PowerSync and clear local database
       await disconnectDatabase();
-      
+
       // Sign out from Supabase
       const { error } = await supabase.auth.signOut();
       if (error) {
-        console.error('Supabase logout error:', error);
+        console.error("Supabase logout error:", error);
       }
-      
+
       // Clear local user data
       await clearUserData();
-      console.log('User logged out');
+      console.log("User logged out");
       // The AuthContext will automatically handle the navigation back to login
     } catch (error) {
-      console.error('Failed to logout:', error);
+      console.error("Failed to logout:", error);
     }
   };
 
   const handleDeleteProfile = () => {
     Alert.alert(
-      'Delete Profile',
-      'Are you sure you want to delete your profile? This action cannot be undone.',
+      "Delete Profile",
+      "Are you sure you want to delete your profile? This action cannot be undone.",
       [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress: () => console.log('Profile deleted') },
-      ]
+        { text: "Cancel", style: "cancel" },
+        { text: "Delete", onPress: () => console.log("Profile deleted") },
+      ],
     );
   };
 
   const handleSupportCenter = () => {
-    Alert.alert('Support Center', 'Open support chat or contact page.');
+    Alert.alert("Support Center", "Open support chat or contact page.");
     // TODO: Navigate to support screen using Expo Router
     // router.push('/(stack)/support');
   };
@@ -140,9 +136,10 @@ export default function ProfileScreen() {
         setProfileLoading(true);
         setProfileError(null);
 
-        const result = await db.selectFrom('profiles')
+        const result = await db
+          .selectFrom("profiles")
           .selectAll()
-          .where('user_id', '=', currentUserUuid)
+          .where("user_id", "=", currentUserUuid)
           .limit(1)
           .execute();
 
@@ -152,7 +149,7 @@ export default function ProfileScreen() {
             setProfile({
               user_id: profileData.user_id,
               name: profileData.name,
-              avatar: profileData.avatar || '',
+              avatar: profileData.avatar || "",
               created_at: profileData.created_at,
             });
           } else {
@@ -161,7 +158,7 @@ export default function ProfileScreen() {
         }
       } catch (err) {
         if (!isCancelled) {
-          console.error('❌ Error fetching profile:', err);
+          console.error("❌ Error fetching profile:", err);
           setProfileError(err as Error);
         }
       } finally {
@@ -180,9 +177,16 @@ export default function ProfileScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <ScrollView style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}>
+      <ScrollView
+        style={[
+          styles.container,
+          { paddingTop: insets.top, backgroundColor: colors.background },
+        ]}
+      >
         {/* Header */}
-        <Text style={[styles.headerTitle, { color: colors.text }]}>{t('profile.title')}</Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>
+          {t("profile.title")}
+        </Text>
 
         {/* User Information Section */}
         <ProfileSection
@@ -214,7 +218,7 @@ export default function ProfileScreen() {
       {/* Floating Action Button for Support Center */}
       <FloatingActionButton
         icon="chatbubble"
-        label={t('profile.supportCenter')}
+        label={t("profile.supportCenter")}
         backgroundColor={colors.success}
         onPress={handleSupportCenter}
       />
@@ -224,7 +228,7 @@ export default function ProfileScreen() {
         visible={showLogoutSelector}
         title="Logout?"
         options={[
-          { key: 'logout', label: t('profile.logout'), value: 'logout' },
+          { key: "logout", label: t("profile.logout"), value: "logout" },
         ]}
         onSelect={handleLogoutSelect}
         onCancel={() => setShowLogoutSelector(false)}
@@ -240,8 +244,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     paddingVertical: 15,
   },
 });

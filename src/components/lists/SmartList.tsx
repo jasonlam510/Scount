@@ -1,8 +1,15 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '@/hooks';
-import ExpenseItem from './ExpenseItem';
-import DailyTotal from '@/components/DailyTotal';
+import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
+import { useTheme } from "@/hooks";
+import ExpenseItem from "./ExpenseItem";
+import DailyTotal from "@/components/DailyTotal";
 
 interface ExpenseData {
   id: string;
@@ -10,14 +17,14 @@ interface ExpenseData {
   payer: string;
   amount: number;
   currency: string;
-  type: 'expense' | 'income';
+  type: "expense" | "income";
   icon: string;
   date: string;
 }
 
 interface SmartListProps {
   data: ExpenseData[];
-  groupBy?: 'date' | 'category' | 'payer';
+  groupBy?: "date" | "category" | "payer";
   renderItem?: (item: ExpenseData) => React.ReactNode;
   style?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
@@ -25,7 +32,7 @@ interface SmartListProps {
 
 const SmartList: React.FC<SmartListProps> = ({
   data,
-  groupBy = 'date',
+  groupBy = "date",
   renderItem,
   style,
   contentContainerStyle,
@@ -33,19 +40,22 @@ const SmartList: React.FC<SmartListProps> = ({
   const { colors } = useTheme();
 
   // Group data by the specified field
-  const groupedData = data.reduce((groups, item) => {
-    const key = item[groupBy as keyof ExpenseData] as string;
-    if (!groups[key]) {
-      groups[key] = [];
-    }
-    groups[key].push(item);
-    return groups;
-  }, {} as Record<string, ExpenseData[]>);
+  const groupedData = data.reduce(
+    (groups, item) => {
+      const key = item[groupBy as keyof ExpenseData] as string;
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(item);
+      return groups;
+    },
+    {} as Record<string, ExpenseData[]>,
+  );
 
   // Calculate daily totals
   const calculateDailyTotal = (items: ExpenseData[]) => {
     return items.reduce((sum, item) => {
-      return item.type === 'expense' ? sum - item.amount : sum + item.amount;
+      return item.type === "expense" ? sum - item.amount : sum + item.amount;
     }, 0);
   };
 
@@ -62,9 +72,12 @@ const SmartList: React.FC<SmartListProps> = ({
   };
 
   return (
-    <ScrollView 
+    <ScrollView
       style={[defaultStyles.scrollContainer, style]}
-      contentContainerStyle={[defaultStyles.scrollContent, contentContainerStyle]}
+      contentContainerStyle={[
+        defaultStyles.scrollContent,
+        contentContainerStyle,
+      ]}
       showsVerticalScrollIndicator={false}
     >
       {sortedDates.map((date) => {
@@ -74,15 +87,18 @@ const SmartList: React.FC<SmartListProps> = ({
         return (
           <View key={date} style={defaultStyles.dateGroup}>
             <View style={defaultStyles.dateHeader}>
-              <Text style={[defaultStyles.dateText, { color: colors.textSecondary }]}>
+              <Text
+                style={[
+                  defaultStyles.dateText,
+                  { color: colors.textSecondary },
+                ]}
+              >
                 {date}
               </Text>
               <DailyTotal total={dailyTotal} currency="HK$" />
             </View>
             {items.map((item) => (
-              <View key={item.id}>
-                {renderExpenseItem(item)}
-              </View>
+              <View key={item.id}>{renderExpenseItem(item)}</View>
             ))}
           </View>
         );
@@ -103,9 +119,9 @@ const defaultStyles = StyleSheet.create({
     marginBottom: 10,
   },
   dateHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 5,
     paddingRight: 12, // Match the expense item padding
   },
@@ -114,4 +130,4 @@ const defaultStyles = StyleSheet.create({
   },
 });
 
-export default SmartList; 
+export default SmartList;

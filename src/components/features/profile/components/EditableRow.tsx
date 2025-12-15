@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme, useI18n } from '@/hooks';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useTheme, useI18n } from "@/hooks";
 
 interface EditableRowProps {
   label: string;
@@ -9,7 +9,11 @@ interface EditableRowProps {
   onPress: () => void;
 }
 
-export default function EditableRow({ label, value, onPress }: EditableRowProps) {
+export default function EditableRow({
+  label,
+  value,
+  onPress,
+}: EditableRowProps) {
   const { colors } = useTheme();
   const { t } = useI18n();
 
@@ -17,8 +21,14 @@ export default function EditableRow({ label, value, onPress }: EditableRowProps)
     <TouchableOpacity style={styles.row} onPress={onPress}>
       <Text style={[styles.rowLabel, { color: colors.text }]}>{label}</Text>
       <View style={styles.rowValueContainer}>
-        <Text style={[styles.rowValue, { color: colors.textSecondary }]}>{value}</Text>
-        <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
+        <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
+          {value}
+        </Text>
+        <Ionicons
+          name="chevron-forward"
+          size={20}
+          color={colors.textSecondary}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -26,9 +36,9 @@ export default function EditableRow({ label, value, onPress }: EditableRowProps)
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 12,
     paddingHorizontal: 15,
   },
@@ -36,8 +46,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   rowValueContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   rowValue: {
     fontSize: 17,

@@ -1,15 +1,14 @@
-
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from "react";
 
 // App-wide state interface (minimal)
 interface AppState {
   // App lifecycle
   isAppReady: boolean;
-  
+
   // Future: Electric client state
   // electricClient: ElectricClient | null;
   // isElectricConnected: boolean;
-  
+
   // Future: App-wide error handling
   // globalError: string | null;
 }
@@ -18,11 +17,11 @@ interface AppState {
 interface AppActions {
   // App lifecycle
   setAppReady: (ready: boolean) => void;
-  
+
   // Future: Electric client actions
   // setElectricClient: (client: ElectricClient | null) => void;
   // setElectricConnection: (connected: boolean) => void;
-  
+
   // Future: Global error handling
   // setGlobalError: (error: string | null) => void;
 }
@@ -52,21 +51,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setAppReady: () => {}, // Placeholder for now
   };
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 // Hook to use app context
 export const useApp = (): AppContextType => {
   const context = useContext(AppContext);
   if (context === undefined) {
-    throw new Error('useApp must be used within an AppProvider');
+    throw new Error("useApp must be used within an AppProvider");
   }
   return context;
 };
 
 // Export context for direct access if needed
-export { AppContext }; 
+export { AppContext };

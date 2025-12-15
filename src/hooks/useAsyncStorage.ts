@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Generic storage interface
 export interface StorageInterface {
@@ -42,8 +42,8 @@ export const useAsyncStorage = (): StorageInterface => {
     try {
       await AsyncStorage.clear();
     } catch (error) {
-      console.error('Failed to clear storage:', error);
-      throw new Error('Failed to clear storage');
+      console.error("Failed to clear storage:", error);
+      throw new Error("Failed to clear storage");
     }
   };
 
@@ -51,7 +51,7 @@ export const useAsyncStorage = (): StorageInterface => {
     try {
       return Array.from(await AsyncStorage.getAllKeys());
     } catch (error) {
-      console.warn('Failed to get all storage keys:', error);
+      console.warn("Failed to get all storage keys:", error);
       return [];
     }
   };
@@ -63,4 +63,4 @@ export const useAsyncStorage = (): StorageInterface => {
     clear,
     getAllKeys,
   };
-}; 
+};

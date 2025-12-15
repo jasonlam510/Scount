@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Platform, ActionSheetIOS } from 'react-native';
-import { useTheme, useI18n, useAppSettings } from '@/hooks';
-import Selector from '@/components/Selector';
-import SwitchRow from '../components/SwitchRow';
-import SettingRow from '../components/SettingRow';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Platform, ActionSheetIOS } from "react-native";
+import { useTheme, useI18n, useAppSettings } from "@/hooks";
+import Selector from "@/components/Selector";
+import SwitchRow from "../components/SwitchRow";
+import SettingRow from "../components/SettingRow";
 
 interface AppSettingsSectionProps {
   currentLanguage: string;
   onLanguageChange: (language: string) => void;
-  themeMode: 'light' | 'dark' | 'automatic';
-  onThemeChange: (mode: 'light' | 'dark' | 'automatic') => void;
+  themeMode: "light" | "dark" | "automatic";
+  onThemeChange: (mode: "light" | "dark" | "automatic") => void;
 }
 
 export default function AppSettingsSection({
@@ -21,43 +21,50 @@ export default function AppSettingsSection({
   const { colors } = useTheme();
   const { t } = useI18n();
   const { notificationsEnabled, setNotificationsEnabled } = useAppSettings();
-  
+
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showThemeSelector, setShowThemeSelector] = useState(false);
 
   const getCurrentLanguageDisplay = () => {
     switch (currentLanguage) {
-      case 'en': return 'English';
-      case 'zh': return '繁體中文';
-      default: return 'English';
+      case "en":
+        return "English";
+      case "zh":
+        return "繁體中文";
+      default:
+        return "English";
     }
   };
 
   const getThemeModeDisplayText = () => {
     switch (themeMode) {
-      case 'light': return t('common.light');
-      case 'dark': return t('common.dark');
-      case 'automatic': return t('common.automatic');
-      default: return t('common.automatic');
+      case "light":
+        return t("common.light");
+      case "dark":
+        return t("common.dark");
+      case "automatic":
+        return t("common.automatic");
+      default:
+        return t("common.automatic");
     }
   };
 
   // Platform-specific handlers
   const handleLanguagePress = () => {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['English', '繁體中文', 'Cancel'],
+          options: ["English", "繁體中文", "Cancel"],
           cancelButtonIndex: 2,
-          title: t('profile.language'),
+          title: t("profile.language"),
         },
         (buttonIndex) => {
           if (buttonIndex === 0) {
-            onLanguageChange('en');
+            onLanguageChange("en");
           } else if (buttonIndex === 1) {
-            onLanguageChange('zh');
+            onLanguageChange("zh");
           }
-        }
+        },
       );
     } else {
       setShowLanguageSelector(true);
@@ -70,22 +77,27 @@ export default function AppSettingsSection({
   };
 
   const handleThemePress = () => {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: [t('common.light'), t('common.dark'), t('common.automatic'), 'Cancel'],
+          options: [
+            t("common.light"),
+            t("common.dark"),
+            t("common.automatic"),
+            "Cancel",
+          ],
           cancelButtonIndex: 3,
-          title: t('profile.theme'),
+          title: t("profile.theme"),
         },
         (buttonIndex) => {
           if (buttonIndex === 0) {
-            onThemeChange('light');
+            onThemeChange("light");
           } else if (buttonIndex === 1) {
-            onThemeChange('dark');
+            onThemeChange("dark");
           } else if (buttonIndex === 2) {
-            onThemeChange('automatic');
+            onThemeChange("automatic");
           }
-        }
+        },
       );
     } else {
       setShowThemeSelector(true);
@@ -93,34 +105,36 @@ export default function AppSettingsSection({
   };
 
   const handleThemeSelect = (mode: string) => {
-    onThemeChange(mode as 'light' | 'dark' | 'automatic');
+    onThemeChange(mode as "light" | "dark" | "automatic");
     setShowThemeSelector(false);
   };
 
   return (
     <>
-      <Text style={[styles.sectionHeader, { color: colors.textSecondary }]}>{t('profile.settings')}</Text>
+      <Text style={[styles.sectionHeader, { color: colors.textSecondary }]}>
+        {t("profile.settings")}
+      </Text>
       <View style={[styles.section, { backgroundColor: colors.surface }]}>
         <SwitchRow
-          label={t('profile.notifications')}
+          label={t("profile.notifications")}
           value={notificationsEnabled}
           onValueChange={async (value) => {
             try {
               await setNotificationsEnabled(value);
             } catch (error) {
-              console.error('Failed to save notifications setting:', error);
+              console.error("Failed to save notifications setting:", error);
             }
           }}
         />
         <View style={[styles.separator, { backgroundColor: colors.border }]} />
         <SettingRow
-          label={t('profile.language')}
+          label={t("profile.language")}
           value={getCurrentLanguageDisplay()}
           onPress={handleLanguagePress}
         />
         <View style={[styles.separator, { backgroundColor: colors.border }]} />
         <SettingRow
-          label={t('profile.theme')}
+          label={t("profile.theme")}
           value={getThemeModeDisplayText()}
           onPress={handleThemePress}
         />
@@ -129,10 +143,10 @@ export default function AppSettingsSection({
       {/* Language Selector */}
       <Selector
         visible={showLanguageSelector}
-        title={t('profile.language')}
+        title={t("profile.language")}
         options={[
-          { key: 'en', label: 'English', value: 'en' },
-          { key: 'zh', label: '繁體中文', value: 'zh' },
+          { key: "en", label: "English", value: "en" },
+          { key: "zh", label: "繁體中文", value: "zh" },
         ]}
         onSelect={handleLanguageSelect}
         onCancel={() => setShowLanguageSelector(false)}
@@ -141,11 +155,15 @@ export default function AppSettingsSection({
       {/* Theme Selector */}
       <Selector
         visible={showThemeSelector}
-        title={t('profile.theme')}
+        title={t("profile.theme")}
         options={[
-          { key: 'light', label: t('common.light'), value: 'light' },
-          { key: 'dark', label: t('common.dark'), value: 'dark' },
-          { key: 'automatic', label: t('common.automatic'), value: 'automatic' },
+          { key: "light", label: t("common.light"), value: "light" },
+          { key: "dark", label: t("common.dark"), value: "dark" },
+          {
+            key: "automatic",
+            label: t("common.automatic"),
+            value: "automatic",
+          },
         ]}
         onSelect={handleThemeSelect}
         onCancel={() => setShowThemeSelector(false)}
@@ -157,7 +175,7 @@ export default function AppSettingsSection({
 const styles = StyleSheet.create({
   sectionHeader: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: "600",
     marginTop: 20,
     marginBottom: 10,
     marginLeft: 15,
@@ -165,7 +183,7 @@ const styles = StyleSheet.create({
   section: {
     borderRadius: 10,
     marginBottom: 20,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   separator: {
     height: StyleSheet.hairlineWidth,

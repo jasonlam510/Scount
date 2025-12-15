@@ -1,30 +1,38 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { router } from 'expo-router';
-import { supabase } from '@/lib/supabase';
-import { useI18n, useTheme } from '@/hooks';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { router } from "expo-router";
+import { supabase } from "@/lib/supabase";
+import { useI18n, useTheme } from "@/hooks";
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useI18n();
   const { colors } = useTheme();
-  
+
   const handleOTPLogin = async () => {
     if (!email.trim()) {
-      Alert.alert(t('common.error'), t('auth.emailRequired'));
+      Alert.alert(t("common.error"), t("auth.emailRequired"));
       return;
     }
 
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      Alert.alert(t('common.error'), t('auth.invalidEmail'));
+      Alert.alert(t("common.error"), t("auth.invalidEmail"));
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       const { data, error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
@@ -34,36 +42,41 @@ export default function LoginScreen() {
       });
 
       if (error) {
-        console.error('OTP error:', error);
-        Alert.alert(t('common.error'), error.message);
+        console.error("OTP error:", error);
+        Alert.alert(t("common.error"), error.message);
       } else {
         // Navigate to OTP input screen with email parameter
         router.push({
-          pathname: '/(auth)/check-email',
-          params: { email: email.trim() }
+          pathname: "/(auth)/check-email",
+          params: { email: email.trim() },
         });
       }
     } catch (error) {
-      console.error('OTP error:', error);
-      Alert.alert(t('common.error'), t('auth.somethingWrong'));
+      console.error("OTP error:", error);
+      Alert.alert(t("common.error"), t("auth.somethingWrong"));
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
       <View style={styles.content}>
         <Text style={[styles.title, { color: colors.text }]}>Scount</Text>
-        
+
         <View style={styles.formContainer}>
           <TextInput
-            style={[styles.emailInput, { 
-              backgroundColor: colors.surface, 
-              borderColor: colors.border,
-              color: colors.text 
-            }]}
-            placeholder={t('auth.emailPlaceholder')}
+            style={[
+              styles.emailInput,
+              {
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                color: colors.text,
+              },
+            ]}
+            placeholder={t("auth.emailPlaceholder")}
             placeholderTextColor={colors.textSecondary}
             value={email}
             onChangeText={setEmail}
@@ -72,18 +85,18 @@ export default function LoginScreen() {
             autoCorrect={false}
             editable={!isLoading}
           />
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={[
-              styles.loginButton, 
+              styles.loginButton,
               { backgroundColor: colors.primary },
-              isLoading && styles.loginButtonDisabled
-            ]} 
+              isLoading && styles.loginButtonDisabled,
+            ]}
             onPress={handleOTPLogin}
             disabled={isLoading}
           >
             <Text style={styles.loginButtonText}>
-              {isLoading ? t('auth.sending') : t('auth.sendOTP')}
+              {isLoading ? t("auth.sending") : t("auth.sendOTP")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -98,23 +111,23 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 40,
-    textAlign: 'center',
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
     marginBottom: 40,
-    textAlign: 'center',
+    textAlign: "center",
   },
   formContainer: {
-    width: '100%',
+    width: "100%",
     maxWidth: 300,
     marginBottom: 20,
   },
@@ -129,19 +142,19 @@ const styles = StyleSheet.create({
   loginButton: {
     paddingVertical: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   loginButtonDisabled: {
     opacity: 0.6,
   },
   loginButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   helpText: {
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: 20,
   },
 });

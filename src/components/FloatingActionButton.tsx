@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '@/hooks';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@/hooks";
 
 interface FloatingActionButtonProps {
   icon: keyof typeof Ionicons.glyphMap;
@@ -47,17 +47,17 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
 
 const styles = StyleSheet.create({
   fabContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    alignItems: 'center',
+    alignItems: "center",
   },
   fab: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     elevation: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
   },
   fabLabel: {
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: "center",
     paddingBottom: 10,
   },
 });
 
-export default FloatingActionButton; 
+export default FloatingActionButton;

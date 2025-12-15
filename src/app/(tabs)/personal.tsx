@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme, useI18n } from '@/hooks';
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme, useI18n } from "@/hooks";
 
-import FloatingActionButton from '@/components/FloatingActionButton';
-import SummarySection from '@/components/SummarySection';
-import { SmartList } from '@/components/lists';
-import SegmentedControl from '@/components/navigation/SegmentedControl';
-import HeaderActions from '@/components/navigation/HeaderActions';
+import FloatingActionButton from "@/components/FloatingActionButton";
+import SummarySection from "@/components/SummarySection";
+import { SmartList } from "@/components/lists";
+import SegmentedControl from "@/components/navigation/SegmentedControl";
+import HeaderActions from "@/components/navigation/HeaderActions";
 
 export default function PersonalScreen() {
   const insets = useSafeAreaInsets();
@@ -31,81 +31,197 @@ export default function PersonalScreen() {
     payer: string;
     amount: number;
     currency: string;
-    type: 'expense' | 'income';
+    type: "expense" | "income";
     icon: string;
     date: string;
   }[] = [
     // Expenses
-    { id: '1', description: 'Three fish', payer: '', amount: 57.60, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '2', description: 'Fish skin', payer: '🌻 煮飯仔', amount: 7.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '3', description: 'Fishotto', payer: '🇬🇧 London', amount: 187.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '4', description: 'Three dish', payer: '', amount: 63.20, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '5', description: 'Carbonara', payer: '', amount: 166.40, currency: 'HK$', type: 'expense', icon: '🚗', date: '27 Jul 2025' },
-    { id: '6', description: 'Poke bowl', payer: '🇮🇸Iceland', amount: 50.00, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '7', description: 'Lunch', payer: '', amount: 186.40, currency: 'HK$', type: 'expense', icon: '💶', date: '27 Jul 2025' },
-    { id: '8', description: 'Coffee', payer: '👧🏻gf', amount: 25.00, currency: 'HK$', type: 'expense', icon: '☕', date: '26 Jul 2025' },
-    { id: '9', description: 'Dinner', payer: '', amount: 120.00, currency: 'HK$', type: 'expense', icon: '🍽️', date: '26 Jul 2025' },
-    
+    {
+      id: "1",
+      description: "Three fish",
+      payer: "",
+      amount: 57.6,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "2",
+      description: "Fish skin",
+      payer: "🌻 煮飯仔",
+      amount: 7.2,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "3",
+      description: "Fishotto",
+      payer: "🇬🇧 London",
+      amount: 187.2,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "4",
+      description: "Three dish",
+      payer: "",
+      amount: 63.2,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "5",
+      description: "Carbonara",
+      payer: "",
+      amount: 166.4,
+      currency: "HK$",
+      type: "expense",
+      icon: "🚗",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "6",
+      description: "Poke bowl",
+      payer: "🇮🇸Iceland",
+      amount: 50.0,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "7",
+      description: "Lunch",
+      payer: "",
+      amount: 186.4,
+      currency: "HK$",
+      type: "expense",
+      icon: "💶",
+      date: "27 Jul 2025",
+    },
+    {
+      id: "8",
+      description: "Coffee",
+      payer: "👧🏻gf",
+      amount: 25.0,
+      currency: "HK$",
+      type: "expense",
+      icon: "☕",
+      date: "26 Jul 2025",
+    },
+    {
+      id: "9",
+      description: "Dinner",
+      payer: "",
+      amount: 120.0,
+      currency: "HK$",
+      type: "expense",
+      icon: "🍽️",
+      date: "26 Jul 2025",
+    },
+
     // Income
-    { id: '10', description: 'Salary', payer: 'Received by Shirley', amount: 5000.00, currency: 'HK$', type: 'income', icon: '💰', date: '25 Jul 2025' },
-    { id: '11', description: 'Freelance Project', payer: 'Received by Shirley', amount: 2500.00, currency: 'HK$', type: 'income', icon: '💼', date: '24 Jul 2025' },
-    { id: '12', description: 'Investment Return', payer: 'Received by Shirley', amount: 2025.90, currency: 'HK$', type: 'income', icon: '📈', date: '23 Jul 2025' },
+    {
+      id: "10",
+      description: "Salary",
+      payer: "Received by Shirley",
+      amount: 5000.0,
+      currency: "HK$",
+      type: "income",
+      icon: "💰",
+      date: "25 Jul 2025",
+    },
+    {
+      id: "11",
+      description: "Freelance Project",
+      payer: "Received by Shirley",
+      amount: 2500.0,
+      currency: "HK$",
+      type: "income",
+      icon: "💼",
+      date: "24 Jul 2025",
+    },
+    {
+      id: "12",
+      description: "Investment Return",
+      payer: "Received by Shirley",
+      amount: 2025.9,
+      currency: "HK$",
+      type: "income",
+      icon: "📈",
+      date: "23 Jul 2025",
+    },
   ];
 
   // Calculate totals from mockExpenses data
   const myExpenses = mockExpenses
-    .filter(item => item.type === 'expense')
+    .filter((item) => item.type === "expense")
     .reduce((sum, item) => sum + item.amount, 0);
-  
+
   const totalIncome = mockExpenses
-    .filter(item => item.type === 'income')
+    .filter((item) => item.type === "income")
     .reduce((sum, item) => sum + item.amount, 0);
 
   // Header action handlers
   const handleSearchPress = () => {
     // TODO: Show search bar at top, focus on search input, show keyboard
-    console.log('Search button pressed');
+    console.log("Search button pressed");
   };
 
   const handleMenuPress = () => {
     // TODO: Show dropdown menu under button
-    console.log('Menu button pressed');
+    console.log("Menu button pressed");
   };
 
   const renderBalancesItem = ({ item }: { item: any }) => (
     <View style={[styles.balanceItem, { backgroundColor: colors.surface }]}>
       <View style={styles.balanceContent}>
-        <Text style={[styles.balanceDescription, { color: colors.text }]}>{item.description}</Text>
-        <Text style={[styles.balancePayer, { color: colors.textSecondary }]}>{item.payer}</Text>
+        <Text style={[styles.balanceDescription, { color: colors.text }]}>
+          {item.description}
+        </Text>
+        <Text style={[styles.balancePayer, { color: colors.textSecondary }]}>
+          {item.payer}
+        </Text>
       </View>
-      <Text style={[styles.balanceAmount, { color: colors.text }]}>{item.amount}</Text>
+      <Text style={[styles.balanceAmount, { color: colors.text }]}>
+        {item.amount}
+      </Text>
     </View>
   );
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={colors.text === '#ffffff' ? 'light-content' : 'dark-content'} />
-      
+      <StatusBar
+        barStyle={colors.text === "#ffffff" ? "light-content" : "dark-content"}
+      />
+
       {/* Header Actions */}
       <HeaderActions
         actions={[
           {
-            icon: 'search',
+            icon: "search",
             onPress: handleSearchPress,
-            visible: activeTab === 0 // Only show for Expenses tab
+            visible: activeTab === 0, // Only show for Expenses tab
           },
           {
-            icon: 'ellipsis-vertical',
+            icon: "ellipsis-vertical",
             onPress: handleMenuPress,
-            visible: true // Always show menu
-          }
+            visible: true, // Always show menu
+          },
         ]}
       />
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
         <SegmentedControl
-          tabs={[t('personal.expensesTab'), t('personal.balancesTab')]}
+          tabs={[t("personal.expensesTab"), t("personal.balancesTab")]}
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
@@ -116,15 +232,15 @@ export default function PersonalScreen() {
         <SummarySection
           items={[
             {
-              label: t('expenses.expense'),
+              label: t("expenses.expense"),
               amount: myExpenses,
-              currency: 'HK$'
+              currency: "HK$",
             },
             {
-              label: t('expenses.income'),
+              label: t("expenses.income"),
               amount: totalIncome,
-              currency: 'HK$'
-            }
+              currency: "HK$",
+            },
           ]}
         />
       )}
@@ -135,18 +251,20 @@ export default function PersonalScreen() {
       ) : (
         // Balances content would go here
         <View style={styles.emptyContainer}>
-          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>{t('expenses.noBalances')}</Text>
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+            {t("expenses.noBalances")}
+          </Text>
         </View>
       )}
 
       {/* Floating Action Button */}
       <FloatingActionButton
         icon="add"
-        label={t('expenses.addExpense')}
+        label={t("expenses.addExpense")}
         onPress={() => {
           // TODO: Navigate to add expense screen using Expo Router
           // router.push('/(stack)/personal/transaction-form');
-          console.log('Add expense pressed');
+          console.log("Add expense pressed");
         }}
       />
     </View>
@@ -163,8 +281,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   balanceItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
@@ -174,7 +292,7 @@ const styles = StyleSheet.create({
   },
   balanceDescription: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     marginBottom: 2,
   },
   balancePayer: {
@@ -182,16 +300,16 @@ const styles = StyleSheet.create({
   },
   balanceAmount: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: 50,
   },
   emptyText: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

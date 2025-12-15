@@ -1,6 +1,12 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { useTheme } from '@/hooks';
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+} from "react-native";
+import { useTheme } from "@/hooks";
 
 export interface SelectorOption {
   key: string;
@@ -28,17 +34,19 @@ const Selector: React.FC<SelectorProps> = ({
   if (!visible) return null;
 
   return (
-    <View style={[styles.modalOverlay, { backgroundColor: 'rgba(0, 0, 0, 0.5)' }]}>
+    <View
+      style={[styles.modalOverlay, { backgroundColor: "rgba(0, 0, 0, 0.5)" }]}
+    >
       <View style={[styles.modalContent, { backgroundColor: colors.surface }]}>
         <Text style={[styles.modalTitle, { color: colors.text }]}>{title}</Text>
-        
+
         {options.map((option, index) => (
           <TouchableOpacity
             key={option.key}
             style={[
               styles.option,
               { borderBottomColor: colors.border },
-              index === options.length - 1 && { borderBottomWidth: 0 }
+              index === options.length - 1 && { borderBottomWidth: 0 },
             ]}
             onPress={() => onSelect(option.value)}
           >
@@ -47,7 +55,7 @@ const Selector: React.FC<SelectorProps> = ({
             </Text>
           </TouchableOpacity>
         ))}
-        
+
         <TouchableOpacity
           style={[styles.cancelButton, { backgroundColor: colors.border }]}
           onPress={onCancel}
@@ -63,13 +71,13 @@ const Selector: React.FC<SelectorProps> = ({
 
 const styles = StyleSheet.create({
   modalOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 1000,
   },
   modalContent: {
@@ -80,8 +88,8 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 15,
   },
   option: {
@@ -90,18 +98,18 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   cancelButton: {
     marginTop: 15,
     paddingVertical: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   cancelButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 
-export default Selector; 
+export default Selector;

@@ -1,17 +1,23 @@
-import { AbstractPowerSyncDatabase, CrudEntry, PowerSyncBackendConnector, UpdateType, type PowerSyncCredentials } from '@powersync/react-native';
-import type { SupabaseClient } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
+import {
+  AbstractPowerSyncDatabase,
+  CrudEntry,
+  PowerSyncBackendConnector,
+  UpdateType,
+  type PowerSyncCredentials,
+} from "@powersync/react-native";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 
 /// Postgres Response codes that we cannot recover from by retrying.
 const FATAL_RESPONSE_CODES = [
   // Class 22 — Data Exception
   // Examples include data type mismatch.
-  new RegExp('^22...$'),
+  new RegExp("^22...$"),
   // Class 23 — Integrity Constraint Violation.
   // Examples include NOT NULL, FOREIGN KEY and UNIQUE violations.
-  new RegExp('^23...$'),
+  new RegExp("^23...$"),
   // INSUFFICIENT PRIVILEGE - typically a row-level security violation
-  new RegExp('^42501$')
+  new RegExp("^42501$"),
 ];
 
 const POWERSYNC_URL = process.env.EXPO_PUBLIC_POWERSYNC_URL;
@@ -26,18 +32,18 @@ export class Connector implements PowerSyncBackendConnector {
   async fetchCredentials() {
     const {
       data: { session },
-      error
+      error,
     } = await this.supabaseClient.auth.getSession();
 
     if (!session || error) {
       throw new Error(`Could not fetch Supabase credentials: ${error}`);
     }
 
-    console.debug('session expires at', session.expires_at);
+    console.debug("session expires at", session.expires_at);
 
     return {
       endpoint: POWERSYNC_URL,
-      token: session.access_token ?? ''
+      token: session.access_token ?? "",
     } satisfies PowerSyncCredentials;
   }
 
@@ -54,8 +60,15 @@ export class Connector implements PowerSyncBackendConnector {
       // or edge functions to process the entire transaction in a single call.
       for (const op of transaction.crud) {
         lastOp = op;
-        console.log('Processing operation:', op.op, 'type:', typeof op.op, 'for table:', op.table);
-        console.log('Operation data:', op.opData);
+        console.log(
+          "Processing operation:",
+          op.op,
+          "type:",
+          typeof op.op,
+          "for table:",
+          op.table,
+        );
+        console.log("Operation data:", op.opData);
         const table = this.supabaseClient.from(op.table);
         let result: any;
         switch (op.op) {
@@ -65,10 +78,10 @@ export class Connector implements PowerSyncBackendConnector {
             break;
           }
           case UpdateType.PATCH:
-            result = await table.update(op.opData).eq('id', op.id);
+            result = await table.update(op.opData).eq("id", op.id);
             break;
           case UpdateType.DELETE:
-            result = await table.delete().eq('id', op.id);
+            result = await table.delete().eq("id", op.id);
             break;
         }
 
@@ -82,7 +95,10 @@ export class Connector implements PowerSyncBackendConnector {
       await transaction.complete();
     } catch (ex: any) {
       console.debug(ex);
-      if (typeof ex.code == 'string' && FATAL_RESPONSE_CODES.some((regex) => regex.test(ex.code))) {
+      if (
+        typeof ex.code == "string" &&
+        FATAL_RESPONSE_CODES.some((regex) => regex.test(ex.code))
+      ) {
         /**
          * Instead of blocking the queue with these errors,
          * discard the (rest of the) transaction.
@@ -91,7 +107,7 @@ export class Connector implements PowerSyncBackendConnector {
          * If protecting against data loss is important, save the failing records
          * elsewhere instead of discarding, and/or notify the user.
          */
-        console.error('Data upload error - discarding:', lastOp, ex);
+        console.error("Data upload error - discarding:", lastOp, ex);
         await transaction.complete();
       } else {
         // Error may be retryable - e.g. network error or temporary server error.

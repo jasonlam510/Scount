@@ -1,4 +1,4 @@
-import { useAppSettingsStore , useUserStore } from '@/zustand';
+import { useAppSettingsStore, useUserStore } from "@/zustand";
 
 export const useUser = () => {
   const {
@@ -7,7 +7,7 @@ export const useUser = () => {
     accessToken,
     refreshToken,
     userEmail,
-    
+
     // Actions
     setCurrentUserUuid,
     setAccessToken,
@@ -28,13 +28,13 @@ export const useUser = () => {
     refreshToken,
     userEmail,
     isAuthenticated,
-    
+
     // User management
     setCurrentUserUuid,
     setAccessToken,
     setRefreshToken,
     setUserEmail,
-    
+
     // Authentication
     login,
     logout,

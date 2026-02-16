@@ -1,5 +1,5 @@
 ---
-description: Create tasks.md from requirements.md (no pseudo code). After user approval, create per-unit task markdown files under tasks/ with detailed Ruby pseudo code.
+description: Create tasks.md from requirements.md (no pseudo code). After user approval, create per-unit task markdown files under tasks/ with detailed pseudo code.
 ---
 
 ## User Input
@@ -15,12 +15,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 Generate `tasks.md` from `requirements.md` in the active feature scope. `tasks.md` is an **ordered delivery plan** (no pseudo code).
 
 `tasks.md` MUST separate:
+
 - **Recon findings** (recorded in `## Notes & Clarifications`)
 - **Commit Units** where **each unit equals exactly one git commit**.
 
 **CRITICAL**: `/plan` MUST perform recon first. The commit list (Phase 1+) must be based on verified findings from the existing codebase, not assumptions.
 
-After the user approves the plan (e.g. "ok", "please create task(s)"), `/plan` MUST create a `tasks/` directory in the feature scope and generate **one markdown file per unit**. Those per-unit files contain the detailed **Ruby pseudo code** for implementation.
+After the user approves the plan (e.g. "ok", "please create task(s)"), `/plan` MUST create a `tasks/` directory in the feature scope and generate **one markdown file per unit**. Those per-unit files contain detailed **pseudo code** for implementation.
 
 ## System design principles
 
@@ -56,13 +57,15 @@ When doing technical design (interpreting requirements.md, recon, and generating
    - **Design principles check**: Verify the described design aligns with the six system design principles (see above). Note any misalignment or risk in recon; these will be captured in `## Notes & Clarifications`.
 
 2.5. **Load UI uiux.md (optional)**:
-   - If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
-   - If it conflicts with `requirements.md`, defer to `requirements.md` requirements and record the conflict in recon notes.
 
-2.75. **Load blueprint.md (optional)**:
-   - If `FEATURE_DIR/blueprint.md` exists, read it.
-   - Treat it as an additional input that can refine technical approach and file plan.
-   - If it conflicts with `requirements.md`, defer to `requirements.md` requirements and record the conflict in recon notes.
+- If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
+- If it conflicts with `requirements.md`, defer to `requirements.md` requirements and record the conflict in recon notes.
+
+  2.75. **Load blueprint.md (optional)**:
+
+- If `FEATURE_DIR/blueprint.md` exists, read it.
+- Treat it as an additional input that can refine technical approach and file plan.
+- If it conflicts with `requirements.md`, defer to `requirements.md` requirements and record the conflict in recon notes.
 
 3. **Recon (do this BEFORE deciding commits)**:
    - Think like a senior engineer: **compare the requirements vs the current codebase** and identify the true gaps.
@@ -94,56 +97,67 @@ When doing technical design (interpreting requirements.md, recon, and generating
        - A pointer to the unit detail file that will be created after approval (in `tasks/`)
 
    - Structure template:
+
      ```markdown
      # Tasks: [FeatureName]
-     
+
      ## Status Legend
+
      - [ ] Not Started
      - [~] In Progress
-     - [X] Completed
+     - [x] Completed
      - [!] Blocked/Needs Clarification
-     
+
      ## Notes & Clarifications
+
      - [Recon findings + clarifications. Keep as bullets.]
      - What exists already:
        - ...
-    - Design gaps (missing vs requirements.md):
-       - ...
-     - Risks / unknowns:
-       - ...
-     - Design principles: [Alignment or gaps vs separation of concerns, encapsulation, loose coupling, scalability, resilience, security.]
-     
-     ## Commit Units (each unit == exactly 1 git commit)
-     
-     ### 1) <Git commit subject draft>
-     - Status: [ ]
-     - Goal: <one sentence>
-     - Acceptance Signals:
-       - <signal tied to design requirements>
-     - Changes (high-level):
-       - [new] `path/to/new_file.ext`: <what it contains>
-         - <sub-point describing behavior>
-       - [change] `path/to/existing_file.ext`: <what changes>
-         - <sub-point describing behavior>
-     - Unit details: `tasks/1. <Unit Title>.md`
-     
-     ### 2) <Git commit subject draft>
-     - Status: [ ]
-     - Goal: ...
-     - Acceptance Signals:
-       - ...
-     - Changes (high-level):
-       - ...
-     - Unit details: `tasks/2. <Unit Title>.md`
-     
-     ...
      ```
 
+   - Design gaps (missing vs requirements.md):
+     - ...
+   - Risks / unknowns:
+     - ...
+   - Design principles: [Alignment or gaps vs separation of concerns, encapsulation, loose coupling, scalability, resilience, security.]
+
+   ## Commit Units (each unit == exactly 1 git commit)
+
+   ### 1) <Git commit subject draft>
+   - Status: [ ]
+   - Goal: <one sentence>
+   - Acceptance Signals:
+     - <signal tied to design requirements>
+   - Changes (high-level):
+     - [new] `path/to/new_file.ext`: <what it contains>
+       - <sub-point describing behavior>
+     - [change] `path/to/existing_file.ext`: <what changes>
+       - <sub-point describing behavior>
+   - Unit details: `tasks/1. <Unit Title>.md`
+
+   ### 2) <Git commit subject draft>
+   - Status: [ ]
+   - Goal: ...
+   - Acceptance Signals:
+     - ...
+   - Changes (high-level):
+     - ...
+   - Unit details: `tasks/2. <Unit Title>.md`
+
+   ...
+
+   ```
+
    - Planning guidance:
-     - Prefer smallest safe commit units that can be reviewed independently.
-     - Keep commit subjects readable and imperative (no semantic prefixes).
-     - Ensure commit units and pseudo code respect system design principles: boundaries (SoC), clear interfaces (encapsulation), minimal cross-module coupling, scalability/resilience/security where the feature touches them.
-     - If a unit would require multiple commits, split it here (do not rely on “commit frequently” later).
+   - Prefer smallest safe commit units that can be reviewed independently.
+   - **Localization packing**: Never create standalone commit units for localization changes (e.g., adding translation keys). Group localization updates with the implementation tasks that use them.
+     - If localization is for a **new** file or component, include it in the same unit as that file.
+     - If localization is for an **existing** component, include it in the unit that modifies that component to use the new keys.
+   - Keep commit subjects readable and imperative (no semantic prefixes).
+   - Ensure commit units and pseudo code respect system design principles: boundaries (SoC), clear interfaces (encapsulation), minimal cross-module coupling, scalability/resilience/security where the feature touches them.
+   - If a unit would require multiple commits, split it here (do not rely on “commit frequently” later).
+
+   ```
 
 5. **Validate completeness**:
    - Each requirements.md requirement maps to at least one commit unit acceptance signal (or recon finding that gates it)
@@ -166,35 +180,40 @@ When doing technical design (interpreting requirements.md, recon, and generating
    - Create **one markdown file per unit**:
      - File name format: `N. {unit title}.md` (example: `1. Add selectors to summary view.md`)
      - Sanitize title for filesystem safety (avoid `/`, `\`, `:`, `*`, `?`, `"`, `<`, `>`, `|`)
-   - Each per-unit file MUST include the detailed **Ruby pseudo code** (implementation detail lives here, not in `tasks.md`).
+   - Each per-unit file MUST include the detailed **Pseudo code** (implementation detail lives here, not in `tasks.md`).
    - End with: "Unit files created. Next: run `/implement <unit>` (e.g. `/implement 1`)."
 
 ## Per-Unit Task File Template (in tasks/)
 
 Each unit file (e.g. `FEATURE_DIR/tasks/1. <Unit Title>.md`) MUST follow this template:
 
-```markdown
+````markdown
 # Unit 1: <Unit Title>
 
-- Status: [ ]  (use [~] in progress, [X] completed, [!] blocked)
+- Status: [ ] (use [~] in progress, [X] completed, [!] blocked)
 - Git commit subject draft: <single line>
 - Goal: <one sentence>
 - Acceptance Signals:
   - ...
 
-## Changes (Ruby pseudo code)
-- [new] `path/to/new_file.rb`
-  ```ruby
+## Changes (pseudo code)
+
+- [new] `path/to/new_file.ext`
+  ```text
   # pseudo code explaining approach, logic flow, and data structures
   ```
-- [change] `path/to/existing_file.rb`
-  ```ruby
+````
+
+- [change] `path/to/existing_file.ext`
+  ```text
   # pseudo code
   ```
 
 ## Notes / Gotchas
+
 - ...
-```
+
+````
 
 ## Handling Misunderstandings & Feedback
 
@@ -207,7 +226,7 @@ When user provides feedback during planning:
    - Add a "Clarifications" section if it doesn't exist:
      ```markdown
      ## Clarifications
-     
+
      ### [Date] - [Topic]
      **Misunderstanding**: [What was misunderstood]
      **Clarification**: [Correct understanding]
@@ -227,6 +246,7 @@ When user provides feedback during planning:
 
 - **Dependency-aware**: Order tasks correctly
 - **Commit-shaped**: Each commit unit is exactly one commit with a clear goal
-- **Pseudo only**: Limit implementation detail to the Ruby pseudo code blocks
+- **Pseudo only**: Limit implementation detail to the pseudo code blocks
 - **Traceable**: Acceptance signals must tie back to requirements.md requirements
 - **Principles-aligned**: Technical design and task breakdown must align with the six system design principles; flag and document any trade-offs or violations
+````

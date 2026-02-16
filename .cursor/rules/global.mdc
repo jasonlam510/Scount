@@ -4,7 +4,7 @@
 ## Project Overview:
 - **Purpose**: Personal and group expense tracking application
 - **Tech Stack**: React Native + Expo, TypeScript, Supabase (DB/Auth), PowerSync (sync engine)
-- **Target Platforms**: iOS and Android (mobile-only)
+- **Target Platforms**: iOS, Android, and Web (Multiplatform)
 - **Architecture**: Offline-first with real-time sync
 
 ## UI/UX Guidelines:

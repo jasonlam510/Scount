@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Switch, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { ThemedSwitch } from "@/components";
 import { useTheme } from "@/hooks";
 
 interface SwitchRowProps {
@@ -18,13 +19,7 @@ export default function SwitchRow({
   return (
     <View style={styles.row}>
       <Text style={[styles.rowLabel, { color: colors.text }]}>{label}</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: colors.success }}
-        thumbColor={value ? "#ffffff" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={onValueChange}
-        value={value}
-      />
+      <ThemedSwitch value={value} onValueChange={onValueChange} />
     </View>
   );
 }

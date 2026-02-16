@@ -6,6 +6,7 @@ export { default as FloatingActionButton } from "./FloatingActionButton";
 export { default as LoadingScreen } from "./LoadingScreen";
 export { default as Selector } from "./Selector";
 export { default as SummarySection } from "./SummarySection";
+export { default as ThemedSwitch } from "./ThemedSwitch";
 
 // List components
 export * from "./lists";

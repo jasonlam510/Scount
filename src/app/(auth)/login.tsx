@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { isValidEmail } from "@/utils";
 import { useI18n, useTheme } from "@/hooks";
 
 export default function LoginScreen() {
@@ -23,9 +24,7 @@ export default function LoginScreen() {
       return;
     }
 
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       Alert.alert(t("common.error"), t("auth.invalidEmail"));
       return;
     }

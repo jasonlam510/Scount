@@ -66,6 +66,7 @@ export default function ProfileHeader({
 
   return (
     <>
+      {/* Profile Header */}
       <View style={styles.profileHeader}>
         <TouchableOpacity
           style={styles.profilePhotoContainer}

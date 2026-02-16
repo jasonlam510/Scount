@@ -1,4 +1,5 @@
 // Export reusable UI components from this directory
+export * from "./auth";
 export { Alert } from "./Alert";
 export { default as DailyTotal } from "./DailyTotal";
 export { default as FloatingActionButton } from "./FloatingActionButton";

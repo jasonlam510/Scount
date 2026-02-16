@@ -90,6 +90,7 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
         style,
       ]}
     >
+      {/* Header */}
       <View style={styles.header}>
         <View style={styles.leftSection}>{renderBackButton()}</View>
         <View style={styles.rightSection}>{renderActions()}</View>

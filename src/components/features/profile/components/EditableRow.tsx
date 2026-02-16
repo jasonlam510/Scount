@@ -18,7 +18,9 @@ export default function EditableRow({
 
   return (
     <TouchableOpacity style={styles.row} onPress={onPress}>
+      {/* Label */}
       <Text style={[styles.rowLabel, { color: colors.text }]}>{label}</Text>
+      {/* Value */}
       <View style={styles.rowValueContainer}>
         <Text style={[styles.rowValue, { color: colors.textSecondary }]}>
           {value}

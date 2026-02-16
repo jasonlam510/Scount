@@ -16,6 +16,7 @@ export default function AccountSection({
 
   return (
     <>
+      {/* Logout Button */}
       <TouchableOpacity
         style={[styles.logoutButton, { backgroundColor: colors.surface }]}
         onPress={onLogoutPress}
@@ -25,6 +26,7 @@ export default function AccountSection({
         </Text>
       </TouchableOpacity>
 
+      {/* Delete Profile */}
       <TouchableOpacity onPress={onDeleteProfile}>
         <Text style={[styles.deleteProfileText, { color: colors.danger }]}>
           {t("profile.deleteProfile")}

@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
-import { Alert } from "@/components";
+import { Alert, OtpInput } from "@/components";
 import { supabase } from "@/lib/supabase";
 import { useI18n, useTheme } from "@/hooks";
 
@@ -152,35 +146,12 @@ export default function CheckEmailScreen() {
         <Text style={[styles.email, { color: colors.primary }]}>{email}</Text>
 
         {/* OTP Input */}
-        <View style={styles.otpContainer}>
-          <Text style={[styles.otpLabel, { color: colors.text }]}>
-            {t("auth.enterOTP")}
-          </Text>
-          <TextInput
-            style={[
-              styles.otpInput,
-              {
-                backgroundColor: colors.surface,
-                borderColor: colors.border,
-                color: colors.text,
-              },
-            ]}
-            value={otpCode}
-            onChangeText={(text) => {
-              // Only allow numeric input
-              const numericText = text.replace(/[^0-9]/g, "");
-              setOtpCode(numericText);
-            }}
-            placeholder="_ _ _ _ _ _"
-            placeholderTextColor={colors.textSecondary}
-            keyboardType="numeric"
-            maxLength={6}
-            textAlign="center"
-            autoFocus
-            autoComplete="one-time-code"
-            textContentType="oneTimeCode"
-          />
-        </View>
+        <OtpInput
+          value={otpCode}
+          onChangeText={setOtpCode}
+          label={t("auth.enterOTP")}
+          length={6}
+        />
 
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
@@ -296,27 +267,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 32,
     textAlign: "center",
-  },
-  otpContainer: {
-    width: "100%",
-    maxWidth: 300,
-    marginBottom: 32,
-  },
-  otpLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  otpInput: {
-    fontSize: 24,
-    fontWeight: "600",
-    borderWidth: 2,
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    textAlign: "center",
-    letterSpacing: 4,
   },
   verifyButton: {
     alignItems: "center",

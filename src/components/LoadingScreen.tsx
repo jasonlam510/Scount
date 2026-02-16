@@ -25,10 +25,13 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      {/* Spinner */}
       <ActivityIndicator size="large" color={colors.primary} />
+      {/* Message */}
       <Text style={[styles.message, { color: colors.textSecondary }]}>
         {displayMessage}
       </Text>
+      {/* Error */}
       {showError && error && (
         <Text style={[styles.error, { color: colors.danger }]}>
           Error: {error}

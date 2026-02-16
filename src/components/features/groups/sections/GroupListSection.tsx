@@ -25,11 +25,13 @@ export default function GroupListSection({
 
   return (
     <View style={styles.container}>
+      {/* Header */}
       <GroupListHeader
         title={t("group.title")}
         subtitle={t("group.subtitle")}
       />
 
+      {/* Group List */}
       <ScrollView
         style={styles.content}
         contentContainerStyle={styles.contentContainer}

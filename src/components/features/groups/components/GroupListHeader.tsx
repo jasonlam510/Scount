@@ -15,7 +15,9 @@ export default function GroupListHeader({
 
   return (
     <>
+      {/* Title */}
       <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
+      {/* Subtitle */}
       {subtitle && (
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           {subtitle}

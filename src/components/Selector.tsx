@@ -32,8 +32,10 @@ const Selector: React.FC<SelectorProps> = ({
       style={[styles.modalOverlay, { backgroundColor: "rgba(0, 0, 0, 0.5)" }]}
     >
       <View style={[styles.modalContent, { backgroundColor: colors.surface }]}>
+        {/* Title */}
         <Text style={[styles.modalTitle, { color: colors.text }]}>{title}</Text>
 
+        {/* Options */}
         {options.map((option, index) => (
           <TouchableOpacity
             key={option.key}
@@ -50,6 +52,7 @@ const Selector: React.FC<SelectorProps> = ({
           </TouchableOpacity>
         ))}
 
+        {/* Cancel Button */}
         <TouchableOpacity
           style={[styles.cancelButton, { backgroundColor: colors.border }]}
           onPress={onCancel}

@@ -34,6 +34,7 @@ export default function GroupScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      {/* Group List Section */}
       <GroupListSection
         groups={groups}
         isLoading={isLoading}

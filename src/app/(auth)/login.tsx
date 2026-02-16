@@ -60,8 +60,10 @@ export default function LoginScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
+        {/* Title */}
         <Text style={[styles.title, { color: colors.text }]}>Scount</Text>
 
+        {/* Form */}
         <View style={styles.formContainer}>
           <TextInput
             style={[

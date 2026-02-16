@@ -26,6 +26,7 @@ export default function ProfileSection({
 
   return (
     <View style={[styles.section, { backgroundColor: colors.surface }]}>
+      {/* Profile Header */}
       <ProfileHeader
         profileName={profileName}
         userEmail={userEmail}
@@ -34,8 +35,10 @@ export default function ProfileSection({
         onPhotoSelected={onPhotoSelected}
       />
 
+      {/* Separator */}
       <View style={[styles.separator, { backgroundColor: colors.border }]} />
 
+      {/* Name Row */}
       <EditableRow
         label={t("profile.name")}
         value={profileLoading ? t("common.loading") : profileName}

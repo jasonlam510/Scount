@@ -86,6 +86,7 @@ const SmartList: React.FC<SmartListProps> = ({
 
         return (
           <View key={date} style={defaultStyles.dateGroup}>
+            {/* Date Header */}
             <View style={defaultStyles.dateHeader}>
               <Text
                 style={[
@@ -97,6 +98,7 @@ const SmartList: React.FC<SmartListProps> = ({
               </Text>
               <DailyTotal total={dailyTotal} currency="HK$" />
             </View>
+            {/* Items */}
             {items.map((item) => (
               <View key={item.id}>{renderExpenseItem(item)}</View>
             ))}

@@ -4,9 +4,15 @@ const expoConfig = require("eslint-config-expo/flat");
 const eslintPluginPrettierRecommended = require("eslint-plugin-prettier/recommended");
 
 module.exports = defineConfig([
-  globalIgnores(["dist/*", "node_modules/**", "**/node_modules/@powersync/**"]),
+  globalIgnores(["dist/*", ".node_modules/"]),
   expoConfig,
   eslintPluginPrettierRecommended,
+  {
+    // Prevent import analysis from parsing bundled third-party artifacts.
+    settings: {
+      "import/ignore": ["node_modules"],
+    },
+  },
   {
     files: ["babel.config.js", "metro.config.js"],
     languageOptions: {

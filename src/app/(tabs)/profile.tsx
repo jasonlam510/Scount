@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Platform,
-  ActionSheetIOS,
-} from "react-native";
-import { Alert } from "@/components";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Alert, ActionSheet } from "@/components";
 import { useTheme, useI18n, useUser } from "@/hooks";
 import { supabase } from "@/lib/supabase";
 import { disconnectDatabase, db } from "@/powersync";
 import { Profile } from "@/types/profiles";
 import FloatingActionButton from "@/components/FloatingActionButton";
-import Selector from "@/components/Selector";
 import {
   ProfileSection,
   AppSettingsSection,
@@ -27,7 +19,7 @@ export default function ProfileScreen() {
   // Profile state
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [showLogoutSelector, setShowLogoutSelector] = useState(false);
+  const [showLogoutActionSheet, setShowLogoutActionSheet] = useState(false);
 
   // Handlers for navigation/actions
   const handleEditName = () => {
@@ -46,35 +38,13 @@ export default function ProfileScreen() {
     }
   };
 
-  // Platform-specific logout handlers
-  const handleLogoutPress = () => {
-    if (Platform.OS === "ios") {
-      // Native iOS ActionSheet (true bottom-up menu)
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: [t("profile.logout"), "Cancel"],
-          cancelButtonIndex: 1,
-          destructiveButtonIndex: 0, // Makes logout button red
-          title: "Logout?",
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 0) {
-            handleLogout(); // Execute actual logout
-          }
-          // buttonIndex === 1 is Cancel, do nothing
-        },
-      );
-    } else {
-      // Android: use custom selector
-      setShowLogoutSelector(true);
-    }
-  };
+  const handleLogoutPress = () => setShowLogoutActionSheet(true);
 
-  const handleLogoutSelect = (value: string) => {
-    if (value === "logout") {
+  const handleLogoutSelect = (buttonIndex: number) => {
+    if (buttonIndex === 0) {
       handleLogout();
     }
-    setShowLogoutSelector(false);
+    setShowLogoutActionSheet(false);
   };
 
   const handleLogout = async () => {
@@ -210,15 +180,13 @@ export default function ProfileScreen() {
         onPress={handleSupportCenter}
       />
 
-      {/* Logout Selector */}
-      <Selector
-        visible={showLogoutSelector}
+      {/* Logout ActionSheet */}
+      <ActionSheet
+        visible={showLogoutActionSheet}
         title="Logout?"
-        options={[
-          { key: "logout", label: t("profile.logout"), value: "logout" },
-        ]}
+        options={[t("profile.logout"), "Cancel"]}
+        cancelButtonIndex={1}
         onSelect={handleLogoutSelect}
-        onCancel={() => setShowLogoutSelector(false)}
       />
     </View>
   );

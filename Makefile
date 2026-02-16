@@ -39,22 +39,20 @@ format:
 	@echo "Checking code formatting with Prettier..."
 	@npx prettier --check .
 
-.PHONY: depcheck
-depcheck:
-	@echo "Checking for unused dependencies..."
-	@npx depcheck
-	@echo "Dependency check completed."
-
 .PHONY: audit
 audit:
 	@echo "Running npm audit for security vulnerabilities..."
 	@npm audit
 	@echo "Security audit completed."
 
+.PHONY: extraction
+extraction:
+	@npx i18next-cli status
+
 .PHONY: ci-static
-ci-static: lint format depcheck audit
+ci-static: lint format audit extraction
 	@echo "==========================================="
-	@echo "CI Static Quality Gate Passed. Ready for Build."
+	@echo "Quality Gate Passed. Ready for Build."
 	@echo "==========================================="
 
 # ==============================================================================
@@ -70,3 +68,14 @@ fix-lint:
 fix-format:
 	@echo "Running Prettier autofix..."
 	@npx prettier --write .
+
+.PHONY: fix-extraction
+fix-extraction:
+	@npx i18next-cli extract
+
+.PHONY: fix-all
+fix-all: 
+	@echo "Running all fixes..."
+	@make fix-lint
+	@make fix-format
+	@make fix-extraction

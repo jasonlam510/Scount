@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: "center",
+    zIndex: 100,
   },
   fab: {
     justifyContent: "center",

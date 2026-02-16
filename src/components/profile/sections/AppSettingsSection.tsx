@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Platform, ActionSheetIOS } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { ActionSheet } from "@/components";
 import { useTheme, useI18n, useAppSettings } from "@/hooks";
-import Selector from "@/components/Selector";
 import SwitchRow from "../components/SwitchRow";
 import SettingRow from "../components/SettingRow";
 
@@ -49,63 +49,20 @@ export default function AppSettingsSection({
     }
   };
 
-  // Platform-specific handlers
-  const handleLanguagePress = () => {
-    if (Platform.OS === "ios") {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: ["English", "繁體中文", "Cancel"],
-          cancelButtonIndex: 2,
-          title: t("profile.language"),
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 0) {
-            onLanguageChange("en");
-          } else if (buttonIndex === 1) {
-            onLanguageChange("zh");
-          }
-        },
-      );
-    } else {
-      setShowLanguageSelector(true);
-    }
-  };
+  const handleLanguagePress = () => setShowLanguageSelector(true);
 
-  const handleLanguageSelect = (language: string) => {
-    onLanguageChange(language);
+  const handleLanguageSelect = (buttonIndex: number) => {
+    if (buttonIndex === 0) onLanguageChange("en");
+    else if (buttonIndex === 1) onLanguageChange("zh");
     setShowLanguageSelector(false);
   };
 
-  const handleThemePress = () => {
-    if (Platform.OS === "ios") {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: [
-            t("common.light"),
-            t("common.dark"),
-            t("common.automatic"),
-            "Cancel",
-          ],
-          cancelButtonIndex: 3,
-          title: t("profile.theme"),
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 0) {
-            onThemeChange("light");
-          } else if (buttonIndex === 1) {
-            onThemeChange("dark");
-          } else if (buttonIndex === 2) {
-            onThemeChange("automatic");
-          }
-        },
-      );
-    } else {
-      setShowThemeSelector(true);
-    }
-  };
+  const handleThemePress = () => setShowThemeSelector(true);
 
-  const handleThemeSelect = (mode: string) => {
-    onThemeChange(mode as "light" | "dark" | "automatic");
+  const handleThemeSelect = (buttonIndex: number) => {
+    if (buttonIndex === 0) onThemeChange("light");
+    else if (buttonIndex === 1) onThemeChange("dark");
+    else if (buttonIndex === 2) onThemeChange("automatic");
     setShowThemeSelector(false);
   };
 
@@ -140,33 +97,29 @@ export default function AppSettingsSection({
         />
       </View>
 
-      {/* Language Selector */}
-      <Selector
+      {/* Language ActionSheet */}
+      <ActionSheet
         visible={showLanguageSelector}
         title={t("profile.language")}
-        options={[
-          { key: "en", label: "English", value: "en" },
-          { key: "zh", label: "繁體中文", value: "zh" },
-        ]}
+        options={["English", "繁體中文", "Cancel"]}
+        cancelButtonIndex={2}
+        selectedIndex={currentLanguage === "en" ? 0 : 1}
         onSelect={handleLanguageSelect}
-        onCancel={() => setShowLanguageSelector(false)}
       />
 
-      {/* Theme Selector */}
-      <Selector
+      {/* Theme ActionSheet */}
+      <ActionSheet
         visible={showThemeSelector}
         title={t("profile.theme")}
         options={[
-          { key: "light", label: t("common.light"), value: "light" },
-          { key: "dark", label: t("common.dark"), value: "dark" },
-          {
-            key: "automatic",
-            label: t("common.automatic"),
-            value: "automatic",
-          },
+          t("common.light"),
+          t("common.dark"),
+          t("common.automatic"),
+          "Cancel",
         ]}
+        cancelButtonIndex={3}
+        selectedIndex={themeMode === "light" ? 0 : themeMode === "dark" ? 1 : 2}
         onSelect={handleThemeSelect}
-        onCancel={() => setShowThemeSelector(false)}
       />
     </>
   );

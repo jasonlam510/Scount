@@ -7,6 +7,7 @@ export { default as LoadingScreen } from "./LoadingScreen";
 export { default as Selector } from "./Selector";
 export { default as SummarySection } from "./SummarySection";
 export { default as ThemedSwitch } from "./ThemedSwitch";
+export { default as ActionSheet } from "./ActionSheet";
 
 // List components
 export * from "./lists";

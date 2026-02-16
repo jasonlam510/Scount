@@ -20,22 +20,8 @@ export default function TabsLayout() {
 
   return (
     <Tabs
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName: keyof typeof Ionicons.glyphMap;
-
-          if (route.name === "group") {
-            iconName = focused ? "calculator" : "calculator-outline";
-          } else if (route.name === "personal") {
-            iconName = focused ? "wallet" : "wallet-outline";
-          } else if (route.name === "profile") {
-            iconName = focused ? "person" : "person-outline";
-          } else {
-            iconName = "help-outline";
-          }
-
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
+      screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarStyle: {
@@ -43,20 +29,46 @@ export default function TabsLayout() {
           borderTopColor: colors.border,
           borderTopWidth: 1,
         },
-        headerShown: false,
-      })}
+      }}
     >
       <Tabs.Screen
         name="group"
-        options={{ tabBarLabel: t("navigation.group") }}
+        options={{
+          tabBarLabel: t("navigation.group"),
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "calculator" : "calculator-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
       />
       <Tabs.Screen
         name="personal"
-        options={{ tabBarLabel: t("navigation.personal") }}
+        options={{
+          tabBarLabel: t("navigation.personal"),
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "wallet" : "wallet-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
       />
       <Tabs.Screen
         name="profile"
-        options={{ tabBarLabel: t("navigation.profile") }}
+        options={{
+          tabBarLabel: t("navigation.profile"),
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "person" : "person-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
       />
     </Tabs>
   );

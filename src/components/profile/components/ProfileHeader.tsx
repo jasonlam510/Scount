@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Platform,
-  ActionSheetIOS,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useTheme, useI18n } from "@/hooks";
-import Selector from "@/components/Selector";
+import { ActionSheet } from "@/components";
 
 interface ProfileHeaderProps {
   profileName?: string | null;
@@ -28,40 +20,17 @@ export default function ProfileHeader({
 }: ProfileHeaderProps) {
   const { colors } = useTheme();
   const { t } = useI18n();
-  const [showPhotoSelector, setShowPhotoSelector] = useState(false);
+  const [showPhotoActionSheet, setShowPhotoActionSheet] = useState(false);
 
-  const handleEditPhoto = () => {
-    if (Platform.OS === "ios") {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: [
-            t("common.cancel"),
-            t("profile.camera"),
-            t("profile.photoLibrary"),
-          ],
-          cancelButtonIndex: 0,
-          title: t("profile.editPhoto"),
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 1) {
-            onPhotoSelected("camera");
-          } else if (buttonIndex === 2) {
-            onPhotoSelected("library");
-          }
-        },
-      );
-    } else {
-      setShowPhotoSelector(true);
-    }
-  };
+  const handleEditPhoto = () => setShowPhotoActionSheet(true);
 
-  const handlePhotoSelect = (value: string) => {
-    if (value === "camera") {
+  const handlePhotoSelect = (buttonIndex: number) => {
+    if (buttonIndex === 0) {
       onPhotoSelected("camera");
-    } else if (value === "photoLibrary") {
+    } else if (buttonIndex === 1) {
       onPhotoSelected("library");
     }
-    setShowPhotoSelector(false);
+    setShowPhotoActionSheet(false);
   };
 
   return (
@@ -96,20 +65,17 @@ export default function ProfileHeader({
         </View>
       </View>
 
-      {/* Photo Selector */}
-      <Selector
-        visible={showPhotoSelector}
+      {/* Photo ActionSheet */}
+      <ActionSheet
+        visible={showPhotoActionSheet}
         title={t("profile.editPhoto")}
         options={[
-          { key: "camera", label: t("profile.camera"), value: "camera" },
-          {
-            key: "photoLibrary",
-            label: t("profile.photoLibrary"),
-            value: "photoLibrary",
-          },
+          t("profile.camera"),
+          t("profile.photoLibrary"),
+          t("common.cancel"),
         ]}
+        cancelButtonIndex={2}
         onSelect={handlePhotoSelect}
-        onCancel={() => setShowPhotoSelector(false)}
       />
     </>
   );

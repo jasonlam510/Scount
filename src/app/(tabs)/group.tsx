@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Alert } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme, useI18n } from "@/hooks";
 import { GroupListSection } from "@/components/features/groups";
 import FloatingActionButton from "@/components/FloatingActionButton";
@@ -8,7 +7,6 @@ import { useUserGroupsRealtime } from "@/powersync/hooks/useUserGroups";
 import { Group } from "@/types/groups";
 
 export default function GroupScreen() {
-  const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();
   const { groups, isLoading, error } = useUserGroupsRealtime();
@@ -34,12 +32,7 @@ export default function GroupScreen() {
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        { paddingTop: insets.top, backgroundColor: colors.background },
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <GroupListSection
         groups={groups}
         isLoading={isLoading}

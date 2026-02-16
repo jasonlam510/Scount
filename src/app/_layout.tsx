@@ -1,7 +1,8 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import { Stack } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { AuthProvider } from "@/contexts";
 import { LoadingScreen } from "@/components";
 import "@/i18n"; // Import i18n configuration
@@ -85,16 +86,22 @@ function StoreInitializer({ children }: { children: React.ReactNode }) {
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <AuthProvider>
-        <StoreInitializer>
-          <PowerSyncInitializer>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="(auth)" />
-              <Stack.Screen name="(tabs)" />
-            </Stack>
-          </PowerSyncInitializer>
-        </StoreInitializer>
-      </AuthProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <AuthProvider>
+          <StoreInitializer>
+            <PowerSyncInitializer>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="(tabs)" />
+              </Stack>
+            </PowerSyncInitializer>
+          </StoreInitializer>
+        </AuthProvider>
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: { flex: 1 },
+});

@@ -8,7 +8,6 @@ import {
   Platform,
   ActionSheetIOS,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme, useI18n, useUser } from "@/hooks";
 import { supabase } from "@/lib/supabase";
 import { disconnectDatabase, db } from "@/powersync";
@@ -22,7 +21,6 @@ import {
 } from "@/components/features/profile";
 
 export default function ProfileScreen() {
-  const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
   const { currentUserUuid, userEmail, clearUserData } = useUser();
@@ -170,10 +168,7 @@ export default function ProfileScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView
-        style={[
-          styles.container,
-          { paddingTop: insets.top, backgroundColor: colors.background },
-        ]}
+        style={[styles.container, { backgroundColor: colors.background }]}
       >
         {/* Header */}
         <Text style={[styles.headerTitle, { color: colors.text }]}>

@@ -8,7 +8,6 @@ import {
   ViewStyle,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/hooks";
 
 interface HeaderAction {
@@ -40,7 +39,6 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
   style,
   backgroundColor,
 }) => {
-  const insets = useSafeAreaInsets();
   const { colors } = useTheme();
 
   const renderBackButton = () => {
@@ -87,7 +85,6 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
       style={[
         styles.container,
         {
-          paddingTop: insets.top,
           backgroundColor: backgroundColor || colors.background,
         },
         style,

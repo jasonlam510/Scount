@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TextInput,
   TouchableOpacity,
   Alert,
@@ -60,9 +59,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <Text style={[styles.title, { color: colors.text }]}>Scount</Text>
 
@@ -101,7 +98,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

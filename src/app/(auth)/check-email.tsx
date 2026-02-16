@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   Alert,
   TextInput,
@@ -139,9 +138,7 @@ export default function CheckEmailScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         {/* Mail Icon */}
         <View style={styles.iconContainer}>
@@ -266,7 +263,7 @@ export default function CheckEmailScreen() {
           </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

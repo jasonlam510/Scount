@@ -1,4 +1,4 @@
-import { useAppSettingsStore, useUserStore } from "@/zustand";
+import { useUserStore } from "@/zustand";
 
 export const useUser = () => {
   const {

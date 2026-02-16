@@ -34,7 +34,7 @@ export default function LoginScreen() {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithOtp({
+      const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
           shouldCreateUser: true, // Allow new users to sign up

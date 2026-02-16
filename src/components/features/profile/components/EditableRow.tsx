@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useTheme, useI18n } from "@/hooks";
+import { useTheme } from "@/hooks";
 
 interface EditableRowProps {
   label: string;
@@ -15,7 +15,6 @@ export default function EditableRow({
   onPress,
 }: EditableRowProps) {
   const { colors } = useTheme();
-  const { t } = useI18n();
 
   return (
     <TouchableOpacity style={styles.row} onPress={onPress}>

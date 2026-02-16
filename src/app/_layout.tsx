@@ -68,8 +68,7 @@ function StoreInitializer({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const initializeStores = async () => {
       try {
-        const { useInitializeStores } =
-          await import("@/hooks/useInitializeStores");
+        await import("@/hooks/useInitializeStores");
         // Note: This hook should be called in a component that's inside the provider tree
         console.log("📦 Stores will be initialized by individual components");
       } catch (error) {

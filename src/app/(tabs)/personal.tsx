@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-  StatusBar,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { useTheme, useI18n } from "@/hooks";
 
 import FloatingActionButton from "@/components/FloatingActionButton";
@@ -19,7 +9,6 @@ import SegmentedControl from "@/components/navigation/SegmentedControl";
 import HeaderActions from "@/components/navigation/HeaderActions";
 
 export default function PersonalScreen() {
-  const insets = useSafeAreaInsets();
   const { colors } = useTheme();
   const { t } = useI18n();
   const [activeTab, setActiveTab] = useState(0); // 0 for expenses, 1 for balances
@@ -179,22 +168,6 @@ export default function PersonalScreen() {
     // TODO: Show dropdown menu under button
     console.log("Menu button pressed");
   };
-
-  const renderBalancesItem = ({ item }: { item: any }) => (
-    <View style={[styles.balanceItem, { backgroundColor: colors.surface }]}>
-      <View style={styles.balanceContent}>
-        <Text style={[styles.balanceDescription, { color: colors.text }]}>
-          {item.description}
-        </Text>
-        <Text style={[styles.balancePayer, { color: colors.textSecondary }]}>
-          {item.payer}
-        </Text>
-      </View>
-      <Text style={[styles.balanceAmount, { color: colors.text }]}>
-        {item.amount}
-      </Text>
-    </View>
-  );
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

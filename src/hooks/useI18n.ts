@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo } from "react";
 import { useAppSettings } from "@/hooks/useAppSettings";
-import { localeInfo } from "@/i18n";
 import * as Localization from "expo-localization";
 
 export const useI18n = () => {
@@ -10,7 +9,8 @@ export const useI18n = () => {
 
   // Update i18n language when preferences change
   useEffect(() => {
-    if (language && isLanguageSupported(language)) {
+    const supportedLanguages = Object.keys(i18n.options.resources || {});
+    if (language && supportedLanguages.includes(language)) {
       i18n.changeLanguage(language);
     }
   }, [language, i18n]);

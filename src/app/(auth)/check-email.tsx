@@ -81,7 +81,7 @@ export default function CheckEmailScreen() {
     setIsVerifying(true);
 
     try {
-      const { data, error } = await supabase.auth.verifyOtp({
+      const { error } = await supabase.auth.verifyOtp({
         email: email!,
         token: otpCode,
         type: "email",

@@ -9,7 +9,7 @@ import {
   ActionSheetIOS,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme, useI18n, useUser, useAppSettings } from "@/hooks";
+import { useTheme, useI18n, useUser } from "@/hooks";
 import { supabase } from "@/lib/supabase";
 import { disconnectDatabase, db } from "@/powersync";
 import { Profile } from "@/types/profiles";
@@ -25,15 +25,10 @@ export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
-  const { currentUserUuid, userEmail, setCurrentUserUuid, clearUserData } =
-    useUser();
-  const { notificationsEnabled, setNotificationsEnabled } = useAppSettings();
-
+  const { currentUserUuid, userEmail, clearUserData } = useUser();
   // Profile state
   const [profile, setProfile] = useState<Profile | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [profileError, setProfileError] = useState<Error | null>(null);
-
   const [showLogoutSelector, setShowLogoutSelector] = useState(false);
 
   // Handlers for navigation/actions
@@ -134,8 +129,6 @@ export default function ProfileScreen() {
     const fetchProfile = async () => {
       try {
         setProfileLoading(true);
-        setProfileError(null);
-
         const result = await db
           .selectFrom("profiles")
           .selectAll()
@@ -159,7 +152,6 @@ export default function ProfileScreen() {
       } catch (err) {
         if (!isCancelled) {
           console.error("❌ Error fetching profile:", err);
-          setProfileError(err as Error);
         }
       } finally {
         if (!isCancelled) {

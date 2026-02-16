@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { useTheme, useI18n } from "@/hooks";
+import { useTheme } from "@/hooks";
 
 interface GroupListHeaderProps {
   title: string;
@@ -12,7 +12,6 @@ export default function GroupListHeader({
   subtitle,
 }: GroupListHeaderProps) {
   const { colors } = useTheme();
-  const { t } = useI18n();
 
   return (
     <>

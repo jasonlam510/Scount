@@ -1,108 +1,64 @@
 {
-  "common": {
-    "add": "新增",
-    "edit": "編輯",
-    "delete": "刪除",
-    "save": "儲存",
-    "cancel": "取消",
-    "back": "返回",
-    "search": "搜尋",
-    "menu": "選單",
-    "loading": "載入中...",
-    "initializing": "初始化中...",
-    "error": "錯誤",
-    "success": "成功",
-    "light": "淺色",
-    "dark": "深色",
-    "automatic": "自動"
+  "auth": {
+    "backToLogin": "返回登入",
+    "checkSpam": "• 檢查您的垃圾郵件/垃圾資料夾\n• 確認電子郵件地址正確\n• 嘗試重新發送驗證碼",
+    "didntReceive": "沒有收到嗎？",
+    "emailPlaceholder": "輸入您的電子郵件",
+    "emailRequired": "請輸入您的電子郵件地址",
+    "enterOTP": "輸入驗證碼",
+    "invalidEmail": "請輸入有效的電子郵件地址",
+    "otpSentAgain": "驗證碼已重新發送！",
+    "otpSentTo": "我們已將6位數驗證碼發送至：",
+    "resendIn": "重新發送倒數",
+    "resendOTP": "重新發送驗證碼",
+    "sending": "發送中...",
+    "sendOTP": "使用電子郵件登入",
+    "somethingWrong": "出現錯誤，請重試。",
+    "verifying": "驗證中...",
+    "verifyOTP": "驗證代碼"
   },
-  "navigation": {
-    "personal": "個人",
-    "group": "群組",
-    "profile": "個人資料"
+  "common": {
+    "automatic": "自動",
+    "cancel": "取消",
+    "dark": "深色",
+    "error": "錯誤",
+    "light": "淺色",
+    "loading": "載入中...",
+    "success": "成功"
   },
   "expenses": {
-    "title": "支出",
     "addExpense": "新增支出",
-    "addIncome": "新增收入",
-    "totalExpenses": "總支出",
-    "totalIncome": "總收入",
-    "balance": "餘額",
-    "noExpenses": "暫無支出記錄",
-    "noBalances": "暫無餘額記錄",
     "expense": "支出",
     "income": "收入",
-    "amount": "金額",
-    "currency": "貨幣",
-    "description": "描述",
-    "payer": "付款人",
-    "date": "日期",
-    "category": "類別"
-  },
-  "personal": {
-    "title": "個人",
-    "expensesTab": "支出",
-    "balancesTab": "餘額",
-    "searchPlaceholder": "搜尋支出...",
-    "dailyTotal": "日總計"
+    "noBalances": "暫無餘額記錄"
   },
   "group": {
-    "title": "群組",
-    "subtitle": "與朋友分攤費用",
-    "myExpenses": "我的支出",
-    "totalIncome": "總收入",
     "addGroupExpense": "新增群組支出",
-    "noGroups": "暫無群組。建立第一個群組來開始分攤費用！"
+    "noGroups": "暫無群組。建立第一個群組來開始分攤費用！",
+    "subtitle": "與朋友分攤費用",
+    "title": "群組"
+  },
+  "navigation": {
+    "group": "群組",
+    "personal": "個人",
+    "profile": "個人資料"
+  },
+  "personal": {
+    "balancesTab": "餘額",
+    "expensesTab": "支出"
   },
   "profile": {
-    "title": "個人資料",
-    "settings": "設定",
-    "language": "語言",
-    "theme": "主題",
-    "supportCenter": "支援中心",
-    "about": "關於",
-    "version": "版本",
-    "notifications": "通知",
-    "name": "姓名",
-    "email": "電子郵件",
-    "publicNickname": "公開暱稱",
-    "logout": "登出",
+    "camera": "相機",
     "deleteProfile": "刪除個人資料",
     "editPhoto": "編輯個人照片",
-    "camera": "相機",
-    "photoLibrary": "相片庫"
-  },
-  "categories": {
-    "food": "餐飲",
-    "transport": "交通",
-    "entertainment": "娛樂",
-    "shopping": "購物",
-    "health": "健康",
-    "education": "教育",
-    "other": "其他"
-  },
-  "auth": {
-    "welcome": "Scount",
-    "enterEmail": "輸入您的電子郵件以開始使用",
-    "emailPlaceholder": "輸入您的電子郵件",
-    "sendOTP": "使用電子郵件登入",
-    "sending": "發送中...",
-    "otpSent": "驗證碼已發送！",
-    "otpSentTo": "我們已將6位數驗證碼發送至：",
-    "enterOTP": "輸入驗證碼",
-    "verifyOTP": "驗證代碼",
-    "verifying": "驗證中...",
-    "resendOTP": "重新發送驗證碼",
-    "resendIn": "重新發送倒數",
-    "backToLogin": "返回登入",
-    "didntReceive": "沒有收到嗎？",
-    "checkSpam": "• 檢查您的垃圾郵件/垃圾資料夾\n• 確認電子郵件地址正確\n• 嘗試重新發送驗證碼",
-    "emailRequired": "請輸入您的電子郵件地址",
-    "invalidEmail": "請輸入有效的電子郵件地址",
-    "invalidOTP": "請輸入有效的6位數驗證碼",
-    "otpExpired": "驗證碼已過期，請重新申請。",
-    "otpSentAgain": "驗證碼已重新發送！",
-    "somethingWrong": "出現錯誤，請重試。",
-    "secureLinkDescription": "我們將發送安全驗證碼給您，無需密碼即可登入"
+    "language": "語言",
+    "logout": "登出",
+    "name": "姓名",
+    "notifications": "通知",
+    "photoLibrary": "相片庫",
+    "settings": "設定",
+    "supportCenter": "支援中心",
+    "theme": "主題",
+    "title": "個人資料"
   }
 }

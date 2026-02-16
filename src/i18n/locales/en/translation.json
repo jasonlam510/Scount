@@ -1,108 +1,64 @@
 {
-  "common": {
-    "add": "Add",
-    "edit": "Edit",
-    "delete": "Delete",
-    "save": "Save",
-    "cancel": "Cancel",
-    "back": "Back",
-    "search": "Search",
-    "menu": "Menu",
-    "loading": "Loading...",
-    "initializing": "Initializing...",
-    "error": "Error",
-    "success": "Success",
-    "light": "Light",
-    "dark": "Dark",
-    "automatic": "Automatic"
+  "auth": {
+    "backToLogin": "Back to login",
+    "checkSpam": "• Check your spam/junk folder\n• Make sure the email address is correct\n• Try resending the code",
+    "didntReceive": "Didn't receive it?",
+    "emailPlaceholder": "Enter your email",
+    "emailRequired": "Please enter your email address",
+    "enterOTP": "Enter verification code",
+    "invalidEmail": "Please enter a valid email address",
+    "otpSentAgain": "OTP sent again!",
+    "otpSentTo": "We've sent a 6-digit code to:",
+    "resendIn": "Resend in",
+    "resendOTP": "Resend OTP",
+    "sending": "Sending...",
+    "sendOTP": "Sign in with Email",
+    "somethingWrong": "Something went wrong. Please try again.",
+    "verifying": "Verifying...",
+    "verifyOTP": "Verify Code"
   },
-  "navigation": {
-    "personal": "Personal",
-    "group": "Group",
-    "profile": "Profile"
+  "common": {
+    "automatic": "Automatic",
+    "cancel": "Cancel",
+    "dark": "Dark",
+    "error": "Error",
+    "light": "Light",
+    "loading": "Loading...",
+    "success": "Success"
   },
   "expenses": {
-    "title": "Expenses",
     "addExpense": "Add Expense",
-    "addIncome": "Add Income",
-    "totalExpenses": "Total Expenses",
-    "totalIncome": "Total Income",
-    "balance": "Balance",
-    "noExpenses": "No expenses to show",
-    "noBalances": "No balances to show",
     "expense": "Expense",
     "income": "Income",
-    "amount": "Amount",
-    "currency": "Currency",
-    "description": "Description",
-    "payer": "Payer",
-    "date": "Date",
-    "category": "Category"
-  },
-  "personal": {
-    "title": "Personal",
-    "expensesTab": "Expenses",
-    "balancesTab": "Balances",
-    "searchPlaceholder": "Search expenses...",
-    "dailyTotal": "Daily Total"
+    "noBalances": "No balances to show"
   },
   "group": {
-    "title": "Group",
-    "subtitle": "Split expenses with friends",
-    "myExpenses": "My Expenses",
-    "totalIncome": "Total Income",
     "addGroupExpense": "Add Group Expense",
-    "noGroups": "No groups yet. Create your first group to start splitting expenses!"
+    "noGroups": "No groups yet. Create your first group to start splitting expenses!",
+    "subtitle": "Split expenses with friends",
+    "title": "Group"
+  },
+  "navigation": {
+    "group": "Group",
+    "personal": "Personal",
+    "profile": "Profile"
+  },
+  "personal": {
+    "balancesTab": "Balances",
+    "expensesTab": "Expenses"
   },
   "profile": {
-    "title": "Profile",
-    "settings": "Settings",
-    "language": "Language",
-    "theme": "Theme",
-    "supportCenter": "Support Center",
-    "about": "About",
-    "version": "Version",
-    "notifications": "Notifications",
-    "name": "Name",
-    "email": "Email",
-    "publicNickname": "Public Nickname",
-    "logout": "Log out",
+    "camera": "Camera",
     "deleteProfile": "Delete Profile",
     "editPhoto": "Edit Profile Picture",
-    "camera": "Camera",
-    "photoLibrary": "Photo Library"
-  },
-  "categories": {
-    "food": "Food",
-    "transport": "Transport",
-    "entertainment": "Entertainment",
-    "shopping": "Shopping",
-    "health": "Health",
-    "education": "Education",
-    "other": "Other"
-  },
-  "auth": {
-    "welcome": "Scount",
-    "enterEmail": "Enter your email to get started",
-    "emailPlaceholder": "Enter your email",
-    "sendOTP": "Sign in with Email",
-    "sending": "Sending...",
-    "otpSent": "OTP sent!",
-    "otpSentTo": "We've sent a 6-digit code to:",
-    "enterOTP": "Enter verification code",
-    "verifyOTP": "Verify Code",
-    "verifying": "Verifying...",
-    "resendOTP": "Resend OTP",
-    "resendIn": "Resend in",
-    "backToLogin": "Back to login",
-    "didntReceive": "Didn't receive it?",
-    "checkSpam": "• Check your spam/junk folder\n• Make sure the email address is correct\n• Try resending the code",
-    "emailRequired": "Please enter your email address",
-    "invalidEmail": "Please enter a valid email address",
-    "invalidOTP": "Please enter a valid 6-digit code",
-    "otpExpired": "The verification code has expired. Please request a new one.",
-    "otpSentAgain": "OTP sent again!",
-    "somethingWrong": "Something went wrong. Please try again.",
-    "secureLinkDescription": "We'll send you a secure code to sign in without a password"
+    "language": "Language",
+    "logout": "Log out",
+    "name": "Name",
+    "notifications": "Notifications",
+    "photoLibrary": "Photo Library",
+    "settings": "Settings",
+    "supportCenter": "Support Center",
+    "theme": "Theme",
+    "title": "Profile"
   }
 }

@@ -55,7 +55,8 @@
 - **Component Usage**: Import and use section components from `@/components/features/{feature}`
 
 ## Naming Conventions:
-- **Directories**: kebab-case (`components/expense-item`, `powersync/hooks`)
+- **Component folders**: Each component lives in its own subfolder; folder name must match the component name exactly (including capitalized first letter), e.g. `ProfileScreen/ProfileScreen.tsx`, `SwitchRow/SwitchRow.tsx`
+- **Grouping folders** (folders that group components or other files, not named after a single component): lowercase, no capital letter — kebab-case preferred (`components/expense-item`, `powersync/hooks`, `features/profile/sections`)
 - **Files**: PascalCase for components (`ProfileScreen.tsx`), camelCase for hooks (`useProfile.ts`)
 - **Database**: snake_case tables (`personal_expenses`, `user_id` columns)
 - **Hooks**: Prefix with `use` (`useTheme`, `useUserGroups`, `useProfile`)
@@ -67,6 +68,7 @@
 - Define database types from PowerSync schema: `Database = (typeof AppSchema)['types']`
 - Use string literals instead of enums for better JSON serialization
 - Platform-specific typing: `Platform.OS === 'ios'` for conditional logic
+- **Native vs web**: When logic differs significantly or different libraries are required, split by file extension: `.tsx` for native (iOS/Android), `.web.tsx` for web; bundler resolves the correct file per platform
 
 ## Component Design Principles:
 - **Separation of Concerns**: 

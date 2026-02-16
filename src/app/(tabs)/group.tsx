@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Alert } from "@/components";
 import { useTheme, useI18n } from "@/hooks";
 import { GroupListSection } from "@/components/features/groups";
 import FloatingActionButton from "@/components/FloatingActionButton";

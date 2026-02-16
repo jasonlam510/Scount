@@ -5,9 +5,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { router } from "expo-router";
+import { Alert } from "@/components";
 import { supabase } from "@/lib/supabase";
 import { isValidEmail } from "@/utils";
 import { useI18n, useTheme } from "@/hooks";

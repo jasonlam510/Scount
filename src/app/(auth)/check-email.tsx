@@ -4,11 +4,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   TextInput,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
+import { Alert } from "@/components";
 import { supabase } from "@/lib/supabase";
 import { useI18n, useTheme } from "@/hooks";
 

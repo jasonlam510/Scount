@@ -4,10 +4,10 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  Alert,
   Platform,
   ActionSheetIOS,
 } from "react-native";
+import { Alert } from "@/components";
 import { useTheme, useI18n, useUser } from "@/hooks";
 import { supabase } from "@/lib/supabase";
 import { disconnectDatabase, db } from "@/powersync";

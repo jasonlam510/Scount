@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Alert } from "@/components";
 import { useTheme, useI18n } from "@/hooks";
-import { GroupListSection } from "@/components/features/groups";
+import { GroupListSection } from "@/components/groups";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import { useUserGroupsRealtime } from "@/powersync/hooks/useUserGroups";
 import { Group } from "@/types/groups";

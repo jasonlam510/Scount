@@ -18,7 +18,7 @@ import {
   ProfileSection,
   AppSettingsSection,
   AccountSection,
-} from "@/components/features/profile";
+} from "@/components/profile";
 
 export default function ProfileScreen() {
   const { colors, themeMode, setThemeMode } = useTheme();

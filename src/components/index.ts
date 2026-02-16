@@ -10,5 +10,9 @@ export { default as SummarySection } from "./SummarySection";
 // List components
 export * from "./lists";
 
+// Feature components (groups, profile)
+export * from "./groups";
+export * from "./profile";
+
 // Note: Hooks are exported from src/hooks/index.ts
 // Note: Navigation components are exported from src/components/navigation/index.ts

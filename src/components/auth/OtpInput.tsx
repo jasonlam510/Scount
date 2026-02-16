@@ -113,7 +113,7 @@ export default function OtpInput({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    maxWidth: 320,
+    maxWidth: 300,
     marginBottom: 32,
   },
   label: {

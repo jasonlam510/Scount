@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
   },
   helpContainer: {
     width: "100%",
-    maxWidth: 350,
+    maxWidth: 300,
     borderRadius: 8,
     padding: 16,
     borderWidth: 1,

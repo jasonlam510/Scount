@@ -33,8 +33,12 @@
     "noBalances": "暫無餘額記錄"
   },
   "group": {
-    "addGroupExpense": "新增群組支出",
+    "add": "新增",
+    "joinGroup": "加入現有群組",
+    "joinGroupDesc": "使用邀請連結加入",
     "noGroups": "暫無群組。建立第一個群組來開始分攤費用！",
+    "startGroup": "建立新群組",
+    "startGroupDesc": "從頭開始建立一個新群組",
     "subtitle": "與朋友分攤費用",
     "title": "群組"
   },

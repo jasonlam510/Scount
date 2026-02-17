@@ -33,8 +33,12 @@
     "noBalances": "No balances to show"
   },
   "group": {
-    "addGroupExpense": "Add Group Expense",
+    "add": "Add",
+    "joinGroup": "Join an existing group",
+    "joinGroupDesc": "Use an invite link to join",
     "noGroups": "No groups yet. Create your first group to start splitting expenses!",
+    "startGroup": "Start a new group",
+    "startGroupDesc": "Start a new group from scratch",
     "subtitle": "Split expenses with friends",
     "title": "Group"
   },

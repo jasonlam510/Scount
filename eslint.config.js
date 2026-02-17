@@ -4,13 +4,13 @@ const expoConfig = require("eslint-config-expo/flat");
 const eslintPluginPrettierRecommended = require("eslint-plugin-prettier/recommended");
 
 module.exports = defineConfig([
-  globalIgnores(["dist/*", ".node_modules/"]),
+  globalIgnores(["dist/*", ".node_modules/", ".cursor"]),
   expoConfig,
   eslintPluginPrettierRecommended,
   {
     // Prevent import analysis from parsing bundled third-party artifacts.
     settings: {
-      "import/ignore": ["node_modules"],
+      "import/ignore": ["node_modules", ".cursor"],
     },
   },
   {

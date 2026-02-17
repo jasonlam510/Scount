@@ -1,15 +1,13 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Alert } from "@/components";
-import { useTheme, useI18n } from "@/hooks";
-import { GroupListSection } from "@/components/groups";
-import FloatingActionButton from "@/components/FloatingActionButton";
+import { useTheme } from "@/hooks";
+import { GroupListSection, GroupActionFAB } from "@/components/groups";
 import { useUserGroupsRealtime } from "@/powersync/hooks/useUserGroups";
 import { Group } from "@/types/groups";
 
 export default function GroupScreen() {
   const { colors } = useTheme();
-  const { t } = useI18n();
   const { groups, isLoading, error } = useUserGroupsRealtime();
 
   if (isLoading) {
@@ -26,12 +24,6 @@ export default function GroupScreen() {
     // router.push(`/group/${group.id}`);
   };
 
-  const handleCreateGroup = () => {
-    Alert.alert("Create Group", "Navigate to create group screen");
-    // TODO: Implement create group navigation
-    // router.push('/create-group');
-  };
-
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Group List Section */}
@@ -41,12 +33,8 @@ export default function GroupScreen() {
         onGroupPress={handleGroupPress}
       />
 
-      {/* Floating Action Button for Group */}
-      <FloatingActionButton
-        icon="people"
-        label={t("group.addGroupExpense")}
-        onPress={handleCreateGroup}
-      />
+      {/* Group Action FAB (Start/Join) */}
+      <GroupActionFAB />
     </View>
   );
 }

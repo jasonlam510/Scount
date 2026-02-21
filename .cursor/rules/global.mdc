@@ -1,14 +1,21 @@
 
 # Scount - Personal & Group Expense Tracker
 
-## Project Overview:
-- **Purpose**: Personal and group expense tracking application
-- **Tech Stack**: React Native + Expo, TypeScript, Supabase (DB/Auth), PowerSync (sync engine)
-- **Target Platforms**: iOS, Android, and Web (Multiplatform)
-- **Architecture**: Offline-first with real-time sync
+## REQUIRED CONTEXT (read before developing)
+
+- **Project memory (repo-shared)**: Start with `.cursor/memory/MEMORY.md`
+  - Repo conventions: `.cursor/memory/project-conventions.md`
+  - Architecture notes: `.cursor/memory/architecture.md`
+  - Dev commands: `.cursor/memory/dev-commands.md`
+  - Cross-feature decisions: `.cursor/memory/dev-log.md`
+- **Feature work**: If working on a feature scope, read `.cursor/scopes/<feature>/requirements.md` and `blueprint.md` first.
+
+Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts” and evolving conventions in `.cursor/memory/`.
 
 ## UI/UX Guidelines:
 - **Theme System**: ALWAYS use theme colors from `useTheme()` hook - never hard-code colors
+- **Theme Color Source of Truth**: Theme tokens live in `src/constants/colors.ts` (`lightColors` / `darkColors` via `colorThemes`)
+- **Adding New Colors**: If a new color is required, add it to **both** `lightColors` and `darkColors` (and update `ThemeColors` if introducing a new key)
 - **Mobile-First Design**: Design specifically for iOS and Android mobile platforms
 - **Language Support**: Use i18n keys from `useI18n()` hook - support English and Chinese (繁體中文)
 - **Native Components**: Use ActionSheetIOS for iOS, platform-specific components for Android
@@ -17,13 +24,8 @@
 ## Code Style and Structure:
 - Use concise functional React Native components with TypeScript
 - Prefer hooks and Zustand stores for state management; avoid classes
-- File structure: `src/{app, components, hooks, powersync, zustand, i18n, types, utils, contexts}`
-- Navigation: Expo Router with file-based routing (`app/(tabs)`, `app/(auth)`)
-- Component organization: Feature-based with atomic design:
-  - `src/components/features/{feature}/sections/` - Screen-level composites
-  - `src/components/features/{feature}/components/` - Reusable building blocks
-  - `src/components/ui/` - Generic UI components
-- Follow offline-first architecture: PowerSync for data sync, AsyncStorage for app settings
+- Prefer platform-specific files where behavior differs: `.web.tsx` vs `.tsx`
+- Use `useI18n()` for user-facing strings and `useTheme()` for colors
 
 ## EAS Build Compatibility:
 - **Dependency Constraint**: ONLY use dependencies that are compatible with Expo EAS builds
@@ -45,14 +47,8 @@
 - **No Auto-Create**: Never auto-create records in hooks; return null when not found
 
 ## Screen Architecture:
-- **Location**: Screens are in `src/app/(tabs)/` or `src/app/(auth)/`
-- **Structure**: Each screen file should contain:
-  - State management for screen-specific data
-  - Data fetching logic (useEffect hooks, db queries)
-  - Business logic handlers (api calls, navigation)
-  - Platform-specific handlers passed to components
-- **Data Fetching**: Use `db` from `@/powersync` directly in screen useEffect hooks
-- **Component Usage**: Import and use section components from `@/components/features/{feature}`
+- Screens use Expo Router under `src/app/` (see `.cursor/memory/architecture.md` for entry points).
+- Keep business logic + data access in screen files; keep reusable presentation in components.
 
 ## Naming Conventions:
 - **Component folders**: Each component lives in its own subfolder; folder name must match the component name exactly (including capitalized first letter), e.g. `ProfileScreen/ProfileScreen.tsx`, `SwitchRow/SwitchRow.tsx`

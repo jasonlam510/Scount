@@ -10,6 +10,8 @@ export interface ThemeColors {
   accent: string;
   success: string;
   danger: string;
+  /** Search bar filled background (e.g. iOS-style dark gray field) */
+  searchBarBackground: string;
 }
 
 // Light theme colors
@@ -24,6 +26,7 @@ export const lightColors: ThemeColors = {
   accent: "#007AFF",
   success: "#34c759",
   danger: "#ff3b30",
+  searchBarBackground: "#E5E5EA",
 };
 
 // Dark theme colors
@@ -38,6 +41,7 @@ export const darkColors: ThemeColors = {
   accent: "#007AFF",
   success: "#34c759",
   danger: "#ff3b30",
+  searchBarBackground: "#2C2C2E",
 };
 
 // Export all color themes

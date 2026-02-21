@@ -24,7 +24,15 @@
     "error": "錯誤",
     "light": "淺色",
     "loading": "載入中...",
+    "more": "更多…",
     "success": "成功"
+  },
+  "currency_selector": {
+    "clear_search": "清除搜尋",
+    "no_results": "找不到符合的貨幣…",
+    "search_placeholder": "以名稱或代碼搜尋",
+    "suggestions": "建議",
+    "title": "選擇貨幣"
   },
   "expenses": {
     "addExpense": "新增支出",
@@ -34,6 +42,10 @@
   },
   "group": {
     "add": "新增",
+    "createCurrency": "貨幣",
+    "createCurrencyPlaceholder": "選擇貨幣",
+    "createName": "群組名稱",
+    "createNamePlaceholder": "輸入群組名稱",
     "joinGroup": "加入現有群組",
     "joinGroupDesc": "使用邀請連結加入",
     "noGroups": "暫無群組。建立第一個群組來開始分攤費用！",

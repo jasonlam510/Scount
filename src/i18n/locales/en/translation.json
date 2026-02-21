@@ -24,7 +24,15 @@
     "error": "Error",
     "light": "Light",
     "loading": "Loading...",
+    "more": "More…",
     "success": "Success"
+  },
+  "currency_selector": {
+    "clear_search": "Clear search",
+    "no_results": "No currencies found…",
+    "search_placeholder": "Search by name or code",
+    "suggestions": "Suggestions",
+    "title": "Select currency"
   },
   "expenses": {
     "addExpense": "Add Expense",
@@ -34,6 +42,10 @@
   },
   "group": {
     "add": "Add",
+    "createCurrency": "Currency",
+    "createCurrencyPlaceholder": "Select currency",
+    "createName": "Group name",
+    "createNamePlaceholder": "Enter group name",
     "joinGroup": "Join an existing group",
     "joinGroupDesc": "Use an invite link to join",
     "noGroups": "No groups yet. Create your first group to start splitting expenses!",

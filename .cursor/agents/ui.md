@@ -39,7 +39,7 @@ The `uiux.md` file MUST include:
 - **Atomic Design Details**: For every labeled element:
   - **Copywriting**: Exact text (i18n keys when known).
   - **Typography**: Font family, weight, size (px/Tailwind), line-height, letter-spacing.
-  - **Colors**: Hex codes + Tailwind equivalents for bg/border/text/icon states.
+  - **Colors**: Use project color tokens from `src/constants/colors.ts` (light + dark). Prefer token references over raw hex.
   - **Spacing**: Margin/Padding in px/Tailwind units. Exact positioning.
   - **States**: `:hover`, `:active`, `:focus`, `:disabled`, `empty/loading/error` styles.
   - **Assets**: Exact filenames and where they come from (crops from capscreen, existing assets, or newly requested assets).
@@ -66,6 +66,24 @@ The `uiux.md` file MUST include:
 - **CSS Framework**: No inline styles. Use project design tokens and CSS framework.
 - **Template Pattern**: Render variant classes in templates, not in backend logic.
 - **I18n**: Use project's i18n pattern for all UI text.
+
+## Project Conventions (Scount)
+
+### Colors / Theme Tokens (MANDATORY)
+
+- **Source of truth**: `src/constants/colors.ts`
+  - Use `lightColors` / `darkColors` keys (or `colorThemes.light|dark`) for UI color references.
+- **Reuse first**: If a needed color already exists as a token, **reference that token** (do not invent new hex values).
+- **If missing**:
+  - Add a new token name and specify **both** light and dark values to be added to `src/constants/colors.ts`.
+  - Include the exact code snippet to add under **both** `lightColors` and `darkColors` (and `ThemeColors` interface if a new key is introduced).
+  - If the token should also be available as a non-themed constant, specify whether it belongs in the exported `colors` object too.
+
+### uiux.md Token Reporting
+
+- For any screen/component, include a short **“Color tokens used”** list that maps:
+  - `background/surface/primary/text/textSecondary/border/...` → `colorThemes.light.<key>` / `colorThemes.dark.<key>`
+- If you propose new tokens, add a **“Required token additions”** section with light+dark values and the file path (`src/constants/colors.ts`).
 
 ## Communication Pattern
 - Format: `## [HH:MM] - UI - [STATUS]: [CONCISE MESSAGE]`

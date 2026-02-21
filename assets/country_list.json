@@ -1,0 +1,3199 @@
+[
+  {
+    "codeAlpha2": "AF",
+    "codeAlpha3": "AFG",
+    "name": "Afghanistan",
+    "flag": "🇦🇫",
+    "prefix": "+93",
+    "iso4217": {
+      "currency": "Afghani",
+      "code": "AFN",
+      "numeric": "971",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AX",
+    "codeAlpha3": "ALA",
+    "name": "Åland Islands",
+    "flag": "🇦🇽",
+    "prefix": "+358",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AL",
+    "codeAlpha3": "ALB",
+    "name": "Albania",
+    "flag": "🇦🇱",
+    "prefix": "+355",
+    "iso4217": {
+      "currency": "Lek",
+      "code": "ALL",
+      "numeric": "008",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "DZ",
+    "codeAlpha3": "DZA",
+    "name": "Algeria",
+    "flag": "🇩🇿",
+    "prefix": "+213",
+    "iso4217": {
+      "currency": "Algerian Dinar",
+      "code": "DZD",
+      "numeric": "012",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AS",
+    "codeAlpha3": "ASM",
+    "name": "American Samoa",
+    "flag": "🇦🇸",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AD",
+    "codeAlpha3": "AND",
+    "name": "Andorra",
+    "flag": "🇦🇩",
+    "prefix": "+376",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AO",
+    "codeAlpha3": "AGO",
+    "name": "Angola",
+    "flag": "🇦🇴",
+    "prefix": "+244",
+    "iso4217": {
+      "currency": "Kwanza",
+      "code": "AOA",
+      "numeric": "973",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AI",
+    "codeAlpha3": "AIA",
+    "name": "Anguilla",
+    "flag": "🇦🇮",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AQ",
+    "codeAlpha3": "ATA",
+    "name": "Antarctica",
+    "flag": "🇦🇶",
+    "prefix": "+672",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "AG",
+    "codeAlpha3": "ATG",
+    "name": "Antigua and Barbuda",
+    "flag": "🇦🇬",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AR",
+    "codeAlpha3": "ARG",
+    "name": "Argentina",
+    "flag": "🇦🇷",
+    "prefix": "+54",
+    "iso4217": {
+      "currency": "Argentine Peso",
+      "code": "ARS",
+      "numeric": "032",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AM",
+    "codeAlpha3": "ARM",
+    "name": "Armenia",
+    "flag": "🇦🇲",
+    "prefix": "+374",
+    "iso4217": {
+      "currency": "Armenian Dram",
+      "code": "AMD",
+      "numeric": "051",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AW",
+    "codeAlpha3": "ABW",
+    "name": "Aruba",
+    "flag": "🇦🇼",
+    "prefix": "+297",
+    "iso4217": {
+      "currency": "Aruban Florin",
+      "code": "AWG",
+      "numeric": "533",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AU",
+    "codeAlpha3": "AUS",
+    "name": "Australia",
+    "flag": "🇦🇺",
+    "prefix": "+61",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AT",
+    "codeAlpha3": "AUT",
+    "name": "Austria",
+    "flag": "🇦🇹",
+    "prefix": "+43",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AZ",
+    "codeAlpha3": "AZE",
+    "name": "Azerbaijan",
+    "flag": "🇦🇿",
+    "prefix": "+994",
+    "iso4217": {
+      "currency": "Azerbaijan Manat",
+      "code": "AZN",
+      "numeric": "944",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BS",
+    "codeAlpha3": "BHS",
+    "name": "Bahamas",
+    "flag": "🇧🇸",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Bahamian Dollar",
+      "code": "BSD",
+      "numeric": "044",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BH",
+    "codeAlpha3": "BHR",
+    "name": "Bahrain",
+    "flag": "🇧🇭",
+    "prefix": "+973",
+    "iso4217": {
+      "currency": "Bahraini Dinar",
+      "code": "BHD",
+      "numeric": "048",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "BD",
+    "codeAlpha3": "BGD",
+    "name": "Bangladesh",
+    "flag": "🇧🇩",
+    "prefix": "+880",
+    "iso4217": {
+      "currency": "Taka",
+      "code": "BDT",
+      "numeric": "050",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BB",
+    "codeAlpha3": "BRB",
+    "name": "Barbados",
+    "flag": "🇧🇧",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Barbados Dollar",
+      "code": "BBD",
+      "numeric": "052",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BY",
+    "codeAlpha3": "BLR",
+    "name": "Belarus",
+    "flag": "🇧🇾",
+    "prefix": "+375",
+    "iso4217": {
+      "currency": "Belarusian Ruble",
+      "code": "BYN",
+      "numeric": "933",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BE",
+    "codeAlpha3": "BEL",
+    "name": "Belgium",
+    "flag": "🇧🇪",
+    "prefix": "+32",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BZ",
+    "codeAlpha3": "BLZ",
+    "name": "Belize",
+    "flag": "🇧🇿",
+    "prefix": "+501",
+    "iso4217": {
+      "currency": "Belize Dollar",
+      "code": "BZD",
+      "numeric": "084",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BJ",
+    "codeAlpha3": "BEN",
+    "name": "Benin",
+    "flag": "🇧🇯",
+    "prefix": "+229",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "BM",
+    "codeAlpha3": "BMU",
+    "name": "Bermuda",
+    "flag": "🇧🇲",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Bermudian Dollar",
+      "code": "BMD",
+      "numeric": "060",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BT",
+    "codeAlpha3": "BTN",
+    "name": "Bhutan",
+    "flag": "🇧🇹",
+    "prefix": "+975",
+    "iso4217": {
+      "currency": "Indian Rupee",
+      "code": "INR",
+      "numeric": "356",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BO",
+    "codeAlpha3": "BOL",
+    "name": "Bolivia (Plurinational State of)",
+    "flag": "🇧🇴",
+    "prefix": "+591",
+    "iso4217": {
+      "currency": "Boliviano",
+      "code": "BOB",
+      "numeric": "068",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BQ",
+    "codeAlpha3": "BES",
+    "name": "Bonaire, Sint Eustatius and Saba",
+    "flag": "🇧🇶",
+    "prefix": "+599",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BA",
+    "codeAlpha3": "BIH",
+    "name": "Bosnia and Herzegovina",
+    "flag": "🇧🇦",
+    "prefix": "+387",
+    "iso4217": {
+      "currency": "Convertible Mark",
+      "code": "BAM",
+      "numeric": "977",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BW",
+    "codeAlpha3": "BWA",
+    "name": "Botswana",
+    "flag": "🇧🇼",
+    "prefix": "+267",
+    "iso4217": {
+      "currency": "Pula",
+      "code": "BWP",
+      "numeric": "072",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BV",
+    "codeAlpha3": "BVT",
+    "name": "Bouvet Island",
+    "flag": "🇧🇻",
+    "prefix": "+47",
+    "iso4217": {
+      "currency": "Norwegian Krone",
+      "code": "NOK",
+      "numeric": "578",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BR",
+    "codeAlpha3": "BRA",
+    "name": "Brazil",
+    "flag": "🇧🇷",
+    "prefix": "+55",
+    "iso4217": {
+      "currency": "Brazilian Real",
+      "code": "BRL",
+      "numeric": "986",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IO",
+    "codeAlpha3": "IOT",
+    "name": "British Indian Ocean Territory",
+    "flag": "🇮🇴",
+    "prefix": "+246",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BN",
+    "codeAlpha3": "BRN",
+    "name": "Brunei Darussalam",
+    "flag": "🇧🇳",
+    "prefix": "+673",
+    "iso4217": {
+      "currency": "Brunei Dollar",
+      "code": "BND",
+      "numeric": "096",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BG",
+    "codeAlpha3": "BGR",
+    "name": "Bulgaria",
+    "flag": "🇧🇬",
+    "prefix": "+359",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "BF",
+    "codeAlpha3": "BFA",
+    "name": "Burkina Faso",
+    "flag": "🇧🇫",
+    "prefix": "+226",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "BI",
+    "codeAlpha3": "BDI",
+    "name": "Burundi",
+    "flag": "🇧🇮",
+    "prefix": "+257",
+    "iso4217": {
+      "currency": "Burundi Franc",
+      "code": "BIF",
+      "numeric": "108",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CV",
+    "codeAlpha3": "CPV",
+    "name": "Cabo Verde",
+    "flag": "🇨🇻",
+    "prefix": "+238",
+    "iso4217": {
+      "currency": "Cabo Verde Escudo",
+      "code": "CVE",
+      "numeric": "132",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KH",
+    "codeAlpha3": "KHM",
+    "name": "Cambodia",
+    "flag": "🇰🇭",
+    "prefix": "+855",
+    "iso4217": {
+      "currency": "Riel",
+      "code": "KHR",
+      "numeric": "116",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CM",
+    "codeAlpha3": "CMR",
+    "name": "Cameroon",
+    "flag": "🇨🇲",
+    "prefix": "+237",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CA",
+    "codeAlpha3": "CAN",
+    "name": "Canada",
+    "flag": "🇨🇦",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Canadian Dollar",
+      "code": "CAD",
+      "numeric": "124",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KY",
+    "codeAlpha3": "CYM",
+    "name": "Cayman Islands",
+    "flag": "🇰🇾",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Cayman Islands Dollar",
+      "code": "KYD",
+      "numeric": "136",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CF",
+    "codeAlpha3": "CAF",
+    "name": "Central African Republic",
+    "flag": "🇨🇫",
+    "prefix": "+236",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "TD",
+    "codeAlpha3": "TCD",
+    "name": "Chad",
+    "flag": "🇹🇩",
+    "prefix": "+235",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CL",
+    "codeAlpha3": "CHL",
+    "name": "Chile",
+    "flag": "🇨🇱",
+    "prefix": "+56",
+    "iso4217": {
+      "currency": "Chilean Peso",
+      "code": "CLP",
+      "numeric": "152",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CN",
+    "codeAlpha3": "CHN",
+    "name": "China",
+    "flag": "🇨🇳",
+    "prefix": "+86",
+    "iso4217": {
+      "currency": "Yuan Renminbi",
+      "code": "CNY",
+      "numeric": "156",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CX",
+    "codeAlpha3": "CXR",
+    "name": "Christmas Island",
+    "flag": "🇨🇽",
+    "prefix": "+61",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CC",
+    "codeAlpha3": "CCK",
+    "name": "Cocos (Keeling) Islands",
+    "flag": "🇨🇨",
+    "prefix": "+61",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CO",
+    "codeAlpha3": "COL",
+    "name": "Colombia",
+    "flag": "🇨🇴",
+    "prefix": "+57",
+    "iso4217": {
+      "currency": "Colombian Peso",
+      "code": "COP",
+      "numeric": "170",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KM",
+    "codeAlpha3": "COM",
+    "name": "Comoros",
+    "flag": "🇰🇲",
+    "prefix": "+269",
+    "iso4217": {
+      "currency": "Comorian Franc",
+      "code": "KMF",
+      "numeric": "174",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CG",
+    "codeAlpha3": "COG",
+    "name": "Congo",
+    "flag": "🇨🇬",
+    "prefix": "+242",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "CD",
+    "codeAlpha3": "COD",
+    "name": "Congo (Democratic Republic of the)",
+    "flag": "🇨🇩",
+    "prefix": "+243",
+    "iso4217": {
+      "currency": "Congolese Franc",
+      "code": "CDF",
+      "numeric": "976",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CK",
+    "codeAlpha3": "COK",
+    "name": "Cook Islands",
+    "flag": "🇨🇰",
+    "prefix": "+682",
+    "iso4217": {
+      "currency": "New Zealand Dollar",
+      "code": "NZD",
+      "numeric": "554",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CR",
+    "codeAlpha3": "CRI",
+    "name": "Costa Rica",
+    "flag": "🇨🇷",
+    "prefix": "+506",
+    "iso4217": {
+      "currency": "Costa Rican Colon",
+      "code": "CRC",
+      "numeric": "188",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CI",
+    "codeAlpha3": "CIV",
+    "name": "Côte d'Ivoire",
+    "flag": "🇨🇮",
+    "prefix": "+225",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "HR",
+    "codeAlpha3": "HRV",
+    "name": "Croatia",
+    "flag": "🇭🇷",
+    "prefix": "+385",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CU",
+    "codeAlpha3": "CUB",
+    "name": "Cuba",
+    "flag": "🇨🇺",
+    "prefix": "+53",
+    "iso4217": {
+      "currency": "Cuban Peso",
+      "code": "CUP",
+      "numeric": "192",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CW",
+    "codeAlpha3": "CUW",
+    "name": "Curaçao",
+    "flag": "🇨🇼",
+    "prefix": "+599",
+    "iso4217": {
+      "currency": "Caribbean Guilder",
+      "code": "XCG",
+      "numeric": "532",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CY",
+    "codeAlpha3": "CYP",
+    "name": "Cyprus",
+    "flag": "🇨🇾",
+    "prefix": "+357",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CZ",
+    "codeAlpha3": "CZE",
+    "name": "Czechia",
+    "flag": "🇨🇿",
+    "prefix": "+420",
+    "iso4217": {
+      "currency": "Czech Koruna",
+      "code": "CZK",
+      "numeric": "203",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "DK",
+    "codeAlpha3": "DNK",
+    "name": "Denmark",
+    "flag": "🇩🇰",
+    "prefix": "+45",
+    "iso4217": {
+      "currency": "Danish Krone",
+      "code": "DKK",
+      "numeric": "208",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "DJ",
+    "codeAlpha3": "DJI",
+    "name": "Djibouti",
+    "flag": "🇩🇯",
+    "prefix": "+253",
+    "iso4217": {
+      "currency": "Djibouti Franc",
+      "code": "DJF",
+      "numeric": "262",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "DM",
+    "codeAlpha3": "DMA",
+    "name": "Dominica",
+    "flag": "🇩🇲",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "DO",
+    "codeAlpha3": "DOM",
+    "name": "Dominican Republic",
+    "flag": "🇩🇴",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Dominican Peso",
+      "code": "DOP",
+      "numeric": "214",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "EC",
+    "codeAlpha3": "ECU",
+    "name": "Ecuador",
+    "flag": "🇪🇨",
+    "prefix": "+593",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "EG",
+    "codeAlpha3": "EGY",
+    "name": "Egypt",
+    "flag": "🇪🇬",
+    "prefix": "+20",
+    "iso4217": {
+      "currency": "Egyptian Pound",
+      "code": "EGP",
+      "numeric": "818",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SV",
+    "codeAlpha3": "SLV",
+    "name": "El Salvador",
+    "flag": "🇸🇻",
+    "prefix": "+503",
+    "iso4217": {
+      "currency": "El Salvador Colon",
+      "code": "SVC",
+      "numeric": "222",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GQ",
+    "codeAlpha3": "GNQ",
+    "name": "Equatorial Guinea",
+    "flag": "🇬🇶",
+    "prefix": "+240",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "ER",
+    "codeAlpha3": "ERI",
+    "name": "Eritrea",
+    "flag": "🇪🇷",
+    "prefix": "+291",
+    "iso4217": {
+      "currency": "Nakfa",
+      "code": "ERN",
+      "numeric": "232",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "EE",
+    "codeAlpha3": "EST",
+    "name": "Estonia",
+    "flag": "🇪🇪",
+    "prefix": "+372",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ET",
+    "codeAlpha3": "ETH",
+    "name": "Ethiopia",
+    "flag": "🇪🇹",
+    "prefix": "+251",
+    "iso4217": {
+      "currency": "Ethiopian Birr",
+      "code": "ETB",
+      "numeric": "230",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FK",
+    "codeAlpha3": "FLK",
+    "name": "Falkland Islands (Malvinas)",
+    "flag": "🇫🇰",
+    "prefix": "+500",
+    "iso4217": {
+      "currency": "Falkland Islands Pound",
+      "code": "FKP",
+      "numeric": "238",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FO",
+    "codeAlpha3": "FRO",
+    "name": "Faroe Islands",
+    "flag": "🇫🇴",
+    "prefix": "+298",
+    "iso4217": {
+      "currency": "Danish Krone",
+      "code": "DKK",
+      "numeric": "208",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FJ",
+    "codeAlpha3": "FJI",
+    "name": "Fiji",
+    "flag": "🇫🇯",
+    "prefix": "+679",
+    "iso4217": {
+      "currency": "Fiji Dollar",
+      "code": "FJD",
+      "numeric": "242",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FI",
+    "codeAlpha3": "FIN",
+    "name": "Finland",
+    "flag": "🇫🇮",
+    "prefix": "+358",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FR",
+    "codeAlpha3": "FRA",
+    "name": "France",
+    "flag": "🇫🇷",
+    "prefix": "+33",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GF",
+    "codeAlpha3": "GUF",
+    "name": "French Guiana",
+    "flag": "🇬🇫",
+    "prefix": "+594",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PF",
+    "codeAlpha3": "PYF",
+    "name": "French Polynesia",
+    "flag": "🇵🇫",
+    "prefix": "+689",
+    "iso4217": {
+      "currency": "CFP Franc",
+      "code": "XPF",
+      "numeric": "953",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "TF",
+    "codeAlpha3": "ATF",
+    "name": "French Southern Territories",
+    "flag": "🇹🇫",
+    "prefix": "+262",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GA",
+    "codeAlpha3": "GAB",
+    "name": "Gabon",
+    "flag": "🇬🇦",
+    "prefix": "+241",
+    "iso4217": {
+      "currency": "CFA Franc BEAC",
+      "code": "XAF",
+      "numeric": "950",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "GM",
+    "codeAlpha3": "GMB",
+    "name": "Gambia",
+    "flag": "🇬🇲",
+    "prefix": "+220",
+    "iso4217": {
+      "currency": "Dalasi",
+      "code": "GMD",
+      "numeric": "270",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GE",
+    "codeAlpha3": "GEO",
+    "name": "Georgia",
+    "flag": "🇬🇪",
+    "prefix": "+995",
+    "iso4217": {
+      "currency": "Lari",
+      "code": "GEL",
+      "numeric": "981",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "DE",
+    "codeAlpha3": "DEU",
+    "name": "Germany",
+    "flag": "🇩🇪",
+    "prefix": "+49",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GH",
+    "codeAlpha3": "GHA",
+    "name": "Ghana",
+    "flag": "🇬🇭",
+    "prefix": "+233",
+    "iso4217": {
+      "currency": "Ghana Cedi",
+      "code": "GHS",
+      "numeric": "936",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GI",
+    "codeAlpha3": "GIB",
+    "name": "Gibraltar",
+    "flag": "🇬🇮",
+    "prefix": "+350",
+    "iso4217": {
+      "currency": "Gibraltar Pound",
+      "code": "GIP",
+      "numeric": "292",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GR",
+    "codeAlpha3": "GRC",
+    "name": "Greece",
+    "flag": "🇬🇷",
+    "prefix": "+30",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GL",
+    "codeAlpha3": "GRL",
+    "name": "Greenland",
+    "flag": "🇬🇱",
+    "prefix": "+299",
+    "iso4217": {
+      "currency": "Danish Krone",
+      "code": "DKK",
+      "numeric": "208",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GD",
+    "codeAlpha3": "GRD",
+    "name": "Grenada",
+    "flag": "🇬🇩",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GP",
+    "codeAlpha3": "GLP",
+    "name": "Guadeloupe",
+    "flag": "🇬🇵",
+    "prefix": "+590",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GU",
+    "codeAlpha3": "GUM",
+    "name": "Guam",
+    "flag": "🇬🇺",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GT",
+    "codeAlpha3": "GTM",
+    "name": "Guatemala",
+    "flag": "🇬🇹",
+    "prefix": "+502",
+    "iso4217": {
+      "currency": "Quetzal",
+      "code": "GTQ",
+      "numeric": "320",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GG",
+    "codeAlpha3": "GGY",
+    "name": "Guernsey",
+    "flag": "🇬🇬",
+    "prefix": "+44",
+    "iso4217": {
+      "currency": "Pound Sterling",
+      "code": "GBP",
+      "numeric": "826",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GN",
+    "codeAlpha3": "GIN",
+    "name": "Guinea",
+    "flag": "🇬🇳",
+    "prefix": "+224",
+    "iso4217": {
+      "currency": "Guinean Franc",
+      "code": "GNF",
+      "numeric": "324",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "GW",
+    "codeAlpha3": "GNB",
+    "name": "Guinea-Bissau",
+    "flag": "🇬🇼",
+    "prefix": "+245",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "GY",
+    "codeAlpha3": "GUY",
+    "name": "Guyana",
+    "flag": "🇬🇾",
+    "prefix": "+592",
+    "iso4217": {
+      "currency": "Guyana Dollar",
+      "code": "GYD",
+      "numeric": "328",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "HT",
+    "codeAlpha3": "HTI",
+    "name": "Haiti",
+    "flag": "🇭🇹",
+    "prefix": "+509",
+    "iso4217": {
+      "currency": "Gourde",
+      "code": "HTG",
+      "numeric": "332",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "HM",
+    "codeAlpha3": "HMD",
+    "name": "Heard Island and McDonald Islands",
+    "flag": "🇭🇲",
+    "prefix": "+672",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "VA",
+    "codeAlpha3": "VAT",
+    "name": "Holy See",
+    "flag": "🇻🇦",
+    "prefix": "+379",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "HN",
+    "codeAlpha3": "HND",
+    "name": "Honduras",
+    "flag": "🇭🇳",
+    "prefix": "+504",
+    "iso4217": {
+      "currency": "Lempira",
+      "code": "HNL",
+      "numeric": "340",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "HK",
+    "codeAlpha3": "HKG",
+    "name": "Hong Kong",
+    "flag": "🇭🇰",
+    "prefix": "+852",
+    "iso4217": {
+      "currency": "Hong Kong Dollar",
+      "code": "HKD",
+      "numeric": "344",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "HU",
+    "codeAlpha3": "HUN",
+    "name": "Hungary",
+    "flag": "🇭🇺",
+    "prefix": "+36",
+    "iso4217": {
+      "currency": "Forint",
+      "code": "HUF",
+      "numeric": "348",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IS",
+    "codeAlpha3": "ISL",
+    "name": "Iceland",
+    "flag": "🇮🇸",
+    "prefix": "+354",
+    "iso4217": {
+      "currency": "Iceland Krona",
+      "code": "ISK",
+      "numeric": "352",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "IN",
+    "codeAlpha3": "IND",
+    "name": "India",
+    "flag": "🇮🇳",
+    "prefix": "+91",
+    "iso4217": {
+      "currency": "Indian Rupee",
+      "code": "INR",
+      "numeric": "356",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ID",
+    "codeAlpha3": "IDN",
+    "name": "Indonesia",
+    "flag": "🇮🇩",
+    "prefix": "+62",
+    "iso4217": {
+      "currency": "Rupiah",
+      "code": "IDR",
+      "numeric": "360",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IR",
+    "codeAlpha3": "IRN",
+    "name": "Iran (Islamic Republic of)",
+    "flag": "🇮🇷",
+    "prefix": "+98",
+    "iso4217": {
+      "currency": "Iranian Rial",
+      "code": "IRR",
+      "numeric": "364",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IQ",
+    "codeAlpha3": "IRQ",
+    "name": "Iraq",
+    "flag": "🇮🇶",
+    "prefix": "+964",
+    "iso4217": {
+      "currency": "Iraqi Dinar",
+      "code": "IQD",
+      "numeric": "368",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "IE",
+    "codeAlpha3": "IRL",
+    "name": "Ireland",
+    "flag": "🇮🇪",
+    "prefix": "+353",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IM",
+    "codeAlpha3": "IMN",
+    "name": "Isle of Man",
+    "flag": "🇮🇲",
+    "prefix": "+44",
+    "iso4217": {
+      "currency": "Pound Sterling",
+      "code": "GBP",
+      "numeric": "826",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IL",
+    "codeAlpha3": "ISR",
+    "name": "Israel",
+    "flag": "🇮🇱",
+    "prefix": "+972",
+    "iso4217": {
+      "currency": "New Israeli Sheqel",
+      "code": "ILS",
+      "numeric": "376",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "IT",
+    "codeAlpha3": "ITA",
+    "name": "Italy",
+    "flag": "🇮🇹",
+    "prefix": "+39",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "JM",
+    "codeAlpha3": "JAM",
+    "name": "Jamaica",
+    "flag": "🇯🇲",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Jamaican Dollar",
+      "code": "JMD",
+      "numeric": "388",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "JP",
+    "codeAlpha3": "JPN",
+    "name": "Japan",
+    "flag": "🇯🇵",
+    "prefix": "+81",
+    "iso4217": {
+      "currency": "Yen",
+      "code": "JPY",
+      "numeric": "392",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "JE",
+    "codeAlpha3": "JEY",
+    "name": "Jersey",
+    "flag": "🇯🇪",
+    "prefix": "+44",
+    "iso4217": {
+      "currency": "Pound Sterling",
+      "code": "GBP",
+      "numeric": "826",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "JO",
+    "codeAlpha3": "JOR",
+    "name": "Jordan",
+    "flag": "🇯🇴",
+    "prefix": "+962",
+    "iso4217": {
+      "currency": "Jordanian Dinar",
+      "code": "JOD",
+      "numeric": "400",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "KZ",
+    "codeAlpha3": "KAZ",
+    "name": "Kazakhstan",
+    "flag": "🇰🇿",
+    "prefix": "+7",
+    "iso4217": {
+      "currency": "Tenge",
+      "code": "KZT",
+      "numeric": "398",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KE",
+    "codeAlpha3": "KEN",
+    "name": "Kenya",
+    "flag": "🇰🇪",
+    "prefix": "+254",
+    "iso4217": {
+      "currency": "Kenyan Shilling",
+      "code": "KES",
+      "numeric": "404",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KI",
+    "codeAlpha3": "KIR",
+    "name": "Kiribati",
+    "flag": "🇰🇮",
+    "prefix": "+686",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KP",
+    "codeAlpha3": "PRK",
+    "name": "Korea (Democratic People's Republic of)",
+    "flag": "🇰🇵",
+    "prefix": "+850",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "KR",
+    "codeAlpha3": "KOR",
+    "name": "Korea (Republic of)",
+    "flag": "🇰🇷",
+    "prefix": "+82",
+    "iso4217": {
+      "currency": "Won",
+      "code": "KRW",
+      "numeric": "410",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "KW",
+    "codeAlpha3": "KWT",
+    "name": "Kuwait",
+    "flag": "🇰🇼",
+    "prefix": "+965",
+    "iso4217": {
+      "currency": "Kuwaiti Dinar",
+      "code": "KWD",
+      "numeric": "414",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "KG",
+    "codeAlpha3": "KGZ",
+    "name": "Kyrgyzstan",
+    "flag": "🇰🇬",
+    "prefix": "+996",
+    "iso4217": {
+      "currency": "Som",
+      "code": "KGS",
+      "numeric": "417",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LA",
+    "codeAlpha3": "LAO",
+    "name": "Lao People's Democratic Republic",
+    "flag": "🇱🇦",
+    "prefix": "+856",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "LV",
+    "codeAlpha3": "LVA",
+    "name": "Latvia",
+    "flag": "🇱🇻",
+    "prefix": "+371",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LB",
+    "codeAlpha3": "LBN",
+    "name": "Lebanon",
+    "flag": "🇱🇧",
+    "prefix": "+961",
+    "iso4217": {
+      "currency": "Lebanese Pound",
+      "code": "LBP",
+      "numeric": "422",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LS",
+    "codeAlpha3": "LSO",
+    "name": "Lesotho",
+    "flag": "🇱🇸",
+    "prefix": "+266",
+    "iso4217": {
+      "currency": "Loti",
+      "code": "LSL",
+      "numeric": "426",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LR",
+    "codeAlpha3": "LBR",
+    "name": "Liberia",
+    "flag": "🇱🇷",
+    "prefix": "+231",
+    "iso4217": {
+      "currency": "Liberian Dollar",
+      "code": "LRD",
+      "numeric": "430",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LY",
+    "codeAlpha3": "LBY",
+    "name": "Libya",
+    "flag": "🇱🇾",
+    "prefix": "+218",
+    "iso4217": {
+      "currency": "Libyan Dinar",
+      "code": "LYD",
+      "numeric": "434",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "LI",
+    "codeAlpha3": "LIE",
+    "name": "Liechtenstein",
+    "flag": "🇱🇮",
+    "prefix": "+423",
+    "iso4217": {
+      "currency": "Swiss Franc",
+      "code": "CHF",
+      "numeric": "756",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LT",
+    "codeAlpha3": "LTU",
+    "name": "Lithuania",
+    "flag": "🇱🇹",
+    "prefix": "+370",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LU",
+    "codeAlpha3": "LUX",
+    "name": "Luxembourg",
+    "flag": "🇱🇺",
+    "prefix": "+352",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MO",
+    "codeAlpha3": "MAC",
+    "name": "Macao",
+    "flag": "🇲🇴",
+    "prefix": "+853",
+    "iso4217": {
+      "currency": "Pataca",
+      "code": "MOP",
+      "numeric": "446",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MK",
+    "codeAlpha3": "MKD",
+    "name": "Macedonia (the former Yugoslav Republic of)",
+    "flag": "🇲🇰",
+    "prefix": "+389",
+    "iso4217": {
+      "currency": "Denar",
+      "code": "MKD",
+      "numeric": "807",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MG",
+    "codeAlpha3": "MDG",
+    "name": "Madagascar",
+    "flag": "🇲🇬",
+    "prefix": "+261",
+    "iso4217": {
+      "currency": "Malagasy Ariary",
+      "code": "MGA",
+      "numeric": "969",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MW",
+    "codeAlpha3": "MWI",
+    "name": "Malawi",
+    "flag": "🇲🇼",
+    "prefix": "+265",
+    "iso4217": {
+      "currency": "Malawi Kwacha",
+      "code": "MWK",
+      "numeric": "454",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MY",
+    "codeAlpha3": "MYS",
+    "name": "Malaysia",
+    "flag": "🇲🇾",
+    "prefix": "+60",
+    "iso4217": {
+      "currency": "Malaysian Ringgit",
+      "code": "MYR",
+      "numeric": "458",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MV",
+    "codeAlpha3": "MDV",
+    "name": "Maldives",
+    "flag": "🇲🇻",
+    "prefix": "+960",
+    "iso4217": {
+      "currency": "Rufiyaa",
+      "code": "MVR",
+      "numeric": "462",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ML",
+    "codeAlpha3": "MLI",
+    "name": "Mali",
+    "flag": "🇲🇱",
+    "prefix": "+223",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "MT",
+    "codeAlpha3": "MLT",
+    "name": "Malta",
+    "flag": "🇲🇹",
+    "prefix": "+356",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MH",
+    "codeAlpha3": "MHL",
+    "name": "Marshall Islands",
+    "flag": "🇲🇭",
+    "prefix": "+692",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MQ",
+    "codeAlpha3": "MTQ",
+    "name": "Martinique",
+    "flag": "🇲🇶",
+    "prefix": "+596",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MR",
+    "codeAlpha3": "MRT",
+    "name": "Mauritania",
+    "flag": "🇲🇷",
+    "prefix": "+222",
+    "iso4217": {
+      "currency": "Ouguiya",
+      "code": "MRU",
+      "numeric": "929",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MU",
+    "codeAlpha3": "MUS",
+    "name": "Mauritius",
+    "flag": "🇲🇺",
+    "prefix": "+230",
+    "iso4217": {
+      "currency": "Mauritius Rupee",
+      "code": "MUR",
+      "numeric": "480",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "YT",
+    "codeAlpha3": "MYT",
+    "name": "Mayotte",
+    "flag": "🇾🇹",
+    "prefix": "+262",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MX",
+    "codeAlpha3": "MEX",
+    "name": "Mexico",
+    "flag": "🇲🇽",
+    "prefix": "+52",
+    "iso4217": {
+      "currency": "Mexican Peso",
+      "code": "MXN",
+      "numeric": "484",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "FM",
+    "codeAlpha3": "FSM",
+    "name": "Micronesia (Federated States of)",
+    "flag": "🇫🇲",
+    "prefix": "+691",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MD",
+    "codeAlpha3": "MDA",
+    "name": "Moldova (Republic of)",
+    "flag": "🇲🇩",
+    "prefix": "+373",
+    "iso4217": {
+      "currency": "Moldovan Leu",
+      "code": "MDL",
+      "numeric": "498",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MC",
+    "codeAlpha3": "MCO",
+    "name": "Monaco",
+    "flag": "🇲🇨",
+    "prefix": "+377",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MN",
+    "codeAlpha3": "MNG",
+    "name": "Mongolia",
+    "flag": "🇲🇳",
+    "prefix": "+976",
+    "iso4217": {
+      "currency": "Tugrik",
+      "code": "MNT",
+      "numeric": "496",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ME",
+    "codeAlpha3": "MNE",
+    "name": "Montenegro",
+    "flag": "🇲🇪",
+    "prefix": "+382",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MS",
+    "codeAlpha3": "MSR",
+    "name": "Montserrat",
+    "flag": "🇲🇸",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MA",
+    "codeAlpha3": "MAR",
+    "name": "Morocco",
+    "flag": "🇲🇦",
+    "prefix": "+212",
+    "iso4217": {
+      "currency": "Moroccan Dirham",
+      "code": "MAD",
+      "numeric": "504",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MZ",
+    "codeAlpha3": "MOZ",
+    "name": "Mozambique",
+    "flag": "🇲🇿",
+    "prefix": "+258",
+    "iso4217": {
+      "currency": "Mozambique Metical",
+      "code": "MZN",
+      "numeric": "943",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MM",
+    "codeAlpha3": "MMR",
+    "name": "Myanmar",
+    "flag": "🇲🇲",
+    "prefix": "+95",
+    "iso4217": {
+      "currency": "Kyat",
+      "code": "MMK",
+      "numeric": "104",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NA",
+    "codeAlpha3": "NAM",
+    "name": "Namibia",
+    "flag": "🇳🇦",
+    "prefix": "+264",
+    "iso4217": {
+      "currency": "Namibia Dollar",
+      "code": "NAD",
+      "numeric": "516",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NR",
+    "codeAlpha3": "NRU",
+    "name": "Nauru",
+    "flag": "🇳🇷",
+    "prefix": "+674",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NP",
+    "codeAlpha3": "NPL",
+    "name": "Nepal",
+    "flag": "🇳🇵",
+    "prefix": "+977",
+    "iso4217": {
+      "currency": "Nepalese Rupee",
+      "code": "NPR",
+      "numeric": "524",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NL",
+    "codeAlpha3": "NLD",
+    "name": "Netherlands",
+    "flag": "🇳🇱",
+    "prefix": "+31",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "NC",
+    "codeAlpha3": "NCL",
+    "name": "New Caledonia",
+    "flag": "🇳🇨",
+    "prefix": "+687",
+    "iso4217": {
+      "currency": "CFP Franc",
+      "code": "XPF",
+      "numeric": "953",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "NZ",
+    "codeAlpha3": "NZL",
+    "name": "New Zealand",
+    "flag": "🇳🇿",
+    "prefix": "+64",
+    "iso4217": {
+      "currency": "New Zealand Dollar",
+      "code": "NZD",
+      "numeric": "554",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NI",
+    "codeAlpha3": "NIC",
+    "name": "Nicaragua",
+    "flag": "🇳🇮",
+    "prefix": "+505",
+    "iso4217": {
+      "currency": "Cordoba Oro",
+      "code": "NIO",
+      "numeric": "558",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NE",
+    "codeAlpha3": "NER",
+    "name": "Niger",
+    "flag": "🇳🇪",
+    "prefix": "+227",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "NG",
+    "codeAlpha3": "NGA",
+    "name": "Nigeria",
+    "flag": "🇳🇬",
+    "prefix": "+234",
+    "iso4217": {
+      "currency": "Naira",
+      "code": "NGN",
+      "numeric": "566",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NU",
+    "codeAlpha3": "NIU",
+    "name": "Niue",
+    "flag": "🇳🇺",
+    "prefix": "+683",
+    "iso4217": {
+      "currency": "New Zealand Dollar",
+      "code": "NZD",
+      "numeric": "554",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NF",
+    "codeAlpha3": "NFK",
+    "name": "Norfolk Island",
+    "flag": "🇳🇫",
+    "prefix": "+672",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MP",
+    "codeAlpha3": "MNP",
+    "name": "Northern Mariana Islands",
+    "flag": "🇲🇵",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "NO",
+    "codeAlpha3": "NOR",
+    "name": "Norway",
+    "flag": "🇳🇴",
+    "prefix": "+47",
+    "iso4217": {
+      "currency": "Norwegian Krone",
+      "code": "NOK",
+      "numeric": "578",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "OM",
+    "codeAlpha3": "OMN",
+    "name": "Oman",
+    "flag": "🇴🇲",
+    "prefix": "+968",
+    "iso4217": {
+      "currency": "Rial Omani",
+      "code": "OMR",
+      "numeric": "512",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "PK",
+    "codeAlpha3": "PAK",
+    "name": "Pakistan",
+    "flag": "🇵🇰",
+    "prefix": "+92",
+    "iso4217": {
+      "currency": "Pakistan Rupee",
+      "code": "PKR",
+      "numeric": "586",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PW",
+    "codeAlpha3": "PLW",
+    "name": "Palau",
+    "flag": "🇵🇼",
+    "prefix": "+680",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PS",
+    "codeAlpha3": "PSE",
+    "name": "Palestine, State of",
+    "flag": "🇵🇸",
+    "prefix": "+970",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "PA",
+    "codeAlpha3": "PAN",
+    "name": "Panama",
+    "flag": "🇵🇦",
+    "prefix": "+507",
+    "iso4217": {
+      "currency": "Balboa",
+      "code": "PAB",
+      "numeric": "590",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PG",
+    "codeAlpha3": "PNG",
+    "name": "Papua New Guinea",
+    "flag": "🇵🇬",
+    "prefix": "+675",
+    "iso4217": {
+      "currency": "Kina",
+      "code": "PGK",
+      "numeric": "598",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PY",
+    "codeAlpha3": "PRY",
+    "name": "Paraguay",
+    "flag": "🇵🇾",
+    "prefix": "+595",
+    "iso4217": {
+      "currency": "Guarani",
+      "code": "PYG",
+      "numeric": "600",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "PE",
+    "codeAlpha3": "PER",
+    "name": "Peru",
+    "flag": "🇵🇪",
+    "prefix": "+51",
+    "iso4217": {
+      "currency": "Sol",
+      "code": "PEN",
+      "numeric": "604",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PH",
+    "codeAlpha3": "PHL",
+    "name": "Philippines",
+    "flag": "🇵🇭",
+    "prefix": "+63",
+    "iso4217": {
+      "currency": "Philippine Peso",
+      "code": "PHP",
+      "numeric": "608",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PN",
+    "codeAlpha3": "PCN",
+    "name": "Pitcairn",
+    "flag": "🇵🇳",
+    "prefix": "+64",
+    "iso4217": {
+      "currency": "New Zealand Dollar",
+      "code": "NZD",
+      "numeric": "554",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PL",
+    "codeAlpha3": "POL",
+    "name": "Poland",
+    "flag": "🇵🇱",
+    "prefix": "+48",
+    "iso4217": {
+      "currency": "Zloty",
+      "code": "PLN",
+      "numeric": "985",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PT",
+    "codeAlpha3": "PRT",
+    "name": "Portugal",
+    "flag": "🇵🇹",
+    "prefix": "+351",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PR",
+    "codeAlpha3": "PRI",
+    "name": "Puerto Rico",
+    "flag": "🇵🇷",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "QA",
+    "codeAlpha3": "QAT",
+    "name": "Qatar",
+    "flag": "🇶🇦",
+    "prefix": "+974",
+    "iso4217": {
+      "currency": "Qatari Rial",
+      "code": "QAR",
+      "numeric": "634",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "RE",
+    "codeAlpha3": "REU",
+    "name": "Réunion",
+    "flag": "🇷🇪",
+    "prefix": "+262",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "RO",
+    "codeAlpha3": "ROU",
+    "name": "Romania",
+    "flag": "🇷🇴",
+    "prefix": "+40",
+    "iso4217": {
+      "currency": "Romanian Leu",
+      "code": "RON",
+      "numeric": "946",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "RU",
+    "codeAlpha3": "RUS",
+    "name": "Russian Federation",
+    "flag": "🇷🇺",
+    "prefix": "+7",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "RW",
+    "codeAlpha3": "RWA",
+    "name": "Rwanda",
+    "flag": "🇷🇼",
+    "prefix": "+250",
+    "iso4217": {
+      "currency": "Rwanda Franc",
+      "code": "RWF",
+      "numeric": "646",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "BL",
+    "codeAlpha3": "BLM",
+    "name": "Saint Barthélemy",
+    "flag": "🇧🇱",
+    "prefix": "+590",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SH",
+    "codeAlpha3": "SHN",
+    "name": "Saint Helena, Ascension and Tristan da Cunha",
+    "flag": "🇸🇭",
+    "prefix": "+290",
+    "iso4217": {
+      "currency": "Saint Helena Pound",
+      "code": "SHP",
+      "numeric": "654",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "KN",
+    "codeAlpha3": "KNA",
+    "name": "Saint Kitts and Nevis",
+    "flag": "🇰🇳",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LC",
+    "codeAlpha3": "LCA",
+    "name": "Saint Lucia",
+    "flag": "🇱🇨",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "MF",
+    "codeAlpha3": "MAF",
+    "name": "Saint Martin (French part)",
+    "flag": "🇲🇫",
+    "prefix": "+590",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "PM",
+    "codeAlpha3": "SPM",
+    "name": "Saint Pierre and Miquelon",
+    "flag": "🇵🇲",
+    "prefix": "+508",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "VC",
+    "codeAlpha3": "VCT",
+    "name": "Saint Vincent and the Grenadines",
+    "flag": "🇻🇨",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "East Caribbean Dollar",
+      "code": "XCD",
+      "numeric": "951",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "WS",
+    "codeAlpha3": "WSM",
+    "name": "Samoa",
+    "flag": "🇼🇸",
+    "prefix": "+685",
+    "iso4217": {
+      "currency": "Tala",
+      "code": "WST",
+      "numeric": "882",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SM",
+    "codeAlpha3": "SMR",
+    "name": "San Marino",
+    "flag": "🇸🇲",
+    "prefix": "+378",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ST",
+    "codeAlpha3": "STP",
+    "name": "Sao Tome and Principe",
+    "flag": "🇸🇹",
+    "prefix": "+239",
+    "iso4217": {
+      "currency": "Dobra",
+      "code": "STN",
+      "numeric": "930",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SA",
+    "codeAlpha3": "SAU",
+    "name": "Saudi Arabia",
+    "flag": "🇸🇦",
+    "prefix": "+966",
+    "iso4217": {
+      "currency": "Saudi Riyal",
+      "code": "SAR",
+      "numeric": "682",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SN",
+    "codeAlpha3": "SEN",
+    "name": "Senegal",
+    "flag": "🇸🇳",
+    "prefix": "+221",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "RS",
+    "codeAlpha3": "SRB",
+    "name": "Serbia",
+    "flag": "🇷🇸",
+    "prefix": "+381",
+    "iso4217": {
+      "currency": "Serbian Dinar",
+      "code": "RSD",
+      "numeric": "941",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SC",
+    "codeAlpha3": "SYC",
+    "name": "Seychelles",
+    "flag": "🇸🇨",
+    "prefix": "+248",
+    "iso4217": {
+      "currency": "Seychelles Rupee",
+      "code": "SCR",
+      "numeric": "690",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SL",
+    "codeAlpha3": "SLE",
+    "name": "Sierra Leone",
+    "flag": "🇸🇱",
+    "prefix": "+232",
+    "iso4217": {
+      "currency": "Leone",
+      "code": "SLE",
+      "numeric": "925",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SG",
+    "codeAlpha3": "SGP",
+    "name": "Singapore",
+    "flag": "🇸🇬",
+    "prefix": "+65",
+    "iso4217": {
+      "currency": "Singapore Dollar",
+      "code": "SGD",
+      "numeric": "702",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SX",
+    "codeAlpha3": "SXM",
+    "name": "Sint Maarten (Dutch part)",
+    "flag": "🇸🇽",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Caribbean Guilder",
+      "code": "XCG",
+      "numeric": "532",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SK",
+    "codeAlpha3": "SVK",
+    "name": "Slovakia",
+    "flag": "🇸🇰",
+    "prefix": "+421",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SI",
+    "codeAlpha3": "SVN",
+    "name": "Slovenia",
+    "flag": "🇸🇮",
+    "prefix": "+386",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SB",
+    "codeAlpha3": "SLB",
+    "name": "Solomon Islands",
+    "flag": "🇸🇧",
+    "prefix": "+677",
+    "iso4217": {
+      "currency": "Solomon Islands Dollar",
+      "code": "SBD",
+      "numeric": "090",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SO",
+    "codeAlpha3": "SOM",
+    "name": "Somalia",
+    "flag": "🇸🇴",
+    "prefix": "+252",
+    "iso4217": {
+      "currency": "Somali Shilling",
+      "code": "SOS",
+      "numeric": "706",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ZA",
+    "codeAlpha3": "ZAF",
+    "name": "South Africa",
+    "flag": "🇿🇦",
+    "prefix": "+27",
+    "iso4217": {
+      "currency": "Rand",
+      "code": "ZAR",
+      "numeric": "710",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GS",
+    "codeAlpha3": "SGS",
+    "name": "South Georgia and the South Sandwich Islands",
+    "flag": "🇬🇸",
+    "prefix": "+500",
+    "iso4217": null
+  },
+  {
+    "codeAlpha2": "SS",
+    "codeAlpha3": "SSD",
+    "name": "South Sudan",
+    "flag": "🇸🇸",
+    "prefix": "+211",
+    "iso4217": {
+      "currency": "South Sudanese Pound",
+      "code": "SSP",
+      "numeric": "728",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ES",
+    "codeAlpha3": "ESP",
+    "name": "Spain",
+    "flag": "🇪🇸",
+    "prefix": "+34",
+    "iso4217": {
+      "currency": "Euro",
+      "code": "EUR",
+      "numeric": "978",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "LK",
+    "codeAlpha3": "LKA",
+    "name": "Sri Lanka",
+    "flag": "🇱🇰",
+    "prefix": "+94",
+    "iso4217": {
+      "currency": "Sri Lanka Rupee",
+      "code": "LKR",
+      "numeric": "144",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SD",
+    "codeAlpha3": "SDN",
+    "name": "Sudan",
+    "flag": "🇸🇩",
+    "prefix": "+249",
+    "iso4217": {
+      "currency": "Sudanese Pound",
+      "code": "SDG",
+      "numeric": "938",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SR",
+    "codeAlpha3": "SUR",
+    "name": "Suriname",
+    "flag": "🇸🇷",
+    "prefix": "+597",
+    "iso4217": {
+      "currency": "Surinam Dollar",
+      "code": "SRD",
+      "numeric": "968",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SJ",
+    "codeAlpha3": "SJM",
+    "name": "Svalbard and Jan Mayen",
+    "flag": "🇸🇯",
+    "prefix": "+47",
+    "iso4217": {
+      "currency": "Norwegian Krone",
+      "code": "NOK",
+      "numeric": "578",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SZ",
+    "codeAlpha3": "SWZ",
+    "name": "Swaziland",
+    "flag": "🇸🇿",
+    "prefix": "+268",
+    "iso4217": {
+      "currency": "Lilangeni",
+      "code": "SZL",
+      "numeric": "748",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SE",
+    "codeAlpha3": "SWE",
+    "name": "Sweden",
+    "flag": "🇸🇪",
+    "prefix": "+46",
+    "iso4217": {
+      "currency": "Swedish Krona",
+      "code": "SEK",
+      "numeric": "752",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "CH",
+    "codeAlpha3": "CHE",
+    "name": "Switzerland",
+    "flag": "🇨🇭",
+    "prefix": "+41",
+    "iso4217": {
+      "currency": "Swiss Franc",
+      "code": "CHF",
+      "numeric": "756",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "SY",
+    "codeAlpha3": "SYR",
+    "name": "Syrian Arab Republic",
+    "flag": "🇸🇾",
+    "prefix": "+963",
+    "iso4217": {
+      "currency": "Syrian Pound",
+      "code": "SYP",
+      "numeric": "760",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TW",
+    "codeAlpha3": "TWN",
+    "name": "Taiwan, Province of China",
+    "flag": "🇹🇼",
+    "prefix": "+886",
+    "iso4217": {
+      "currency": "New Taiwan Dollar",
+      "code": "TWD",
+      "numeric": "901",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TJ",
+    "codeAlpha3": "TJK",
+    "name": "Tajikistan",
+    "flag": "🇹🇯",
+    "prefix": "+992",
+    "iso4217": {
+      "currency": "Somoni",
+      "code": "TJS",
+      "numeric": "972",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TZ",
+    "codeAlpha3": "TZA",
+    "name": "Tanzania, United Republic of",
+    "flag": "🇹🇿",
+    "prefix": "+255",
+    "iso4217": {
+      "currency": "Tanzanian Shilling",
+      "code": "TZS",
+      "numeric": "834",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TH",
+    "codeAlpha3": "THA",
+    "name": "Thailand",
+    "flag": "🇹🇭",
+    "prefix": "+66",
+    "iso4217": {
+      "currency": "Baht",
+      "code": "THB",
+      "numeric": "764",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TL",
+    "codeAlpha3": "TLS",
+    "name": "Timor-Leste",
+    "flag": "🇹🇱",
+    "prefix": "+670",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TG",
+    "codeAlpha3": "TGO",
+    "name": "Togo",
+    "flag": "🇹🇬",
+    "prefix": "+228",
+    "iso4217": {
+      "currency": "CFA Franc BCEAO",
+      "code": "XOF",
+      "numeric": "952",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "TK",
+    "codeAlpha3": "TKL",
+    "name": "Tokelau",
+    "flag": "🇹🇰",
+    "prefix": "+690",
+    "iso4217": {
+      "currency": "New Zealand Dollar",
+      "code": "NZD",
+      "numeric": "554",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TO",
+    "codeAlpha3": "TON",
+    "name": "Tonga",
+    "flag": "🇹🇴",
+    "prefix": "+676",
+    "iso4217": {
+      "currency": "Pa’anga",
+      "code": "TOP",
+      "numeric": "776",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TT",
+    "codeAlpha3": "TTO",
+    "name": "Trinidad and Tobago",
+    "flag": "🇹🇹",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "Trinidad and Tobago Dollar",
+      "code": "TTD",
+      "numeric": "780",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TN",
+    "codeAlpha3": "TUN",
+    "name": "Tunisia",
+    "flag": "🇹🇳",
+    "prefix": "+216",
+    "iso4217": {
+      "currency": "Tunisian Dinar",
+      "code": "TND",
+      "numeric": "788",
+      "minorUnits": 3
+    }
+  },
+  {
+    "codeAlpha2": "TR",
+    "codeAlpha3": "TUR",
+    "name": "Turkey",
+    "flag": "🇹🇷",
+    "prefix": "+90",
+    "iso4217": {
+      "currency": "Turkish Lira",
+      "code": "TRY",
+      "numeric": "949",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TM",
+    "codeAlpha3": "TKM",
+    "name": "Turkmenistan",
+    "flag": "🇹🇲",
+    "prefix": "+993",
+    "iso4217": {
+      "currency": "Turkmenistan New Manat",
+      "code": "TMT",
+      "numeric": "934",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TC",
+    "codeAlpha3": "TCA",
+    "name": "Turks and Caicos Islands",
+    "flag": "🇹🇨",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "TV",
+    "codeAlpha3": "TUV",
+    "name": "Tuvalu",
+    "flag": "🇹🇻",
+    "prefix": "+688",
+    "iso4217": {
+      "currency": "Australian Dollar",
+      "code": "AUD",
+      "numeric": "036",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "UG",
+    "codeAlpha3": "UGA",
+    "name": "Uganda",
+    "flag": "🇺🇬",
+    "prefix": "+256",
+    "iso4217": {
+      "currency": "Uganda Shilling",
+      "code": "UGX",
+      "numeric": "800",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "UA",
+    "codeAlpha3": "UKR",
+    "name": "Ukraine",
+    "flag": "🇺🇦",
+    "prefix": "+380",
+    "iso4217": {
+      "currency": "Hryvnia",
+      "code": "UAH",
+      "numeric": "980",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "AE",
+    "codeAlpha3": "ARE",
+    "name": "United Arab Emirates",
+    "flag": "🇦🇪",
+    "prefix": "+971",
+    "iso4217": {
+      "currency": "UAE Dirham",
+      "code": "AED",
+      "numeric": "784",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "GB",
+    "codeAlpha3": "GBR",
+    "name": "United Kingdom of Great Britain and Northern Ireland",
+    "flag": "🇬🇧",
+    "prefix": "+44",
+    "iso4217": {
+      "currency": "Pound Sterling",
+      "code": "GBP",
+      "numeric": "826",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "US",
+    "codeAlpha3": "USA",
+    "name": "United States of America",
+    "flag": "🇺🇸",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "UM",
+    "codeAlpha3": "UMI",
+    "name": "United States Minor Outlying Islands",
+    "flag": "🇺🇲",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "UY",
+    "codeAlpha3": "URY",
+    "name": "Uruguay",
+    "flag": "🇺🇾",
+    "prefix": "+598",
+    "iso4217": {
+      "currency": "Peso Uruguayo",
+      "code": "UYU",
+      "numeric": "858",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "UZ",
+    "codeAlpha3": "UZB",
+    "name": "Uzbekistan",
+    "flag": "🇺🇿",
+    "prefix": "+998",
+    "iso4217": {
+      "currency": "Uzbekistan Sum",
+      "code": "UZS",
+      "numeric": "860",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "VU",
+    "codeAlpha3": "VUT",
+    "name": "Vanuatu",
+    "flag": "🇻🇺",
+    "prefix": "+678",
+    "iso4217": {
+      "currency": "Vatu",
+      "code": "VUV",
+      "numeric": "548",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "VE",
+    "codeAlpha3": "VEN",
+    "name": "Venezuela (Bolivarian Republic of)",
+    "flag": "🇻🇪",
+    "prefix": "+58",
+    "iso4217": {
+      "currency": "Bolívar Soberano",
+      "code": "VES",
+      "numeric": "928",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "VN",
+    "codeAlpha3": "VNM",
+    "name": "Viet Nam",
+    "flag": "🇻🇳",
+    "prefix": "+84",
+    "iso4217": {
+      "currency": "Dong",
+      "code": "VND",
+      "numeric": "704",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "VG",
+    "codeAlpha3": "VGB",
+    "name": "Virgin Islands (British)",
+    "flag": "🇻🇬",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "VI",
+    "codeAlpha3": "VIR",
+    "name": "Virgin Islands (U.S.)",
+    "flag": "🇻🇮",
+    "prefix": "+1",
+    "iso4217": {
+      "currency": "US Dollar",
+      "code": "USD",
+      "numeric": "840",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "WF",
+    "codeAlpha3": "WLF",
+    "name": "Wallis and Futuna",
+    "flag": "🇼🇫",
+    "prefix": "+681",
+    "iso4217": {
+      "currency": "CFP Franc",
+      "code": "XPF",
+      "numeric": "953",
+      "minorUnits": 0
+    }
+  },
+  {
+    "codeAlpha2": "EH",
+    "codeAlpha3": "ESH",
+    "name": "Western Sahara",
+    "flag": "🇪🇭",
+    "prefix": "+212",
+    "iso4217": {
+      "currency": "Moroccan Dirham",
+      "code": "MAD",
+      "numeric": "504",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "YE",
+    "codeAlpha3": "YEM",
+    "name": "Yemen",
+    "flag": "🇾🇪",
+    "prefix": "+967",
+    "iso4217": {
+      "currency": "Yemeni Rial",
+      "code": "YER",
+      "numeric": "886",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ZM",
+    "codeAlpha3": "ZMB",
+    "name": "Zambia",
+    "flag": "🇿🇲",
+    "prefix": "+260",
+    "iso4217": {
+      "currency": "Zambian Kwacha",
+      "code": "ZMW",
+      "numeric": "967",
+      "minorUnits": 2
+    }
+  },
+  {
+    "codeAlpha2": "ZW",
+    "codeAlpha3": "ZWE",
+    "name": "Zimbabwe",
+    "flag": "🇿🇼",
+    "prefix": "+263",
+    "iso4217": {
+      "currency": "Zimbabwe Gold",
+      "code": "ZWG",
+      "numeric": "924",
+      "minorUnits": 2
+    }
+  }
+]

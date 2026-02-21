@@ -38,13 +38,13 @@ When the user wants to commit **staged** changes (optionally with a footer like 
 
 Group **only the staged files** into **commit units** in **dependency order** (things that other units depend on come first). Do not include unstaged or untracked files in the plan.
 
-| Priority | Unit type | Typical files |
-|----------|-----------|---------------|
-| 1 | Shared / foundations | Concerns, base modules (no views yet) |
-| 2 | Routes / config | `config/routes.rb` |
-| 3 | Feature A | Controllers, layout, **partials/locals that layout uses**, **i18n used by those views/partials**, spec |
-| 4 | Feature B | Controllers, layout, spec (reuse shared partials and i18n from earlier unit) |
-| 5 | Docs / tooling | Storybook stories, README, etc. |
+| Priority | Unit type            | Typical files                                                                                          |
+| -------- | -------------------- | ------------------------------------------------------------------------------------------------------ |
+| 1        | Shared / foundations | Concerns, base modules (no views yet)                                                                  |
+| 2        | Routes / config      | `config/routes.rb`                                                                                     |
+| 3        | Feature A            | Controllers, layout, **partials/locals that layout uses**, **i18n used by those views/partials**, spec |
+| 4        | Feature B            | Controllers, layout, spec (reuse shared partials and i18n from earlier unit)                           |
+| 5        | Docs / tooling       | Storybook stories, README, etc.                                                                        |
 
 - One logical unit = one commit
 - Order so that no commit depends on a later commit (e.g. concern before controllers that include it)
@@ -136,7 +136,7 @@ For change-password work, a typical order (locals with the UI that uses them, in
 
 1. **Add ChangePasswordHelpers concern** — `app/controllers/concerns/change_password_helpers.rb`
 2. **Add change_password routes for users and admins** — `config/routes.rb`
-3. **Add admin change password** — admins controller, base controller, layout, **shared _change_password_form and _change_password_modal** (layout uses them), **i18n** (`config/locales/en.yml`, `zh-TC.yml` for `shared.change_password_form.*` — form uses them), admin spec
+3. **Add admin change password** — admins controller, base controller, layout, **shared \_change_password_form and \_change_password_modal** (layout uses them), **i18n** (`config/locales/en.yml`, `zh-TC.yml` for `shared.change_password_form.*` — form uses them), admin spec
 4. **Add user change password** — users base controller, registrations controller, layout, spec (partials and i18n already in repo from step 3)
 5. **Add change password form Storybook story** — `storybook/stories/change_password_form_stories.rb`
 

@@ -22,7 +22,8 @@ type CountryEntry = {
   iso4217: CountryIso4217;
 };
 
-const COUNTRY_LIST = require("../../assets/country_list.json") as CountryEntry[];
+const COUNTRY_LIST =
+  require("../../assets/country_list.json") as CountryEntry[];
 
 export function normalizeCurrencyCode(code: string): string {
   return code.trim().toUpperCase();

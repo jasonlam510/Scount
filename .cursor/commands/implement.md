@@ -60,7 +60,7 @@ Execute implementation for **one unit** at a time.
        git switch -c {linear-issue}-{kebab-name}
        ```
      - **CRITICAL**: Always ensure you're on the correct feature branch before implementing
-   - **Report branch status**: 
+   - **Report branch status**:
      - "Current branch: [branch-name]"
      - "Feature branch: [feature-branch-name]"
      - "Status: [On correct branch / Need to checkout / Need to create]"
@@ -79,7 +79,8 @@ Execute implementation for **one unit** at a time.
    - Reference requirements when making decisions
 
 5.5. **Load UI uiux.md (optional)**:
-  - If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
+
+- If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
 
 6. **Verify prerequisites (CRITICAL)**:
    - Ensure recon findings exist in `tasks.md` under `## Notes & Clarifications`.
@@ -101,12 +102,12 @@ Execute implementation for **one unit** at a time.
    - **Mark unit as in progress**: Update `Status: [ ]` → `Status: [~]` in `tasks.md` (and in the unit file if it contains a status line).
    - Read the unit file in `FEATURE_DIR/tasks/` and implement directly from its **Ruby pseudo code**.
    - **CRITICAL**: Do not invent architecture mid-implementation.
-    - If the pseudo code is missing, unclear, or conflicts with requirements.md: STOP and ask user to adjust `/plan` output.
+   - If the pseudo code is missing, unclear, or conflicts with requirements.md: STOP and ask user to adjust `/plan` output.
    - Keep changes scoped to this unit. If additional work is needed beyond this unit:
      - STOP
-    - Update `requirements.md` clarifications (if requirements changed)
-     - Update `tasks.md` and/or unit files by adding/splitting units
-     - Re-run `/plan`
+   - Update `requirements.md` clarifications (if requirements changed)
+   - Update `tasks.md` and/or unit files by adding/splitting units
+   - Re-run `/plan`
 
 9. **After finishing the unit**:
    - Run: `make fix-all`
@@ -116,27 +117,30 @@ Execute implementation for **one unit** at a time.
    - Report: "Completed unit [N]"
 
 10. **Next steps**:
-   - If units remain: "Run `/implement <next unit number>` to continue."
-   - If all units completed: "All units completed. Run `/commit` to create git commits."
+
+- If units remain: "Run `/implement <next unit number>` to continue."
+- If all units completed: "All units completed. Run `/commit` to create git commits."
 
 9. **Handle feedback and misunderstandings**:
    - If user provides feedback or points out misunderstandings:
      - **Stop current task** if needed
      - **Acknowledge**: "I see, let me clarify: [restate understanding]"
-    - **Update requirements.md**: Add clarification to "Clarifications" section
-     - **Update tasks.md**: Adjust affected tasks, mark with `[!]` if blocked
-     - **Confirm**: Restate corrected understanding, ask if correct
-     - **Resume**: Continue with corrected understanding
+   - **Update requirements.md**: Add clarification to "Clarifications" section
+   - **Update tasks.md**: Adjust affected tasks, mark with `[!]` if blocked
+   - **Confirm**: Restate corrected understanding, ask if correct
+   - **Resume**: Continue with corrected understanding
 
 10. **Progress reporting**:
-   - Report progress within the current unit
-   - If blocked, mark the unit `[!]` and explain what is needed
+
+- Report progress within the current unit
+- If blocked, mark the unit `[!]` and explain what is needed
 
 11. **Completion**:
-   - Verify all commit units marked `[X]`
-   - Check that implementation matches requirements.md (and uiux.md if applicable)
-   - Ensure tests pass
-   - Report completion with summary
+
+- Verify all commit units marked `[X]`
+- Check that implementation matches requirements.md (and uiux.md if applicable)
+- Ensure tests pass
+- Report completion with summary
 
 ## Guidelines
 
@@ -163,6 +167,7 @@ When user provides feedback during implementation:
    - Add to "Clarifications" section:
      ```markdown
      ### [Date] - [Topic]
+
      **Misunderstanding**: [What was misunderstood]
      **Clarification**: [Correct understanding]
      **Impact**: [What changed in implementation]

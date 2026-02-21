@@ -56,45 +56,61 @@ Create a requirements specification (`requirements.md`) in the feature scope fol
 4. **Create requirements.md**:
    - Location: `FEATURE_DIR/requirements.md` (e.g., `.cursor/scopes/20251121-123456-FeatureName/requirements.md`)
    - Structure:
+
      ```markdown
      # Feature: [FeatureName]
-     
+
      ## Purpose & User Problem
+
      [What problem does this solve?]
-     
+
      ## Success Criteria
+
      [Measurable, technology-agnostic outcomes]
-     
+
      ## Scope
+
      ### In Scope
+
      - [What's included]
-     
+
      ### Out of Scope
+
      - [What's explicitly excluded]
-     
+
      ## Requirements
+
      ### Functional
+
      - [Testable requirements]
-     
+
      ### Non-Functional
+
      - [Performance, security, etc.]
-     
+
      ## Technical Considerations
+
      - [Constraints, dependencies, integrations]
-     
+
      ## User Scenarios
+
      - [Primary user flows]
-     
+
      ## Assumptions
+
      - [Documented assumptions]
-     
+
      ## Clarifications
+
      [Added during planning/implementation when misunderstandings are resolved]
+
      ### [Date] - [Topic]
+
      **Misunderstanding**: [What was misunderstood]
      **Clarification**: [Correct understanding]
      **Impact**: [What changed in requirements/tasks]
      ```
+
    - Keep it concise and focused on WHAT/WHY, not HOW
 
 5. **Present to user**:

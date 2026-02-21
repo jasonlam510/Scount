@@ -57,7 +57,7 @@ After all commit units in `tasks.md` are completed (marked with `Status: [X]`), 
    - **Report**: "Found [N] completed commit unit(s) to commit"
 
 6. **Map changes to commit units**:
-   - For each completed unit, identify which files were changed based on the "Changes (Ruby pseudo code)" section
+   - For each completed unit, identify which files were changed based on the "Changes (Pseudo code)" section
    - Match uncommitted changes to commit units:
      - Check if files in git status match files listed in unit's "Changes" section
      - If multiple units share files, ask user which unit each change belongs to

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useI18n, useTheme } from "@/hooks";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import BottomSheet from "@/components/BottomSheet";
@@ -42,12 +43,17 @@ const ActionItem: React.FC<{
 const GroupActionFAB: React.FC = () => {
   const { t } = useI18n();
   const { colors } = useTheme();
+  const router = useRouter();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const handleAction = (type: "create" | "join") => {
     setIsMenuVisible(false);
-    // TODO: Navigation logic will be added later in the app screen
-    console.log(`Group action triggered: ${type}`);
+    if (type === "create") {
+      router.push("/(tabs)/group/create");
+    } else {
+      // TODO: Join group flow
+      console.log("Join group");
+    }
   };
 
   return (

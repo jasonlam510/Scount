@@ -26,6 +26,7 @@ Keep this file focused on **non-negotiable rules**. Put evergreen â€œrepo factsâ
 - Prefer hooks and Zustand stores for state management; avoid classes
 - Prefer platform-specific files where behavior differs: `.web.tsx` vs `.tsx`
 - Use `useI18n()` for user-facing strings and `useTheme()` for colors
+- **Section comments in JSX**: Add a short comment for each logical section (e.g. `{/* Header */}`, `{/* Form */}`, `{/* Search */}`) so the structure is easy to scan. Include sub-sections where helpful (e.g. `{/* Name field */}`, `{/* Currency field */}`). 
 
 ## EAS Build Compatibility:
 - **Dependency Constraint**: ONLY use dependencies that are compatible with Expo EAS builds

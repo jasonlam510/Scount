@@ -9,7 +9,8 @@
     "ios": "expo run:ios",
     "web": "npm run powersync:copy-assets && expo start --web",
     "powersync:copy-assets": "npx powersync-web copy-assets",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
@@ -62,7 +63,8 @@
     "eslint-plugin-prettier": "^5.5.4",
     "i18next-cli": "^1.42.8",
     "prettier": "^3.7.4",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "patch-package": "^8.0.0"
   },
   "private": true
 }

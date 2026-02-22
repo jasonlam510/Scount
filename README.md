@@ -40,6 +40,14 @@ cd scount
 make init-dev
 ```
 
+3. Start the services and copy the secret
+
+```bash
+make start-powersync
+make start-db
+```
+Then copy the `Publishable` from the supabase's respone to the `EXPO_PUBLIC_SUPABASE_ANON_KEY` in your `.env`
+
 ### Run the App
 
 ```bash

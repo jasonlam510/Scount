@@ -15,6 +15,14 @@ init-dev:
 		echo "Created .env from .env.example"; \
 	fi
 
+.PHONY: start-db
+start-db:
+	@npx supabase start
+
+.PHONY: start-powersync
+start-powersync:
+	@cd powersync-service && docker compose up -d
+
 .PHONY: clean-dev
 clean-dev:
 	@echo "Cleaning build artifacts and dependencies..."
@@ -79,3 +87,30 @@ fix-all:
 	@make fix-lint
 	@make fix-format
 	@make fix-extraction
+
+# ==============================================================================
+# Supabase CLI
+# ==============================================================================
+db-new-migration.name := $(migration-name)
+ifneq ($(filter db-new-migration,$(MAKECMDGOALS)),)
+db-new-migration.name := $(or $(migration-name),$(firstword $(filter-out db-new-migration,$(MAKECMDGOALS))))
+endif
+
+.PHONY: db-new-migration
+db-new-migration:
+	@if [ -z "$(db-new-migration.name)" ]; then \
+		echo "Usage: make db-new-migration migration-name=<name>"; \
+		exit 1; \
+	fi
+	@npx supabase migration new $(db-new-migration.name)
+
+ifneq ($(filter db-new-migration,$(MAKECMDGOALS)),)
+ifneq ($(db-new-migration.name),)
+$(db-new-migration.name):
+	@:
+endif
+endif
+
+.PHONY: db-migrate-up
+db-migrate-up:
+	@npx supabase migration up

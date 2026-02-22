@@ -20,6 +20,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 Generate a technical blueprint (`blueprint.md`) in the active feature scope. This command sits **between** `/design` (requirements) and `/plan` (delivery plan + unit files).
 
 `blueprint.md` MUST include:
+
 1. **Summary of gaps** between `requirements.md` requirements and the current codebase (based on recon).
 2. **Summary of the technical design** (what approach/tech is proposed) including **file paths** to create/update.
 3. **UML class diagram with signatures**, a **sequence diagram**, and an **ER diagram** (if applicable).
@@ -43,8 +44,9 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
    - If missing: ERROR "requirements.md not found. Run `/design` first."
 
 2.5. **Load UI uiux.md (optional)**:
-   - If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
-   - If it conflicts with `requirements.md`, defer to `requirements.md` and record the conflict in gap notes.
+
+- If `FEATURE_DIR/uiux.md` exists, read it as UI specification input.
+- If it conflicts with `requirements.md`, defer to `requirements.md` and record the conflict in gap notes.
 
 3. **Recon (required)**:
    - Compare the requirements in `requirements.md` (and any relevant constraints from UI `uiux.md`) to the actual current codebase.
@@ -61,10 +63,12 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
    - MUST include explicit file paths for proposed changes.
    - Use Mermaid for diagrams.
    - Structure:
-     ```markdown
+
+     ````markdown
      # Blueprint: [FeatureName]
-     
+
      ## Requirement vs Codebase Gap (from requirements.md + recon)
+
      - What exists already:
        - ...
      - Gaps (missing vs requirements):
@@ -73,8 +77,9 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
        - ...
      - Risks / unknowns:
        - ...
-     
+
      ## Proposed Technical Design
+
      - Approach:
        - [High-level approach and why]
      - Key components / responsibilities:
@@ -87,22 +92,26 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
        - ...
      - Errors / edge cases:
        - ...
-     
+
      ### File Plan (create/update)
+
      - [new] `path/to/new_file.ext`: <what it contains>
      - [change] `path/to/existing_file.ext`: <what changes>
-     
+
      ## UML Diagrams
-     
+
      ### Class Diagram (with signatures)
+
      ```mermaid
      classDiagram
        class ExampleService {
          +call(input: InputType) OutputType
        }
      ```
-     
+     ````
+
      ### Sequence Diagram
+
      ```mermaid
      sequenceDiagram
        participant U as User
@@ -116,8 +125,9 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
        API-->>UI: response
        UI-->>U: render
      ```
-     
+
      ### ER Diagram (if applicable)
+
      ```mermaid
      erDiagram
        ENTITY_A ||--o{ ENTITY_B : relates_to
@@ -129,6 +139,9 @@ Generate a technical blueprint (`blueprint.md`) in the active feature scope. Thi
          uuid entity_a_id FK
        }
      ```
+
+     ```
+
      ```
 
 5. **Present to user**:

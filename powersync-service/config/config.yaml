@@ -1,0 +1,50 @@
+replication:
+  connections:
+    - type: postgresql
+      uri: postgresql://postgres:postgres@host.docker.internal:54322/postgres
+      # SSL settings
+      sslmode: disable # 'verify-full' (default) or 'verify-ca' or 'disable'
+
+# Connection settings for bucket storage
+storage:
+  type: mongodb
+  uri: mongodb://mongo:27017/powersync_demo
+
+# The port which the PowerSync API server will listen on
+port: 8080
+
+# Specify sync rules (inline so no file mount required)
+sync_rules:
+  content: |
+    bucket_definitions:
+      user:
+        parameters: SELECT request.user_id() as user_id
+        data:
+          - SELECT * FROM public.profiles WHERE user_id = bucket.user_id
+          - SELECT * FROM public.user_categories WHERE user_id = bucket.user_id
+          - SELECT * FROM public.user_subcategories WHERE user_id = bucket.user_id
+          - SELECT * FROM public.user_expenses WHERE user_id = bucket.user_id
+          - SELECT * FROM public.user_tags WHERE user_id = bucket.user_id
+          - SELECT * FROM public.user_expense_tags WHERE user_id = bucket.user_id
+      groups:
+        parameters: SELECT group_id FROM public.group_members WHERE user_id = request.user_id()
+        data:
+          - SELECT * FROM public.groups WHERE id = bucket.group_id AND is_deleted = false
+          - SELECT * FROM public.group_members WHERE group_id = bucket.group_id
+
+# Settings for client authentication
+client_auth:
+  # Enable this if using Supabase Auth
+  supabase: true
+
+  # JWKS URIs can be specified here.
+  jwks_uri: [http://host.docker.internal:54321/auth/v1/.well-known/jwks.json]
+
+  # JWKS audience. Include 'authenticated' so Supabase-issued JWTs are accepted (no dev token needed).
+  audience: ["authenticated", "powersync-dev", "powersync"]
+
+  # Settings for telemetry reporting
+  # See https://docs.powersync.com/self-hosting/telemetry
+  telemetry:
+    # Opt out of reporting anonymized usage metrics to PowerSync telemetry service
+    disable_telemetry_sharing: false

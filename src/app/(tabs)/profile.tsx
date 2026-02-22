@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Alert, ActionSheet } from "@/components";
 import { useTheme, useI18n, useUser } from "@/hooks";
+import { useProfile } from "@/powersync/hooks";
 import { supabase } from "@/lib/supabase";
-import { disconnectDatabase, db } from "@/powersync";
-import { Profile } from "@/types/profiles";
+import { disconnectDatabase } from "@/powersync";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import {
   ProfileSection,
@@ -15,18 +15,9 @@ import {
 export default function ProfileScreen() {
   const { colors, themeMode, setThemeMode } = useTheme();
   const { t, changeLanguage, currentLanguage } = useI18n();
-  const { currentUserUuid, userEmail, clearUserData } = useUser();
-  // Profile state
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const { userEmail, clearUserData } = useUser();
+  const { profile, profileLoading, handleSaveName } = useProfile();
   const [showLogoutActionSheet, setShowLogoutActionSheet] = useState(false);
-
-  // Handlers for navigation/actions
-  const handleEditName = () => {
-    Alert.alert("Edit Name", "Navigate to screen to edit user name.");
-    // TODO: Navigate to edit name screen using Expo Router
-    // router.push('/(stack)/edit-name');
-  };
 
   const handlePhotoSelected = (source: "camera" | "library") => {
     if (source === "camera") {
@@ -84,57 +75,6 @@ export default function ProfileScreen() {
     // router.push('/(stack)/support');
   };
 
-  // Fetch profile from PowerSync
-  useEffect(() => {
-    if (!currentUserUuid) {
-      setProfile(null);
-      setProfileLoading(false);
-      return;
-    }
-
-    let isCancelled = false;
-
-    const fetchProfile = async () => {
-      try {
-        setProfileLoading(true);
-        const result = await db
-          .selectFrom("profiles")
-          .selectAll()
-          .where("user_id", "=", currentUserUuid)
-          .limit(1)
-          .execute();
-
-        if (!isCancelled) {
-          if (result.length > 0) {
-            const profileData = result[0];
-            setProfile({
-              user_id: profileData.user_id,
-              name: profileData.name,
-              avatar: profileData.avatar || "",
-              created_at: profileData.created_at,
-            });
-          } else {
-            setProfile(null);
-          }
-        }
-      } catch (err) {
-        if (!isCancelled) {
-          console.error("❌ Error fetching profile:", err);
-        }
-      } finally {
-        if (!isCancelled) {
-          setProfileLoading(false);
-        }
-      }
-    };
-
-    fetchProfile();
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [currentUserUuid]);
-
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView
@@ -152,7 +92,7 @@ export default function ProfileScreen() {
           profileAvatar={profile?.avatar}
           profileLoading={profileLoading}
           onPhotoSelected={handlePhotoSelected}
-          onEditName={handleEditName}
+          onSaveName={handleSaveName}
         />
 
         {/* Preferences Section */}

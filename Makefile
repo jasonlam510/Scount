@@ -23,6 +23,11 @@ start-db:
 start-powersync:
 	@cd powersync-service && docker compose up -d
 
+# Recreates the local Postgres container and applies all local migrations found in supabase/migrations directory.
+.PHONY: reset-db
+reset-db:
+	@npx supabase db reset
+
 .PHONY: clean-dev
 clean-dev:
 	@echo "Cleaning build artifacts and dependencies..."

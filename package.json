@@ -63,6 +63,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "i18next-cli": "^1.42.8",
+    "kysely-supabase": "^0.2.1",
     "patch-package": "^8.0.0",
     "prettier": "^3.7.4",
     "supabase": "^2.76.12",

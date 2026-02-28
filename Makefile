@@ -23,11 +23,6 @@ start-db:
 start-powersync:
 	@cd powersync-service && docker compose up -d
 
-# Recreates the local Postgres container and applies all local migrations found in supabase/migrations directory.
-.PHONY: reset-db
-reset-db:
-	@npx supabase db reset
-
 .PHONY: clean-dev
 clean-dev:
 	@echo "Cleaning build artifacts and dependencies..."
@@ -101,8 +96,8 @@ ifneq ($(filter db-new-migration,$(MAKECMDGOALS)),)
 db-new-migration.name := $(or $(migration-name),$(firstword $(filter-out db-new-migration,$(MAKECMDGOALS))))
 endif
 
-.PHONY: db-new-migration
-db-new-migration:
+.PHONY: new-db-migration
+new-db-migration:
 	@if [ -z "$(db-new-migration.name)" ]; then \
 		echo "Usage: make db-new-migration migration-name=<name>"; \
 		exit 1; \
@@ -116,6 +111,16 @@ $(db-new-migration.name):
 endif
 endif
 
-.PHONY: db-migrate-up
-db-migrate-up:
+.PHONY: migrate-db-up
+migrate-db-up:
 	@npx supabase migration up
+
+# Recreates the local Postgres container and applies all local migrations found in supabase/migrations directory.
+.PHONY: reset-db
+reset-db:
+	@npx supabase db reset
+
+.PHONY: generate-db-schema
+generate-db-schema:
+	npx supabase gen types typescript --local > ./src/lib/supabase/types.ts
+

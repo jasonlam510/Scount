@@ -4,20 +4,10 @@ Scount combines the best features from Tricount and Smoney, integrating both per
 
 ## Tech Stack
 
-Language: TypeScript
-
-Framework: React Native + Expo
-
-DB sync: PowerSync
-
-DB & Auth: Supabase
-
-## Tech Stack
-
-Language: TypeScript
-Framework: React Native + Expo
-DB sync: PowerSync
-DB & Auth: Supabase
+- **Language**: TypeScript
+- **Framework**: React Native + Expo
+- **DB sync**: PowerSync
+- **DB & Auth**: Supabase
 
 ## Quick Start
 
@@ -46,6 +36,7 @@ make init-dev
 make start-powersync
 make start-db
 ```
+
 Then copy the `Publishable` from the supabase's respone to the `EXPO_PUBLIC_SUPABASE_ANON_KEY` in your `.env`
 
 ### Run the App
@@ -78,3 +69,19 @@ npx expo run:ios
 # or
 npx expo run:android
 ```
+
+### Troubleshooting
+
+#### Expo EAS Configuration (Optional)
+
+If you are using this project with Expo and encounter issues with multiple versions of SQLite3, the conflict might be due to `expo-updates` also depending on SQLite. To resolve this, configure Expo to use the third-party SQLite pod.
+
+Update your `ios/Podfile.properties.json` to include the following configuration:
+
+```json
+{
+  "expo.updates.useThirdPartySQLitePod": "true"
+}
+```
+
+From [Powersync doc](https://powersync-ja.github.io/powersync-js/react-native-sdk#babel-plugins-watched-queries)

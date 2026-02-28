@@ -13,6 +13,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@azure/core-asynciterator-polyfill": "^1.0.2",
     "@expo/metro-runtime": "~6.1.2",
     "@journeyapps/react-native-quick-sqlite": "^2.4.8",
     "@powersync/adapter-sql-js": "^0.0.4",

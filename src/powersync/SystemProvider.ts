@@ -1,6 +1,4 @@
 import { Platform } from "react-native";
-import { SQLJSOpenFactory } from "@powersync/adapter-sql-js";
-import Constants from "expo-constants";
 import { wrapPowerSyncWithKysely } from "@powersync/kysely-driver";
 import { AppSchema, Database } from "./AppSchema";
 import { Connector } from "./Connector";
@@ -18,7 +16,6 @@ if (Platform.OS === "web") {
   ({ PowerSyncDatabase } = require("@powersync/react-native"));
 }
 
-const isExpoGo = Constants.executionEnvironment === "storeClient";
 const isWeb = Platform.OS === "web";
 
 // Create platform-specific PowerSync instance
@@ -47,13 +44,9 @@ if (isWeb) {
   // Mobile implementation
   powerSync = new PowerSyncDatabase({
     schema: AppSchema,
-    database: isExpoGo
-      ? new SQLJSOpenFactory({
-          dbFilename: "app.db",
-        })
-      : {
-          dbFilename: "app.db",
-        },
+    database: {
+      dbFilename: "app.db",
+    },
   });
 }
 
@@ -78,5 +71,5 @@ export const disconnectDatabase = async () => {
   }
 };
 
-// Keep powerSync internal - only export db interface
-// export { powerSync }; // ❌ No longer exported - use db instead
+// Keep powerSync internal - but export for direct transaction access if needed
+export { powerSync };

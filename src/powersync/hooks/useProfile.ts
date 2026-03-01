@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useUser } from "@/hooks";
-import { db } from "@/powersync/SystemProvider.tsx";
+import { db } from "@/powersync/SystemProvider";
 import type { Profile } from "@/types/profiles";
 
 export function useProfile() {

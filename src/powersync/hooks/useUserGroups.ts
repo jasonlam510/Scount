@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Platform } from "react-native";
-import { db } from "@/powersync/SystemProvider.tsx";
+import { db } from "@/powersync/SystemProvider";
 import { useUser } from "@/hooks/useUser";
 import { Group } from "@/types/groups";
 
@@ -60,11 +60,11 @@ export const useUserGroups = (): UseUserGroupsResult => {
           // No manual type casting needed - Kysely provides type safety
           const userGroups: Group[] = result.map((row) => ({
             id: row.id,
-            group_id: row.group_id,
             created_at: row.created_at,
             title: row.title,
             icon: row.icon,
             currency: row.currency,
+            invite_token: row.invite_token,
             is_deleted: row.is_deleted,
             updated_at: row.updated_at,
           }));
@@ -145,11 +145,11 @@ export const useUserGroupsRealtime = (): UseUserGroupsResult => {
             // No manual type casting needed - Kysely provides type safety
             const userGroups: Group[] = results.map((row) => ({
               id: row.id,
-              group_id: row.group_id,
               created_at: row.created_at,
               title: row.title,
               icon: row.icon,
               currency: row.currency,
+              invite_token: row.invite_token,
               is_deleted: row.is_deleted,
               updated_at: row.updated_at,
             }));

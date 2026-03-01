@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import { useI18n, useTheme } from "@/hooks";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import BottomSheet from "@/components/BottomSheet";
+
+export interface GroupActionFABItemConfig {
+  icon: keyof typeof Entypo.glyphMap;
+  iconBackgroundColor: string;
+  title: string;
+  subtitle: string;
+  onPress: () => void;
+  iconColor?: string;
+}
+
+interface GroupActionFABProps {
+  actions: GroupActionFABItemConfig[];
+}
 
 const ActionItem: React.FC<{
   icon: keyof typeof Entypo.glyphMap;
@@ -13,81 +25,96 @@ const ActionItem: React.FC<{
   title: string;
   subtext: string;
   onPress: () => void;
-  isLast?: boolean;
-}> = ({ icon, color, bgColor, title, subtext, onPress, isLast }) => {
+  showDivider?: boolean;
+}> = ({ icon, color, bgColor, title, subtext, onPress, showDivider }) => {
   const { colors } = useTheme();
 
   return (
     <TouchableOpacity
       style={[
         styles.item,
-        !isLast && { borderBottomWidth: 1, borderBottomColor: colors.border },
+        showDivider && {
+          borderBottomWidth: 1,
+          borderBottomColor: colors.border,
+        },
       ]}
       onPress={onPress}
       activeOpacity={0.7}
     >
+      {/* Action icon */}
       <View style={[styles.iconWrapper, { backgroundColor: bgColor }]}>
         <Entypo name={icon} size={24} color={color} />
       </View>
+
+      {/* Action copy */}
       <View style={styles.textWrapper}>
         <Text style={[styles.itemTitle, { color: colors.text }]}>{title}</Text>
         <Text style={[styles.itemSubtext, { color: colors.textSecondary }]}>
           {subtext}
         </Text>
       </View>
+
+      {/* Row affordance */}
       <Entypo name="chevron-right" size={20} color={colors.border} />
     </TouchableOpacity>
   );
 };
 
-const GroupActionFAB: React.FC = () => {
+const GroupActionFAB: React.FC<GroupActionFABProps> = ({ actions }) => {
   const { t } = useI18n();
   const { colors } = useTheme();
-  const router = useRouter();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [pendingActionIndex, setPendingActionIndex] = useState<number | null>(
+    null,
+  );
 
-  const handleAction = (type: "create" | "join") => {
+  const handleAction = (index: number) => {
+    setPendingActionIndex(index);
     setIsMenuVisible(false);
-    if (type === "create") {
-      router.push("/(tabs)/group/create");
-    } else {
-      // TODO: Join group flow
-      console.log("Join group");
-    }
+  };
+
+  const handleMenuDismiss = () => {
+    if (pendingActionIndex === null) return;
+    const action = actions[pendingActionIndex];
+    setPendingActionIndex(null);
+    action?.onPress();
   };
 
   return (
     <>
+      {/* FAB trigger */}
       <FloatingActionButton
         icon="add"
         label={t("group.add")}
-        onPress={() => setIsMenuVisible(true)}
+        onPress={() => {
+          if (actions.length > 0) {
+            setIsMenuVisible(true);
+          }
+        }}
       />
 
+      {/* Action menu */}
       <BottomSheet
         visible={isMenuVisible}
         onClose={() => setIsMenuVisible(false)}
+        onDismiss={handleMenuDismiss}
       >
+        {/* Action list */}
         <View
           style={[styles.menuContainer, { backgroundColor: colors.surface }]}
         >
-          <ActionItem
-            icon="plus"
-            color={colors.primary}
-            bgColor={colors.primary + "20"} // 12% opacity roughly
-            title={t("group.startGroup")}
-            subtext={t("group.startGroupDesc")}
-            onPress={() => handleAction("create")}
-          />
-          <ActionItem
-            icon="link"
-            color={colors.success}
-            bgColor={colors.success + "20"}
-            title={t("group.joinGroup")}
-            subtext={t("group.joinGroupDesc")}
-            onPress={() => handleAction("join")}
-            isLast
-          />
+          {actions.map((action, index) => (
+            <ActionItem
+              key={`${action.title}-${index}`}
+              icon={action.icon}
+              color={action.iconColor || colors.primary}
+              bgColor={action.iconBackgroundColor}
+              title={action.title}
+              subtext={action.subtitle}
+              onPress={() => handleAction(index)}
+              showDivider={index < actions.length - 1}
+            />
+          ))}
         </View>
       </BottomSheet>
     </>

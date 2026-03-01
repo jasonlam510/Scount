@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Alert } from "@/components";
-import { useTheme } from "@/hooks";
-import { GroupListSection, GroupActionFAB } from "@/components/groups";
+import { useI18n, useTheme } from "@/hooks";
+import {
+  GroupListSection,
+  GroupActionFAB,
+  GroupActionFABItemConfig,
+  CreateGroupModal,
+} from "@/components/groups";
 import { useUserGroupsRealtime } from "@/powersync/hooks/useUserGroups";
 import { Group } from "@/types/groups";
 
 export default function GroupScreen() {
+  const { t } = useI18n();
   const { colors } = useTheme();
   const { groups, isLoading, error } = useUserGroupsRealtime();
+  const [isCreateVisible, setIsCreateVisible] = useState(false);
 
   if (isLoading) {
     console.log("Loading groups... [GroupScreen]");
@@ -24,6 +31,28 @@ export default function GroupScreen() {
     // router.push(`/group/${group.id}`);
   };
 
+  const actionConfigs: GroupActionFABItemConfig[] = [
+    {
+      icon: "plus",
+      iconBackgroundColor: colors.primary + "20",
+      iconColor: colors.primary,
+      title: t("group.startGroup"),
+      subtitle: t("group.startGroupDesc"),
+      onPress: () => setIsCreateVisible(true),
+    },
+    {
+      icon: "link",
+      iconBackgroundColor: colors.success + "20",
+      iconColor: colors.success,
+      title: t("group.joinGroup"),
+      subtitle: t("group.joinGroupDesc"),
+      onPress: () => {
+        // TODO: Join group flow
+        console.log("Join group");
+      },
+    },
+  ];
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Group List Section */}
@@ -34,7 +63,13 @@ export default function GroupScreen() {
       />
 
       {/* Group Action FAB (Start/Join) */}
-      <GroupActionFAB />
+      <GroupActionFAB actions={actionConfigs} />
+
+      {/* Create Group Modal */}
+      <CreateGroupModal
+        visible={isCreateVisible}
+        onClose={() => setIsCreateVisible(false)}
+      />
     </View>
   );
 }

@@ -21,11 +21,7 @@ sync_rules:
         parameters: SELECT request.user_id() as user_id
         data:
           - SELECT * FROM public.profiles WHERE user_id = bucket.user_id
-          - SELECT * FROM public.user_categories WHERE user_id = bucket.user_id
-          - SELECT * FROM public.user_subcategories WHERE user_id = bucket.user_id
-          - SELECT * FROM public.user_expenses WHERE user_id = bucket.user_id
-          - SELECT * FROM public.user_tags WHERE user_id = bucket.user_id
-          - SELECT * FROM public.user_expense_tags WHERE user_id = bucket.user_id
+
       groups:
         parameters: SELECT group_id FROM public.group_members WHERE user_id = request.user_id()
         data:

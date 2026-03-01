@@ -19,6 +19,7 @@
   },
   "common": {
     "automatic": "自動",
+    "back": "返回",
     "cancel": "取消",
     "dark": "深色",
     "error": "錯誤",
@@ -42,17 +43,34 @@
   },
   "group": {
     "add": "新增",
+    "addParticipant": "新增參與者",
+    "atLeastOneParticipant": "請至少新增一位參與者",
     "createCurrency": "貨幣",
-    "createCurrencyPlaceholder": "選擇貨幣",
-    "createName": "群組名稱",
+    "createFailed": "建立群組失敗，請重試。",
     "createNamePlaceholder": "輸入群組名稱",
+    "createNameRequired": "請輸入群組名稱",
+    "createParticipants": "參與者",
+    "createSubmit": "建立群組",
     "joinGroup": "加入現有群組",
     "joinGroupDesc": "使用邀請連結加入",
     "noGroups": "暫無群組。建立第一個群組來開始分攤費用！",
+    "participantNamePlaceholder": "參與者姓名",
     "startGroup": "建立新群組",
     "startGroupDesc": "從頭開始建立一個新群組",
     "subtitle": "與朋友分攤費用",
     "title": "群組"
+  },
+  "groups": {
+    "ready": {
+      "continue": "前往群組",
+      "nativeShare": "原生分享",
+      "qrTitle": "掃描加入",
+      "shareMessage": "加入我在 Scount 上的群組來分攤費用！ {{link}}",
+      "showQR": "顯示二維碼",
+      "subtitle": "邀請您的朋友加入",
+      "title": "群組已就緒！",
+      "whatsapp": "透過 WhatsApp 分享"
+    }
   },
   "navigation": {
     "group": "群組",

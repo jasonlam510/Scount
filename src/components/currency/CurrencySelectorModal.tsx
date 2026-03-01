@@ -2,15 +2,15 @@ import React, { useMemo, useState, useCallback } from "react";
 import {
   View,
   Text,
-  Modal,
   Pressable,
-  TextInput,
+  Platform,
   StyleSheet,
   SectionList,
   type ListRenderItemInfo,
   type SectionListData,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Modal, ModalTextField } from "@/components/Modal";
 import { useTheme } from "@/hooks";
 import { useI18n } from "@/hooks/useI18n";
 import { useCurrencyDomainStore } from "@/zustand/currencyDomainStore";
@@ -184,160 +184,90 @@ export default function CurrencySelectorModal({
     [letterSectionIndex],
   );
 
-  if (!visible) return null;
-
   return (
     <Modal
       visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
+      onClose={onClose}
+      title={t("currency_selector.title")}
+      presentationStyle={Platform.OS === "ios" ? "fullScreen" : "pageSheet"}
     >
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        {/* Header: fixed padding (modal not full-screen, so no safe-area top) */}
-        <View
-          style={[
-            styles.header,
-            {
-              backgroundColor: colors.surface,
-              paddingTop: 12,
-              paddingBottom: 12,
-            },
-          ]}
-        >
-          <Pressable onPress={onClose} style={styles.backButton} hitSlop={8}>
-            <Text style={{ color: colors.primary, fontSize: 17 }}>
-              {t("common.cancel")}
+      {/* Search */}
+      <ModalTextField
+        variant="search"
+        placeholder={t("currency_selector.search_placeholder")}
+        value={query}
+        onChangeText={setQuery}
+        autoCapitalize="none"
+        autoCorrect={false}
+        clearButtonMode="while-editing"
+      />
+
+      {noResults ? (
+        <View style={styles.emptyWrap}>
+          {/* No results message */}
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
+            {t("currency_selector.no_results")}
+          </Text>
+          {/* Clear search button */}
+          <Pressable onPress={() => setQuery("")} style={styles.clearButton}>
+            <Text style={{ color: colors.primary }}>
+              {t("currency_selector.clear_search")}
             </Text>
           </Pressable>
-          <View style={styles.titleWrap}>
-            <Text style={[styles.title, { color: colors.text }]}>
-              {t("currency_selector.title")}
-            </Text>
-          </View>
-          <View style={styles.headerSpacer} />
         </View>
-
-        {/* Search */}
-        <TextInput
-          style={[
-            styles.search,
-            {
-              backgroundColor: colors.searchBarBackground,
-              borderColor: colors.searchBarBackground,
-              color: colors.text,
-            },
-          ]}
-          placeholder={t("currency_selector.search_placeholder")}
-          placeholderTextColor={colors.textSecondary}
-          value={query}
-          onChangeText={setQuery}
-          autoCapitalize="none"
-          autoCorrect={false}
-          clearButtonMode="while-editing"
-        />
-
-        {noResults ? (
-          <View style={styles.emptyWrap}>
-            {/* No results message */}
-            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
-              {t("currency_selector.no_results")}
-            </Text>
-            {/* Clear search button */}
-            <Pressable onPress={() => setQuery("")} style={styles.clearButton}>
-              <Text style={{ color: colors.primary }}>
-                {t("currency_selector.clear_search")}
-              </Text>
-            </Pressable>
-          </View>
-        ) : (
-          <View style={styles.listWrap}>
-            {/* Section list */}
-            <SectionList
-              ref={listRef}
-              sections={sections}
-              keyExtractor={keyExtractor}
-              renderItem={renderItem}
-              renderSectionHeader={renderSectionHeader}
-              stickySectionHeadersEnabled={false}
-              contentContainerStyle={[
-                styles.listContent,
-                {
-                  paddingBottom: insets.bottom + 24,
-                  paddingRight: 6,
-                },
+      ) : (
+        <View style={styles.listWrap}>
+          {/* Section list */}
+          <SectionList
+            ref={listRef}
+            sections={sections}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            renderSectionHeader={renderSectionHeader}
+            stickySectionHeadersEnabled={false}
+            contentContainerStyle={[
+              styles.listContent,
+              {
+                paddingBottom: insets.bottom + 24,
+                paddingRight: 6,
+              },
+            ]}
+            style={{ backgroundColor: colors.background }}
+            onScrollToIndexFailed={() => {
+              // Best effort; the list will recover on next layout.
+            }}
+          />
+          {/* Alphabetical index */}
+          {showIndex && (
+            <View
+              style={[
+                styles.indexWrap,
+                { paddingRight: Math.max(2, insets.right) },
               ]}
-              style={{ backgroundColor: colors.background }}
-              onScrollToIndexFailed={() => {
-                // Best effort; the list will recover on next layout.
-              }}
-            />
-            {/* Alphabetical index */}
-            {showIndex && (
-              <View
-                style={[
-                  styles.indexWrap,
-                  { paddingRight: Math.max(2, insets.right) },
-                ]}
-                pointerEvents="box-none"
-              >
-                <View style={styles.indexColumn}>
-                  {indexTitles.map((title) => (
-                    <Pressable
-                      key={title}
-                      onPress={() => handleIndexPress(title)}
-                      style={styles.indexItem}
-                    >
-                      <Text
-                        style={[styles.indexText, { color: colors.primary }]}
-                      >
-                        {title}
-                      </Text>
-                    </Pressable>
-                  ))}
-                </View>
+              pointerEvents="box-none"
+            >
+              <View style={styles.indexColumn}>
+                {indexTitles.map((title) => (
+                  <Pressable
+                    key={title}
+                    onPress={() => handleIndexPress(title)}
+                    style={styles.indexItem}
+                  >
+                    <Text style={[styles.indexText, { color: colors.primary }]}>
+                      {title}
+                    </Text>
+                  </Pressable>
+                ))}
               </View>
-            )}
-          </View>
-        )}
-      </View>
+            </View>
+          )}
+        </View>
+      )}
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  backButton: {
-    marginRight: 16,
-  },
-  titleWrap: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 17,
-    fontWeight: "600",
-  },
-  headerSpacer: {
-    width: 76,
-  },
-  search: {
-    height: 36,
-    marginHorizontal: 16,
-    marginVertical: 16,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    borderWidth: 1,
-    fontSize: 16,
-  },
   listContent: {
     paddingHorizontal: 0,
   },

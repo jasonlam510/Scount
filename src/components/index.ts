@@ -8,6 +8,7 @@ export { default as Selector } from "./Selector";
 export { default as SummarySection } from "./SummarySection";
 export { default as ThemedSwitch } from "./ThemedSwitch";
 export { default as ActionSheet } from "./ActionSheet";
+export * from "./Modal";
 
 // Currency (quick menu, row, selector modal)
 export * from "./currency";

@@ -16,6 +16,7 @@ interface BottomSheetProps {
   visible: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  onDismiss?: () => void;
 }
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -24,6 +25,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   visible,
   onClose,
   children,
+  onDismiss,
 }) => {
   const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
@@ -105,9 +107,10 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         }),
       ]).start(() => {
         setShowModal(false);
+        onDismiss?.();
       });
     }
-  }, [visible, backdropOpacity, sheetTranslateY]);
+  }, [visible, backdropOpacity, onDismiss, sheetTranslateY]);
 
   if (!showModal) return null;
 

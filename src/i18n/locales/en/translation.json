@@ -19,6 +19,7 @@
   },
   "common": {
     "automatic": "Automatic",
+    "back": "Back",
     "cancel": "Cancel",
     "dark": "Dark",
     "error": "Error",
@@ -42,17 +43,34 @@
   },
   "group": {
     "add": "Add",
+    "addParticipant": "Add participant",
+    "atLeastOneParticipant": "Please add at least one participant",
     "createCurrency": "Currency",
-    "createCurrencyPlaceholder": "Select currency",
-    "createName": "Group name",
+    "createFailed": "Failed to create group. Please try again.",
     "createNamePlaceholder": "Enter group name",
+    "createNameRequired": "Please enter a group name",
+    "createParticipants": "Participants",
+    "createSubmit": "Create Group",
     "joinGroup": "Join an existing group",
     "joinGroupDesc": "Use an invite link to join",
     "noGroups": "No groups yet. Create your first group to start splitting expenses!",
+    "participantNamePlaceholder": "Participant name",
     "startGroup": "Start a new group",
     "startGroupDesc": "Start a new group from scratch",
     "subtitle": "Split expenses with friends",
     "title": "Group"
+  },
+  "groups": {
+    "ready": {
+      "continue": "Go to Group",
+      "nativeShare": "Native Share",
+      "qrTitle": "Scan to Join",
+      "shareMessage": "Join my group on Scount to split expenses! {{link}}",
+      "showQR": "Show QR Code",
+      "subtitle": "Invite your friends to join",
+      "title": "Group is Ready!",
+      "whatsapp": "Share via WhatsApp"
+    }
   },
   "navigation": {
     "group": "Group",

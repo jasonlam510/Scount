@@ -2,7 +2,7 @@
 .env
 .env*.local
 archive/
-.cursor/scopes/
+.*/scopes/
 
 # Dependencies
 node_modules/

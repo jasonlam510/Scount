@@ -3,14 +3,15 @@
 
 ## REQUIRED CONTEXT (read before developing)
 
-- **Project memory (repo-shared)**: Start with `.cursor/memory/MEMORY.md`
-  - Repo conventions: `.cursor/memory/project-conventions.md`
-  - Architecture notes: `.cursor/memory/architecture.md`
-  - Dev commands: `.cursor/memory/dev-commands.md`
-  - Cross-feature decisions: `.cursor/memory/dev-log.md`
-- **Feature work**: If working on a feature scope, read `.cursor/scopes/<feature>/requirements.md` and `blueprint.md` first.
+- **Project memory (repo-shared)**: Start with `.codex/memory/MEMORY.md`
+  - Repo conventions: `.codex/memory/project-conventions.md`
+  - Architecture notes: `.codex/memory/architecture.md`
+  - Dev commands: `.codex/memory/dev-commands.md`
+  - Cross-feature decisions: `.codex/memory/dev-log.md`
+- **Feature work**: If working on a feature scope, read `.codex/scopes/<feature>/requirements.md` and `blueprint.md` first.
+- **Kysely documentation**: Read `.codex/rules/docs/kysely.md` for database operation patterns.
 
-Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts” and evolving conventions in `.cursor/memory/`.
+Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts” and evolving conventions in `.codex/memory/`.
 
 ## UI/UX Guidelines:
 - **Theme System**: ALWAYS use theme colors from `useTheme()` hook - never hard-code colors
@@ -19,6 +20,7 @@ Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts�
 - **Mobile-First Design**: Design specifically for iOS and Android mobile platforms
 - **Language Support**: Use i18n keys from `useI18n()` hook - support English and Chinese (繁體中文)
 - **Native Components**: Use ActionSheetIOS for iOS, platform-specific components for Android
+- **Alerts**: ALWAYS use `@/components/Alert` instead of `alert` or `Alert.alert` from `react-native` for cross-platform consistency (web polyfill)
 - **Accessibility**: Follow iOS Human Interface Guidelines and Android Material Design accessibility standards
 
 ## Code Style and Structure:
@@ -34,27 +36,29 @@ Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts�
 - **Expo SDK**: Prefer Expo SDK modules over third-party alternatives when available
 - **No Custom Native Code**: Avoid libraries requiring custom iOS/Android native code modifications
 
-## Data Layer (PowerSync + Supabase):
-- **Database Schema**: Follow `docs/erd.md` for complete schema definition and relationships
-- **Core Tables**: `profiles`, `groups`, `participants` (see ERD for full field specifications)
-- **UUID Primary Keys**: All tables use UUID PKs as defined in ERD
-- **PowerSync Hooks**: Use hooks from `src/powersync/hooks/` directory (`useUserGroups`, `useUserGroupsRealtime`)
-- **Direct Database Access**: Use `db` from `@/powersync` directly in screens for simple queries
-- **Query Patterns**: Use Kysely for type-safe queries, PowerSync handles sync automatically
-- **Realtime Hooks**: Prefer `useUserGroupsRealtime` for reactive data updates
-- **Sync Rules**: Define user-specific buckets in `sync-rules.yaml` following ERD relationships
-- **Schema Mapping**: Mirror ERD structure in `src/powersync/AppSchema.ts` for local SQLite
-- **Platform Support**: SQL.js adapter for Expo Go, native SQLite for production builds
-- **No Auto-Create**: Never auto-create records in hooks; return null when not found
+## Data Layer (PowerSync + Kysely + Supabase):
+- **Database Logic Location**: ALL database write operations and complex queries MUST be implemented as functions or classes in `src/db/` (e.g., `src/db/group.ts`). NEVER put complex DB logic directly in screens.
+- **Kysely for Queries**: Use Kysely for ALL type-safe database operations. Reference `.codex/rules/docs/kysely.md` for syntax and patterns.
+- **Transactions**: Use `db.transaction().execute(async (transaction) => { ... })` for all multi-statement writes to ensure atomicity.
+- **Direct Database Access**: Import `db` from `@/powersync` for all Kysely operations.
+- **Core Tables**: `profiles`, `groups`, `group_members` (see `docs/erd.md` for full specifications).
+- **UUID Primary Keys**: All tables use UUID PKs as defined in ERD. Use `generateUUID()` from `@/utils/common`.
+- **Timestamps**: ALWAYS use `getCurrentTimestamp()` from `@/utils/common` for `created_at` or other timestamp fields in database operations.
+- **PowerSync Hooks**: Use hooks from `src/powersync/hooks/` for reactive data fetching in components.
+- **No Auto-Create**: Never auto-create records in hooks; return null when not found.
+- **Sync Rules**: Define user-specific buckets in `sync-rules.yaml` following ERD relationships.
+- **Schema Mapping**: Mirror ERD structure in `src/powersync/AppSchema.ts` for local SQLite.
+- **Platform Support**: SQL.js adapter for Expo Go, native SQLite for production builds.
 
 ## Screen Architecture:
-- Screens use Expo Router under `src/app/` (see `.cursor/memory/architecture.md` for entry points).
-- Keep business logic + data access in screen files; keep reusable presentation in components.
+- Screens use Expo Router under `src/app/` (see `.codex/memory/architecture.md` for entry points).
+- **Logic Delegation**: Keep screens focused on UI and routing. Delegate complex business logic and ALL database access to `src/db/` or specialized hooks.
+- Keep reusable presentation in components.
 
 ## Naming Conventions:
 - **Component folders**: Each component lives in its own subfolder; folder name must match the component name exactly (including capitalized first letter), e.g. `ProfileScreen/ProfileScreen.tsx`, `SwitchRow/SwitchRow.tsx`
-- **Grouping folders** (folders that group components or other files, not named after a single component): lowercase, no capital letter — kebab-case preferred (`components/expense-item`, `powersync/hooks`, `features/profile/sections`)
-- **Files**: PascalCase for components (`ProfileScreen.tsx`), camelCase for hooks (`useProfile.ts`)
+- **Grouping folders** (folders that group components or other files, not named after a single component): lowercase, no capital letter — kebab-case preferred (`components/expense-item`, `powersync/hooks`, `features/profile/sections`, `db/group`)
+- **Files**: PascalCase for components (`ProfileScreen.tsx`), camelCase for hooks (`useProfile.ts`), kebab-case for database services (`db/group.ts`).
 - **Database**: snake_case tables (`personal_expenses`, `user_id` columns)
 - **Hooks**: Prefix with `use` (`useTheme`, `useUserGroups`, `useProfile`)
 - **PowerSync**: Use `Realtime` suffix for reactive hooks (`useUserGroupsRealtime`)
@@ -69,11 +73,11 @@ Keep this file focused on **non-negotiable rules**. Put evergreen “repo facts�
 
 ## Component Design Principles:
 - **Separation of Concerns**: 
-  - Screen files: Business logic, state management, data fetching
-  - Sections: Screen-level composition, platform-specific UI
-  - Components: Reusable building blocks, pure presentation logic
+  - Screen files: Composition, UI layout, routing, delegating logic to `src/db/` or hooks.
+  - Sections: Screen-level composition, platform-specific UI.
+  - Components: Reusable building blocks, pure presentation logic.
 - **Platform UI Handling**: Platform-specific UI (ActionSheetIOS vs Selector) goes in components
-- **Business Logic**: Business logic, API calls, data updates stay in screen files
+- **Business Logic**: Business logic and data updates stay in `src/db/` or hooks.
 - **Component Props**: Components should receive business callbacks (`onPhotoSelected`, `onLogout`)
 - **State Management**: Use local state for UI state, Zustand for app-wide state
 
